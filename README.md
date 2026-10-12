@@ -1,4 +1,4 @@
-# Podstawowe Algorytmy Sztucznej Inteligencji - 2026
+# Podstawowe Algorytmy Sztucznej Inteligencji
 
 Skrypt dla studentów.
 
