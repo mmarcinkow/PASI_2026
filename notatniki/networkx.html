@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; NetworkX – Podstawowe Algorytmy Sztucznej Inteligencji</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../zadania/lista-01-grafy.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9284228ca7e91ca044f135275a559bce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź",
+    "search-label": "Szukaj"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notatniki/networkx.html">Notatniki</a></li><li class="breadcrumb-item"><a href="../notatniki/networkx.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">NetworkX</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Szukaj" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Podstawowe Algorytmy Sztucznej Inteligencji</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Szukaj"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wprowadzenie</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Wykłady</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wykłady/grafy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Listy zadań</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../zadania/lista-01-grafy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Notatniki</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notatniki/networkx.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">NetworkX</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notatniki/networkx.html">Notatniki</a></li><li class="breadcrumb-item"><a href="../notatniki/networkx.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">NetworkX</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">NetworkX</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Poniższy notatnik przedstawia cztery podstawowe klasy grafów w NetworkX, dostęp do danych krawędzi oraz podstawy wizualizacji.</p>
+<p><a href="src/networkx.ipynb" class="btn btn-primary" download="networkx.ipynb">Pobierz notatnik <code>.ipynb</code></a></p>
+<div class="quarto-embed-nb-cell" data-notebook="src/networkx.ipynb" data-notebook-title="[1]{.chapter-number}&nbsp; [NetworkX]{.chapter-title}" data-notebook-cellid="quarto-metadata">
+<p>Biblioteka NetworkX udostępnia cztery podstawowe klasy grafów: <code>Graph</code>, <code>DiGraph</code>, <code>MultiGraph</code> oraz <code>MultiDiGraph</code>. Różnią się one tym, czy krawędzie mają kierunek i czy pomiędzy tymi samymi wierzchołkami może występować wiele krawędzi.</p>
+<div id="imports" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.497203Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.497048Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.875260Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.874727Z&quot;}}" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"NetworkX"</span>, nx.__version__)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NetworkX 3.6.1</code></pre>
+</div>
+</div>
+<section id="dodawanie-krawędzi" class="level2">
+<h2 class="anchored" data-anchor-id="dodawanie-krawędzi">Dodawanie krawędzi</h2>
+<p>We wszystkich czterech klasach metoda <code>add_edge(u, v)</code> dodaje krawędź pomiędzy wierzchołkami ‘u’ oraz ‘v’. Nie dodajemy osobno wierzchołków, metoda tworzy je za nas. Atrybuty krawędzi (takie jak wagi, etykiety etc.) przekazujemy jako argumenty nazwane, na przykład <code>weight=3</code> albo <code>color="red"</code>. Wiele krawędzi można dodać za pomocą <code>add_edges_from()</code>.</p>
+<section id="graph" class="level3">
+<h3 class="anchored" data-anchor-id="graph"><code>Graph</code></h3>
+<p><code>Graph</code> jest grafem nieskierowanym bez krawędzi wielokrotnych. Ponowne dodanie tej samej krawędzi nie tworzy nowej krawędzi, lecz aktualizuje jej słownik atrybutów. Funkcja <code>add_edge(u, v)</code> oraz <code>add_edge(v, u)</code> będzie miała ten sam efekt.</p>
+<div id="graph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.876553Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.876364Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.879516Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.879133Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> nx.Graph() <span class="co">#tworzymy pusty graf nieskierowany</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>graph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, weight<span class="op">=</span><span class="dv">2</span>) <span class="co">#tworzymy krawędź A--B z wagą 2</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>graph.add_edge(<span class="st">"B"</span>, <span class="st">"A"</span>, color<span class="op">=</span><span class="st">"turquoise"</span>) <span class="co">#dodajemy do krawędzi A-B atrybut</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Wierzchołki:"</span>, <span class="bu">list</span>(graph.nodes))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Krawędzie:"</span>, <span class="bu">list</span>(graph.edges(data<span class="op">=</span><span class="va">True</span>)))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dane A--B:"</span>, <span class="bu">dict</span>(graph.edges[<span class="st">"A"</span>, <span class="st">"B"</span>]))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Wspólny słownik danych:"</span>, graph[<span class="st">"A"</span>][<span class="st">"B"</span>] <span class="kw">is</span> graph[<span class="st">"B"</span>][<span class="st">"A"</span>] )</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wierzchołki: ['A', 'B']
+Krawędzie: [('A', 'B', {'weight': 2, 'color': 'turquoise'})]
+Dane A--B: {'weight': 2, 'color': 'turquoise'}
+Wspólny słownik danych: True</code></pre>
+</div>
+</div>
+</section>
+<section id="digraph" class="level3">
+<h3 class="anchored" data-anchor-id="digraph"><code>DiGraph</code></h3>
+<p><code>DiGraph</code> jest grafem skierowanym bez krawędzi wielokrotnych. Krawędzie <code>u → v</code> oraz <code>v → u</code> są różne. Ponowne dodanie <code>u → v</code> aktualizuje dane istniejącej krawędzi.</p>
+<div id="digraph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.880732Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.880619Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.883533Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.882832Z&quot;}}" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>digraph <span class="op">=</span> nx.DiGraph()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>digraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, weight<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>digraph.add_edge(<span class="st">"B"</span>, <span class="st">"A"</span>, weight<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>digraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, color<span class="op">=</span><span class="st">"turquoise"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Wierzchołki:"</span>, <span class="bu">list</span>(digraph.nodes))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Krawędzie:"</span>, <span class="bu">list</span>(digraph.edges(data<span class="op">=</span><span class="va">True</span>)))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Następnicy A:"</span>, <span class="bu">list</span>(digraph.successors(<span class="st">"A"</span>)))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Poprzednicy A:"</span>, <span class="bu">list</span>(digraph.predecessors(<span class="st">"A"</span>)))</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wierzchołki: ['A', 'B']
+Krawędzie: [('A', 'B', {'weight': 2, 'color': 'turquoise'}), ('B', 'A', {'weight': 5})]
+Następnicy A: ['B']
+Poprzednicy A: ['B']</code></pre>
+</div>
+</div>
+</section>
+<section id="multigraph" class="level3">
+<h3 class="anchored" data-anchor-id="multigraph"><code>MultiGraph</code></h3>
+<p><code>MultiGraph</code> jest multigrafem nieskierowanym. Każde wywołanie <code>add_edge(u, v)</code> bez podanego klucza tworzy kolejną krawędź i zwraca jej utworzony automatycznie klucz. Podanie istniejącego klucza aktualizuje wskazaną krawędź. Można również używać własnych kluczy, na przykład <code>key="A1"</code>.</p>
+<div id="multigraph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.885135Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.885012Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.887926Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.887411Z&quot;}}" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>multigraph <span class="op">=</span> nx.MultiGraph()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>first_key <span class="op">=</span> multigraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, route<span class="op">=</span><span class="st">"lokalna"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>second_key <span class="op">=</span> multigraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, route<span class="op">=</span><span class="st">"ekspresowa"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>multigraph.add_edge(<span class="st">"B"</span>, <span class="st">"A"</span>, key<span class="op">=</span>first_key, color<span class="op">=</span><span class="st">"turquoise"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Nadane klucze:"</span>, first_key, second_key)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Krawędzie:"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> u, v, key, data <span class="kw">in</span> multigraph.edges(keys<span class="op">=</span><span class="va">True</span>, data<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(u, v, key, data)</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nadane klucze: 0 1
+Krawędzie:
+A B 0 {'route': 'lokalna', 'color': 'turquoise'}
+A B 1 {'route': 'ekspresowa'}</code></pre>
+</div>
+</div>
+</section>
+<section id="multidigraph" class="level3">
+<h3 class="anchored" data-anchor-id="multidigraph"><code>MultiDiGraph</code></h3>
+<p><code>MultiDiGraph</code> łączy kierunek z możliwością przechowywania krawędzi równoległych. Klucze są lokalne dla uporządkowanej pary końców. Dlatego pierwsza krawędź <code>A → B</code> i pierwsza krawędź <code>B → A</code> mogą otrzymać ten sam klucz.</p>
+<div id="multidigraph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.889130Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.889019Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.892546Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.892099Z&quot;}}" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>multidigraph <span class="op">=</span> nx.MultiDiGraph()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>forward_1 <span class="op">=</span> multidigraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, route<span class="op">=</span><span class="st">"pierwsza"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>forward_2 <span class="op">=</span> multidigraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, route<span class="op">=</span><span class="st">"druga"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>backward <span class="op">=</span> multidigraph.add_edge(<span class="st">"B"</span>, <span class="st">"A"</span>, route<span class="op">=</span><span class="st">"powrotna"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Klucze A → B:"</span>, forward_1, forward_2)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Klucz B → A:"</span>, backward)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Krawędzie:"</span>, <span class="bu">list</span>(multidigraph.edges(keys<span class="op">=</span><span class="va">True</span>, data<span class="op">=</span><span class="va">True</span>)))</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Klucze A → B: 0 1
+Klucz B → A: 0
+Krawędzie: [('A', 'B', 0, {'route': 'pierwsza'}), ('A', 'B', 1, {'route': 'druga'}), ('B', 'A', 0, {'route': 'powrotna'})]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="jak-networkx-przechowuje-krawędzie" class="level2">
+<h2 class="anchored" data-anchor-id="jak-networkx-przechowuje-krawędzie">Jak NetworkX przechowuje krawędzie</h2>
+<p>Strukturę danych można schematycznie zapisać następująco:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Klasa</th>
+<th>Struktura sąsiedztwa</th>
+<th>Wartość końcowa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Graph</code></td>
+<td><code>G.adj[u][v]</code></td>
+<td>słownik atrybutów</td>
+</tr>
+<tr class="even">
+<td><code>DiGraph</code></td>
+<td><code>G.succ[u][v]</code>, <code>G.pred[v][u]</code></td>
+<td>ten sam słownik atrybutów</td>
+</tr>
+<tr class="odd">
+<td><code>MultiGraph</code></td>
+<td><code>G.adj[u][v][key]</code></td>
+<td>słownik atrybutów konkretnej krawędzi</td>
+</tr>
+<tr class="even">
+<td><code>MultiDiGraph</code></td>
+<td><code>G.succ[u][v][key]</code>, <code>G.pred[v][u][key]</code></td>
+<td>słownik atrybutów konkretnej krawędzi</td>
+</tr>
+</tbody>
+</table>
+<p>W grafie nieskierowanym wpisy dla <code>u</code> i <code>v</code> wskazują ten sam słownik danych krawędzi; NetworkX nie przechowuje osobnej funkcji odwracania krawędzi.</p>
+</section>
+<section id="dostęp-do-jednej-krawędzi" class="level2">
+<h2 class="anchored" data-anchor-id="dostęp-do-jednej-krawędzi">Dostęp do jednej krawędzi</h2>
+<p>W <code>Graph</code> i <code>DiGraph</code> krawędź jest wyznaczona przez parę końców. W <code>MultiGraph</code> i <code>MultiDiGraph</code> trzeba dodatkowo podać jej klucz. Metoda <code>get_edge_data()</code> jest wygodna, gdy zamiast wyjątku chcemy otrzymać wartość domyślną.</p>
+<div id="single-edge-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.893719Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.893612Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.896235Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.895695Z&quot;}}" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(graph.edges[<span class="st">"A"</span>, <span class="st">"B"</span>]))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(digraph.edges[<span class="st">"A"</span>, <span class="st">"B"</span>]))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(multigraph.edges[<span class="st">"A"</span>, <span class="st">"B"</span>, first_key]))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(multidigraph.edges[<span class="st">"A"</span>, <span class="st">"B"</span>, forward_2]))</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'weight': 2, 'color': 'turquoise'}
+{'weight': 2, 'color': 'turquoise'}
+{'route': 'lokalna', 'color': 'turquoise'}
+{'route': 'druga'}</code></pre>
+</div>
+</div>
+<section id="sam-klucz-nie-wystarcza" class="level3">
+<h3 class="anchored" data-anchor-id="sam-klucz-nie-wystarcza">Sam klucz nie wystarcza</h3>
+<p>Nie. Klucz multikrawędzi nie jest globalnym identyfikatorem. Ten sam klucz może pojawić się pomiędzy różnymi parami wierzchołków, a NetworkX nie utrzymuje dodatkowego indeksu <code>key → końce krawędzi</code>. Jeżeli znamy tylko klucz, musimy przejrzeć krawędzie.</p>
+<div id="find-key-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.898246Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.898121Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.902344Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.901947Z&quot;}}" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>roads <span class="op">=</span> nx.MultiGraph()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>roads.add_edge(<span class="st">"Warszawa"</span>, <span class="st">"Łódź"</span>, key<span class="op">=</span><span class="st">"A1"</span>, length<span class="op">=</span><span class="dv">130</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>roads.add_edge(<span class="st">"Kraków"</span>, <span class="st">"Katowice"</span>, key<span class="op">=</span><span class="st">"A1"</span>, length<span class="op">=</span><span class="dv">80</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>matches <span class="op">=</span> [</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    (u, v, key, data)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> u, v, key, data <span class="kw">in</span> roads.edges(keys<span class="op">=</span><span class="va">True</span>, data<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> key <span class="op">==</span> <span class="st">"A1"</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>matches</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>[('Warszawa', 'Łódź', 'A1', {'length': 130}),
+ ('Kraków', 'Katowice', 'A1', {'length': 80})]</code></pre>
+</div>
+</div>
+<p>Jeżeli nazwy krawędzi mają być globalnie unikalne i często po nich wyszukujemy, warto utrzymywać własny indeks. Taki słownik odtwarza funkcje przypisujące krawędzi jej początek i koniec z formalnej definicji grafu.</p>
+<div id="edge-index-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.903722Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.903585Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.906347Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.905974Z&quot;}}" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>road_graph <span class="op">=</span> nx.MultiGraph()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>edge_index <span class="op">=</span> {}</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_road(u, v, name, <span class="op">**</span>attributes):</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> name <span class="kw">in</span> edge_index:</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Krawędź </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> już istnieje"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    road_graph.add_edge(u, v, key<span class="op">=</span>name, <span class="op">**</span>attributes)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    edge_index[name] <span class="op">=</span> (u, v, name)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>add_road(<span class="st">"Warszawa"</span>, <span class="st">"Łódź"</span>, <span class="st">"A2"</span>, length<span class="op">=</span><span class="dv">130</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>edge <span class="op">=</span> edge_index[<span class="st">"A2"</span>]</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Identyfikator w NetworkX:"</span>, edge)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dane:"</span>, <span class="bu">dict</span>(road_graph.edges[edge]))</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Identyfikator w NetworkX: ('Warszawa', 'Łódź', 'A2')
+Dane: {'length': 130}</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="podstawy-wizualizacji" class="level2">
+<h2 class="anchored" data-anchor-id="podstawy-wizualizacji">Podstawy wizualizacji</h2>
+<p>Najprostsza funkcja <code>nx.draw()</code> jednocześnie wybiera położenia wierzchołków i rysuje graf za pomocą Matplotlib. Do szybkich eksperymentów wystarczy podać <code>with_labels=True</code>.</p>
+<div id="simple-drawing" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.907992Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.907755Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:01.025035Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:01.024537Z&quot;}}" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>visual_graph <span class="op">=</span> nx.Graph()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>visual_graph.add_weighted_edges_from([</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="dv">2</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="dv">4</span>),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="dv">1</span>),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"C"</span>, <span class="st">"D"</span>, <span class="dv">3</span>),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"D"</span>, <span class="st">"E"</span>, <span class="dv">2</span>),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>nx.draw(visual_graph, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"turquoise"</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="networkx_files/figure-html/src-networkx-cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="pozycje-wierzchołków" class="level3">
+<h3 class="anchored" data-anchor-id="pozycje-wierzchołków">Pozycje wierzchołków</h3>
+<p>Funkcja <code>nx.draw()</code> może otrzymać w argumencie <code>pos</code> słownik, który każdemu wierzchołkowi przypisuje parę współrzędnych <code>(x, y)</code>. Dzięki temu sami ustalamy układ grafu, zamiast pozostawiać jego wyznaczenie bibliotece NetworkX. Współrzędne nie oznaczają pikseli ani konkretnych jednostek — ważne jest ich wzajemne położenie: większa wartość <code>x</code> przesuwa wierzchołek w prawo, a większa wartość <code>y</code> w górę.</p>
+<div id="b8777bb7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A"</span>: (<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"B"</span>: (<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C"</span>: (<span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"D"</span>: (<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"E"</span>: (<span class="dv">3</span>, <span class="dv">0</span>),</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>nx.draw(</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    visual_graph,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    pos<span class="op">=</span>positions,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    with_labels<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"#168C88"</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="dv">900</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Współrzędnych nie musimy wypisywać sami. Poniższe funkcje tworzą je automatycznie: <code>spring_layout()</code>, <code>planar_layout()</code>, <code>circular_layout()</code> i <code>shell_layout()</code>. Ustalenie <code>seed</code> pozwala odtwarzać ten sam układ losowy.</p>
+<div id="layouts-comparison" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:01.026235Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:01.026044Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:01.100766Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:01.100252Z&quot;}}" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>layouts <span class="op">=</span> {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spring_layout"</span>: nx.spring_layout(visual_graph, seed<span class="op">=</span><span class="dv">7</span>),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"planar_layout"</span>: nx.planar_layout(visual_graph),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"circular_layout"</span>: nx.circular_layout(visual_graph),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"shell_layout"</span>: nx.shell_layout(visual_graph),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, (name, positions) <span class="kw">in</span> <span class="bu">zip</span>(axes.flat, layouts.items()):</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    nx.draw(</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        visual_graph,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        positions,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        with_labels<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        edgecolors<span class="op">=</span><span class="st">"#168C88"</span>,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    ax.set_title(name)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="networkx_files/figure-html/src-networkx-cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>NetworkX zawiera również układy dostosowane do szczególnych sytuacji: <code>bipartite_layout()</code>, <code>multipartite_layout()</code> i <code>bfs_layout()</code>. Dostępne są też między innymi <code>kamada_kawai_layout()</code>, <code>spectral_layout()</code>, <code>spiral_layout()</code>, <code>random_layout()</code>, <code>forceatlas2_layout()</code> oraz <code>arf_layout()</code>. Niektóre z nich, w tym <code>kamada_kawai_layout()</code>, wymagają zainstalowania opcjonalnego pakietu SciPy.</p>
+</section>
+<section id="dokładniejsze-sterowanie-rysunkiem" class="level3">
+<h3 class="anchored" data-anchor-id="dokładniejsze-sterowanie-rysunkiem">Dokładniejsze sterowanie rysunkiem</h3>
+<p>Funkcja <code>draw_networkx()</code> rysuje wierzchołki, krawędzie i etykiety. Gdy potrzebujemy większej kontroli, możemy wywołać osobno <code>draw_networkx_nodes()</code>, <code>draw_networkx_edges()</code>, <code>draw_networkx_labels()</code> oraz <code>draw_networkx_edge_labels()</code>.</p>
+<div id="detailed-drawing" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:01.102325Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:01.102183Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:01.138345Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:01.137966Z&quot;}}" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> nx.spring_layout(visual_graph, seed<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>edge_labels <span class="op">=</span> nx.get_edge_attributes(visual_graph, <span class="st">"weight"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_nodes(</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    visual_graph, positions, node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"#168C88"</span>, node_size<span class="op">=</span><span class="dv">900</span>, ax<span class="op">=</span>ax,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edges(visual_graph, positions, width<span class="op">=</span><span class="fl">1.5</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_labels(visual_graph, positions, ax<span class="op">=</span>ax)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edge_labels(</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    visual_graph, positions, edge_labels<span class="op">=</span>edge_labels, ax<span class="op">=</span>ax,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="networkx_files/figure-html/src-networkx-cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Dla grafów skierowanych <code>draw_networkx_edges()</code> rysuje groty strzałek. W multigrafach krawędzie równoległe można rozsunąć za pomocą argumentu <code>connectionstyle</code>, na przykład <code>"arc3,rad=0.15"</code>. NetworkX udostępnia także skróty takie jak <code>draw_spring()</code>, <code>draw_circular()</code>, <code>draw_shell()</code>, <code>draw_kamada_kawai()</code> i <code>draw_planar()</code>, które od razu stosują odpowiadający im układ.</p>
+</section>
+</section>
+</div>
+
+
+
+</main> <!-- /main -->
+<script>
+(() => {
+  const initializeTheoremFullscreen = () => {
+    const blocks = document.querySelectorAll(
+      "#quarto-document-content .theorem:not(.exercise)"
+    );
+
+    if (blocks.length === 0 || document.getElementById("theorem-fullscreen-dialog")) {
+      return;
+    }
+
+    const dialog = document.createElement("dialog");
+    dialog.id = "theorem-fullscreen-dialog";
+    dialog.innerHTML = `
+      <div class="theorem-fullscreen-panel">
+        <button class="theorem-fullscreen-close" type="button" aria-label="Zamknij">×</button>
+        <div class="theorem-fullscreen-content"></div>
+      </div>
+    `;
+    document.body.append(dialog);
+
+    const content = dialog.querySelector(".theorem-fullscreen-content");
+    const closeButton = dialog.querySelector(".theorem-fullscreen-close");
+    let lastTrigger = null;
+
+    const closeDialog = () => {
+      if (dialog.open) {
+        dialog.close();
+      }
+    };
+
+    const openDialog = (block, trigger) => {
+      const copy = block.cloneNode(true);
+      const title = block.querySelector(".theorem-title")?.textContent.trim() ||
+        "Definicja, przykład lub twierdzenie";
+      const includeSelector = block.dataset.fullscreenInclude;
+
+      copy.classList.add("theorem-fullscreen-copy");
+      copy.removeAttribute("data-fullscreen-include");
+
+      if (includeSelector) {
+        document.querySelectorAll(includeSelector).forEach((element) => {
+          const includedCopy = element.cloneNode(true);
+          includedCopy.classList.add("theorem-fullscreen-extra");
+          copy.append(includedCopy);
+        });
+      }
+
+      copy.removeAttribute("id");
+      copy.querySelectorAll("[id]").forEach((element) => element.removeAttribute("id"));
+      copy.querySelectorAll(".theorem-expand-button").forEach((button) => button.remove());
+      copy.querySelectorAll(".theorem-expand-trigger").forEach((element) => {
+        element.classList.remove("theorem-expand-trigger");
+        element.removeAttribute("role");
+        element.removeAttribute("tabindex");
+        element.removeAttribute("title");
+        element.removeAttribute("aria-haspopup");
+        element.removeAttribute("aria-controls");
+      });
+
+      content.replaceChildren(copy);
+      dialog.setAttribute("aria-label", title);
+      lastTrigger = trigger;
+      dialog.showModal();
+      closeButton.focus();
+    };
+
+    closeButton.addEventListener("click", closeDialog);
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        closeDialog();
+      }
+    });
+    dialog.addEventListener("close", () => {
+      content.replaceChildren();
+      lastTrigger?.focus();
+      lastTrigger = null;
+    });
+
+    blocks.forEach((block) => {
+      if (block.dataset.fullscreenReady === "true") {
+        return;
+      }
+      block.dataset.fullscreenReady = "true";
+
+      const title = block.querySelector(".theorem-title");
+      const label = title?.textContent.trim() || "definicję, przykład lub twierdzenie";
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "theorem-expand-button";
+      button.title = `Powiększ: ${label}`;
+      button.setAttribute("aria-label", `Powiększ: ${label}`);
+      button.setAttribute("aria-haspopup", "dialog");
+      button.setAttribute("aria-controls", dialog.id);
+      button.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8 3H3v5 M16 3h5v5 M21 16v5h-5 M8 21H3v-5"></path>
+        </svg>
+      `;
+      button.addEventListener("click", () => openDialog(block, button));
+      block.append(button);
+
+      if (title) {
+        title.classList.add("theorem-expand-trigger");
+        title.setAttribute("role", "button");
+        title.setAttribute("tabindex", "0");
+        title.setAttribute("title", `Powiększ: ${label}`);
+        title.setAttribute("aria-haspopup", "dialog");
+        title.setAttribute("aria-controls", dialog.id);
+        title.addEventListener("click", () => openDialog(block, title));
+        title.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openDialog(block, title);
+          }
+        });
+      }
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeTheoremFullscreen, { once: true });
+  } else {
+    initializeTheoremFullscreen();
+  }
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Skopiowano!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Skopiowano!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../zadania/lista-01-grafy.html" class="pagination-link" aria-label="[1]{.chapter-number}&nbsp; [Grafy]{.chapter-title}">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
