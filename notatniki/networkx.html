@@ -372,11 +372,11 @@ Krawędzie: [('A', 'B', 0, {'route': 'pierwsza'}), ('A', 'B', 1, {'route': 'drug
 </tr>
 </tbody>
 </table>
-<p>W grafie nieskierowanym wpisy dla <code>u</code> i <code>v</code> wskazują ten sam słownik danych krawędzi; NetworkX nie przechowuje osobnej funkcji odwracania krawędzi.</p>
+<p>Powyżej G.succ Przetestuj czym są G.adj, G.adj[v], G.succ, G.succ[v] dla odpowiednich przykładów.</p>
 </section>
 <section id="dostęp-do-jednej-krawędzi" class="level2">
 <h2 class="anchored" data-anchor-id="dostęp-do-jednej-krawędzi">Dostęp do jednej krawędzi</h2>
-<p>W <code>Graph</code> i <code>DiGraph</code> krawędź jest wyznaczona przez parę końców. W <code>MultiGraph</code> i <code>MultiDiGraph</code> trzeba dodatkowo podać jej klucz. Metoda <code>get_edge_data()</code> jest wygodna, gdy zamiast wyjątku chcemy otrzymać wartość domyślną.</p>
+<p>Do tych samych danych mamy dostęp również za pomocą metody ‘edges’. W <code>Graph</code> i <code>DiGraph</code> krawędź jest wyznaczona przez parę końców. W <code>MultiGraph</code> i <code>MultiDiGraph</code> trzeba dodatkowo podać jej klucz.</p>
 <div id="single-edge-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.464496Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.464410Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.466377Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.465931Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(graph.edges[<span class="st">"A"</span>, <span class="st">"B"</span>]))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(digraph.edges[<span class="st">"A"</span>, <span class="st">"B"</span>]))</span>
