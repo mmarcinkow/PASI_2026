@@ -124,7 +124,7 @@
     "href": "notatniki/networkx.html#jak-networkx-przechowuje-krawędzie",
     "title": "1  NetworkX",
     "section": "Jak NetworkX przechowuje krawędzie",
-    "text": "Jak NetworkX przechowuje krawędzie\nStrukturę danych można schematycznie zapisać następująco:\n\n\n\n\n\n\n\n\nKlasa\nStruktura sąsiedztwa\nWartość końcowa\n\n\n\n\nGraph\nG.adj[u][v]\nsłownik atrybutów\n\n\nDiGraph\nG.succ[u][v], G.pred[v][u]\nsłownik atrybutów\n\n\nMultiGraph\nG.adj[u][v][key]\nsłownik atrybutów konkretnej krawędzi\n\n\nMultiDiGraph\nG.succ[u][v][key], G.pred[v][u][key]\nsłownik atrybutów konkretnej krawędzi\n\n\n\nPowyżej G.succ Przetestuj czym są G.adj, G.adj[v], G.succ, G.succ[v] dla odpowiednich przykładów.",
+    "text": "Jak NetworkX przechowuje krawędzie\nStrukturę danych można schematycznie zapisać następująco:\n\n\n\n\n\n\n\n\nKlasa\nStruktura sąsiedztwa\nWartość końcowa\n\n\n\n\nGraph\nG.adj[u][v]\nsłownik atrybutów\n\n\nDiGraph\nG.succ[u][v], G.pred[v][u]\nsłownik atrybutów\n\n\nMultiGraph\nG.adj[u][v][key]\nsłownik atrybutów konkretnej krawędzi\n\n\nMultiDiGraph\nG.succ[u][v][key], G.pred[v][u][key]\nsłownik atrybutów konkretnej krawędzi\n\n\n\nPrzetestuj, doczytaj, czym są G.adj, G.adj[v], G.succ, G.succ[v], G.pred[v] dla odpowiednich przykładów. Zauważ, że dla DiGrafu mamy G.succ[u][v] == G.pred[v][u].",
     "crumbs": [
       "Notatniki",
       "[1]{.chapter-number}  [NetworkX]{.chapter-title}"
