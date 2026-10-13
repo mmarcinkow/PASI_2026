@@ -237,9 +237,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Poniższy notatnik przedstawia cztery podstawowe klasy grafów w NetworkX, dostęp do danych krawędzi oraz podstawy wizualizacji.</p>
 <p><a href="src/networkx.ipynb" class="btn btn-primary" download="networkx.ipynb">Pobierz notatnik <code>.ipynb</code></a></p>
-<div class="quarto-embed-nb-cell" data-notebook="src/networkx.ipynb" data-notebook-title="[1]{.chapter-number}&nbsp; [NetworkX]{.chapter-title}" data-notebook-cellid="quarto-metadata">
+<div class="quarto-embed-nb-cell" data-notebook="/tmp/pasi2026-lecture1-build/notatniki/src/networkx.ipynb" data-notebook-title="[1]{.chapter-number}&nbsp; [NetworkX]{.chapter-title}" data-notebook-cellid="quarto-metadata">
 <p>Biblioteka NetworkX udostępnia cztery podstawowe klasy grafów: <code>Graph</code>, <code>DiGraph</code>, <code>MultiGraph</code> oraz <code>MultiDiGraph</code>. Różnią się one tym, czy krawędzie mają kierunek i czy pomiędzy tymi samymi wierzchołkami może występować wiele krawędzi.</p>
-<div id="imports" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.497203Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.497048Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.875260Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.874727Z&quot;}}" data-execution_count="1">
+<div id="imports" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.003641Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.003506Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.449062Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.448614Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -254,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="graph" class="level3">
 <h3 class="anchored" data-anchor-id="graph"><code>Graph</code></h3>
 <p><code>Graph</code> jest grafem nieskierowanym bez krawędzi wielokrotnych. Ponowne dodanie tej samej krawędzi nie tworzy nowej krawędzi, lecz aktualizuje jej słownik atrybutów. Funkcja <code>add_edge(u, v)</code> oraz <code>add_edge(v, u)</code> będzie miała ten sam efekt.</p>
-<div id="graph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.876553Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.876364Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.879516Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.879133Z&quot;}}">
+<div id="graph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.450365Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.450190Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.452882Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.452376Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> nx.Graph() <span class="co">#tworzymy pusty graf nieskierowany</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>graph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, weight<span class="op">=</span><span class="dv">2</span>) <span class="co">#tworzymy krawędź A--B z wagą 2</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>graph.add_edge(<span class="st">"B"</span>, <span class="st">"A"</span>, color<span class="op">=</span><span class="st">"turquoise"</span>) <span class="co">#dodajemy do krawędzi A-B atrybut</span></span>
@@ -274,7 +274,7 @@ Wspólny słownik danych: True</code></pre>
 <section id="digraph" class="level3">
 <h3 class="anchored" data-anchor-id="digraph"><code>DiGraph</code></h3>
 <p><code>DiGraph</code> jest grafem skierowanym bez krawędzi wielokrotnych. Krawędzie <code>u → v</code> oraz <code>v → u</code> są różne. Ponowne dodanie <code>u → v</code> aktualizuje dane istniejącej krawędzi.</p>
-<div id="digraph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.880732Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.880619Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.883533Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.882832Z&quot;}}" data-execution_count="3">
+<div id="digraph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.453852Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.453764Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.456430Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.455959Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>digraph <span class="op">=</span> nx.DiGraph()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>digraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, weight<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>digraph.add_edge(<span class="st">"B"</span>, <span class="st">"A"</span>, weight<span class="op">=</span><span class="dv">5</span>)</span>
@@ -295,7 +295,7 @@ Poprzednicy A: ['B']</code></pre>
 <section id="multigraph" class="level3">
 <h3 class="anchored" data-anchor-id="multigraph"><code>MultiGraph</code></h3>
 <p><code>MultiGraph</code> jest multigrafem nieskierowanym. Każde wywołanie <code>add_edge(u, v)</code> bez podanego klucza tworzy kolejną krawędź i zwraca jej utworzony automatycznie klucz. Podanie istniejącego klucza aktualizuje wskazaną krawędź. Można również używać własnych kluczy, na przykład <code>key="A1"</code>.</p>
-<div id="multigraph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.885135Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.885012Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.887926Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.887411Z&quot;}}" data-execution_count="4">
+<div id="multigraph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.457397Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.457306Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.460195Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.459773Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>multigraph <span class="op">=</span> nx.MultiGraph()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>first_key <span class="op">=</span> multigraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, route<span class="op">=</span><span class="st">"lokalna"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>second_key <span class="op">=</span> multigraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, route<span class="op">=</span><span class="st">"ekspresowa"</span>)</span>
@@ -316,7 +316,7 @@ A B 1 {'route': 'ekspresowa'}</code></pre>
 <section id="multidigraph" class="level3">
 <h3 class="anchored" data-anchor-id="multidigraph"><code>MultiDiGraph</code></h3>
 <p><code>MultiDiGraph</code> łączy kierunek z możliwością przechowywania krawędzi równoległych. Klucze są lokalne dla uporządkowanej pary końców. Dlatego pierwsza krawędź <code>A → B</code> i pierwsza krawędź <code>B → A</code> mogą otrzymać ten sam klucz.</p>
-<div id="multidigraph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.889130Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.889019Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.892546Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.892099Z&quot;}}" data-execution_count="5">
+<div id="multidigraph-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.461276Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.461169Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.463552Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.463140Z&quot;}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>multidigraph <span class="op">=</span> nx.MultiDiGraph()</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>forward_1 <span class="op">=</span> multidigraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, route<span class="op">=</span><span class="st">"pierwsza"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>forward_2 <span class="op">=</span> multidigraph.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, route<span class="op">=</span><span class="st">"druga"</span>)</span>
@@ -358,7 +358,7 @@ Krawędzie: [('A', 'B', 0, {'route': 'pierwsza'}), ('A', 'B', 1, {'route': 'drug
 <tr class="even">
 <td><code>DiGraph</code></td>
 <td><code>G.succ[u][v]</code>, <code>G.pred[v][u]</code></td>
-<td>ten sam słownik atrybutów</td>
+<td>słownik atrybutów</td>
 </tr>
 <tr class="odd">
 <td><code>MultiGraph</code></td>
@@ -377,7 +377,7 @@ Krawędzie: [('A', 'B', 0, {'route': 'pierwsza'}), ('A', 'B', 1, {'route': 'drug
 <section id="dostęp-do-jednej-krawędzi" class="level2">
 <h2 class="anchored" data-anchor-id="dostęp-do-jednej-krawędzi">Dostęp do jednej krawędzi</h2>
 <p>W <code>Graph</code> i <code>DiGraph</code> krawędź jest wyznaczona przez parę końców. W <code>MultiGraph</code> i <code>MultiDiGraph</code> trzeba dodatkowo podać jej klucz. Metoda <code>get_edge_data()</code> jest wygodna, gdy zamiast wyjątku chcemy otrzymać wartość domyślną.</p>
-<div id="single-edge-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.893719Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.893612Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.896235Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.895695Z&quot;}}" data-execution_count="6">
+<div id="single-edge-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.464496Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.464410Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.466377Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.465931Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(graph.edges[<span class="st">"A"</span>, <span class="st">"B"</span>]))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(digraph.edges[<span class="st">"A"</span>, <span class="st">"B"</span>]))</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">dict</span>(multigraph.edges[<span class="st">"A"</span>, <span class="st">"B"</span>, first_key]))</span>
@@ -391,8 +391,8 @@ Krawędzie: [('A', 'B', 0, {'route': 'pierwsza'}), ('A', 'B', 1, {'route': 'drug
 </div>
 <section id="sam-klucz-nie-wystarcza" class="level3">
 <h3 class="anchored" data-anchor-id="sam-klucz-nie-wystarcza">Sam klucz nie wystarcza</h3>
-<p>Nie. Klucz multikrawędzi nie jest globalnym identyfikatorem. Ten sam klucz może pojawić się pomiędzy różnymi parami wierzchołków, a NetworkX nie utrzymuje dodatkowego indeksu <code>key → końce krawędzi</code>. Jeżeli znamy tylko klucz, musimy przejrzeć krawędzie.</p>
-<div id="find-key-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.898246Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.898121Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.902344Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.901947Z&quot;}}" data-execution_count="7">
+<p>Klucz multikrawędzi nie jest globalnym identyfikatorem. Ten sam klucz może pojawić się pomiędzy różnymi parami wierzchołków, a NetworkX nie utrzymuje dodatkowego indeksu <code>key → końce krawędzi</code>. Jeżeli znamy tylko klucz, musimy przejrzeć krawędzie.</p>
+<div id="find-key-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.467489Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.467353Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.471790Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.471391Z&quot;}}" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>roads <span class="op">=</span> nx.MultiGraph()</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>roads.add_edge(<span class="st">"Warszawa"</span>, <span class="st">"Łódź"</span>, key<span class="op">=</span><span class="st">"A1"</span>, length<span class="op">=</span><span class="dv">130</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>roads.add_edge(<span class="st">"Kraków"</span>, <span class="st">"Katowice"</span>, key<span class="op">=</span><span class="st">"A1"</span>, length<span class="op">=</span><span class="dv">80</span>)</span>
@@ -408,43 +408,52 @@ Krawędzie: [('A', 'B', 0, {'route': 'pierwsza'}), ('A', 'B', 1, {'route': 'drug
  ('Kraków', 'Katowice', 'A1', {'length': 80})]</code></pre>
 </div>
 </div>
-<p>Jeżeli nazwy krawędzi mają być globalnie unikalne i często po nich wyszukujemy, warto utrzymywać własny indeks. Taki słownik odtwarza funkcje przypisujące krawędzi jej początek i koniec z formalnej definicji grafu.</p>
-<div id="edge-index-example" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.903722Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.903585Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:00.906347Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:00.905974Z&quot;}}" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>road_graph <span class="op">=</span> nx.MultiGraph()</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>edge_index <span class="op">=</span> {}</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_road(u, v, name, <span class="op">**</span>attributes):</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> name <span class="kw">in</span> edge_index:</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Krawędź </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> już istnieje"</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    road_graph.add_edge(u, v, key<span class="op">=</span>name, <span class="op">**</span>attributes)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    edge_index[name] <span class="op">=</span> (u, v, name)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>add_road(<span class="st">"Warszawa"</span>, <span class="st">"Łódź"</span>, <span class="st">"A2"</span>, length<span class="op">=</span><span class="dv">130</span>)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>edge <span class="op">=</span> edge_index[<span class="st">"A2"</span>]</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Identyfikator w NetworkX:"</span>, edge)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dane:"</span>, <span class="bu">dict</span>(road_graph.edges[edge]))</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Identyfikator w NetworkX: ('Warszawa', 'Łódź', 'A2')
-Dane: {'length': 130}</code></pre>
-</div>
-</div>
 </section>
 </section>
 <section id="podstawy-wizualizacji" class="level2">
 <h2 class="anchored" data-anchor-id="podstawy-wizualizacji">Podstawy wizualizacji</h2>
 <p>Najprostsza funkcja <code>nx.draw()</code> jednocześnie wybiera położenia wierzchołków i rysuje graf za pomocą Matplotlib. Do szybkich eksperymentów wystarczy podać <code>with_labels=True</code>.</p>
-<div id="simple-drawing" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:00.907992Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:00.907755Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:01.025035Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:01.024537Z&quot;}}" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>visual_graph <span class="op">=</span> nx.Graph()</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>visual_graph.add_weighted_edges_from([</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="dv">2</span>),</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="dv">4</span>),</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="dv">1</span>),</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"C"</span>, <span class="st">"D"</span>, <span class="dv">3</span>),</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"D"</span>, <span class="st">"E"</span>, <span class="dv">2</span>),</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>nx.draw(visual_graph, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"turquoise"</span>)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="simple-drawing" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.472603Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.472488Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.590072Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.589564Z&quot;}}" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>visual_graph <span class="op">=</span> nx.Graph()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>visual_graph.add_weighted_edges_from([</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="dv">2</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="dv">4</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="dv">1</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"C"</span>, <span class="st">"D"</span>, <span class="dv">3</span>),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"D"</span>, <span class="st">"E"</span>, <span class="dv">2</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>nx.draw(visual_graph, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"turquoise"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="networkx_files/figure-html/src-networkx-cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="pozycje-wierzchołków" class="level3">
+<h3 class="anchored" data-anchor-id="pozycje-wierzchołków">Pozycje wierzchołków</h3>
+<p>Funkcja <code>nx.draw()</code> może otrzymać w argumencie <code>pos</code> słownik, który każdemu wierzchołkowi przypisuje parę współrzędnych <code>(x, y)</code>. Dzięki temu sami ustalamy układ grafu, zamiast pozostawiać jego wyznaczenie bibliotece NetworkX. Współrzędne nie oznaczają pikseli ani konkretnych jednostek — ważne jest ich wzajemne położenie: większa wartość <code>x</code> przesuwa wierzchołek w prawo, a większa wartość <code>y</code> w górę.</p>
+<div id="b8777bb7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.591096Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.590928Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.613756Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.613112Z&quot;}}" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A"</span>: (<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"B"</span>: (<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C"</span>: (<span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"D"</span>: (<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"E"</span>: (<span class="dv">3</span>, <span class="dv">0</span>),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>nx.draw(</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    visual_graph,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    pos<span class="op">=</span>positions,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    with_labels<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"#168C88"</span>,</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="dv">900</span>,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -453,54 +462,32 @@ Dane: {'length': 130}</code></pre>
 </div>
 </div>
 </div>
-<section id="pozycje-wierzchołków" class="level3">
-<h3 class="anchored" data-anchor-id="pozycje-wierzchołków">Pozycje wierzchołków</h3>
-<p>Funkcja <code>nx.draw()</code> może otrzymać w argumencie <code>pos</code> słownik, który każdemu wierzchołkowi przypisuje parę współrzędnych <code>(x, y)</code>. Dzięki temu sami ustalamy układ grafu, zamiast pozostawiać jego wyznaczenie bibliotece NetworkX. Współrzędne nie oznaczają pikseli ani konkretnych jednostek — ważne jest ich wzajemne położenie: większa wartość <code>x</code> przesuwa wierzchołek w prawo, a większa wartość <code>y</code> w górę.</p>
-<div id="b8777bb7" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> {</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A"</span>: (<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"B"</span>: (<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C"</span>: (<span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"D"</span>: (<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>),</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"E"</span>: (<span class="dv">3</span>, <span class="dv">0</span>),</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>nx.draw(</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    visual_graph,</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    pos<span class="op">=</span>positions,</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    with_labels<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"#168C88"</span>,</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="dv">900</span>,</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 <p>Współrzędnych nie musimy wypisywać sami. Poniższe funkcje tworzą je automatycznie: <code>spring_layout()</code>, <code>planar_layout()</code>, <code>circular_layout()</code> i <code>shell_layout()</code>. Ustalenie <code>seed</code> pozwala odtwarzać ten sam układ losowy.</p>
-<div id="layouts-comparison" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:01.026235Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:01.026044Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:01.100766Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:01.100252Z&quot;}}" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>layouts <span class="op">=</span> {</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spring_layout"</span>: nx.spring_layout(visual_graph, seed<span class="op">=</span><span class="dv">7</span>),</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"planar_layout"</span>: nx.planar_layout(visual_graph),</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"circular_layout"</span>: nx.circular_layout(visual_graph),</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"shell_layout"</span>: nx.shell_layout(visual_graph),</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, (name, positions) <span class="kw">in</span> <span class="bu">zip</span>(axes.flat, layouts.items()):</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    nx.draw(</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        visual_graph,</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        positions,</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        with_labels<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        edgecolors<span class="op">=</span><span class="st">"#168C88"</span>,</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    ax.set_title(name)</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="layouts-comparison" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.615222Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.615127Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.685728Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.684989Z&quot;}}" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>layouts <span class="op">=</span> {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spring_layout"</span>: nx.spring_layout(visual_graph, seed<span class="op">=</span><span class="dv">7</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"planar_layout"</span>: nx.planar_layout(visual_graph),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"circular_layout"</span>: nx.circular_layout(visual_graph),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"shell_layout"</span>: nx.shell_layout(visual_graph),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, (name, positions) <span class="kw">in</span> <span class="bu">zip</span>(axes.flat, layouts.items()):</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    nx.draw(</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        visual_graph,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        positions,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        with_labels<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        edgecolors<span class="op">=</span><span class="st">"#168C88"</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    ax.set_title(name)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="networkx_files/figure-html/src-networkx-cell-12-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="networkx_files/figure-html/src-networkx-cell-11-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -510,27 +497,27 @@ Dane: {'length': 130}</code></pre>
 <section id="dokładniejsze-sterowanie-rysunkiem" class="level3">
 <h3 class="anchored" data-anchor-id="dokładniejsze-sterowanie-rysunkiem">Dokładniejsze sterowanie rysunkiem</h3>
 <p>Funkcja <code>draw_networkx()</code> rysuje wierzchołki, krawędzie i etykiety. Gdy potrzebujemy większej kontroli, możemy wywołać osobno <code>draw_networkx_nodes()</code>, <code>draw_networkx_edges()</code>, <code>draw_networkx_labels()</code> oraz <code>draw_networkx_edge_labels()</code>.</p>
-<div id="detailed-drawing" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-02T10:25:01.102325Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-02T10:25:01.102183Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-02T10:25:01.138345Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-02T10:25:01.137966Z&quot;}}" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> nx.spring_layout(visual_graph, seed<span class="op">=</span><span class="dv">7</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>edge_labels <span class="op">=</span> nx.get_edge_attributes(visual_graph, <span class="st">"weight"</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_nodes(</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    visual_graph, positions, node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"#168C88"</span>, node_size<span class="op">=</span><span class="dv">900</span>, ax<span class="op">=</span>ax,</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edges(visual_graph, positions, width<span class="op">=</span><span class="fl">1.5</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_labels(visual_graph, positions, ax<span class="op">=</span>ax)</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edge_labels(</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    visual_graph, positions, edge_labels<span class="op">=</span>edge_labels, ax<span class="op">=</span>ax,</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="detailed-drawing" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-13T10:05:38.687197Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-13T10:05:38.687086Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-13T10:05:38.725441Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-13T10:05:38.725061Z&quot;}}" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> nx.spring_layout(visual_graph, seed<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>edge_labels <span class="op">=</span> nx.get_edge_attributes(visual_graph, <span class="st">"weight"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_nodes(</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    visual_graph, positions, node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"#168C88"</span>, node_size<span class="op">=</span><span class="dv">900</span>, ax<span class="op">=</span>ax,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edges(visual_graph, positions, width<span class="op">=</span><span class="fl">1.5</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_labels(visual_graph, positions, ax<span class="op">=</span>ax)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edge_labels(</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    visual_graph, positions, edge_labels<span class="op">=</span>edge_labels, ax<span class="op">=</span>ax,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="networkx_files/figure-html/src-networkx-cell-13-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="networkx_files/figure-html/src-networkx-cell-12-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
