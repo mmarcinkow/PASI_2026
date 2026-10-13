@@ -39,6 +39,36 @@
   padding-right: 1.25rem;
 }
 
+.function-values-table table {
+  width: auto;
+  margin: 1rem auto;
+  border-collapse: collapse;
+}
+
+.function-values-table table,
+.function-values-table thead,
+.function-values-table tbody,
+.function-values-table tr,
+.function-values-table table th,
+.function-values-table table td {
+  border: 0;
+}
+
+.function-values-table table th,
+.function-values-table table td {
+  padding: 0.3rem 0.8rem;
+  text-align: center;
+  font-weight: normal;
+}
+
+.function-values-table table thead th {
+  border-bottom: 1px solid currentColor;
+}
+
+.function-values-table table tr > :first-child {
+  border-right: 1px solid currentColor;
+}
+
 #thm-euler,
 .theorem.theorem-boxed:not(.theorem-fullscreen-copy),
 .theorem.definition.definition-boxed:not(.theorem-fullscreen-copy) {

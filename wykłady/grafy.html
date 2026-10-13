@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1.1" class="anchored" data-anchor-id="przykłady"><span class="header-section-number">1.1</span> Przykłady</h2>
 <div id="exm-graf-znajomosci" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.1 (Graf znajomości)</strong></span> Wierzchołki odpowiadają osobom. Dwie osoby łączymy krawędzią, jeśli się znają.</p>
-<div id="0cbf5d7f" class="cell" data-execution_count="1">
+<div id="8cd71b88" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -323,7 +323,7 @@ Rysunek&nbsp;1.1: Przykładowy graf znajomości.
 </div>
 <div id="exm-mapa-drogowa" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.2 (Mapa drogowa)</strong></span> Wierzchołki odpowiadają miastom, a krawędzie łączącym je drogom. Każda droga ma unikalną nazwę oraz długość wyrażoną w kilometrach.</p>
-<div id="9bcdd311" class="cell" data-execution_count="3">
+<div id="8940635a" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.MultiGraph()</span>
@@ -388,7 +388,7 @@ Rysunek&nbsp;1.2: Przykładowa mapa drogowa.
 </div>
 <div id="exm-mapa-turystyczna" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.3 (Mapa turystyczna: graf skierowany)</strong></span> Wierzchołki odpowiadają miejscowościom i szczytom, a krawędzie trasom turystycznym. Każda krawędź jest skierowana i zawiera przewidywany czas przejścia w minutach.</p>
-<div id="f6467817" class="cell" data-execution_count="5">
+<div id="5e005605" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
@@ -455,62 +455,85 @@ Rysunek&nbsp;1.3: Przykładowa mapa turystyczna.
 </div>
 <div id="exm-multigraf-skierowany" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.4 (Graf skierowany z pętlami i wielokrotnymi krawędziami)</strong></span> Rozważmy następujący graf.</p>
-<div id="3b31bdf1" class="cell" data-execution_count="7">
+<div id="6fa0ad30" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.MultiDiGraph()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="st">"A"</span>, <span class="st">"A"</span>, key<span class="op">=</span><span class="st">"e1"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="st">"A"</span>, <span class="st">"A"</span>, key<span class="op">=</span><span class="st">"e2"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, key<span class="op">=</span><span class="st">"e3"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, key<span class="op">=</span><span class="st">"e4"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> {</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A"</span>: (<span class="fl">0.0</span>, <span class="fl">0.0</span>),</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"B"</span>: (<span class="fl">2.0</span>, <span class="fl">0.0</span>),</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>connectionstyles <span class="op">=</span> [<span class="st">"arc3,rad=-0.2"</span>, <span class="st">"arc3,rad=0.2"</span>]</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>edge_labels <span class="op">=</span> {</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    (u, v, key): key</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> u, v, key <span class="kw">in</span> G.edges(keys<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx(</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    G,</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    positions,</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="dv">600</span>,</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"#168C88"</span>,</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    linewidths<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    connectionstyle<span class="op">=</span>connectionstyles,</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    arrows<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    arrowstyle<span class="op">=</span><span class="st">"-|&gt;"</span>,</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    arrowsize<span class="op">=</span><span class="dv">16</span>,</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    with_labels<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_labels(</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    G,</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A"</span>: (<span class="op">-</span><span class="fl">0.12</span>, <span class="op">-</span><span class="fl">0.18</span>),</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B"</span>: (<span class="fl">2.12</span>, <span class="op">-</span><span class="fl">0.18</span>),</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    font_size<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    clip_on<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edge_labels(</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    G,</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    positions,</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    edge_labels<span class="op">=</span>edge_labels,</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    connectionstyle<span class="op">=</span>connectionstyles,</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    rotate<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    font_size<span class="op">=</span><span class="dv">9</span>,</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    bbox<span class="op">=</span>{<span class="st">"facecolor"</span>: <span class="st">"white"</span>, <span class="st">"edgecolor"</span>: <span class="st">"none"</span>, <span class="st">"alpha"</span>: <span class="fl">0.7</span>},</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="dv">600</span>,</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> FancyArrowPatch</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.path <span class="im">import</span> Path</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.MultiDiGraph()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="st">"A"</span>, <span class="st">"A"</span>, key<span class="op">=</span><span class="st">"e1"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="st">"A"</span>, <span class="st">"A"</span>, key<span class="op">=</span><span class="st">"e2"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, key<span class="op">=</span><span class="st">"e3"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>G.add_edge(<span class="st">"A"</span>, <span class="st">"B"</span>, key<span class="op">=</span><span class="st">"e4"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> {</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A"</span>: (<span class="fl">0.0</span>, <span class="fl">0.0</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"B"</span>: (<span class="fl">2.0</span>, <span class="fl">0.0</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>connectionstyles <span class="op">=</span> [<span class="st">"arc3,rad=-0.2"</span>, <span class="st">"arc3,rad=0.2"</span>]</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>edge_labels <span class="op">=</span> {</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    (u, v, key): key</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> u, v, key <span class="kw">in</span> G.edges(keys<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> u <span class="op">!=</span> v</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edges(</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    G,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    positions,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    edgelist<span class="op">=</span><span class="bu">list</span>(edge_labels),</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    connectionstyle<span class="op">=</span>connectionstyles,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    arrows<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    arrowstyle<span class="op">=</span><span class="st">"-|&gt;"</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    arrowsize<span class="op">=</span><span class="dv">16</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Pętle rysujemy osobno: nad i pod lewą stroną wierzchołka A.</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Cztery punkty wyznaczają krzywą Béziera od A z powrotem do A.</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>label_bbox <span class="op">=</span> {<span class="st">"facecolor"</span>: <span class="st">"white"</span>, <span class="st">"edgecolor"</span>: <span class="st">"none"</span>, <span class="st">"alpha"</span>: <span class="dv">1</span>, <span class="st">"pad"</span>: <span class="fl">0.3</span>}</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, direction <span class="kw">in</span> [(<span class="st">"e1"</span>, <span class="dv">1</span>), (<span class="st">"e2"</span>, <span class="op">-</span><span class="dv">1</span>)]:</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    loop <span class="op">=</span> Path(</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        [(<span class="dv">0</span>, <span class="dv">0</span>), (<span class="dv">0</span>, direction <span class="op">*</span> <span class="fl">0.85</span>), (<span class="op">-</span><span class="fl">0.9</span>, direction <span class="op">*</span> <span class="fl">0.85</span>),</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>         (<span class="op">-</span><span class="fl">0.085</span>, direction <span class="op">*</span> <span class="fl">0.03</span>)],</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        [Path.MOVETO, Path.CURVE4, Path.CURVE4, Path.CURVE4],</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    ax.add_patch(FancyArrowPatch(</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>        path<span class="op">=</span>loop, arrowstyle<span class="op">=</span><span class="st">"-|&gt;"</span>, mutation_scale<span class="op">=</span><span class="dv">16</span>,</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="dv">1</span>, zorder<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    ax.text(</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>        <span class="op">-</span><span class="fl">0.35</span>, direction <span class="op">*</span> <span class="fl">0.64</span>, key,</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"center"</span>, fontsize<span class="op">=</span><span class="dv">9</span>, bbox<span class="op">=</span>label_bbox,</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_nodes(</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    G,</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    positions,</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    node_color<span class="op">=</span><span class="st">"turquoise"</span>,</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    edgecolors<span class="op">=</span><span class="st">"#168C88"</span>,</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    linewidths<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_labels(G, positions, font_size<span class="op">=</span><span class="dv">10</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edge_labels(</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    G,</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    positions,</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    edge_labels<span class="op">=</span>edge_labels,</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    connectionstyle<span class="op">=</span>connectionstyles,</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    rotate<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    font_size<span class="op">=</span><span class="dv">9</span>,</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    bbox<span class="op">=</span>label_bbox,</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    node_size<span class="op">=</span><span class="dv">600</span>,</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">0.85</span>, <span class="fl">2.25</span>)</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="fl">0.8</span>, <span class="fl">0.8</span>)</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">"equal"</span>)</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>ax.set_axis_off()</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div id="fig-multigraf-skierowany" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -554,20 +577,42 @@ V=\{A,B\},
 E=\{e_1,e_2,e_3,e_4\}.
 </annotation></semantics></math></p>
 <p>Wartości funkcji <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> są następujące:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>e</mi></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>e</mi><mn>1</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>e</mi><mn>2</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>e</mi><mn>3</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>e</mi><mn>4</mn></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="center" style="text-align: center"><mi>A</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>A</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>A</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>A</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="center" style="text-align: center"><mi>A</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>A</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>B</mi></mtd><mtd columnalign="center" style="text-align: center"><mi>B</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{array}{c|cccc}
-e      &amp; e_1 &amp; e_2 &amp; e_3 &amp; e_4 \\ \hline
-s(e)   &amp; A   &amp; A   &amp; A   &amp; A   \\
-t(e)   &amp; A   &amp; A   &amp; B   &amp; B
-\end{array}
-</annotation></semantics></math></p>
+<div class="function-values-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math></th>
+<th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>1</mn></msub><annotation encoding="application/x-tex">e_1</annotation></semantics></math></th>
+<th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>2</mn></msub><annotation encoding="application/x-tex">e_2</annotation></semantics></math></th>
+<th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>3</mn></msub><annotation encoding="application/x-tex">e_3</annotation></semantics></math></th>
+<th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>4</mn></msub><annotation encoding="application/x-tex">e_4</annotation></semantics></math></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">s(e)</annotation></semantics></math></td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">t(e)</annotation></semantics></math></td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math></td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>Krawędzie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>1</mn></msub><annotation encoding="application/x-tex">e_1</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>2</mn></msub><annotation encoding="application/x-tex">e_2</annotation></semantics></math> są pętlami, natomiast <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>3</mn></msub><annotation encoding="application/x-tex">e_3</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>4</mn></msub><annotation encoding="application/x-tex">e_4</annotation></semantics></math> są krawędziami wielokrotnymi skierowanymi z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
 </div>
 <p>Graf nieskierowany możemy opisać za pomocą grafów skierowanych. Intuicyjnie, każdą krawędź nieskierowaną (również pętlę) zapiszemy jako dwie krawędzie skierowane o przeciwnych zwrotach.</p>
 </section>
 <section id="graf-nieskierowany" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="graf-nieskierowany"><span class="header-section-number">1.2.2</span> Graf nieskierowany</h3>
-<div id="def-graf-nieskierowany" class="definition-boxed theorem definition">
+<div id="def-graf-nieskierowany" class="definition-boxed fullscreen-half-image theorem definition" data-fullscreen-include="#fig-krawedz-nieskierowana">
 <p><span class="theorem-title"><strong>Definicja 1.2</strong></span> <strong>Grafem nieskierowanym</strong> nazywamy graf skierowany <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> z dodatkową funkcją <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">
 i:E\to E
 </annotation></semantics></math></p>
@@ -584,7 +629,17 @@ s(i(e))&amp;=t(e), &amp; t(i(e))&amp;=s(e).
 </annotation></semantics></math></p>
 <p>Krawędź <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">i(e)</annotation></semantics></math> nazywamy <strong>krawędzią odwrotną</strong> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>. Para <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>e</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{e,i(e)\}</annotation></semantics></math> reprezentuje jedną krawędź nieskierowaną.</p>
 </div>
-<p>Często nie ma znaczenia o jakim grafie mówimy - skierowanym lub nie. Wtedy po prostu używamy określenia <strong>graf</strong>.</p>
+<div id="fig-krawedz-nieskierowana" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Dwa wierzchołki A i B. Krawędź e prowadzi z A do B, a krawędź odwrotna i(e) z B do A.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-krawedz-nieskierowana-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/krawedz-nieskierowana.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Rysunek&nbsp;1.5: Jedna krawędź nieskierowana jako para krawędzi skierowanych e i i(e)."><img src="images/krawedz-nieskierowana.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:43.3333%" alt="Dwa wierzchołki A i B. Krawędź e prowadzi z A do B, a krawędź odwrotna i(e) z B do A."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-krawedz-nieskierowana-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;1.5: Jedna krawędź nieskierowana jako para krawędzi skierowanych <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">i(e)</annotation></semantics></math>.
+</figcaption>
+</figure>
+</div>
+<p>Często z kontekstu wynika o jakim grafie mówimy - skierowanym lub nie. Wtedy po prostu używamy określenia <strong>graf</strong>.</p>
 <div id="exm-formalny-opis-mapy-drogowej" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.6 (Formalny opis mapy drogowej)</strong></span> W mapie drogowej z przykładu <a href="#exm-mapa-drogowa" class="quarto-xref"><span>1.2</span></a> każdą drogę zastępujemy dwiema krawędziami skierowanymi. Zbiór ich identyfikatorów ma postać</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>E</mi><mo>=</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">{</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>−</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">D</mi><mi mathvariant="normal">K</mi><mn mathvariant="normal">92</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">D</mi><mi mathvariant="normal">K</mi><mn mathvariant="normal">92</mn></mrow><mo>−</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">1</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">1</mn></mrow><mo>−</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">8</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">8</mn></mrow><mo>−</mo></msup><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">5</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">5</mn></mrow><mo>−</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">7</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">7</mn></mrow><mo>−</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">17</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">17</mn></mrow><mo>−</mo></msup><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">}</mo><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
@@ -620,7 +675,7 @@ i(\mathrm{A2}^{-})=\mathrm{A2}^{+}.
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/mapa-drogowa.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Przykładowa mapa drogowa."><img src="images/mapa-drogowa.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%" alt="Przykładowa mapa drogowa."></a></p>
+<p><a href="images/mapa-drogowa.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Przykładowa mapa drogowa."><img src="images/mapa-drogowa.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%" alt="Przykładowa mapa drogowa."></a></p>
 </figure>
 </div>
 <figcaption>Przykładowa mapa drogowa.</figcaption>
@@ -644,6 +699,7 @@ E=\bigl\{
 \bigr\}.
 </annotation></semantics></math></p>
 </div>
+<p>Zachodzi wtedy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>⊂</mo><mi>V</mi><mo>×</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">E \subset V \times V</annotation></semantics></math>.</p>
 </section>
 </section>
 <section id="sec-dodatkowe-dane" class="level2" data-number="1.3">
@@ -690,7 +746,7 @@ c:V\to\{\text{zielony},\text{czerwony}\}
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/stopnie-skierowane.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="images/stopnie-skierowane.png" id="fullscreen-stopnie-skierowane" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:55.0%"></a></p>
+<p><a href="images/stopnie-skierowane.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="images/stopnie-skierowane.png" id="fullscreen-stopnie-skierowane" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:55.0%"></a></p>
 </figure>
 </div>
 <p>Pętla zaczynająca się i kończąca w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> zwiększa zarówno stopień wejściowy, jak i stopień wyjściowy tego wierzchołka o jeden.</p>
@@ -726,10 +782,10 @@ v_0=s(e_1),
 \qquad
 v_j=t(e_j)\quad\text{dla }j=1,\ldots,n.
 </annotation></semantics></math></p>
-<p>Na przykład ścieżka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>e</mi><mn>6</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p=(e_1,\ldots,e_6)</annotation></semantics></math> przedstawiona poniżej przechodzi kolejno przez wierzchołki <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mn>6</mn></msub></mrow><annotation encoding="application/x-tex">v_0,\ldots,v_6</annotation></semantics></math>. Wszystkie te wierzchołki są parami różne.</p>
+<p>Na przykład ścieżka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>e</mi><mn>6</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p=(e_1,\ldots,e_6)</annotation></semantics></math> przedstawiona poniżej przechodzi kolejno przez wierzchołki <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mn>6</mn></msub></mrow><annotation encoding="application/x-tex">v_0,\ldots,v_6</annotation></semantics></math>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/sciezka-prosta.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="images/sciezka-prosta.png" id="fullscreen-sciezka-prosta" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:75.0%"></a></p>
+<p><a href="images/sciezka-prosta.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="images/sciezka-prosta.png" id="fullscreen-sciezka-prosta" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:75.0%"></a></p>
 </figure>
 </div>
 <p>Wierzchołek <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>0</mn></msub><annotation encoding="application/x-tex">v_0</annotation></semantics></math> nazywamy <strong>początkiem</strong>, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>n</mi></msub><annotation encoding="application/x-tex">v_n</annotation></semantics></math> <strong>końcem</strong> ścieżki.</p>
@@ -740,7 +796,7 @@ v_j=t(e_j)\quad\text{dla }j=1,\ldots,n.
 </div>
 <div id="exm-sciezki" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.10 (Przykłady ścieżek)</strong></span> Na poniższym rysunku przedstawiono kilka rodzajów ścieżek.</p>
-<div id="4da10e81" class="cell" data-execution_count="11">
+<div id="84782151" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_path_example(graph, positions, ax, title, connectionstyle<span class="op">=</span><span class="st">"arc3"</span>):</span>
@@ -777,7 +833,7 @@ v_j=t(e_j)\quad\text{dla }j=1,\ldots,n.
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        rotate<span class="op">=</span><span class="va">False</span>,</span>
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        font_size<span class="op">=</span><span class="dv">8</span>,</span>
 <span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        connectionstyle<span class="op">=</span>connectionstyle,</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        bbox<span class="op">=</span>{<span class="st">"facecolor"</span>: <span class="st">"white"</span>, <span class="st">"edgecolor"</span>: <span class="st">"none"</span>, <span class="st">"alpha"</span>: <span class="fl">0.8</span>},</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        bbox<span class="op">=</span>{<span class="st">"facecolor"</span>: <span class="st">"white"</span>, <span class="st">"edgecolor"</span>: <span class="st">"none"</span>, <span class="st">"alpha"</span>: <span class="dv">1</span>, <span class="st">"pad"</span>: <span class="fl">0.3</span>},</span>
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    ax.set_title(title, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
@@ -850,10 +906,10 @@ v_j=t(e_j)\quad\text{dla }j=1,\ldots,n.
 <div id="fig-sciezki" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sciezki-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/sciezki.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Rysunek&nbsp;1.5: Przykłady ścieżek: (a) ścieżka prosta; (b) ścieżka, która natychmiast zawraca; (c) ścieżka, która wraca do wcześniej odwiedzonego wierzchołka; (d) różne ścieżki przechodzące przez te same wierzchołki."><img src="images/sciezki.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></a>
+<a href="images/sciezki.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Rysunek&nbsp;1.6: Przykłady ścieżek: (a) ścieżka prosta; (b) ścieżka, która natychmiast zawraca; (c) ścieżka, która wraca do wcześniej odwiedzonego wierzchołka; (d) różne ścieżki przechodzące przez te same wierzchołki."><img src="images/sciezki.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sciezki-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Rysunek&nbsp;1.5: Przykłady ścieżek: (a) ścieżka prosta; (b) ścieżka, która natychmiast zawraca; (c) ścieżka, która wraca do wcześniej odwiedzonego wierzchołka; (d) różne ścieżki przechodzące przez te same wierzchołki.
+Rysunek&nbsp;1.6: Przykłady ścieżek: (a) ścieżka prosta; (b) ścieżka, która natychmiast zawraca; (c) ścieżka, która wraca do wcześniej odwiedzonego wierzchołka; (d) różne ścieżki przechodzące przez te same wierzchołki.
 </figcaption>
 </figure>
 </div>
@@ -873,17 +929,14 @@ q=(e_2,e_3)
 </div>
 <div id="def-cykl-prosty" class="theorem definition">
 <p><span class="theorem-title"><strong>Definicja 1.8 (Cykl prosty)</strong></span> Niech cykl <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>e</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p=(e_1,\ldots,e_n)</annotation></semantics></math> przechodzi kolejno przez wierzchołki</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mi>n</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
-v_0,v_1,\ldots,v_n.
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mi>n</mi></msub><mo>=</mo><msub><mi>v</mi><mn>0</mn></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+v_0,v_1,\ldots,v_n=v_0.
 </annotation></semantics></math></p>
-<p>Cykl <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> nazywamy <strong>prostym</strong>, jeżeli</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>=</mo><msub><mi>v</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">
-v_0=v_n
-</annotation></semantics></math></p>
-<p>oraz wierzchołki <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">v_0,v_1,\ldots,v_{n-1}</annotation></semantics></math> są parami różne.</p>
+<p>Cykl <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> nazywamy <strong>prostym</strong>, jeżeli wierzchołki <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">v_0,v_1,\ldots,v_{n-1}</annotation></semantics></math> są parami różne.</p>
 </div>
-<p>W grafie nieskierowanym wymagamy dodatkowo, aby cykl prosty nie przechodził dwukrotnie przez tę samą krawędź nieskierowaną. W szczególności ścieżka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(e,i(e))</annotation></semantics></math>, która przechodzi krawędzią <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>, a następnie natychmiast zawraca, nie jest cyklem prostym.</p>
-<p>Ścieżka z panelu (b) na rysunku <a href="#fig-sciezki" class="quarto-xref"><span>1.5</span></a> jest cyklem prostym w grafie skierowanym, chociaż nie jest ścieżką prostą. Ścieżka z panelu (c) nie jest cyklem, ponieważ kończy się w innym wierzchołku, niż się zaczyna. Jej trzy pierwsze krawędzie tworzą jednak cykl prosty.</p>
+<p>W grafie nieskierowanym ustalamy dodatkowo, że cykl postaci <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(e,i(e))</annotation></semantics></math> nie jest cyklem prostym, choć zpełnia powyższą definicję.</p>
+<p>Uwaga: cykl prosty traktowany jako ścieżka nie jest ścieżką prostą, ponieważ przechodzi więcej niż raz przez wierzchołek <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>0</mn></msub><annotation encoding="application/x-tex">v_0</annotation></semantics></math>.</p>
+<p>Ścieżka z panelu (b) na rysunku <a href="#fig-sciezki" class="quarto-xref"><span>1.6</span></a> jest cyklem prostym w grafie skierowanym, chociaż nie jest ścieżką prostą. Ścieżka z panelu (c) nie jest cyklem, ponieważ kończy się w innym wierzchołku, niż się zaczyna. Jej trzy pierwsze krawędzie tworzą jednak cykl prosty.</p>
 </section>
 <section id="spójność" class="level3" data-number="1.4.4">
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="spójność"><span class="header-section-number">1.4.4</span> Spójność</h3>
@@ -894,7 +947,7 @@ v_0=v_n
 <div id="def-silna-spojnosc" class="theorem definition">
 <p><span class="theorem-title"><strong>Definicja 1.10 (Graf silnie spójny)</strong></span> Graf skierowany nazywamy <strong>silnie spójnym</strong>, jeżeli dla każdych dwóch wierzchołków <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math> istnieje ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
 </div>
-<p>W powyższej definicji para <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(u,v)</annotation></semantics></math> jest uporządkowana. Jeżeli graf jest silnie spójny, to dla każdych <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math> istnieje zarówno ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>, jak i ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>.</p>
+<p>Jeżeli graf jest silnie spójny, to dla każdych <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math> istnieje zarówno ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>, jak i ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>.</p>
 <div id="def-spojnosc" class="theorem definition">
 <p><span class="theorem-title"><strong>Definicja 1.11 (Graf spójny)</strong></span> Graf nieskierowany nazywamy <strong>spójnym</strong>, jeżeli dla każdych dwóch wierzchołków <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math> istnieje ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
 </div>
@@ -968,7 +1021,7 @@ c\bigl(s(e)\bigr)\neq c\bigl(t(e)\bigr).
 <p>Grafy dwudzielne pojawiają się naturalnie wtedy, gdy wierzchołki opisują obiekty dwóch różnych rodzajów. Mogą to być na przykład użytkownicy i produkty, które kupili lub ocenili, albo autorzy i artykuły naukowe.</p>
 <div id="exm-autorzy-artykuly" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.11 (Autorzy i artykuły)</strong></span> Wierzchołki po lewej stronie odpowiadają autorom, a wierzchołki po prawej stronie artykułom. Krawędź skierowana od autora do artykułu oznacza, że dana osoba jest autorem tego artykułu.</p>
-<div id="b42771fa" class="cell" data-execution_count="13">
+<div id="f8a97331" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>authors_articles <span class="op">=</span> nx.DiGraph()</span>
@@ -1045,10 +1098,10 @@ c\bigl(s(e)\bigr)\neq c\bigl(t(e)\bigr).
 <div id="fig-graf-dwudzielny-autorzy" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-graf-dwudzielny-autorzy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/graf-dwudzielny-autorzy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Rysunek&nbsp;1.6: Graf dwudzielny autorów i artykułów."><img src="images/graf-dwudzielny-autorzy.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></a>
+<a href="images/graf-dwudzielny-autorzy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Rysunek&nbsp;1.7: Graf dwudzielny autorów i artykułów."><img src="images/graf-dwudzielny-autorzy.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graf-dwudzielny-autorzy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Rysunek&nbsp;1.6: Graf dwudzielny autorów i artykułów.
+Rysunek&nbsp;1.7: Graf dwudzielny autorów i artykułów.
 </figcaption>
 </figure>
 </div>
@@ -1059,7 +1112,7 @@ Rysunek&nbsp;1.6: Graf dwudzielny autorów i artykułów.
 <div id="def-drzewo" class="fullscreen-half-image fullscreen-image-29 theorem definition" data-fullscreen-include="#fig-drzewo">
 <p><span class="theorem-title"><strong>Definicja 1.16</strong></span> <strong>Drzewem</strong> nazywamy spójny graf nieskierowany, który nie zawiera cykli prostych.</p>
 </div>
-<div id="98b006a3" class="cell" data-execution_count="15">
+<div id="d3bdb6fd" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> nx.Graph()</span>
@@ -1110,10 +1163,10 @@ Rysunek&nbsp;1.6: Graf dwudzielny autorów i artykułów.
 <div id="fig-drzewo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-drzewo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/drzewo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Rysunek&nbsp;1.7: Przykładowe drzewo."><img src="images/drzewo.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:58.0%"></a>
+<a href="images/drzewo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Rysunek&nbsp;1.8: Przykładowe drzewo."><img src="images/drzewo.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:58.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-drzewo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Rysunek&nbsp;1.7: Przykładowe drzewo.
+Rysunek&nbsp;1.8: Przykładowe drzewo.
 </figcaption>
 </figure>
 </div>
@@ -1125,7 +1178,7 @@ Rysunek&nbsp;1.7: Przykładowe drzewo.
 <p><span class="theorem-title"><strong>Definicja 1.17</strong></span> <strong>Ukorzenionym drzewem skierowanym</strong> nazywamy graf skierowany <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> z wyróżnionym wierzchołkiem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>, zwanym <strong>korzeniem</strong>, taki że dla każdego wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">v\in V</annotation></semantics></math> istnieje dokładnie jedna ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
 </div>
 <p>Krawędzie ukorzenionego drzewa skierowanego są zwrócone od korzenia. Każdy wierzchołek różny od korzenia ma dokładnie jedną krawędź wchodzącą.</p>
-<div id="a288480c" class="cell" data-execution_count="17">
+<div id="a81f19dd" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rooted_tree <span class="op">=</span> nx.DiGraph()</span>
@@ -1182,10 +1235,10 @@ Rysunek&nbsp;1.7: Przykładowe drzewo.
 <div id="fig-drzewo-skierowane-ukorzenione" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-drzewo-skierowane-ukorzenione-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/drzewo-skierowane-ukorzenione.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Rysunek&nbsp;1.8: Ukorzenione drzewo skierowane."><img src="images/drzewo-skierowane-ukorzenione.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></a>
+<a href="images/drzewo-skierowane-ukorzenione.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Rysunek&nbsp;1.9: Ukorzenione drzewo skierowane."><img src="images/drzewo-skierowane-ukorzenione.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-drzewo-skierowane-ukorzenione-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Rysunek&nbsp;1.8: Ukorzenione drzewo skierowane.
+Rysunek&nbsp;1.9: Ukorzenione drzewo skierowane.
 </figcaption>
 </figure>
 </div>
@@ -1197,7 +1250,7 @@ Rysunek&nbsp;1.8: Ukorzenione drzewo skierowane.
 </div>
 <p>Grafy tego rodzaju nazywamy również <strong>DAG-ami</strong>, (ang. <em>directed acyclic graph</em>).</p>
 <p>W szczególności DAG nie może mieć pętli. Jego graf nieskierowany może jednak zawierać cykle proste: ważne jest jedynie to, że żadnego z nich nie można przejść zgodnie z kierunkami wszystkich krawędzi.</p>
-<div id="8cc8acfb" class="cell" data-execution_count="19">
+<div id="a37644a9" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dag <span class="op">=</span> nx.DiGraph()</span>
@@ -1243,14 +1296,14 @@ Rysunek&nbsp;1.8: Ukorzenione drzewo skierowane.
 <div id="fig-dag" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/dag.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Rysunek&nbsp;1.9: Przykładowy graf skierowany acykliczny."><img src="images/dag.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></a>
+<a href="images/dag.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Rysunek&nbsp;1.10: Przykładowy graf skierowany acykliczny."><img src="images/dag.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Rysunek&nbsp;1.9: Przykładowy graf skierowany acykliczny.
+Rysunek&nbsp;1.10: Przykładowy graf skierowany acykliczny.
 </figcaption>
 </figure>
 </div>
-<p>Na rysunku <a href="#fig-dag" class="quarto-xref"><span>1.9</span></a> wszystkie krawędzie prowadzą od lewej do prawej, dlatego graf nie zawiera cyklu. Po pominięciu kierunków krawędzi wierzchołki <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><msub><mi>v</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">v_0,v_1,v_2</annotation></semantics></math> tworzą jednak cykl prosty. Każde ukorzenione drzewo skierowane jest DAG-iem.</p>
+<p>Na rysunku <a href="#fig-dag" class="quarto-xref"><span>1.10</span></a> wszystkie krawędzie prowadzą od lewej do prawej, dlatego graf nie zawiera cyklu. Po pominięciu kierunków krawędzi wierzchołki <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><msub><mi>v</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">v_0,v_1,v_2</annotation></semantics></math> tworzą jednak cykl prosty. Każde ukorzenione drzewo skierowane jest DAG-iem.</p>
 </section>
 </section>
 <section id="dwie-historyjki" class="level2" data-number="1.6">
@@ -1262,10 +1315,10 @@ Rysunek&nbsp;1.9: Przykładowy graf skierowany acykliczny.
 <div id="fig-mosty-krolewieckie" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mosty-krolewieckie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/mosty-krolewieckie.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Rysunek&nbsp;1.10: Schemat mostów królewieckich i odpowiadający mu multigraf."><img src="images/mosty-krolewieckie.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+<a href="images/mosty-krolewieckie.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Rysunek&nbsp;1.11: Schemat mostów królewieckich i odpowiadający mu multigraf."><img src="images/mosty-krolewieckie.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mosty-krolewieckie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Rysunek&nbsp;1.10: Schemat mostów królewieckich i odpowiadający mu multigraf.
+Rysunek&nbsp;1.11: Schemat mostów królewieckich i odpowiadający mu multigraf.
 </figcaption>
 </figure>
 </div>
@@ -1322,10 +1375,10 @@ Rysunek&nbsp;1.10: Schemat mostów królewieckich i odpowiadający mu multigraf.
 <div id="fig-eksperyment-milgrama" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-eksperyment-milgrama-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/eksperyment-milgrama.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Rysunek&nbsp;1.11: Schemat eksperymentu Milgrama. Część rozpoczętych łańcuchów docierała do osoby docelowej, a część urywała się wcześniej."><img src="images/eksperyment-milgrama.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+<a href="images/eksperyment-milgrama.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcuchów docierała do osoby docelowej, a część urywała się wcześniej."><img src="images/eksperyment-milgrama.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eksperyment-milgrama-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Rysunek&nbsp;1.11: Schemat eksperymentu Milgrama. Część rozpoczętych łańcuchów docierała do osoby docelowej, a część urywała się wcześniej.
+Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcuchów docierała do osoby docelowej, a część urywała się wcześniej.
 </figcaption>
 </figure>
 </div>
@@ -1341,20 +1394,6 @@ Rysunek&nbsp;1.11: Schemat eksperymentu Milgrama. Część rozpoczętych łańcu
 <h4 data-number="1.6.2.2" class="anchored" data-anchor-id="facebook"><span class="header-section-number">1.6.2.2</span> Facebook</h4>
 <p>Relacje znajomości na Facebooku również tworzą ogromny graf nieskierowany: wierzchołkami są użytkownicy, a krawędziami wzajemne znajomości. W <a href="https://vigna.di.unimi.it/ftp/papers/FourDegreesOfSeparation.pdf">badaniu z 2011 roku</a> przeanalizowano graf około 721 milionów aktywnych użytkowników połączonych około 69 miliardami krawędzi. Średnia odległość między użytkownikami wyniosła <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>,</mo><mn>74</mn></mrow><annotation encoding="application/x-tex">4{,}74</annotation></semantics></math>, była więc mniejsza niż sześć. W zależności od przyjętej konwencji wynik ten opisywano także jako <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>,</mo><mn>74</mn></mrow><annotation encoding="application/x-tex">3{,}74</annotation></semantics></math> osoby pośredniczącej.</p>
 <p>Wynik Facebooka dotyczy średniej. Nie mówi, że każda para użytkowników jest połączona ścieżką tej samej długości. Pokazuje jednak, że nawet w sieci obejmującej setki milionów osób typowy łańcuch łączący dwoje ludzi jest bardzo krótki.</p>
-</section>
-<section id="zjawisko-małego-świata" class="level4" data-number="1.6.2.3">
-<h4 data-number="1.6.2.3" class="anchored" data-anchor-id="zjawisko-małego-świata"><span class="header-section-number">1.6.2.3</span> Zjawisko małego świata</h4>
-<p>Eksperyment Milgrama można określić jako klasyczną obserwację <strong>zjawiska małego świata</strong>. W ogromnej sieci społecznej typowe odległości mogą pozostawać małe, ponieważ gęste grupy lokalnych znajomości są połączone nielicznymi relacjami prowadzącymi do innych środowisk. Takie połączenia działają jak skróty: kilka z nich może bardzo wyraźnie skrócić drogi pomiędzy odległymi częściami sieci.</p>
-<div id="fig-maly-swiat" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-maly-swiat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/maly-swiat.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Rysunek&nbsp;1.12: Schemat sieci o strukturze małego świata. Nieliczne relacje łączące różne grupy znajomych wyraźnie skracają drogi w całej sieci."><img src="images/maly-swiat.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maly-swiat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Rysunek&nbsp;1.12: Schemat sieci o strukturze małego świata. Nieliczne relacje łączące różne grupy znajomych wyraźnie skracają drogi w całej sieci.
-</figcaption>
-</figure>
-</div>
 <p><em>Ten rozdział opracowano na podstawie dwóch źródeł: S. N. Dorogovtsev, <strong>Lectures on Complex Networks</strong>, sekcje 1.5 i 11.3, oraz M. Newman, <strong>Networks</strong>, sekcja 4.6.</em></p>
 
 
