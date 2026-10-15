@@ -208,8 +208,7 @@ ul.task-list li input[type="checkbox"] {
 <p><span class="theorem-title"><strong>Zadanie 1</strong></span> Zapisz formalnie graf z przykładu <a href="../wykłady/grafy.html#exm-graf-znajomosci" class="quarto-xref"><span>1.1</span></a>. Wypisz zbiory <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math> oraz określ funkcje <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>. Krawędzie opisz jako pary wierzchołków. Nie wprowadzaj dla nich osobnych identyfikatorów, ponieważ graf nie ma krawędzi wielokrotnych.</p>
 </div>
 <div id="exr-jednoznacznosc-sciezki" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 2</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie grafem nieskierowanym. Pokaż, że jeżeli <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> jest drzewem (definicja <a href="../wykłady/grafy.html#def-drzewo" class="quarto-xref"><span>1.16</span></a>), to między każdymi dwoma różnymi wierzchołkami istnieje dokładnie jedna ścieżka prosta.</p>
-<p>Pokaż również twierdzenie “odwrotne”: jeżeli między każdymi dwoma różnymi wierzchołkami istnieje dokładnie jedna ścieżka prosta, i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> nie ma pętli, to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> jest drzewem.</p>
+<p><span class="theorem-title"><strong>Zadanie 2</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie spójnym grafem nieskierowanym bez pętli. Pokaż, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> jest drzewem (definicja <a href="../wykłady/grafy.html#def-drzewo" class="quarto-xref"><span>1.16</span></a>) wtedy i tylko wtedy, gdy nie zawiera cykli prostych.</p>
 </div>
 <div id="exr-sila-slabych-wiezi" class="theorem exercise">
 <p><span class="theorem-title"><strong>Zadanie 3</strong></span> Mark Granovetter rozróżnił <strong>silne więzi</strong>, łączące nas na przykład z bliskimi przyjaciółmi, oraz <strong>słabe więzi</strong>, łączące nas z dalszymi znajomymi. Badając sposób, w jaki ludzie dowiadują się o nowych możliwościach zatrudnienia, zauważył, że użyteczne informacje często docierają właśnie przez słabe więzi. Bliscy znajomi zwykle należą do podobnego środowiska co my, natomiast dalszy znajomy może połączyć nas z inną grupą społeczną. Granovetter opisał to zjawisko w pracy <a href="https://sociology.stanford.edu/publications/strength-weak-ties"><em>The Strength of Weak Ties</em></a> z 1973 roku.</p>
@@ -244,7 +243,7 @@ w(p)=d_w(u,v).
 <p>Innymi słowy, skonstruuj przykład, w którym odległość <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>w</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">d_w(u,v)</annotation></semantics></math> jest infimum długości ścieżek z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>, ale nie jest długością żadnej konkretnej ścieżki. Wyjaśnij, dlaczego w definicji odległości używamy infimum zamiast minimum (definicja <a href="../wykłady/grafy.html#def-odleglosc" class="quarto-xref"><span>1.13</span></a>).</p>
 </div>
 <div id="exr-stopnie-sciezka-eulerowska" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 5</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym spójnym grafem nieskierowanym zawierającym co najmniej jedną krawędź, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> ścieżką eulerowską (definicja <a href="../wykłady/grafy.html#def-sciezka-eulerowska" class="quarto-xref"><span>1.19</span></a>) zaczynającą się w wierzchołku <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> i kończącą się w wierzchołku <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Zadanie 5</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym spójnym grafem nieskierowanym, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> ścieżką eulerowską (definicja <a href="../wykłady/grafy.html#def-sciezka-eulerowska" class="quarto-xref"><span>1.19</span></a>) zaczynającą się w wierzchołku <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> i kończącą się w wierzchołku <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
 <p>Pokaż, że:</p>
 <ol type="1">
 <li>jeżeli <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u=v</annotation></semantics></math>, to każdy wierzchołek ma parzysty stopień;</li>
@@ -252,9 +251,9 @@ w(p)=d_w(u,v).
 </ol>
 </div>
 <div id="exr-suma-stopni" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 6</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo>,</mo><mi>E</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">G=(V,E)</annotation></semantics></math> będzie skończonym grafem nieskierowanym. Pokaż, że</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>∑</mo><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow></munder><msub><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mi>G</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>2</mn><mo stretchy="false" form="prefix">|</mo><mi>E</mi><mo stretchy="false" form="prefix">|</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
-\sum_{v\in V}\deg_G(v)=2|E|.
+<p><span class="theorem-title"><strong>Zadanie 6</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym grafem nieskierowanym mającym <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math> krawędzi nieskierowanych. Pokaż, że</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>∑</mo><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow></munder><msub><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mi>G</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>2</mn><mi>m</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\sum_{v\in V}\deg_G(v)=2m.
 </annotation></semantics></math></p>
 <p>Pamiętaj, że pętla zwiększa stopień swojego wierzchołka o dwa. Wywnioskuj, że liczba wierzchołków nieparzystego stopnia jest parzysta.</p>
 </div>
@@ -263,7 +262,7 @@ w(p)=d_w(u,v).
 <p>Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> będą dwoma różnymi wierzchołkami grafu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mi>n</mi></msub><annotation encoding="application/x-tex">K_n</annotation></semantics></math>.</p>
 <ol type="1">
 <li>Ile jest ścieżek prostych z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> składających się dokładnie z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math> krawędzi?</li>
-<li>Ile jest wszystkich ścieżek prostych z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>?</li>
+<li>Ile jest ścieżek z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> składających się dokładnie z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math> krawędzi?</li>
 </ol>
 </div>
 <div id="exr-dwudzielnosc-cykle-nieparzyste" class="theorem exercise">
@@ -289,7 +288,7 @@ Indukcja po liczbie krawędzi. Uważaj na spójność.
 </details>
 </div>
 <div id="exr-paradoks-przyjazni" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 10</strong></span> Sieć znajomości w modelujemy jako skończony graf prosty nieskierowany <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo>,</mo><mi>E</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">G=(V,E)</annotation></semantics></math>, w którym wierzchołki reprezentują osoby, a krawędzie - znajomości. Załóżmy, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>≠</mo><mi>∅</mi></mrow><annotation encoding="application/x-tex">E\neq\emptyset</annotation></semantics></math>, i oznaczmy stopień wierzchołka (czyli liczbę znajomych) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">d(v)</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Zadanie 10</strong></span> Sieć znajomości w modelujemy jako skończony graf prosty nieskierowany <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo>,</mo><mi>E</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">G=(V,E)</annotation></semantics></math>, w którym wierzchołki reprezentują osoby, a krawędzie - znajomości. Załóżmy, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> jest spójny, i oznaczmy stopień wierzchołka (czyli liczbę znajomych) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">d(v)</annotation></semantics></math>.</p>
 <p>Średnia liczba znajomych członków społeczności <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> wynosi:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo stretchy="false" form="prefix">(</mo><mi>G</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow></mfrac><munder><mo>∑</mo><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow></munder><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
 S(G) = \frac{1}{|V|}\sum_{v\in V}d(v).
@@ -447,6 +446,59 @@ Wskazówka
     document.addEventListener("DOMContentLoaded", initializeTheoremFullscreen, { once: true });
   } else {
     initializeTheoremFullscreen();
+  }
+})();
+</script>
+<script>
+(() => {
+  const fixPreviewUrls = (root) => {
+    const reference = root._tippy?.reference;
+    if (!reference?.matches("a.quarto-xref")) return;
+
+    // Quarto copies HTML from the referenced page into the current page.
+    // Relative image and link URLs must still use the referenced page as base.
+    const base = new URL(reference.getAttribute("href"), document.baseURI);
+    root.querySelectorAll(".tippy-content img[src], .tippy-content a[href]")
+      .forEach((element) => {
+        const attribute = element.tagName === "IMG" ? "src" : "href";
+        const value = element.getAttribute(attribute);
+        if (value && !/^(?:[a-z][a-z\d+.-]*:|\/\/|\/)/i.test(value)) {
+          element.setAttribute(attribute, new URL(value, base).href);
+        }
+      });
+  };
+
+  const initializeXrefPreviews = () => {
+    // Quarto reads cross-page fragments with new URL(href), without a base.
+    document.querySelectorAll("a.quarto-xref[href]").forEach((reference) => {
+      const href = reference.getAttribute("href");
+      if (href && !href.startsWith("#")) {
+        reference.setAttribute("href", new URL(href, document.baseURI).href);
+      }
+    });
+    const observer = new MutationObserver((mutations) => {
+      const roots = new Set();
+      mutations.forEach((mutation) => {
+        const root = mutation.target.parentElement?.closest("[data-tippy-root]");
+        if (root) roots.add(root);
+        if (mutation.target instanceof Element && mutation.target.matches("[data-tippy-root]")) {
+          roots.add(mutation.target);
+        }
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+          if (node.matches("[data-tippy-root]")) roots.add(node);
+          node.querySelectorAll("[data-tippy-root]").forEach((root) => roots.add(root));
+        });
+      });
+      roots.forEach(fixPreviewUrls);
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeXrefPreviews, { once: true });
+  } else {
+    initializeXrefPreviews();
   }
 })();
 </script>

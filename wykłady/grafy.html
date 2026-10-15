@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1.1" class="anchored" data-anchor-id="przykłady"><span class="header-section-number">1.1</span> Przykłady</h2>
 <div id="exm-graf-znajomosci" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.1 (Graf znajomości)</strong></span> Wierzchołki odpowiadają osobom. Dwie osoby łączymy krawędzią, jeśli się znają.</p>
-<div id="8cd71b88" class="cell">
+<div id="bf54757f" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -323,7 +323,7 @@ Rysunek&nbsp;1.1: Przykładowy graf znajomości.
 </div>
 <div id="exm-mapa-drogowa" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.2 (Mapa drogowa)</strong></span> Wierzchołki odpowiadają miastom, a krawędzie łączącym je drogom. Każda droga ma unikalną nazwę oraz długość wyrażoną w kilometrach.</p>
-<div id="8940635a" class="cell">
+<div id="478d743f" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.MultiGraph()</span>
@@ -388,7 +388,7 @@ Rysunek&nbsp;1.2: Przykładowa mapa drogowa.
 </div>
 <div id="exm-mapa-turystyczna" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.3 (Mapa turystyczna: graf skierowany)</strong></span> Wierzchołki odpowiadają miejscowościom i szczytom, a krawędzie trasom turystycznym. Każda krawędź jest skierowana i zawiera przewidywany czas przejścia w minutach.</p>
-<div id="5e005605" class="cell">
+<div id="a788c61d" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
@@ -455,7 +455,7 @@ Rysunek&nbsp;1.3: Przykładowa mapa turystyczna.
 </div>
 <div id="exm-multigraf-skierowany" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.4 (Graf skierowany z pętlami i wielokrotnymi krawędziami)</strong></span> Rozważmy następujący graf.</p>
-<div id="6fa0ad30" class="cell">
+<div id="a645c47b" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> FancyArrowPatch</span>
@@ -796,7 +796,7 @@ v_j=t(e_j)\quad\text{dla }j=1,\ldots,n.
 </div>
 <div id="exm-sciezki" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.10 (Przykłady ścieżek)</strong></span> Na poniższym rysunku przedstawiono kilka rodzajów ścieżek.</p>
-<div id="84782151" class="cell">
+<div id="cf256a9c" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_path_example(graph, positions, ax, title, connectionstyle<span class="op">=</span><span class="st">"arc3"</span>):</span>
@@ -1021,7 +1021,7 @@ c\bigl(s(e)\bigr)\neq c\bigl(t(e)\bigr).
 <p>Grafy dwudzielne pojawiają się naturalnie wtedy, gdy wierzchołki opisują obiekty dwóch różnych rodzajów. Mogą to być na przykład użytkownicy i produkty, które kupili lub ocenili, albo autorzy i artykuły naukowe.</p>
 <div id="exm-autorzy-artykuly" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.11 (Autorzy i artykuły)</strong></span> Wierzchołki po lewej stronie odpowiadają autorom, a wierzchołki po prawej stronie artykułom. Krawędź skierowana od autora do artykułu oznacza, że dana osoba jest autorem tego artykułu.</p>
-<div id="f8a97331" class="cell">
+<div id="d4a9f3f0" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>authors_articles <span class="op">=</span> nx.DiGraph()</span>
@@ -1110,9 +1110,9 @@ Rysunek&nbsp;1.7: Graf dwudzielny autorów i artykułów.
 <section id="drzewa" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="drzewa"><span class="header-section-number">1.5.2</span> Drzewa</h3>
 <div id="def-drzewo" class="fullscreen-half-image fullscreen-image-29 theorem definition" data-fullscreen-include="#fig-drzewo">
-<p><span class="theorem-title"><strong>Definicja 1.16</strong></span> <strong>Drzewem</strong> nazywamy spójny graf nieskierowany, który nie zawiera cykli prostych.</p>
+<p><span class="theorem-title"><strong>Definicja 1.16</strong></span> <strong>Drzewem</strong> nazywamy graf nieskierowany bez pętli, w którym pomiędzy każdymi dwoma różnymi wierzchołkami istnieje dokładnie jedna ścieżka prosta.</p>
 </div>
-<div id="d3bdb6fd" class="cell">
+<div id="54851aff" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> nx.Graph()</span>
@@ -1170,7 +1170,7 @@ Rysunek&nbsp;1.8: Przykładowe drzewo.
 </figcaption>
 </figure>
 </div>
-<p>Spójność jest częścią definicji drzewa. Po jej pominięciu otrzymalibyśmy graf, którego każda składowa spójności jest drzewem.</p>
+<p>Zauważmy, że z definicji wynika, że drzewo jest spójne.</p>
 </section>
 <section id="ukorzenione-drzewa-skierowane" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="ukorzenione-drzewa-skierowane"><span class="header-section-number">1.5.3</span> Ukorzenione drzewa skierowane</h3>
@@ -1178,7 +1178,7 @@ Rysunek&nbsp;1.8: Przykładowe drzewo.
 <p><span class="theorem-title"><strong>Definicja 1.17</strong></span> <strong>Ukorzenionym drzewem skierowanym</strong> nazywamy graf skierowany <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> z wyróżnionym wierzchołkiem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>, zwanym <strong>korzeniem</strong>, taki że dla każdego wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">v\in V</annotation></semantics></math> istnieje dokładnie jedna ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
 </div>
 <p>Krawędzie ukorzenionego drzewa skierowanego są zwrócone od korzenia. Każdy wierzchołek różny od korzenia ma dokładnie jedną krawędź wchodzącą.</p>
-<div id="a81f19dd" class="cell">
+<div id="b82e856d" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rooted_tree <span class="op">=</span> nx.DiGraph()</span>
@@ -1250,7 +1250,7 @@ Rysunek&nbsp;1.9: Ukorzenione drzewo skierowane.
 </div>
 <p>Grafy tego rodzaju nazywamy również <strong>DAG-ami</strong>, (ang. <em>directed acyclic graph</em>).</p>
 <p>W szczególności DAG nie może mieć pętli. Jego graf nieskierowany może jednak zawierać cykle proste: ważne jest jedynie to, że żadnego z nich nie można przejść zgodnie z kierunkami wszystkich krawędzi.</p>
-<div id="a37644a9" class="cell">
+<div id="c6ef8c91" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dag <span class="op">=</span> nx.DiGraph()</span>
@@ -1526,6 +1526,59 @@ Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcu
     document.addEventListener("DOMContentLoaded", initializeTheoremFullscreen, { once: true });
   } else {
     initializeTheoremFullscreen();
+  }
+})();
+</script>
+<script>
+(() => {
+  const fixPreviewUrls = (root) => {
+    const reference = root._tippy?.reference;
+    if (!reference?.matches("a.quarto-xref")) return;
+
+    // Quarto copies HTML from the referenced page into the current page.
+    // Relative image and link URLs must still use the referenced page as base.
+    const base = new URL(reference.getAttribute("href"), document.baseURI);
+    root.querySelectorAll(".tippy-content img[src], .tippy-content a[href]")
+      .forEach((element) => {
+        const attribute = element.tagName === "IMG" ? "src" : "href";
+        const value = element.getAttribute(attribute);
+        if (value && !/^(?:[a-z][a-z\d+.-]*:|\/\/|\/)/i.test(value)) {
+          element.setAttribute(attribute, new URL(value, base).href);
+        }
+      });
+  };
+
+  const initializeXrefPreviews = () => {
+    // Quarto reads cross-page fragments with new URL(href), without a base.
+    document.querySelectorAll("a.quarto-xref[href]").forEach((reference) => {
+      const href = reference.getAttribute("href");
+      if (href && !href.startsWith("#")) {
+        reference.setAttribute("href", new URL(href, document.baseURI).href);
+      }
+    });
+    const observer = new MutationObserver((mutations) => {
+      const roots = new Set();
+      mutations.forEach((mutation) => {
+        const root = mutation.target.parentElement?.closest("[data-tippy-root]");
+        if (root) roots.add(root);
+        if (mutation.target instanceof Element && mutation.target.matches("[data-tippy-root]")) {
+          roots.add(mutation.target);
+        }
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+          if (node.matches("[data-tippy-root]")) roots.add(node);
+          node.querySelectorAll("[data-tippy-root]").forEach((root) => roots.add(root));
+        });
+      });
+      roots.forEach(fixPreviewUrls);
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeXrefPreviews, { once: true });
+  } else {
+    initializeXrefPreviews();
   }
 })();
 </script>

@@ -341,6 +341,59 @@ ul.task-list li input[type="checkbox"] {
   }
 })();
 </script>
+<script>
+(() => {
+  const fixPreviewUrls = (root) => {
+    const reference = root._tippy?.reference;
+    if (!reference?.matches("a.quarto-xref")) return;
+
+    // Quarto copies HTML from the referenced page into the current page.
+    // Relative image and link URLs must still use the referenced page as base.
+    const base = new URL(reference.getAttribute("href"), document.baseURI);
+    root.querySelectorAll(".tippy-content img[src], .tippy-content a[href]")
+      .forEach((element) => {
+        const attribute = element.tagName === "IMG" ? "src" : "href";
+        const value = element.getAttribute(attribute);
+        if (value && !/^(?:[a-z][a-z\d+.-]*:|\/\/|\/)/i.test(value)) {
+          element.setAttribute(attribute, new URL(value, base).href);
+        }
+      });
+  };
+
+  const initializeXrefPreviews = () => {
+    // Quarto reads cross-page fragments with new URL(href), without a base.
+    document.querySelectorAll("a.quarto-xref[href]").forEach((reference) => {
+      const href = reference.getAttribute("href");
+      if (href && !href.startsWith("#")) {
+        reference.setAttribute("href", new URL(href, document.baseURI).href);
+      }
+    });
+    const observer = new MutationObserver((mutations) => {
+      const roots = new Set();
+      mutations.forEach((mutation) => {
+        const root = mutation.target.parentElement?.closest("[data-tippy-root]");
+        if (root) roots.add(root);
+        if (mutation.target instanceof Element && mutation.target.matches("[data-tippy-root]")) {
+          roots.add(mutation.target);
+        }
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+          if (node.matches("[data-tippy-root]")) roots.add(node);
+          node.querySelectorAll("[data-tippy-root]").forEach((root) => roots.add(root));
+        });
+      });
+      roots.forEach(fixPreviewUrls);
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeXrefPreviews, { once: true });
+  } else {
+    initializeXrefPreviews();
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
