@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Poniższy notatnik przedstawia cztery podstawowe klasy grafów w NetworkX, dostęp do danych krawędzi oraz podstawy wizualizacji.</p>
 <p><a href="src/networkx.ipynb" class="btn btn-primary" download="networkx.ipynb">Pobierz notatnik <code>.ipynb</code></a></p>
-<div class="quarto-embed-nb-cell" data-notebook="/tmp/pasi-networkx-oqlofb7l/source/notatniki/src/networkx.ipynb" data-notebook-title="[1]{.chapter-number}&nbsp; [NetworkX]{.chapter-title}" data-notebook-cellid="quarto-metadata">
+<div class="quarto-embed-nb-cell" data-notebook="/tmp/pasi-networkx-comment-8k4f44_r/source/notatniki/src/networkx.ipynb" data-notebook-title="[1]{.chapter-number}&nbsp; [NetworkX]{.chapter-title}" data-notebook-cellid="quarto-metadata">
 <p>Biblioteka NetworkX udostępnia cztery podstawowe klasy grafów: <code>Graph</code>, <code>DiGraph</code>, <code>MultiGraph</code> oraz <code>MultiDiGraph</code>. Różnią się one tym, czy krawędzie mają kierunek i czy pomiędzy tymi samymi wierzchołkami może występować wiele krawędzi.</p>
 <div id="imports" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T19:41:56.308391Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T19:41:56.308249Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T19:41:59.687551Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T19:41:59.687229Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -385,7 +385,7 @@ B C 1 {'color': 'yellow'}</code></pre>
 </div>
 </div>
 <div id="ca8753ec" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T19:41:59.717983Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T19:41:59.717911Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T19:41:59.719783Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T19:41:59.719395Z&quot;}}" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Aby dostać dane krawędzie, musimy również podać klucz:</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Aby dostać dane krawędzi, musimy również podać jej klucz:</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dane krawędzi B--C o kluczu BC1:"</span>, multigraph.edges[<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"BC1"</span>])</span></code></pre></div><button title="Kopiuj do schowka" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Dane krawędzi B--C o kluczu BC1: {'color': 'turquoise'}</code></pre>
