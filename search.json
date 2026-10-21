@@ -245,7 +245,7 @@
     "href": "notatniki/siec-www-centralnosc.html",
     "title": "2  Sieć WWW, centralność i PageRank",
     "section": "",
-    "text": "Drugi notatnik to krótkie eksperymenty z rzeczywistymi sieciami: badamy stopnie, silnie spójne składowe, zbiory IN i OUT, centralność oraz PageRank. Na dwóch małych grafach porównujemy obie miary ważności i sprawdzamy wpływ teleportacji. Poniżej można przeczytać kod i zapisane wyniki. Aby samodzielnie zmieniać przykłady, pobierz oba pliki do tego samego folderu i otwórz notatnik w Jupyterze.\nPobierz notatnik .ipynb Pobierz funkcje pomocnicze .py",
+    "text": "Ten notatnik to krótkie eksperymenty z rzeczywistymi sieciami: badamy stopnie, silnie spójne składowe, zbiory IN i OUT, centralność oraz PageRank. Aby samodzielnie eksperymentować, pobierz oba pliki do tego samego folderu i otwórz notatnik w Jupyterze.\nPobierz notatnik .ipynb Pobierz funkcje pomocnicze .py",
     "crumbs": [
       "Notatniki",
       "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
