@@ -30,6 +30,10 @@
   font-display: swap;
 }
 
+.exercise.extra .theorem-title > strong::after {
+  content: " *";
+}
+
 .theorem:not(.exercise),
 .proof {
   position: relative;

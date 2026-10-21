@@ -228,5 +228,126 @@
       "Wykłady",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sieć WWW i centralność</span>"
     ]
+  },
+  {
+    "objectID": "zadania/lista-02-siec-www.html",
+    "href": "zadania/lista-02-siec-www.html",
+    "title": "2  Sieć WWW i centralność",
+    "section": "",
+    "text": "Zadanie 1 Udowodnij Fakt 2.1: pokaż, że dla dowolnych wierzchołków v,wv,w grafu skierowanego zachodzą implikacje\nw∈Out⁡(v)⇒Out⁡(w)⊆Out⁡(v)\nw\\in\\operatorname{Out}(v)\n\\quad\\Longrightarrow\\quad\n\\operatorname{Out}(w)\\subseteq\\operatorname{Out}(v)\n\noraz\nw∈In⁡(v)⇒In⁡(w)⊆In⁡(v).\nw\\in\\operatorname{In}(v)\n\\quad\\Longrightarrow\\quad\n\\operatorname{In}(w)\\subseteq\\operatorname{In}(v).\n\n\n\nZadanie 2 Udowodnij Fakt 2.2: wykaż następujące własności silnie spójnych składowych:\n\nSilnie spójne składowe są parami rozłączne.\nDla każdego wierzchołka vv zachodzi równość\nSCC⁡(v)=In⁡(v)∩Out⁡(v).\n\\operatorname{SCC}(v)\n=\n\\operatorname{In}(v)\\cap\\operatorname{Out}(v).\n\nJeżeli vv i ww znajdują się w tej samej silnej składowej spójności, to\nIn⁡(v)=In⁡(w),Out⁡(v)=Out⁡(w).\n\\operatorname{In}(v)=\\operatorname{In}(w),\n\\qquad\n\\operatorname{Out}(v)=\\operatorname{Out}(w).\n\n\n\n\nZadanie 3 Niech vv i ww będą wierzchołkami grafu skierowanego należącymi do tej samej silnie spójnej składowej CC (definicja 2.2). Niech pp będzie ścieżką skierowaną z vv do ww.\nPokaż, że każdy wierzchołek, przez który przechodzi pp, należy do CC.\n\n\nZadanie 4 Załóżmy, że rozkład stopni wierzchołków dużej sieci ma w przybliżeniu postać\nF(k)=Ck−α,\nF(k)=Ck^{-\\alpha},\n\ngdzie F(k)F(k) to liczba wierzchołków o stopniu kk, a C&gt;0C&gt;0 i α&gt;0\\alpha&gt;0. Zmieńmy teraz skalę na osi OXOX, tzn. rozważmy funkcję Fa(k)=F(ak)F_a(k) = F(ak), gdzie a&gt;0a&gt;0 jest pewną stałą.\nJak funkcja Fa(k)F_a(k) zapisuje się w terminach F(k)F(k)? Zinterperetuj wynik.\n\n\nZadanie 5 Niech GG będzie skończonym grafem skierowanym, AA jego macierzą sąsiedztwa, a α:V→ℝ\\alpha:V\\to\\mathbb{R} dowolną funkcją na wierzchołkach. W tym zadaniu traktujemy α\\alpha jako wektor kolumnowy.\nZinterpretuj iloczyn AαA\\alpha w terminach grafu: opisz, z których wierzchołków pochodzą wartości sumowane we współrzędnej (Aα)(v)(A\\alpha)(v). Zapisz odpowiedni wzór, uwzględniając pętle i krawędzie wielokrotne.\n\n\nZadanie 6 Niech Km,nK_{m,n}, gdzie m,n≥1m,n\\geq 1, będzie pełnym grafem dwudzielnym nieskierowanym. Jego wierzchołki dzielą się na dwie części o licznościach mm i nn. Każdy wierzchołek jednej części jest połączony dokładnie jedną krawędzią z każdym wierzchołkiem drugiej części i nie ma innych krawędzi.\nWyznacz centralność każdego wierzchołka grafu Km,nK_{m,n}, oraz wartość własną Perrona–Frobeniusa macierzy AA.\n\n\nZadanie 7 Niech GG będzie skończonym silnie spójnym i aperiodycznym grafem skierowanym, a AA jego macierzą sąsiedztwa. Niech α=(1,…,1)\\alpha=(1,\\ldots,1) będzie wektorem wierszowym przypisującym każdemu wierzchołkowi wartość 11. Dla n≥0n\\geq 0 określmy\nαn=αAn∥αAn∥1.\n\\alpha_n=\\frac{\\alpha A^n}{\\|\\alpha A^n\\|_1}.\n\nZinterpretuj współrzędną αn(w)\\alpha_n(w) w terminach liczby ścieżek długości nn. Co liczymy w liczniku, a co w mianowniku?\n\n\nZadanie 8 Niech GG będzie skończonym silnie spójnym grafem skierowanym o NN wierzchołkach, w którym każdy wierzchołek ma taki sam stopień wejściowy deg⁡G−(v)=d≥1\\deg_G^-(v)=d\\geq 1. Niech AA będzie jego macierzą sąsiedztwa.\nWyznacz centralność każdego wierzchołka, oraz wartość własną Perrona–Frobeniusa macierzy AA.\n\n\nZadanie 9 Niech GG będzie skończonym silnie spójnym grafem skierowanym zawierającym co najmniej jedną krawędź, a AA jego macierzą sąsiedztwa.\nUdowodnij fakt 2.5: graf GG jest aperiodyczny wtedy i tylko wtedy, gdy jego macierz sąsiedztwa AA jest prymitywna.\n\n\nZadanie 10 Zrób zadanie 1 z Notatnik 2\n\n\nZadanie 11 Zrób zadanie 2 z Notatnik 2",
+    "crumbs": [
+      "Listy zadań",
+      "[2]{.chapter-number}  [Sieć WWW i centralność]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "notatniki/siec-www-centralnosc.html",
+    "href": "notatniki/siec-www-centralnosc.html",
+    "title": "2  Sieć WWW, centralność i PageRank",
+    "section": "",
+    "text": "Drugi notatnik to krótkie eksperymenty z rzeczywistymi sieciami: badamy stopnie, silnie spójne składowe, zbiory IN i OUT, centralność oraz PageRank. Na dwóch małych grafach porównujemy obie miary ważności i sprawdzamy wpływ teleportacji. Poniżej można przeczytać kod i zapisane wyniki. Aby samodzielnie zmieniać przykłady, pobierz oba pliki do tego samego folderu i otwórz notatnik w Jupyterze.\nPobierz notatnik .ipynb Pobierz funkcje pomocnicze .py",
+    "crumbs": [
+      "Notatniki",
+      "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "notatniki/siec-www-centralnosc.html#grafy-przykładowe",
+    "href": "notatniki/siec-www-centralnosc.html#grafy-przykładowe",
+    "title": "2  Sieć WWW, centralność i PageRank",
+    "section": "Grafy przykładowe",
+    "text": "Grafy przykładowe\nBędziemy wybierać spośród czterech rzeczywistych sieci. W każdym przypadku pomijamy wagi krawędzi.\n\n\n\n\n\n\n\n\n\nNazwa w kodzie\nCo przedstawia graf?\nWierzchołki\nKrawędzie\n\n\n\n\nwww_maly\nBlogi polityczne: blogi o polityce amerykańskiej i skierowane odsyłacze między nimi, zebrane w lutym 2005 r.\n1 490\n19 025\n\n\nwww_duzy\nNotre Dame: strony w domenie nd.edu i skierowane odsyłacze, zebrane w 1999 r.\n325 729\n1 497 134\n\n\nkarate\nKlub karate Zachary’ego: osoby i nieskierowane relacje towarzyskie między nimi.\n34\n78\n\n\nflorencja\nRodziny florenckie: rodziny renesansowej Florencji i nieskierowane powiązania małżeńskie.\n15\n20\n\n\n\nDane blogów pochodzą od L. Adamic i N. Glance, udostępnione przez Marka Newmana. W tym notatniku powtórzone odsyłacze między tą samą parą blogów łączymy w jedną krawędź; zachowujemy pętle. Stąd 19 025 krawędzi zamiast 19 090 wpisów w pliku.\nGraf Notre Dame, zebrany przez R. Albert, H. Jeonga i A.-L. Barabásiego, pobieramy z kolekcji SNAP.\nDwa pozostałe grafy są dostępne bez pobierania danych: nx.karate_club_graph() i nx.florentine_families_graph(). W grafie rodzin krawędź oznacza istnienie przynajmniej jednego małżeństwa między dwiema rodzinami; opis tych danych znajduje się także w pracy Hoffa, Raftery’ego i Handcocka (§4.2).",
+    "crumbs": [
+      "Notatniki",
+      "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "notatniki/siec-www-centralnosc.html#przygotowanie-i-wybór-grafu",
+    "href": "notatniki/siec-www-centralnosc.html#przygotowanie-i-wybór-grafu",
+    "title": "2  Sieć WWW, centralność i PageRank",
+    "section": "Przygotowanie i wybór grafu",
+    "text": "Przygotowanie i wybór grafu\nPliki siec-www-centralnosc.ipynb i siec_pomocnicze.py powinny leżeć w tym samym folderze. Potrzebujemy bibliotek networkx, numpy, matplotlib i scipy (używanej przez PageRank). Jeżeli ich brakuje, uruchom w osobnej komórce %pip install networkx numpy matplotlib scipy, a następnie zrestartuj kernel.\nFunkcje pomocnicze zajmują się pobieraniem i rysowaniem.\n\n# Importy oraz ustawienia rysunków.\nfrom pathlib import Path\nimport sys\n\n# Ten warunek pozwala uruchomić notatnik także z katalogu głównego repozytorium.\n# Przy pobraniu obu plików do jednego folderu nie trzeba zmieniać ścieżek.\nif not Path(\"siec_pomocnicze.py\").exists() and Path(\"notatniki/src\").is_dir():\n    sys.path.insert(0, str(Path(\"notatniki/src\").resolve()))\n\nimport networkx as nx\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom siec_pomocnicze import (\n    wczytaj_graf, rysuj_graf, rysuj_stopnie, rysuj_scc, rysuj_zasiegi, rysuj_porownanie,\n)\n\nplt.rcParams.update({\"figure.dpi\": 110, \"font.size\": 10})\n\n\n# Wybór: \"www_maly\", \"www_duzy\", \"karate\", \"florencja\".\nnazwa = \"www_maly\"\nG = wczytaj_graf(nazwa)\n\nprint(f\"Graf: {nazwa}\")\nprint(f\"Wierzchołki: {G.number_of_nodes():,}; krawędzie: {G.number_of_edges():,}\")\nprint(\"Skierowany:\", G.is_directed())\n\n# D służy do obliczeń dla grafów skierowanych.\n# Dla grafu nieskierowanego każdą krawędź traktujemy jako dwa przeciwne łuki.\n# as_view=True nie kopiuje danych; nie modyfikujemy tego widoku.\nD = G if G.is_directed() else G.to_directed(as_view=True)\n\nGrafy WWW pobieramy tylko przy pierwszym użyciu, do folderu dane obok pliku pomocniczego. www_duzy jest opcjonalny: w NetworkX potrzebuje znacznie więcej pamięci niż samo skompresowane archiwum (warto mieć kilka GB wolnej pamięci); obliczenia mogą potrwać. Bez internetu wybierz karate albo florencja.",
+    "crumbs": [
+      "Notatniki",
+      "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "notatniki/siec-www-centralnosc.html#rysunek-grafu",
+    "href": "notatniki/siec-www-centralnosc.html#rysunek-grafu",
+    "title": "2  Sieć WWW, centralność i PageRank",
+    "section": "Rysunek grafu",
+    "text": "Rysunek grafu\nMałe grafy rysujemy w całości. Dla większych wybieramy do 40 wierzchołków połączonych z wybranym wierzchołkiem, przy wyborze pomijając kierunki. Rysunek zachowuje kierunki krawędzi. To fragment ilustracyjny, nie reprezentatywna próba sieci. Wszystkie poniższe statystyki liczymy na całym G lub D, nie na fragmencie rysunku.\n\n# start: \"max_stopień\" (największy stopień), \"losowy\" albo identyfikator wierzchołka.\nrysuj_graf(G, start=\"losowy\", max_wierzcholkow=40, tytul=nazwa)\nplt.show()",
+    "crumbs": [
+      "Notatniki",
+      "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "notatniki/siec-www-centralnosc.html#stopnie-wejściowe-i-wyjściowe",
+    "href": "notatniki/siec-www-centralnosc.html#stopnie-wejściowe-i-wyjściowe",
+    "title": "2  Sieć WWW, centralność i PageRank",
+    "section": "Stopnie wejściowe i wyjściowe",
+    "text": "Stopnie wejściowe i wyjściowe\nStopień wejściowy liczy krawędzie prowadzące bezpośrednio do wierzchołka; wyjściowy — wychodzące z niego. Dla naszych grafów nieskierowanych oba stopnie w D są równe stopniowi w G.\nNa wykresach obie osie mają skalę logarytmiczną. Wierzchołki stopnia zero zliczamy osobno. Ta sekcja ma sens dla grafów maly_www i duzy_www.\n\n# Słownik przypisuje każdemu wierzchołkowi jego stopień.\nstopnie_in = dict(D.in_degree())\nstopnie_out = dict(D.out_degree())\n\n# Porównaj liderów obu rankingów.\nfor stopnie, opis in [(stopnie_in, \"in\"), (stopnie_out, \"out\")]:\n    ranking = sorted(stopnie, key=stopnie.get, reverse=True)[:5]\n    print(f\"Największe stopnie {opis}:\", [(v, stopnie[v]) for v in ranking])\n\nrysuj_stopnie(D)\nplt.show()\n\nNajwiększe stopnie in: [(155, 337), (1051, 276), (641, 268), (55, 263), (963, 238)]\nNajwiększe stopnie out: [(855, 256), (454, 140), (387, 131), (512, 131), (880, 123)]",
+    "crumbs": [
+      "Notatniki",
+      "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "notatniki/siec-www-centralnosc.html#silnie-spójne-składowe-i-kondensacja",
+    "href": "notatniki/siec-www-centralnosc.html#silnie-spójne-składowe-i-kondensacja",
+    "title": "2  Sieć WWW, centralność i PageRank",
+    "section": "Silnie spójne składowe i kondensacja",
+    "text": "Silnie spójne składowe i kondensacja\nNetworkX zwraca składowe jako zbiory wierzchołków. Porządkujemy je według wielkości. W grafie nieskierowanym składowe spójne odpowiadają SCC po zastąpieniu krawędzi parami przeciwnych łuków.\nKondensacja ma po jednym wierzchołku dla każdej SCC. Sprawdzimy, czy rzeczywiście jest DAG-iem. Kolory na rysunku wyróżniają największe składowe; rozmiary na wykresie słupkowym dotyczą całego grafu.\nTa sekcja ma sens dla grafów maly_www i duzy_www.\n\nskladowe = sorted(nx.strongly_connected_components(D), key=len, reverse=True)\nprint(\"Liczba SCC:\", len(skladowe))\nprint(\"Rozmiary dziesięciu największych:\", [len(C) for C in skladowe[:10]])\nprint(\"Liczba słabo spójnych składowych:\", nx.number_weakly_connected_components(D))\n\nK = nx.condensation(D, scc=skladowe)\nprint(f\"Kondensacja: {len(K):,} wierzchołków, {K.number_of_edges():,} krawędzi\")\nprint(\"Czy kondensacja jest DAG-iem?\", nx.is_directed_acyclic_graph(K))\n\nrysuj_scc(D, skladowe)\nplt.show()\n\nLiczba SCC: 688\nRozmiary dziesięciu największych: [793, 3, 2, 2, 2, 2, 2, 2, 2, 2]\nLiczba słabo spójnych składowych: 268\nKondensacja: 688 wierzchołków, 666 krawędzi\nCzy kondensacja jest DAG-iem? True",
+    "crumbs": [
+      "Notatniki",
+      "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "notatniki/siec-www-centralnosc.html#zbiory-in-i-out",
+    "href": "notatniki/siec-www-centralnosc.html#zbiory-in-i-out",
+    "title": "2  Sieć WWW, centralność i PageRank",
+    "section": "Zbiory IN i OUT",
+    "text": "Zbiory IN i OUT\nWybieramy wierzchołek vv. Zbiór In⁡(v)\\operatorname{In}(v) zawiera wierzchołki, z których można dojść do vv, a Out⁡(v)\\operatorname{Out}(v) — te, do których można dojść z vv.\nFunkcje nx.ancestors i nx.descendants nie dodają samego vv. Dopisujemy go, zgodnie z definicją z wykładu. Przecięcie IN i OUT powinno być SCC zawierającą vv. Sprawdź, co zmienia się po wyborze innego wierzchołka.\nTa sekcja ma sens dla grafów maly_www i duzy_www.\n\n# Na początek wybieramy jeden wierzchołek z największej SCC.\n# Zamiast tego możesz wpisać konkretny identyfikator z G.nodes.\nv = list(skladowe[0])[0] #albo lepiej: v = next(iter(skladowe[0]))\nIn_v = nx.ancestors(D, v) | {v}\nOut_v = nx.descendants(D, v) | {v}\nC = In_v & Out_v\n\nprint(\"Wierzchołek:\", v)\nprint(f\"|In_v| = {len(In_v):,}, |Out_v| = {len(Out_v):,}, |SCC(v)| = {len(C):,}\")\nprint(\"In_v ∩ Out_v jest SCC(v):\", C == skladowe[0])\nprint(f\"IN = In_v - C: {len(In_v - C):,}; OUT = Out_v - C: {len(Out_v - C):,}\")\nprint(f\"Poza In_v i Out_v: {len(D) - len(In_v | Out_v):,}\")\n\nrysuj_zasiegi(D, v, In_v, Out_v)\nplt.show()\n\nWierzchołek: 1\n|In_v| = 1,025, |Out_v| = 958, |SCC(v)| = 793\nIn_v ∩ Out_v jest SCC(v): True\nIN = In_v - C: 232; OUT = Out_v - C: 165\nPoza In_v i Out_v: 300\n\n\n\n\n\n\n\n\n\nZadanie 1: Zbadaj dokładniej strukturę grafu www_maly. Zobacz jak wyglądają SCC oraz kondensacje podgrafów IN oraz OUT. Zbadaj strukturę tubes oraz tendrils. Czy ten graf jest spójny?",
+    "crumbs": [
+      "Notatniki",
+      "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "notatniki/siec-www-centralnosc.html#centralność",
+    "href": "notatniki/siec-www-centralnosc.html#centralność",
+    "title": "2  Sieć WWW, centralność i PageRank",
+    "section": "Centralność",
+    "text": "Centralność\nNajpierw liczymy centralność wektora własnego z wykładu. Jeżeli cały graf nie jest silnie spójny, ograniczamy go do największej SCC. Otrzymujemy centralność w tej składowej — nie w całym grafie WWW. Stopnie w poniższym porównaniu również liczymy w tej samej składowej.\nnx.eigenvector_centrality stosuje metodę potęgową dla A+IA+I, więc możemy jej użyć także w przypadku periodycznym. Zwraca wektor o normie ℓ2\\ell_2 równej 1; dzielimy go przez sumę współrzędnych, aby otrzymać normalizację ℓ1\\ell_1 z wykładu.\n\n# copy() daje osobny graf, na którym wielokrotne iteracje są szybsze niż na widoku.\nH = D.subgraph(skladowe[0]).copy()\nprint(f\"Badana SCC: {len(H):,} wierzchołków, {H.number_of_edges():,} krawędzi\")\nprint(\"Czy jest aperiodyczna?\", nx.is_aperiodic(H))\n\n# max_iter ogranicza liczbę iteracji; tol ustala tolerancję zakończenia.\n# weight=None oznacza, że nie korzystamy z wag zapisanych w danych.\nc = nx.eigenvector_centrality(H, max_iter=2000, tol=1e-12, weight=None)\nsuma = sum(c.values())\nc = {v: x / suma for v, x in c.items()}\n\nprint(\"Suma centralności:\", sum(c.values()))\n# Z cA = lambda*c i sumy c(v)=1 wynika poniższy wzór na lambda.\n# Jest to wartość własna A, nie macierzy A+I użytej wewnątrz algorytmu.\nlambda_pf = sum(c[v] * H.out_degree(v) for v in H)\nprint(f\"Wartość własna Perrona–Frobeniusa: {lambda_pf:.6f}\")\n\n\n# Porównujemy centralność i stopień wejściowy w H, nie stopień w całym D.\nranking = sorted(c, key=c.get, reverse=True)[:10]\nprint(f\"{'Wierzchołek':&lt;20} {'Centralność':&gt;12} {'Stopień in':&gt;12}\")\nfor v in ranking:\n    print(f\"{str(v):&lt;20} {c[v]:&gt;12.6f} {H.in_degree(v):&gt;12}\")\n\nlider = ranking[0]\nprint(\"\\nLider centralności:\", lider)\nprint(\"Największy stopień in:\", max(H.in_degree(v) for v in H))\n# Dla blogów możemy odczytać adres lidera z atrybutów wierzchołka.\nif \"label\" in H.nodes[lider]:\n    print(\"Adres blogu lidera:\", H.nodes[lider][\"label\"])\n\n# Wielkość i kolor węzła zależą od centralności obliczonej na CAŁYM H.\nrysuj_graf(H, start=lider, wartosci=c, tytul=\"Centralność w największej SCC\")\nplt.show()\n\nWierzchołek           Centralność   Stopień in\n55                       0.019394          225\n155                      0.017914          265\n641                      0.017413          217\n729                      0.015541          179\n642                      0.013380          123\n535                      0.012959          102\n323                      0.012898          139\n180                      0.012502          113\n493                      0.012093          111\n756                      0.011865          117\n\nLider centralności: 55\nNajwiększy stopień in: 265\nAdres blogu lidera: atrios.blogspot.com\n\n\n\n\n\n\n\n\n\nZadanie 2: Znajdź w grafie florencja następującą sytuację: po połączeniu pewnych dwóch rodzin, trzecia rodzina, która wcześniej nie miała największej centralności, staje się najbardziej centralna.",
+    "crumbs": [
+      "Notatniki",
+      "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "notatniki/siec-www-centralnosc.html#macierz-i-metoda-potęgowa-dla-małych-grafów",
+    "href": "notatniki/siec-www-centralnosc.html#macierz-i-metoda-potęgowa-dla-małych-grafów",
+    "title": "2  Sieć WWW, centralność i PageRank",
+    "section": "Macierz i metoda potęgowa — dla małych grafów",
+    "text": "Macierz i metoda potęgowa — dla małych grafów\nTę część uruchamiamy tylko dla karate i florencja. Dla dużych sieci nie tworzymy gęstej macierzy: zajmowałaby zbyt wiele pamięci.\nDodanie II odpowiada dodaniu po jednej pętli w każdym wierzchołku i nie zmienia centralności.\n\nif len(H) &lt;= 50:\n    # Kolejność wierzchołków wyznacza kolejność wierszy i kolumn.\n    wierzcholki = list(H)\n    A = nx.to_numpy_array(H, nodelist=wierzcholki, weight=None, dtype=int)\n    \n    # Zaczynamy z jednym wirusem w każdym wierzchołku.\n    # Normalizacja w każdej rundzie pozwala uniknąć ogromnych liczb.\n    alpha = np.ones(len(H)) / len(H)\n    B = A + np.eye(len(H))\n    cel = np.array([c[v] for v in wierzcholki])\n    bledy = [np.linalg.norm(alpha - cel, ord=1)]\n    for n in range(60):\n        alpha = alpha @ B\n        alpha = alpha / np.linalg.norm(alpha, ord=1)\n        bledy.append(np.linalg.norm(alpha - cel, ord=1))\n\n    plt.figure(figsize=(7, 3))\n    plt.semilogy(bledy, color=\"#3274a1\")\n    plt.xlabel(\"Liczba rund n\")\n    plt.ylabel(\"Odległość od centralności w normie ℓ₁\")\n    plt.grid(alpha=0.2)\n    plt.show()\nelse:\n    print(\"Aby wykonać część macierzową, wybierz karate lub florencja i uruchom notatnik ponownie.\")",
+    "crumbs": [
+      "Notatniki",
+      "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "notatniki/siec-www-centralnosc.html#pagerank",
+    "href": "notatniki/siec-www-centralnosc.html#pagerank",
+    "title": "2  Sieć WWW, centralność i PageRank",
+    "section": "PageRank",
+    "text": "PageRank\nTeraz zamiast wirusów rozważamy losowego spacerowicza. W centralności wektora własnego ważność wierzchołka trafia do każdego następnego wierzchołka; w PageRanku dzielimy ją przez stopień wyjściowy. Dodatkowo spacerowicz może teleportować się do dowolnego wierzchołka.\nKorzystamy z nx.pagerank. Parametr z wykładu β\\beta nazywa się w tej funkcji alpha: z prawdopodobieństwem β\\beta podążamy za krawędzią, a z prawdopodobieństwem 1−β1-\\beta teleportujemy się. Domyślnie teleportacja wybiera wierzchołek jednostajnie; tak samo uzupełniane są wierzchołki bez wyjścia. Wynik jest słownikiem, którego wartości sumują się do 1.\nPageRank liczymy na całym D, także gdy nie jest silnie spójny. Nie porównujemy go bezpośrednio z wcześniejszym c, obliczonym tylko na największej SCC: byłyby to dwie różne sieci.\n\n# beta odpowiada parametrowi z wykładu; w NetworkX podajemy alpha=beta.\n# Możesz zmienić beta, np. na 0.5 albo 0.95. Tutaj zakładamy 0 &lt; beta &lt; 1.\nbeta = 0.85\npr = nx.pagerank(D, alpha=beta, weight=None, max_iter=2000, tol=1e-12)\n\n# Pomijamy wagi, tak samo jak przy centralności.\n# Dla www_duzy funkcja korzysta z macierzy rzadkiej, nie z gęstej N x N.\nprint(f\"Suma PageRanku: {sum(pr.values()):.6f}\")\nliderzy_pr = sorted(pr, key=pr.get, reverse=True)[:5]\nprint(f\"{'Wierzchołek':&lt;20} {'PageRank':&gt;12} {'Stopień in':&gt;12}\")\nfor v in liderzy_pr:\n    print(f\"{str(v):&lt;20} {pr[v]:&gt;12.6f} {D.in_degree(v):&gt;12}\")\n\n\nCentralność i PageRank na dwóch małych grafach\nPierwszy graf to nieskierowana ścieżka 0−1−2−3−40-1-2-3-4. Drugi to graf skierowany na wierzchołkach A,…,EA,\\ldots,E. Jest silnie spójny i aperiodyczny: zawiera między innymi cykle długości 3 i 4.\nW każdym przykładzie obie miary liczymy na tym samym grafie i normalizujemy do sumy 1. Funkcja rysuj_porownanie jedynie rysuje graf i otrzymane wartości — obliczenia są widoczne poniżej. Te przykłady nie wymagają pobierania danych.\n\n# Własne małe grafy: ich definicje można dowolnie modyfikować.\nS = nx.path_graph(5)\nT = nx.DiGraph([\n    (\"A\", \"B\"), (\"B\", \"C\"), (\"C\", \"A\"),  # cykl długości 3\n    (\"A\", \"D\"), (\"D\", \"E\"), (\"E\", \"A\"),\n    (\"B\", \"D\"), (\"C\", \"D\"),  # A -&gt; B -&gt; D -&gt; E -&gt; A ma długość 4\n])\nprzyklady = {\"Ścieżka nieskierowana\": S, \"Mały graf skierowany\": T}\n\nfor opis, F in przyklady.items():\n    # NetworkX zwraca centralność z normą ℓ₂=1. Zmieniamy ją na normę ℓ₁=1.\n    c_male = nx.eigenvector_centrality(F, max_iter=2000, tol=1e-12, weight=None)\n    suma = sum(c_male.values())\n    c_male = {v: x / suma for v, x in c_male.items()}\n    pr_male = nx.pagerank(F, alpha=beta, weight=None, max_iter=2000, tol=1e-12)\n\n    print(f\"\\n{opis}, beta = {beta}\")\n    print(f\"{'Wierzchołek':&lt;12} {'Centralność':&gt;12} {'PageRank':&gt;12}\")\n    for v in F:\n        print(f\"{str(v):&lt;12} {c_male[v]:&gt;12.4f} {pr_male[v]:&gt;12.4f}\")\n    rysuj_porownanie(F, {\"Centralność\": c_male, f\"PageRank β={beta}\": pr_male},\n                     tytul=opis)\n    plt.show()\n\nDla β=0,85\\beta=0{,}85 widzimy nie tylko różnice wartości, lecz także innych liderów:\n\nNa ścieżce największą centralność ma środkowy wierzchołek 22, ale największy PageRank mają 11 i 33. Każdy z nich otrzymuje cały wkład ze skrajnego sąsiada, który ma tylko jedną krawędź wychodzącą.\nW grafie skierowanym centralność wskazuje DD, a PageRank — AA. Do DD prowadzą trzy krawędzie, lecz AA, BB i CC dzielą swój wkład między po dwóch odbiorców. Natomiast EE przekazuje cały swój wkład do AA.\n\nWażny jest więc nie tylko wybór sąsiadów, lecz także sposób rozdzielania ich ważności.\n\n\nCzy teleportacja zmienia wynik?\nDla grafu T porównamy PageRank bez teleportacji i z teleportacją. Wyjątkowo używamy alpha=1, ponieważ ten konkretny graf jest silnie spójny i aperiodyczny. Nie przenosimy tego ustawienia bez sprawdzenia na inne grafy: na przykład na cyklu iteracje mogą oscylować.\nTeleportacja może zmienić zarówno wartości, jak i kolejność w rankingu. To inna operacja niż dodanie po jednej pętli przy obliczaniu centralności, które nie zmieniało jej wektora.\n\n# Sprawdzamy założenia potrzebne tutaj do iteracji bez teleportacji.\nassert nx.is_strongly_connected(T) and nx.is_aperiodic(T)\n\n# Zmień beta_test, aby sprawdzić inną siłę teleportacji.\nbeta_test = 0.5\nwarianty = {\"Bez teleportacji\": 1.0, f\"β={beta_test}\": beta_test, f\"β={beta}\": beta}\nwyniki_pr = {\n    opis: nx.pagerank(T, alpha=b, weight=None, max_iter=2000, tol=1e-12)\n    for opis, b in warianty.items()\n}\nrysuj_porownanie(T, wyniki_pr, tytul=\"Ten sam graf, różna teleportacja\")\nplt.show()\n\n# Nawet gdy lider się nie zmienił, cały wektor PageRanku może być inny.\nroznica = sum(abs(wyniki_pr[\"Bez teleportacji\"][v] - wyniki_pr[f\"β={beta}\"][v])\n              for v in T)\nprint(f\"Różnica wektorów bez teleportacji i z beta={beta} w normie ℓ₁: {roznica:.6f}\")\n\nNa koniec zmień β\\beta i ponownie uruchom porównania. Dodaj albo usuń jedną krawędź w definicji małego grafu: czy zmienił się lider centralności lub PageRanku? Jeśli graf przestał być silnie spójny, PageRank z teleportacją nadal działa, ale interpretacja centralności z wykładu wymaga ostrożności.\nMożesz też obliczyć PageRank na wcześniejszym H, czyli największej SCC, i porównać go z c. Tym razem obie miary będą dotyczyły dokładnie tej samej sieci.",
+    "crumbs": [
+      "Notatniki",
+      "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
   }
 ]
