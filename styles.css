@@ -30,7 +30,7 @@
   font-display: swap;
 }
 
-.exercise.extra .theorem-title > strong::after {
+.exercise.extra > p:first-child > .theorem-title > strong::after {
   content: " *";
 }
 
