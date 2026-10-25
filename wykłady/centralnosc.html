@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Centralność – Podstawowe Algorytmy Sztucznej Inteligencji</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../zadania/lista-01-grafy.html" rel="next">
+<link href="../wykłady/siec_www.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9284228ca7e91ca044f135275a559bce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź",
+    "search-label": "Szukaj"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css?v=99144ab59fec">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../wykłady/grafy.html">Wykłady</a></li><li class="breadcrumb-item"><a href="../wykłady/centralnosc.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Szukaj" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Podstawowe Algorytmy Sztucznej Inteligencji</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Szukaj"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wprowadzenie</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Wykłady</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wykłady/grafy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wykłady/siec_www.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i macierz sąsiedztwa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wykłady/centralnosc.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Listy zadań</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../zadania/lista-01-grafy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../zadania/lista-02-siec-www.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i macierz sąsiedztwa</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Notatniki</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notatniki/networkx.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">NetworkX</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notatniki/siec-www-centralnosc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW, centralność i PageRank</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Spis treści</h2>
+   
+  <ul>
+  <li><a href="#twierdzenie-perronafrobeniusa" id="toc-twierdzenie-perronafrobeniusa" class="nav-link active" data-scroll-target="#twierdzenie-perronafrobeniusa"><span class="header-section-number">3.1</span> Twierdzenie Perrona–Frobeniusa</a>
+  <ul class="collapse">
+  <li><a href="#aperiodyczność" id="toc-aperiodyczność" class="nav-link" data-scroll-target="#aperiodyczność"><span class="header-section-number">3.1.1</span> Aperiodyczność</a></li>
+  <li><a href="#twierdzenie-perronafrobeniusa-1" id="toc-twierdzenie-perronafrobeniusa-1" class="nav-link" data-scroll-target="#twierdzenie-perronafrobeniusa-1"><span class="header-section-number">3.1.2</span> Twierdzenie Perrona–Frobeniusa</a></li>
+  <li><a href="#wartości-własne-trzech-grafów" id="toc-wartości-własne-trzech-grafów" class="nav-link" data-scroll-target="#wartości-własne-trzech-grafów"><span class="header-section-number">3.1.3</span> Wartości własne trzech grafów</a></li>
+  </ul></li>
+  <li><a href="#sec-centralnosc" id="toc-sec-centralnosc" class="nav-link" data-scroll-target="#sec-centralnosc"><span class="header-section-number">3.2</span> Centralność</a>
+  <ul class="collapse">
+  <li><a href="#sec-norma-i-zbieznosc-udzialow" id="toc-sec-norma-i-zbieznosc-udzialow" class="nav-link" data-scroll-target="#sec-norma-i-zbieznosc-udzialow"><span class="header-section-number">3.2.1</span> Definicja centralności i jak ją policzyć</a></li>
+  <li><a href="#sec-centralnosc-periodyczna" id="toc-sec-centralnosc-periodyczna" class="nav-link" data-scroll-target="#sec-centralnosc-periodyczna"><span class="header-section-number">3.2.2</span> Centralność dla grafów periodycznych</a></li>
+  </ul></li>
+  <li><a href="#sec-podsumowanie-centralnosci" id="toc-sec-podsumowanie-centralnosci" class="nav-link" data-scroll-target="#sec-podsumowanie-centralnosci"><span class="header-section-number">3.3</span> Podsumowanie</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../wykłady/grafy.html">Wykłady</a></li><li class="breadcrumb-item"><a href="../wykłady/centralnosc.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-wyklad-centralnosc" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="twierdzenie-perronafrobeniusa" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="twierdzenie-perronafrobeniusa"><span class="header-section-number">3.1</span> Twierdzenie Perrona–Frobeniusa</h2>
+<p><a href="../wykłady/siec_www.html#centralność-wierzchołków" class="quarto-xref">Eksperyment z wirusami</a> z rozdziału <a href="siec_www.html" class="quarto-xref"><span>2</span></a> pokazał, że w niektórych grafach udziały wirusów zbliżają się do stałych wartości, niezależnych od wierzchołka początkowego. Teraz wyjaśnimy, skąd bierze się ta zbieżność i jakich założeń potrzebujemy.</p>
+<section id="aperiodyczność" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="aperiodyczność"><span class="header-section-number">3.1.1</span> Aperiodyczność</h3>
+<p>W cyklu skierowanym na ośmiu wierzchołkach wirus wraca do punktu wyjścia po <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8</mn><mo>,</mo><mn>16</mn><mo>,</mo><mn>24</mn><mo>,</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">8,16,24,\ldots</annotation></semantics></math> krokach. Wszystkie te liczby są podzielne przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>8</mn><annotation encoding="application/x-tex">8</annotation></semantics></math>. Warunek aperiodyczności wyklucza taki wspólny rytm powrotów.</p>
+<div id="def-aperiodycznosc" class="definition-boxed theorem definition">
+<p><span class="theorem-title"><strong>Definicja 3.1 (Graf aperiodyczny)</strong></span> <strong>Aperiodycznym</strong> nazywamy silnie spójny graf skierowany, w którym największy wspólny dzielnik długości wszystkich cykli jest równy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. Formalnie,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">NWD</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">{</mo><mi>n</mi><mo>≥</mo><mn>1</mn><mo>:</mo><mrow><mtext mathvariant="normal">w grafie istnieje cykl długości </mtext><mspace width="0.333em"></mspace></mrow><mi>n</mi><mo stretchy="false" form="postfix">}</mo><mo>=</mo><mn>1</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\operatorname{NWD}\{n\geq 1:\text{w grafie istnieje cykl długości }n\}=1.
+</annotation></semantics></math></p>
+<p><strong>Periodycznym</strong>, inaczej <strong>okresowym</strong>, nazywamy silnie spójny graf skierowany, który nie jest aperiodyczny.</p>
+</div>
+<p>Innymi słowy, w grafie aperiodycznym nie istnieje liczba całkowita <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">d\geq 2</annotation></semantics></math>, która dzieliłaby długość każdego cyklu. Cykle rozumiemy tu jak w definicji <a href="grafy.html#def-cykl" class="quarto-xref"><span>1.7</span></a>: są niepuste, ale nie muszą być proste.</p>
+<p>Graf przykładowy z animacji jest silnie spójny i zawiera cykle długości <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>10</mn><annotation encoding="application/x-tex">10</annotation></semantics></math> oraz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>9</mn><annotation encoding="application/x-tex">9</annotation></semantics></math>. Ponieważ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">NWD</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mn>9</mn><mo>,</mo><mn>10</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\operatorname{NWD}(9,10)=1</annotation></semantics></math>, graf jest aperiodyczny. Cykl na ośmiu wierzchołkach jest periodyczny. Graf z trzema odgałęzieniami nie jest natomiast silnie spójny, więc nie spełnia założeń definicji.</p>
+<div id="def-macierz-prymitywna" class="definition-boxed theorem definition">
+<p><span class="theorem-title"><strong>Definicja 3.2 (Macierz prymitywna)</strong></span> <strong>Macierzą prymitywną</strong> nazywamy kwadratową macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> o wyrazach nieujemnych, dla której istnieje liczba całkowita <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">r\geq1</annotation></semantics></math> taka, że wszystkie wyrazy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>A</mi><mi>r</mi></msup><annotation encoding="application/x-tex">A^r</annotation></semantics></math> są dodatnie. Formalnie,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∃</mo><mi>r</mi><mo>≥</mo><mn>1</mn><mspace width="1.0em"></mspace><mo>∀</mo><mi>i</mi><mo>,</mo><mi>j</mi><mspace width="2.0em"></mspace><mo stretchy="false" form="prefix">(</mo><msup><mi>A</mi><mi>r</mi></msup><msub><mo stretchy="false" form="postfix">)</mo><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>&gt;</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\exists r\geq1\quad\forall i,j\qquad (A^r)_{ij}&gt;0.
+</annotation></semantics></math></p>
+</div>
+<div id="prp-aperiodycznosc-dodatnia-potega" class="fact theorem proposition">
+<p><span class="theorem-title"><strong>Fakt 3.1</strong></span> Dla skończonego silnie spójnego grafu skierowanego aperiodyczność jest równoważna prymitywności jego macierzy sąsiedztwa.</p>
+</div>
+</section>
+<section id="twierdzenie-perronafrobeniusa-1" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="twierdzenie-perronafrobeniusa-1"><span class="header-section-number">3.1.2</span> Twierdzenie Perrona–Frobeniusa</h3>
+<div id="def-macierz-nieredukowalna" class="definition-boxed theorem definition">
+<p><span class="theorem-title"><strong>Definicja 3.3 (Macierz nieredukowalna)</strong></span> <strong>Macierzą nieredukowalną</strong> nazywamy kwadratową macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> o wyrazach nieujemnych taką, że dla każdych indeksów <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>,</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i,j</annotation></semantics></math> istnieje liczba całkowita <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n\geq0</annotation></semantics></math>, dla której <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msup><mi>A</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">)</mo><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">(A^n)_{ij}&gt;0</annotation></semantics></math>. Formalnie,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>i</mi><mo>,</mo><mi>j</mi><mspace width="1.0em"></mspace><mo>∃</mo><mi>n</mi><mo>≥</mo><mn>0</mn><mspace width="2.0em"></mspace><mo stretchy="false" form="prefix">(</mo><msup><mi>A</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">)</mo><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>&gt;</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\forall i,j\quad\exists n\geq0\qquad (A^n)_{ij}&gt;0.
+</annotation></semantics></math></p>
+</div>
+<p>W tej definicji <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> może zależeć od pary <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>,</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i,j</annotation></semantics></math>. Dla macierzy prymitywnej jedna potęga musi mieć wszystkie wyrazy dodatnie. W szczególności każda macierz prymitywna jest nieredukowalna.</p>
+<div id="prp-silna-spojnosc-nieredukowalnosc" class="fact theorem proposition">
+<p><span class="theorem-title"><strong>Fakt 3.2</strong></span> Skończony graf skierowany jest silnie spójny wtedy i tylko wtedy, gdy jego macierz sąsiedztwa jest nieredukowalna.</p>
+</div>
+<p>Podsumowując, jeżeli <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> jest macierzą sąsiedztwa grafu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>, to zachodzi:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>G</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> silnie spójny</mtext></mrow></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mspace width="1.0em"></mspace><mo>⇔</mo><mspace width="1.0em"></mspace><mi>A</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> nieredukowalna</mtext></mrow><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>G</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> aperiodyczny</mtext></mrow></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mspace width="1.0em"></mspace><mo>⇔</mo><mspace width="1.0em"></mspace><mi>A</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> prymitywna</mtext></mrow><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{aligned}
+G\text{ silnie spójny} &amp;\quad\Longleftrightarrow\quad A\text{ nieredukowalna},\\
+G\text{ aperiodyczny} &amp;\quad\Longleftrightarrow\quad A\text{ prymitywna}.
+\end{aligned}
+</annotation></semantics></math></p>
+<p>Aperiodyczność i silna spójność są własnościami grafów. Nieredukowalność i prymitywność to własności macierzy - są to ogólniejsze pojęcia, bo można je zastosować także do macierzy, które nie są macierzami sąsiedztwa grafów. Przyda się to w rozdziale o PageRanku.</p>
+<p>W analizie dynamiki wirusów kluczową rolę odgrywają wartości własne macierzy sąsiedztwa i następujące twierdzenie.</p>
+<div id="thm-perron-frobenius" class="theorem-boxed theorem">
+<p><span class="theorem-title"><strong>Twierdzenie 3.1 (Twierdzenie Perrona–Frobeniusa)</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> będzie niezerową kwadratową macierzą nieredukowalną o wyrazach nieujemnych. Wtedy:</p>
+<ol type="1">
+<li><p>Macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> ma dodatnią rzeczywistą wartość własną <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\lambda=\lambda(A)</annotation></semantics></math>, która jest jednokrotna i maksymalna co do modułu: dla każdej wartości własnej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> macierzy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>, także zespolonej,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>μ</mi><mo stretchy="false" form="prefix">|</mo><mo>≤</mo><mi>λ</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+|\mu|\leq\lambda.
+</annotation></semantics></math></p>
+<p>Wartość <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> nazywamy <strong>wartością własną Perrona–Frobeniusa</strong>.</p></li>
+<li><p>Istnieje wektor wierszowy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> o wszystkich współrzędnych dodatnich, dla którego</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>A</mi><mo>=</mo><mi>λ</mi><mi>c</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+cA=\lambda c.
+</annotation></semantics></math></p></li>
+</ol>
+<p>Jeżeli dodatkowo macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> jest prymitywna, to dla każdej wartości własnej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>≠</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">\mu\neq\lambda</annotation></semantics></math> zachodzi silniejsza nierówność</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>μ</mi><mo stretchy="false" form="prefix">|</mo><mo>&lt;</mo><mi>λ</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+|\mu|&lt;\lambda.
+</annotation></semantics></math></p>
+</div>
+<p>Twierdzenie stosujemy także do macierzy, które nie są macierzami sąsiedztwa: ich wyrazy mogą być na przykład prawdopodobieństwami przejść między wierzchołkami. Dlatego jego założenia sformułowaliśmy za pomocą własności macierzy, a nie grafu.</p>
+<p>Jednokrotność oznacza tu krotność algebraiczną równą <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>, czyli jednokrotność pierwiastka wielomianu charakterystycznego. Zgodnie z naszą konwencją <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> jest <strong>lewym wektorem własnym</strong>, bo mnożymy go przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> z prawej strony.</p>
+</section>
+<section id="wartości-własne-trzech-grafów" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="wartości-własne-trzech-grafów"><span class="header-section-number">3.1.3</span> Wartości własne trzech grafów</h3>
+<p>Zbiór wartości własnych macierzy nazywamy jej <strong>widmem</strong>. Na rysunku <a href="#fig-widma-macierzy-sasiedztwa" class="quarto-xref"><span>3.1</span></a> przedstawiono widma macierzy sąsiedztwa <a href="../wykłady/siec_www.html#centralność-wierzchołków" class="quarto-xref">trzech grafów z eksperymentu</a>. Liczbę zespoloną <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">a+bi</annotation></semantics></math> zaznaczamy w punkcie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(a,b)</annotation></semantics></math>: oś pozioma odpowiada części rzeczywistej, a pionowa urojonej. Przerywany okrąg ma promień równy największemu modułowi wartości własnej.</p>
+<div id="fig-widma-macierzy-sasiedztwa" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Trzy wykresy wartości własnych na płaszczyźnie zespolonej, we wspólnej skali. Graf przykładowy ma jedną wartość na okręgu, lambda około 1,666, a pozostałe dziewięć wewnątrz. Cykl skierowany ma osiem wartości rozmieszczonych równomiernie na okręgu jednostkowym. Graf z trzema odgałęzieniami ma wartości minus jeden, zero o krotności pięć i jeden o krotności dwa.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-widma-macierzy-sasiedztwa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/widma-macierzy-sasiedztwa.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Rysunek&nbsp;3.1: Widma macierzy sąsiedztwa trzech grafów z eksperymentu. Turkus wyróżnia największą rzeczywistą wartość własną. W panelu (c) zaznaczono krotności algebraiczne powtarzających się wartości."><img src="images/widma-macierzy-sasiedztwa.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Trzy wykresy wartości własnych na płaszczyźnie zespolonej, we wspólnej skali. Graf przykładowy ma jedną wartość na okręgu, lambda około 1,666, a pozostałe dziewięć wewnątrz. Cykl skierowany ma osiem wartości rozmieszczonych równomiernie na okręgu jednostkowym. Graf z trzema odgałęzieniami ma wartości minus jeden, zero o krotności pięć i jeden o krotności dwa."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-widma-macierzy-sasiedztwa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;3.1: Widma macierzy sąsiedztwa trzech grafów z eksperymentu. Turkus wyróżnia największą rzeczywistą wartość własną. W panelu (c) zaznaczono krotności algebraiczne powtarzających się wartości.
+</figcaption>
+</figure>
+</div>
+<p>W <strong>grafie przykładowym</strong> mamy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>≈</mo><mn>1</mn><mo>,</mo><mn>666</mn></mrow><annotation encoding="application/x-tex">\lambda\approx 1{,}666</annotation></semantics></math>. Jest to jedyna wartość własna na okręgu; wszystkie pozostałe leżą ściśle wewnątrz niego.</p>
+<p>Dla <strong>cyklu skierowanego</strong> na ośmiu wierzchołkach wartościami własnymi są pierwiastki ósmego stopnia z jedności:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mi>k</mi></msub><mo>=</mo><msup><mi>e</mi><mrow><mn>2</mn><mi>π</mi><mi>i</mi><mi>k</mi><mi>/</mi><mn>8</mn></mrow></msup><mo>,</mo><mspace width="2.0em"></mspace><mi>k</mi><mo>=</mo><mn>0</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>7</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\mu_k=e^{2\pi i k/8},\qquad k=0,\ldots,7.
+</annotation></semantics></math></p>
+<p>Wartość <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\lambda=1</annotation></semantics></math> jest jednokrotna, ale wszystkie pozostałe wartości własne również mają moduł <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. Dodatni wektor własny istnieje i jest proporcjonalny do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(1,\ldots,1)</annotation></semantics></math>, mimo że wirus umieszczony początkowo w jednym wierzchołku krąży bez końca i udziały nie są zbieżne.</p>
+<p>W grafie <strong>z trzema odgałęzieniami</strong> wartości własne to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> o krotności <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math> o krotności <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> oraz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math> o krotności <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>5</mn><annotation encoding="application/x-tex">5</annotation></semantics></math>. Nie ma tu nawet jednokrotności największej rzeczywistej wartości własnej. Pętla i cykl długości <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math> pozwalają utrzymywać wirusy w różnych częściach grafu, a wynik zależy od miejsca rozpoczęcia eksperymentu.</p>
+</section>
+</section>
+<section id="sec-centralnosc" class="level2 page-columns page-full" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-centralnosc"><span class="header-section-number">3.2</span> Centralność</h2>
+<section id="sec-norma-i-zbieznosc-udzialow" class="level3 page-columns page-full" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="sec-norma-i-zbieznosc-udzialow"><span class="header-section-number">3.2.1</span> Definicja centralności i jak ją policzyć</h3>
+<p>Aby zdefiniować centralność, potrzebujemy sposobu normalizowania wektorów. Posłużymy się normą <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℓ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\ell_1</annotation></semantics></math>.</p>
+<div id="def-norma-l1" class="definition-boxed theorem definition">
+<p><span class="theorem-title"><strong>Definicja 3.4 (Norma <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℓ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\ell_1</annotation></semantics></math>)</strong></span> <strong>Normą <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℓ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\ell_1</annotation></semantics></math></strong> wektora <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>:</mo><mi>V</mi><mo>→</mo><mi mathvariant="double-struck">ℝ</mi></mrow><annotation encoding="application/x-tex">\alpha:V\to\mathbb{R}</annotation></semantics></math> nazywamy liczbę</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub><mo>=</mo><munder><mo>∑</mo><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow></munder><mo stretchy="false" form="prefix">|</mo><mi>α</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">|</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\|\alpha\|_1=\sum_{v\in V}|\alpha(v)|.
+</annotation></semantics></math></p>
+</div>
+<p>Jeżeli współrzędne <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> są nieujemne, norma jest po prostu ich sumą.</p>
+<div id="def-centralnosc-wektora-wlasnego" class="definition-boxed theorem definition">
+<p><span class="theorem-title"><strong>Definicja 3.5 (Centralność)</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym grafem silnie spójnym. <strong>Wektorem centralności</strong> nazywamy wektor wierszowy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>:</mo><mi>V</mi><mo>→</mo><mi mathvariant="double-struck">ℝ</mi></mrow><annotation encoding="application/x-tex">c:V\to\mathbb{R}</annotation></semantics></math> odpowiadający wartości własnej Perrona–Frobeniusa, o wszystkich współrzędnych ostro dodatnich i normie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℓ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\ell_1</annotation></semantics></math> równej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>.</p>
+<p>Wartość <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">c(v)</annotation></semantics></math> nazywamy <strong>centralnością</strong> wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> (ang. <em>eigenvector centrality</em>).</p>
+</div>
+<p>Z twierdzenia <a href="#thm-perron-frobenius" class="quarto-xref"><span>3.1</span></a> wynika, że taki wektor istnieje i jest wyznaczony jednoznacznie: warunek <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><mi>c</mi><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\|c\|_1=1</annotation></semantics></math> ustala jego normalizację.</p>
+<p>Wróćmy do <a href="../wykłady/siec_www.html#centralność-wierzchołków" class="quarto-xref">eksperymentu z wirusami</a>. Okazuje się, że dla silnie spójnych grafów aperiodycznych <strong>wektor udziałów zbiega właśnie do wektora centralności</strong>.</p>
+<p>Przypomnijmy, że wektor <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><mi>i</mi></msub><msup><mi>A</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\delta_i A^n</annotation></semantics></math> opisuje liczby wirusów po <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> rundach przy starcie z wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><msub><mi>δ</mi><mi>i</mi></msub><msup><mi>A</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\|\delta_i A^n\|_1</annotation></semantics></math> jest ich całkowitą liczbą.</p>
+<p>Zachodzi następujące twierdzenie; jego uzasadnienie podajemy po przykładzie.</p>
+<div id="thm-zbieznosc-centralnosci" class="theorem-boxed theorem">
+<p><span class="theorem-title"><strong>Twierdzenie 3.2</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym silnie spójnym i aperiodycznym grafem skierowanym, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> jego macierzą sąsiedztwa, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> jego wektorem centralności (definicja <a href="#def-centralnosc-wektora-wlasnego" class="quarto-xref"><span>3.5</span></a>). Wtedy dla każdego niezerowego wektora wierszowego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>:</mo><mi>V</mi><mo>→</mo><mi mathvariant="double-struck">ℝ</mi></mrow><annotation encoding="application/x-tex">\alpha:V\to\mathbb{R}</annotation></semantics></math> o współrzędnych nieujemnych zachodzi</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup></mrow><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow></mfrac><mo>→</mo><mi>c</mi><mspace width="2.0em"></mspace><mrow><mtext mathvariant="normal">gdy </mtext><mspace width="0.333em"></mspace></mrow><mi>n</mi><mo>→</mo><mi>∞</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\frac{\alpha A^n}{\|\alpha A^n\|_1}
+\longrightarrow c
+\qquad\text{gdy }n\to\infty.
+</annotation></semantics></math></p>
+</div>
+<p>W szczególności możemy wziąć <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><msub><mi>δ</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\alpha=\delta_i</annotation></semantics></math>: udziały wirusów zbiegają do wektora centralności, niezależnie od wierzchołka, w którym umieściliśmy pierwszego wirusa.</p>
+<p>W praktyce nie musimy wyznaczać macierzy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>A</mi><mi>n</mi></msup><annotation encoding="application/x-tex">A^n</annotation></semantics></math>. Wystarczy zacząć od <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mn>0</mn></msub><mo>=</mo><mi>α</mi><mi>/</mi><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\alpha_0=\alpha/\|\alpha\|_1</annotation></semantics></math> i w każdym kroku mnożyć wektor przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>, a następnie go normalizować:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>α</mi><mi>n</mi></msub><mi>A</mi></mrow><mrow><mo stretchy="false" form="postfix">∥</mo><msub><mi>α</mi><mi>n</mi></msub><mi>A</mi><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\alpha_{n+1}=\frac{\alpha_n A}{\|\alpha_n A\|_1}.
+</annotation></semantics></math></p>
+<p>Otrzymujemy wtedy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>n</mi></msub><mo>=</mo><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup><mi>/</mi><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\alpha_n=\alpha A^n/\|\alpha A^n\|_1</annotation></semantics></math>, więc <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>n</mi></msub><mo>→</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">\alpha_n\to c</annotation></semantics></math>.</p>
+<p><strong>Przykład.</strong> Rozważmy graf z dwoma wierzchołkami przedstawiony na rysunku <a href="#fig-macierz-arnolda" class="quarto-xref"><span>3.2</span></a>. Przy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>1</mn></msub><annotation encoding="application/x-tex">v_1</annotation></semantics></math> mamy dwie pętle, przy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>2</mn></msub><annotation encoding="application/x-tex">v_2</annotation></semantics></math> jedną, a między wierzchołkami po jednej krawędzi w każdym kierunku. Wszystkie wyrazy jego macierzy sąsiedztwa są dodatnie, więc możemy zastosować Twierdzenie <a href="#thm-zbieznosc-centralnosci" class="quarto-xref"><span>3.2</span></a>.</p>
+<div id="fig-macierz-arnolda" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Dwa wierzchołki v1 i v2 połączone krawędziami w obu kierunkach. Przy v1 są dwie pętle, przy v2 jedna. Obok macierz A o wierszach (2, 1) i (1, 1).">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-macierz-arnolda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/macierz-arnolda.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Rysunek&nbsp;3.2: Graf i jego macierz sąsiedztwa."><img src="images/macierz-arnolda.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%" alt="Dwa wierzchołki v1 i v2 połączone krawędziami w obu kierunkach. Przy v1 są dwie pętle, przy v2 jedna. Obok macierz A o wierszach (2, 1) i (1, 1)."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-macierz-arnolda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;3.2: Graf i jego macierz sąsiedztwa.
+</figcaption>
+</figure>
+</div>
+<p>Wartości własne tej macierzy oraz odpowiadające im znormalizowane wektory własne to</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>λ</mi><mn>1</mn></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mrow><mn>3</mn><mo>+</mo><msqrt><mn>5</mn></msqrt></mrow><mn>2</mn></mfrac><mo>≈</mo><mn>2</mn><mo>,</mo><mn>618</mn><mo>,</mo></mtd><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>c</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>≈</mo><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>618</mn><mo>,</mo><mspace width="0.167em"></mspace><mn>0</mn><mo>,</mo><mn>382</mn><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>λ</mi><mn>2</mn></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mrow><mn>3</mn><mo>−</mo><msqrt><mn>5</mn></msqrt></mrow><mn>2</mn></mfrac><mo>≈</mo><mn>0</mn><mo>,</mo><mn>382</mn><mo>,</mo></mtd><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>d</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>≈</mo><mo stretchy="false" form="prefix">(</mo><mi>−</mi><mn>0</mn><mo>,</mo><mn>382</mn><mo>,</mo><mspace width="0.167em"></mspace><mn>0</mn><mo>,</mo><mn>618</mn><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{aligned}
+\lambda_1&amp;=\frac{3+\sqrt5}{2}\approx2{,}618,
+&amp; c&amp;\approx(0{,}618,\,0{,}382),\\[2pt]
+\lambda_2&amp;=\frac{3-\sqrt5}{2}\approx0{,}382,
+&amp; d&amp;\approx(-0{,}382,\,0{,}618).
+\end{aligned}
+</annotation></semantics></math></p>
+<p>Wektor <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> jest wektorem centralności. Wybierzmy niezerowy wektor <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> o współrzędnych nieujemnych i obserwujmy kolejne znormalizowane wektory</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>k</mi></msub><mo>=</mo><mfrac><mrow><mi>α</mi><msup><mi>A</mi><mi>k</mi></msup></mrow><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>A</mi><mi>k</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mi>k</mi><mo>=</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi>…</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\alpha_k=\frac{\alpha A^k}{\|\alpha A^k\|_1},
+\qquad k=0,1,2,\ldots.
+</annotation></semantics></math></p>
+<p>Każdy z nich zapisujemy w bazie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>c</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(c,d)</annotation></semantics></math> jako <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>k</mi></msub><mo>=</mo><msub><mi>a</mi><mi>k</mi></msub><mi>c</mi><mo>+</mo><msub><mi>b</mi><mi>k</mi></msub><mi>d</mi></mrow><annotation encoding="application/x-tex">\alpha_k=a_kc+b_kd</annotation></semantics></math>. Ponieważ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>k</mi></msub><mo>→</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">\alpha_k\to c</annotation></semantics></math>, współczynnik <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>a</mi><mi>k</mi></msub><annotation encoding="application/x-tex">a_k</annotation></semantics></math> dąży do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>b</mi><mi>k</mi></msub><annotation encoding="application/x-tex">b_k</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>.</p>
+<p>W poniższej ilustracji niebieski wektor pokazuje <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\alpha_k</annotation></semantics></math>. Oś pozioma odpowiada wartości funkcji w wierzchołku <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>1</mn></msub><annotation encoding="application/x-tex">v_1</annotation></semantics></math>, a pionowa jej wartości w wierzchołku <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>2</mn></msub><annotation encoding="application/x-tex">v_2</annotation></semantics></math>. Przerywane strzałki przedstawiają sumę <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>k</mi></msub><mi>c</mi><mo>+</mo><msub><mi>b</mi><mi>k</mi></msub><mi>d</mi></mrow><annotation encoding="application/x-tex">a_kc+b_kd</annotation></semantics></math>: drugą składową zaczepiamy na końcu pierwszej. Końce wszystkich <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\alpha_k</annotation></semantics></math> leżą na odcinku w pierwszej ćwiartce, na którym suma współrzędnych wynosi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>, ponieważ normalizujemy wektory w normie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℓ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\ell_1</annotation></semantics></math>.</p>
+<div class="column-page">
+<div id="macierz-arnolda-iteracje" class="arnold-widget" data-arnold-widget="">
+  <form class="arnold-widget__start" data-arnold-form="">
+    <span>Wektor początkowy <i>α</i>:</span>
+    <label><i>α</i>(<i>v</i><sub>1</sub>) <input type="number" name="x" value="1" min="0" step="any" required="" aria-label="Pierwsza współrzędna wektora początkowego"></label>
+    <label><i>α</i>(<i>v</i><sub>2</sub>) <input type="number" name="y" value="4" min="0" step="any" required="" aria-label="Druga współrzędna wektora początkowego"></label>
+    <button type="submit">Zastosuj</button>
+    <span class="arnold-widget__start-hint">Przed pierwszym krokiem dzielimy przez sumę współrzędnych.</span>
+  </form>
+  <div class="arnold-widget__plot">
+    <svg viewbox="0 0 540 450" role="img" aria-label="Iteracje wektora na płaszczyźnie i jego rozkład w bazie wektorów własnych" data-arnold-plot=""></svg>
+    <div class="arnold-widget__legend">
+      <span class="is-current"><i>α</i><sub>k</sub> — aktualny wektor</span>
+      <span class="is-perron"><i>c</i> — granica</span>
+      <span class="is-secondary"><i>d</i> — drugi wektor własny</span>
+    </div>
+  </div>
+  <div class="arnold-widget__panel">
+    <div class="arnold-widget__iteration">Iteracja <strong data-arnold-round="">0</strong></div>
+    <p class="arnold-widget__vector"><i>α</i><sub data-arnold-index="">0</sub> = <span data-arnold-vector=""></span></p>
+    <p class="arnold-widget__decomposition">Rozkład w bazie (<i>c</i>, <i>d</i>):<br>
+      <i>α</i><sub>k</sub> = <span class="is-perron"><i>a</i><sub>k</sub><i>c</i></span> + <span class="is-secondary"><i>b</i><sub>k</sub><i>d</i></span>
+    </p>
+    
+<table class="arnold-widget__coefficients caption-top">
+<caption>Współczynniki w ostatnich iteracjach</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col"><em>k</em></th>
+<th class="is-perron" data-quarto-table-cell-role="th" scope="col"><em>a</em><sub>k</sub> → 1</th>
+<th class="is-secondary" data-quarto-table-cell-role="th" scope="col"><em>b</em><sub>k</sub> → 0</th>
+</tr>
+</thead>
+<tbody data-arnold-coefficients="">
+</tbody>
+</table>
+
+    <p class="arnold-widget__error">‖<i>α</i><sub>k</sub> − <i>c</i>‖<sub>1</sub> = <span data-arnold-error=""></span></p>
+    <div class="arnold-widget__controls">
+      <button type="button" data-arnold-action="next">Kolejna iteracja</button>
+      <button type="button" data-arnold-action="previous">Poprzednia</button>
+      <button type="button" data-arnold-action="reset">Od początku</button>
+    </div>
+    <p class="arnold-widget__status" data-arnold-status="" aria-live="polite"></p>
+  </div>
+  <noscript>Włącz JavaScript, aby zmieniać wektor początkowy i wykonywać kolejne iteracje.</noscript>
+</div>
+</div>
+<script src="widgets/macierz-arnolda.js?v=33e277f968b3"></script>
+<p>Twierdzenie <a href="#thm-zbieznosc-centralnosci" class="quarto-xref"><span>3.2</span></a> wynika z następującej ogólniejszej własności.</p>
+<div id="thm-zbieznosc-do-wektora-perrona" class="theorem-boxed theorem">
+<p><span class="theorem-title"><strong>Twierdzenie 3.3</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> będzie macierzą prymitywną rozmiaru <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>×</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">m\times m</annotation></semantics></math>, gdzie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m\geq1</annotation></semantics></math>, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\lambda=\lambda(A)</annotation></semantics></math> jej wartością własną Perrona–Frobeniusa. Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> będzie wektorem wierszowym o wszystkich współrzędnych ostro dodatnich, spełniającym</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>A</mi><mo>=</mo><mi>λ</mi><mi>c</mi><mo>,</mo><mspace width="2.0em"></mspace><mo stretchy="false" form="postfix">∥</mo><mi>c</mi><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub><mo>=</mo><mn>1</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+cA=\lambda c,
+\qquad \|c\|_1=1.
+</annotation></semantics></math></p>
+<p>Dla każdego niezerowego wektora wierszowego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> o <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math> współrzędnych nieujemnych zachodzi</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup></mrow><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow></mfrac><mo>→</mo><mi>c</mi><mspace width="2.0em"></mspace><mrow><mtext mathvariant="normal">gdy </mtext><mspace width="0.333em"></mspace></mrow><mi>n</mi><mo>→</mo><mi>∞</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\frac{\alpha A^n}{\|\alpha A^n\|_1}
+\longrightarrow c
+\qquad\text{gdy }n\to\infty.
+</annotation></semantics></math></p>
+</div>
+<p>Granica nie zależy od <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>. Niektóre współrzędne <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> mogą być zerowe. Mianownik jest zawsze dodatni: macierz prymitywna nie ma zerowych wierszy, więc niezerowy wektor nieujemny po mnożeniu przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> pozostaje niezerowy i nieujemny.</p>
+<details id="proof-zbieznosc-centralnosci" class="proof-details">
+<summary>
+Dowód
+</summary>
+<div class="proof">
+<p><span class="proof-title"><em>Dowód</em>. </span>Udowodnimy twierdzenie przy dodatkowym założeniu, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> jest symetryczna. Oznaczmy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\lambda=\lambda(A)</annotation></semantics></math>. Z twierdzenia spektralnego istnieje ortogonalna baza wektorów własnych</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>,</mo><msub><mi>u</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>u</mi><mi>m</mi></msub><mo>,</mo></mrow><annotation encoding="application/x-tex">
+c,u_2,\ldots,u_m,
+</annotation></semantics></math></p>
+<p>odpowiadających wartościom własnym <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>,</mo><msub><mi>μ</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>μ</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">\lambda,\mu_2,\ldots,\mu_m</annotation></semantics></math>. Rozłóżmy wektor początkowy w tej bazie:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mi>a</mi><mi>c</mi><mo>+</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>2</mn></mrow><mi>m</mi></munderover><msub><mi>b</mi><mi>j</mi></msub><msub><mi>u</mi><mi>j</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\alpha=ac+\sum_{j=2}^{m}b_j u_j.
+</annotation></semantics></math></p>
+<p>Ponieważ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> ma współrzędne dodatnie, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> jest niezerowy i ma współrzędne nieujemne, jego współczynnik przy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> jest dodatni:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mfrac><mrow><mo stretchy="false" form="prefix">⟨</mo><mi>α</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">⟩</mo></mrow><mrow><mo stretchy="false" form="prefix">⟨</mo><mi>c</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">⟩</mo></mrow></mfrac><mo>&gt;</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+a=\frac{\langle\alpha,c\rangle}{\langle c,c\rangle}&gt;0.
+</annotation></semantics></math></p>
+<p>Mnożąc przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>A</mi><mi>n</mi></msup><annotation encoding="application/x-tex">A^n</annotation></semantics></math> i dzieląc przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>λ</mi><mi>n</mi></msup><annotation encoding="application/x-tex">\lambda^n</annotation></semantics></math>, otrzymujemy</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup></mrow><msup><mi>λ</mi><mi>n</mi></msup></mfrac><mo>=</mo><mi>a</mi><mi>c</mi><mo>+</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>2</mn></mrow><mi>m</mi></munderover><msub><mi>b</mi><mi>j</mi></msub><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mi>μ</mi><mi>j</mi></msub><mi>λ</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>n</mi></msup><msub><mi>u</mi><mi>j</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\frac{\alpha A^n}{\lambda^n}
+=ac+\sum_{j=2}^{m}b_j\left(\frac{\mu_j}{\lambda}\right)^n u_j.
+</annotation></semantics></math></p>
+<p>Z prymitywności macierzy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> i twierdzenia <a href="#thm-perron-frobenius" class="quarto-xref"><span>3.1</span></a> mamy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><msub><mi>μ</mi><mi>j</mi></msub><mo stretchy="false" form="prefix">|</mo><mo>&lt;</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">|\mu_j|&lt;\lambda</annotation></semantics></math>. Każdy składnik sumy dąży zatem do zera, więc</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup></mrow><msup><mi>λ</mi><mi>n</mi></msup></mfrac><mo>→</mo><mi>a</mi><mi>c</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\frac{\alpha A^n}{\lambda^n}\longrightarrow ac.
+</annotation></semantics></math></p>
+<p>Z ciągłości normy oraz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><mi>c</mi><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\|c\|_1=1</annotation></semantics></math> wynika teraz, że</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow><msup><mi>λ</mi><mi>n</mi></msup></mfrac><mo>→</mo><mi>a</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\frac{\|\alpha A^n\|_1}{\lambda^n}\longrightarrow a.
+</annotation></semantics></math></p>
+<p>Ponieważ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a&gt;0</annotation></semantics></math>, możemy podzielić te dwie zbieżności stronami:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup></mrow><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup><mi>/</mi><msup><mi>λ</mi><mi>n</mi></msup></mrow><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub><mi>/</mi><msup><mi>λ</mi><mi>n</mi></msup></mrow></mfrac><mo>→</mo><mfrac><mrow><mi>a</mi><mi>c</mi></mrow><mi>a</mi></mfrac><mo>=</mo><mi>c</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\frac{\alpha A^n}{\|\alpha A^n\|_1}
+=\frac{\alpha A^n/\lambda^n}{\|\alpha A^n\|_1/\lambda^n}
+\longrightarrow\frac{ac}{a}=c.
+</annotation></semantics></math></p>
+</div>
+<p>W przypadku ogólnym macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> nie musi mieć bazy wektorów własnych. Można wtedy przeprowadzić analogiczny dowód, korzystając z postaci Jordana. Składniki odpowiadające pozostałym wartościom własnym mogą zawierać dodatkowe czynniki wielomianowe w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>, ale po podzieleniu przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>λ</mi><mi>n</mi></msup><annotation encoding="application/x-tex">\lambda^n</annotation></semantics></math> nadal dążą do zera, ponieważ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>μ</mi><mo stretchy="false" form="prefix">|</mo><mo>&lt;</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">|\mu|&lt;\lambda</annotation></semantics></math>. Współczynnik przy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> również jest dodatni: jeżeli <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> jest dodatnim kolumnowym wektorem własnym, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>r</mi><mo>=</mo><mi>λ</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">Ar=\lambda r</annotation></semantics></math>, to wynosi on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mi>α</mi><mi>r</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>c</mi><mi>r</mi><mo stretchy="false" form="postfix">)</mo><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a=\alpha r/(cr)&gt;0</annotation></semantics></math>.</p>
+</details>
+</section>
+<section id="sec-centralnosc-periodyczna" class="level3 page-columns page-full" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="sec-centralnosc-periodyczna"><span class="header-section-number">3.2.2</span> Centralność dla grafów periodycznych</h3>
+<p>Centralność jest zdefiniowana również dla silnie spójnych grafów periodycznych. Takie grafy pojawiają się w praktyce: na przykład silnie spójne grafy dwudzielne są periodyczne, ponieważ każdy cykl ma parzystą długość. Jak wyznaczyć centralność w takim przypadku korzystając z naszej wirusowej interpretacji, skoro zbieżność z twierdzenia <a href="#thm-zbieznosc-centralnosci" class="quarto-xref"><span>3.2</span></a> nie jest gwarantowana? Istnieje proste wyjście z tej sytuacji. Dodajmy po jednej pętli przy każdym wierzchołku. Nową macierzą sąsiedztwa jest</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mi>A</mi><mo>+</mo><mi>I</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+B=A+I.
+</annotation></semantics></math></p>
+<p>Graf pozostaje silnie spójny, a dzięki cyklom długości <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> staje się aperiodyczny. W eksperymencie każdy wirus zostawia teraz jednego potomka w swoim wierzchołku, a dodatkowo wysyła po jednym potomku wzdłuż każdej dotychczasowej krawędzi wychodzącej.</p>
+<p>Dodanie macierzy jednostkowej nie zmienia wektorów własnych:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>A</mi><mo>=</mo><mi>λ</mi><mi>c</mi><mspace width="1.0em"></mspace><mo>⇔</mo><mspace width="1.0em"></mspace><mi>c</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo>+</mo><mi>I</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>c</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+cA=\lambda c
+\quad\Longleftrightarrow\quad
+c(A+I)=(\lambda+1)c.
+</annotation></semantics></math></p>
+<p>Wartości własne przesuwają się natomiast o <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> w prawo na płaszczyźnie zespolonej. Wektor centralności pozostaje taki sam, ale tym razem udziały do niego zbiegają!</p>
+<p>Powtórzmy eksperyment na cyklu z ośmioma wierzchołkami, tym razem z dodanymi pętlami. W każdej rundzie wirus zostawia jednego potomka w swoim wierzchołku i wysyła drugiego do następnego wierzchołka. Łączna liczba wirusów podwaja się, a ich udziały zbliżają się do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>8</mn><mo>=</mo><mn>12</mn><mo>,</mo><mn>5</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">1/8=12{,}5\%</annotation></semantics></math> w każdym wierzchołku. Wybierz inny wierzchołek początkowy, a następnie porównaj wynik z cyklem bez pętli.</p>
+<p>Możemy też wybrać mniej regularny <strong>graf dwudzielny</strong>. Jego dwie części rysujemy w osobnych kolumnach, a każda krawędź prowadzi z jednej kolumny do drugiej. Graf składa się z dwóch skierowanych cykli długości <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>4</mn><annotation encoding="application/x-tex">4</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>6</mn><annotation encoding="application/x-tex">6</annotation></semantics></math>, połączonych wspólnym wierzchołkiem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>0</mn></msub><annotation encoding="application/x-tex">v_0</annotation></semantics></math>. Jest silnie spójny i ma okres <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>, ponieważ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">NWD</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mn>4</mn><mo>,</mo><mn>6</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\operatorname{NWD}(4,6)=2</annotation></semantics></math>. Zaczynając od jednego wirusa, widzimy, że w kolejnych rundach cała populacja przechodzi na przemian między lewą i prawą kolumną. Udziały nie mogą więc się ustabilizować. Po dodaniu pętli graf przestaje być dwudzielny, a wirusy mogą pozostawać w tej samej kolumnie. Udziały zbiegają, ale tym razem ich graniczne wartości nie są jednakowe dla wszystkich wierzchołków.</p>
+<p>Porównaj również <strong>graf przykładowy</strong> z <a href="../wykłady/siec_www.html#centralność-wierzchołków" class="quarto-xref">pierwszego eksperymentu</a> w wersji bez pętli i z pętlą przy każdym wierzchołku. Ten graf już bez pętli jest aperiodyczny, więc w obu wersjach udziały zbiegają do tych samych wartości. Dodanie pętli zmienia przebieg eksperymentu i szybkość zbieżności, ale nie zmienia wektora centralności.</p>
+<p>Eksperyment obejmuje <strong>200 rund</strong>. Suwak pozwala przejść bezpośrednio do wybranej rundy. Duże liczby pokazujemy w przybliżeniu w zapisie naukowym, np. <code>1,61e60</code> oznacza <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>,</mo><mn>61</mn><mo>⋅</mo><msup><mn>10</mn><mn>60</mn></msup></mrow><annotation encoding="application/x-tex">1{,}61\cdot10^{60}</annotation></semantics></math>. Pełne liczby wirusów są dostępne po najechaniu na wierzchołek lub licznik całkowitej populacji.</p>
+<div class="column-page">
+<div id="virus-cycle-loops" class="virus-widget" data-virus-widget="" data-virus-rounds="200">
+  <div class="virus-widget__graph">
+    <svg viewbox="0 0 660 520" role="img" aria-label="Eksperyment z wirusem na cyklu skierowanym z pętlą przy każdym z ośmiu wierzchołków"></svg>
+  </div>
+  <div class="virus-widget__panel">
+    <dl class="virus-widget__stats">
+      <div>
+        <dt>Runda</dt>
+        <dd data-virus-round="">0</dd>
+      </div>
+      <div>
+        <dt>Wszystkich wirusów</dt>
+        <dd data-virus-total="">1</dd>
+      </div>
+      <div>
+        <dt>Wierzchołek początkowy</dt>
+        <dd data-virus-start="" class="virus-widget__vertex-name"><i>v</i><sub>0</sub></dd>
+      </div>
+    </dl>
+    <div class="virus-widget__shares" data-virus-shares="" aria-label="Udziały wirusów w poszczególnych wierzchołkach"></div>
+    <div class="virus-widget__controls">
+      <button type="button" data-virus-action="previous" aria-label="Poprzednia runda">←</button>
+      <button type="button" data-virus-action="next">Następna runda</button>
+      <button type="button" data-virus-action="play">Odtwarzaj</button>
+      <button type="button" data-virus-action="reset">Od początku</button>
+    </div>
+    <label class="virus-widget__graph-picker">
+      <span>Porównaj grafy</span>
+      <select data-virus-graph="">
+        <option value="cycleWithLoops">Cykl z pętlami</option>
+        <option value="cycle">Cykl bez pętli</option>
+        <option value="twoCyclesWithLoops">Graf dwudzielny z pętlami</option>
+        <option value="twoCycles">Graf dwudzielny bez pętli</option>
+        <option value="originalWithLoops">Graf przykładowy z pętlami</option>
+        <option value="original">Graf przykładowy bez pętli</option>
+      </select>
+    </label>
+    <label class="virus-widget__round-picker">
+      <span>Przejdź do rundy</span>
+      <input type="range" min="0" max="200" step="1" value="0" data-virus-round-input="">
+    </label>
+    <p class="virus-widget__hint" data-virus-status="" aria-live="polite">Kliknij „Następna runda” albo wybierz inny wierzchołek początkowy.</p>
+  </div>
+</div>
+</div>
+<noscript><p>Eksperyment z wirusem wymaga włączonej obsługi JavaScript.</p></noscript>
+<script src="widgets/centralnosc-wirusy.js?v=d10e94d89830"></script>
+</section>
+</section>
+<section id="sec-podsumowanie-centralnosci" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-podsumowanie-centralnosci"><span class="header-section-number">3.3</span> Podsumowanie</h2>
+<p>Każdy skończony silnie spójny graf zawierający co najmniej jedną krawędź ma jednoznacznie wyznaczony wektor centralności (definicja <a href="#def-centralnosc-wektora-wlasnego" class="quarto-xref"><span>3.5</span></a>).</p>
+<p>Centralność możemy zawsze przybliżać <strong>metodą potęgową</strong>, czyli przez kolejne mnożenia wektora i normalizowanie wyniku. Dla grafu aperiodycznego możemy używać macierzy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>. Dla grafu periodycznego używamy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>+</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">A+I</annotation></semantics></math>, jak w podrozdziale <a href="#sec-centralnosc-periodyczna" class="quarto-xref"><span>3.2.2</span></a>. Przesunięcie to zapewnia zbieżność bez zmiany wektora centralności. Możemy więc stosować <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>+</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">A+I</annotation></semantics></math> w obu przypadkach.</p>
+<p>Metoda potęgowa daje nam wygodną interpretację centralności. W grafie aperiodycznym ustalmy wierzchołek początkowy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> i rozważmy wszystkie ścieżki długości <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> rozpoczynające się w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>. Udział tych, które kończą się w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>, dąży do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">c(w)</annotation></semantics></math>, gdy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>→</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">n\to\infty</annotation></semantics></math>. Wynika to z faktu <a href="siec_www.html#prp-potegi-macierzy-sasiedztwa" class="quarto-xref"><span>2.3</span></a> i twierdzenia <a href="#thm-zbieznosc-centralnosci" class="quarto-xref"><span>3.2</span></a>. Granica nie zależy od wyboru <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>. Intuicyjnie, wierzchołek, do którego prowadzi dużo dróg, powinien być ważniejszy od wierzchołka, do którego prowadzi mniej dróg. Dla grafu periodycznego tę interpretację stosujemy do grafu z dodanymi pętlami.</p>
+<p>Metoda potęgowa jest efektywna obliczeniowo, szczególnie dla grafów rzadkich. Liczba kroków potrzebna do uzyskania zadanej dokładności zależy jednak od widma macierzy. Istnieją też inne metody wyznaczania wartości własnych i wektorów własnych macierzy. Na przykład funkcja <a href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.centrality.eigenvector_centrality.html"><code>nx.eigenvector_centrality</code></a> stosuje metodę potęgową dla <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>+</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">A+I</annotation></semantics></math>, natomiast <a href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html"><code>np.linalg.eig</code></a> wyznacza wartości i wektory własne za pomocą procedur biblioteki LAPACK opartych na <a href="https://www.netlib.org/lapack/double/dgeev.f">algorytmie QR</a>.</p>
+<p>Centralność mierzy więc asymptotyczny udział długich ścieżek kończących się w danym wierzchołku. Jest to użyteczna miara ważności, ponieważ uwzględnia połączenia z całego grafu, a nie tylko najbliższe sąsiedztwo.</p>
+<p>Drugą interpretację otrzymujemy bezpośrednio z równania wektora własnego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>A</mi><mo>=</mo><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">cA=\lambda(A)c</annotation></semantics></math>. Z faktu <a href="siec_www.html#prp-mnozenie-przez-macierz-sasiedztwa" class="quarto-xref"><span>2.4</span></a> mamy</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><munder><mo>∑</mo><mrow><mi>u</mi><mo>→</mo><mi>w</mi></mrow></munder><mi>c</mi><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+c(w)=\frac{1}{\lambda(A)}\sum_{u\to w}c(u).
+</annotation></semantics></math></p>
+<p>Centralność <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> jest zatem sumą centralności wierzchołków, które na niego wskazują, <strong>podzieloną</strong> przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\lambda(A)</annotation></semantics></math>. Każda krawędź wnosi do sumy osobny składnik, więc krawędzie wielokrotne uwzględniamy wielokrotnie. Liczy się nie tylko to, ile wierzchołków na nas wskazuje, ale również to, jak ważne są te wierzchołki. Duża centralność poprzedników wnosi duży wkład w naszą centralność.</p>
+<p>Jest to zależność rekurencyjna: ważność wierzchołka zależy od ważności wierzchołków, które na niego wskazują, a ich ważność od wierzchołków, które wskazują na te wierzchołki, i tak dalej. Równanie wektora własnego określa te wartości jednocześnie dla całego grafu.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+(() => {
+  const initializeTheoremFullscreen = () => {
+    const blocks = document.querySelectorAll(
+      "#quarto-document-content .theorem:not(.exercise)"
+    );
+
+    if (blocks.length === 0 || document.getElementById("theorem-fullscreen-dialog")) {
+      return;
+    }
+
+    const dialog = document.createElement("dialog");
+    dialog.id = "theorem-fullscreen-dialog";
+    dialog.innerHTML = `
+      <div class="theorem-fullscreen-panel">
+        <button class="theorem-fullscreen-close" type="button" aria-label="Zamknij">×</button>
+        <div class="theorem-fullscreen-content"></div>
+      </div>
+    `;
+    document.body.append(dialog);
+
+    const content = dialog.querySelector(".theorem-fullscreen-content");
+    const closeButton = dialog.querySelector(".theorem-fullscreen-close");
+    let lastTrigger = null;
+
+    const closeDialog = () => {
+      if (dialog.open) {
+        dialog.close();
+      }
+    };
+
+    const openDialog = (block, trigger) => {
+      const copy = block.cloneNode(true);
+      const title = block.querySelector(".theorem-title")?.textContent.trim() ||
+        "Definicja, przykład lub twierdzenie";
+      const includeSelector = block.dataset.fullscreenInclude;
+
+      copy.classList.add("theorem-fullscreen-copy");
+      copy.removeAttribute("data-fullscreen-include");
+
+      if (includeSelector) {
+        document.querySelectorAll(includeSelector).forEach((element) => {
+          const includedCopy = element.cloneNode(true);
+          includedCopy.classList.add("theorem-fullscreen-extra");
+          copy.append(includedCopy);
+        });
+      }
+
+      copy.removeAttribute("id");
+      copy.querySelectorAll("[id]").forEach((element) => element.removeAttribute("id"));
+      copy.querySelectorAll(".theorem-expand-button").forEach((button) => button.remove());
+      copy.querySelectorAll(".theorem-expand-trigger").forEach((element) => {
+        element.classList.remove("theorem-expand-trigger");
+        element.removeAttribute("role");
+        element.removeAttribute("tabindex");
+        element.removeAttribute("title");
+        element.removeAttribute("aria-haspopup");
+        element.removeAttribute("aria-controls");
+      });
+
+      content.replaceChildren(copy);
+      dialog.setAttribute("aria-label", title);
+      lastTrigger = trigger;
+      dialog.showModal();
+      closeButton.focus();
+    };
+
+    closeButton.addEventListener("click", closeDialog);
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        closeDialog();
+      }
+    });
+    dialog.addEventListener("close", () => {
+      content.replaceChildren();
+      lastTrigger?.focus();
+      lastTrigger = null;
+    });
+
+    blocks.forEach((block) => {
+      if (block.dataset.fullscreenReady === "true") {
+        return;
+      }
+      block.dataset.fullscreenReady = "true";
+
+      const title = block.querySelector(".theorem-title");
+      const label = title?.textContent.trim() || "definicję, przykład lub twierdzenie";
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "theorem-expand-button";
+      button.title = `Powiększ: ${label}`;
+      button.setAttribute("aria-label", `Powiększ: ${label}`);
+      button.setAttribute("aria-haspopup", "dialog");
+      button.setAttribute("aria-controls", dialog.id);
+      button.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8 3H3v5 M16 3h5v5 M21 16v5h-5 M8 21H3v-5"></path>
+        </svg>
+      `;
+      button.addEventListener("click", () => openDialog(block, button));
+      block.append(button);
+
+      if (title) {
+        title.classList.add("theorem-expand-trigger");
+        title.setAttribute("role", "button");
+        title.setAttribute("tabindex", "0");
+        title.setAttribute("title", `Powiększ: ${label}`);
+        title.setAttribute("aria-haspopup", "dialog");
+        title.setAttribute("aria-controls", dialog.id);
+        title.addEventListener("click", () => openDialog(block, title));
+        title.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openDialog(block, title);
+          }
+        });
+      }
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeTheoremFullscreen, { once: true });
+  } else {
+    initializeTheoremFullscreen();
+  }
+})();
+</script>
+<script>
+(() => {
+  const fixPreviewUrls = (root) => {
+    const reference = root._tippy?.reference;
+    if (!reference?.matches("a.quarto-xref")) return;
+
+    // Quarto copies HTML from the referenced page into the current page.
+    // Relative image and link URLs must still use the referenced page as base.
+    const base = new URL(reference.getAttribute("href"), document.baseURI);
+    root.querySelectorAll(".tippy-content img[src], .tippy-content a[href]")
+      .forEach((element) => {
+        const attribute = element.tagName === "IMG" ? "src" : "href";
+        const value = element.getAttribute(attribute);
+        if (value && !/^(?:[a-z][a-z\d+.-]*:|\/\/|\/)/i.test(value)) {
+          element.setAttribute(attribute, new URL(value, base).href);
+        }
+      });
+  };
+
+  const initializeXrefPreviews = () => {
+    // Quarto reads cross-page fragments with new URL(href), without a base.
+    document.querySelectorAll("a.quarto-xref[href]").forEach((reference) => {
+      const href = reference.getAttribute("href");
+      if (href && !href.startsWith("#")) {
+        reference.setAttribute("href", new URL(href, document.baseURI).href);
+      }
+    });
+    const observer = new MutationObserver((mutations) => {
+      const roots = new Set();
+      mutations.forEach((mutation) => {
+        const root = mutation.target.parentElement?.closest("[data-tippy-root]");
+        if (root) roots.add(root);
+        if (mutation.target instanceof Element && mutation.target.matches("[data-tippy-root]")) {
+          roots.add(mutation.target);
+        }
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+          if (node.matches("[data-tippy-root]")) roots.add(node);
+          node.querySelectorAll("[data-tippy-root]").forEach((root) => roots.add(root));
+        });
+      });
+      roots.forEach(fixPreviewUrls);
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeXrefPreviews, { once: true });
+  } else {
+    initializeXrefPreviews();
+  }
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Skopiowano!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Skopiowano!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../wykłady/siec_www.html" class="pagination-link" aria-label="Sieć WWW i macierz sąsiedztwa">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i macierz sąsiedztwa</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../zadania/lista-01-grafy.html" class="pagination-link" aria-label="[1]{.chapter-number}&nbsp; [Grafy]{.chapter-title}">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

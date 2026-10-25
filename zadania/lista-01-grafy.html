@@ -36,6 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../zadania/lista-02-siec-www.html" rel="next">
+<link href="../wykłady/centralnosc.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -79,8 +81,6 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../styles.css?v=99144ab59fec">
-<link href="../zadania/lista-02-siec-www.html" rel="next">
-<link href="../wykłady/siec_www.html" rel="prev">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -141,7 +141,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../wykłady/siec_www.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i centralność</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i macierz sąsiedztwa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wykłady/centralnosc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span></a>
   </div>
 </li>
       </ul>
@@ -164,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../zadania/lista-02-siec-www.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i centralność</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i macierz sąsiedztwa</span></span></a>
   </div>
 </li>
       </ul>
@@ -236,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
 </annotation></semantics></math></p>
 <p>Mówimy, że oznakowanie spełnia <strong>własność silnego domknięcia triady</strong>, jeżeli dla każdych trzech różnych wierzchołków <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi><mo>,</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">u,v,w</annotation></semantics></math> z tego, że więzi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{u,v\}</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>v</mi><mo>,</mo><mi>w</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{v,w\}</annotation></semantics></math> są silne, wynika, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>u</mi><mo>,</mo><mi>w</mi><mo stretchy="false" form="postfix">}</mo><mo>∈</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">\{u,w\}\in E</annotation></semantics></math>. Więź <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>u</mi><mo>,</mo><mi>w</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{u,w\}</annotation></semantics></math> może być silna albo słaba.</p>
 <p><strong>Mostem lokalnym</strong> nazywamy krawędź, która nie należy do żadnego trójkąta. Innymi słowy, jej końce nie mają wspólnego sąsiada.</p>
-<div id="fig-slaba-wiez" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Dwie grupy po cztery wierzchołki, z silnymi więziami wewnątrz każdej grupy. Krótka słaba więź łączy grupy i nie należy do żadnego trójkąta. Nad grupami biegnie alternatywna ścieżka złożona z pięciu słabych więzi i czterech dodatkowych wierzchołków." data-fig-align="center">
+<div id="fig-slaba-wiez" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Dwie grupy po cztery wierzchołki, z silnymi więziami wewnątrz każdej grupy. Krótka słaba więź łączy grupy i nie należy do żadnego trójkąta. Nad grupami biegnie alternatywna ścieżka złożona z pięciu słabych więzi i czterech dodatkowych wierzchołków.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-slaba-wiez-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="images/slaba-wiez.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Rysunek&nbsp;1: Dwie grupy połączone mostem lokalnym oraz dłuższą ścieżką. Usunięcie krótkiej więzi między grupami nie rozspaja grafu."><img src="images/slaba-wiez.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:58.0%" alt="Dwie grupy po cztery wierzchołki, z silnymi więziami wewnątrz każdej grupy. Krótka słaba więź łączy grupy i nie należy do żadnego trójkąta. Nad grupami biegnie alternatywna ścieżka złożona z pięciu słabych więzi i czterech dodatkowych wierzchołków."></a>
@@ -284,7 +290,7 @@ w(p)=d_w(u,v).
 </ol>
 </div>
 <div id="exr-dwudzielnosc-cykle-nieparzyste" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 8</strong></span> Pokaż, że skończony graf nieskierowany jest dwudzielny wtedy i tylko wtedy, gdy nie zawiera cyklu prostego składającego się z nieparzystej liczby krawędzi (definicje <a href="../wykłady/grafy.html#def-graf-dwudzielny" class="quarto-xref"><span>1.15</span></a> i <a href="../wykłady/grafy.html#def-cykl-prosty" class="quarto-xref"><span>1.8</span></a>).</p>
+<p><span class="theorem-title"><strong>Zadanie 8</strong></span> Pokaż, że skończony graf nieskierowany jest dwudzielny wtedy i tylko wtedy, gdy każdy cykl jest parzystej długości (definicje <a href="../wykłady/grafy.html#def-graf-dwudzielny" class="quarto-xref"><span>1.15</span></a> i <a href="../wykłady/grafy.html#def-cykl-prosty" class="quarto-xref"><span>1.8</span></a>).</p>
 <details>
 <summary>
 Wskazówka
@@ -922,13 +928,13 @@ Wskazówka
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../wykłady/siec_www.html" class="pagination-link" aria-label="Sieć WWW i centralność">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i centralność</span></span>
+      <a href="../wykłady/centralnosc.html" class="pagination-link" aria-label="Centralność">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../zadania/lista-02-siec-www.html" class="pagination-link" aria-label="[2]{.chapter-number}&nbsp; [Sieć WWW i centralność]{.chapter-title}">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i centralność</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../zadania/lista-02-siec-www.html" class="pagination-link" aria-label="[2]{.chapter-number}&nbsp; [Sieć WWW i macierz sąsiedztwa]{.chapter-title}">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i macierz sąsiedztwa</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
