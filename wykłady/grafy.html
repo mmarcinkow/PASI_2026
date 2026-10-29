@@ -208,6 +208,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i macierz sąsiedztwa</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../zadania/lista-03-centralnosc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -303,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1.1" class="anchored" data-anchor-id="przykłady"><span class="header-section-number">1.1</span> Przykłady</h2>
 <div id="exm-graf-znajomosci" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.1 (Graf znajomości)</strong></span> Wierzchołki odpowiadają osobom. Dwie osoby łączymy krawędzią, jeśli się znają.</p>
-<div id="e3466fe9" class="cell">
+<div id="52fd2c9d" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -347,7 +353,7 @@ Rysunek&nbsp;1.1: Przykładowy graf znajomości.
 </div>
 <div id="exm-mapa-drogowa" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.2 (Mapa drogowa)</strong></span> Wierzchołki odpowiadają miastom, a krawędzie łączącym je drogom. Każda droga ma unikalną nazwę oraz długość wyrażoną w kilometrach.</p>
-<div id="2eab1c3e" class="cell">
+<div id="37e30195" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.MultiGraph()</span>
@@ -412,7 +418,7 @@ Rysunek&nbsp;1.2: Przykładowa mapa drogowa.
 </div>
 <div id="exm-mapa-turystyczna" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.3 (Mapa turystyczna: graf skierowany)</strong></span> Wierzchołki odpowiadają miejscowościom i szczytom, a krawędzie trasom turystycznym. Każda krawędź jest skierowana i zawiera przewidywany czas przejścia w minutach.</p>
-<div id="c48298da" class="cell">
+<div id="ff14d455" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
@@ -479,7 +485,7 @@ Rysunek&nbsp;1.3: Przykładowa mapa turystyczna.
 </div>
 <div id="exm-multigraf-skierowany" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.4 (Graf skierowany z pętlami i wielokrotnymi krawędziami)</strong></span> Rozważmy następujący graf.</p>
-<div id="708d6009" class="cell">
+<div id="c3cdd85d" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> FancyArrowPatch</span>
@@ -653,7 +659,7 @@ s(i(e))&amp;=t(e), &amp; t(i(e))&amp;=s(e).
 </annotation></semantics></math></p>
 <p>Krawędź <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">i(e)</annotation></semantics></math> nazywamy <strong>krawędzią odwrotną</strong> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>. Para <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>e</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{e,i(e)\}</annotation></semantics></math> reprezentuje jedną krawędź nieskierowaną.</p>
 </div>
-<div id="fig-krawedz-nieskierowana" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Dwa wierzchołki A i B. Krawędź e prowadzi z A do B, a krawędź odwrotna i(e) z B do A." data-fig-align="center">
+<div id="fig-krawedz-nieskierowana" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Dwa wierzchołki A i B. Krawędź e prowadzi z A do B, a krawędź odwrotna i(e) z B do A.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-krawedz-nieskierowana-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="images/krawedz-nieskierowana.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Rysunek&nbsp;1.5: Jedna krawędź nieskierowana jako para krawędzi skierowanych e i i(e)."><img src="images/krawedz-nieskierowana.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:43.3333%" alt="Dwa wierzchołki A i B. Krawędź e prowadzi z A do B, a krawędź odwrotna i(e) z B do A."></a>
@@ -820,7 +826,7 @@ v_j=t(e_j)\quad\text{dla }j=1,\ldots,n.
 </div>
 <div id="exm-sciezki" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.10 (Przykłady ścieżek)</strong></span> Na poniższym rysunku przedstawiono kilka rodzajów ścieżek.</p>
-<div id="4caf60a3" class="cell">
+<div id="dda22a02" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_path_example(graph, positions, ax, title, connectionstyle<span class="op">=</span><span class="st">"arc3"</span>):</span>
@@ -1045,7 +1051,7 @@ c\bigl(s(e)\bigr)\neq c\bigl(t(e)\bigr).
 <p>Grafy dwudzielne pojawiają się naturalnie wtedy, gdy wierzchołki opisują obiekty dwóch różnych rodzajów. Mogą to być na przykład użytkownicy i produkty, które kupili lub ocenili, albo autorzy i artykuły naukowe.</p>
 <div id="exm-autorzy-artykuly" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.11 (Autorzy i artykuły)</strong></span> Wierzchołki po lewej stronie odpowiadają autorom, a wierzchołki po prawej stronie artykułom. Krawędź skierowana od autora do artykułu oznacza, że dana osoba jest autorem tego artykułu.</p>
-<div id="cab60445" class="cell">
+<div id="7d58cb9b" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>authors_articles <span class="op">=</span> nx.DiGraph()</span>
@@ -1136,7 +1142,7 @@ Rysunek&nbsp;1.7: Graf dwudzielny autorów i artykułów.
 <div id="def-drzewo" class="fullscreen-half-image fullscreen-image-29 theorem definition" data-fullscreen-include="#fig-drzewo">
 <p><span class="theorem-title"><strong>Definicja 1.16</strong></span> <strong>Drzewem</strong> nazywamy graf nieskierowany bez pętli, w którym pomiędzy każdymi dwoma wierzchołkami istnieje dokładnie jedna ścieżka prosta.</p>
 </div>
-<div id="bcae50d1" class="cell">
+<div id="7c03c040" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> nx.Graph()</span>
@@ -1202,7 +1208,7 @@ Rysunek&nbsp;1.8: Przykładowe drzewo.
 <p><span class="theorem-title"><strong>Definicja 1.17</strong></span> <strong>Ukorzenionym drzewem skierowanym</strong> nazywamy graf skierowany <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> z wyróżnionym wierzchołkiem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>, zwanym <strong>korzeniem</strong>, taki że dla każdego wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">v\in V</annotation></semantics></math> istnieje dokładnie jedna ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
 </div>
 <p>Krawędzie ukorzenionego drzewa skierowanego są zwrócone od korzenia. Każdy wierzchołek różny od korzenia ma dokładnie jedną krawędź wchodzącą.</p>
-<div id="b291c35d" class="cell">
+<div id="15420ea5" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rooted_tree <span class="op">=</span> nx.DiGraph()</span>
@@ -1274,7 +1280,7 @@ Rysunek&nbsp;1.9: Ukorzenione drzewo skierowane.
 </div>
 <p>Grafy tego rodzaju nazywamy również <strong>DAG-ami</strong>, (ang. <em>directed acyclic graph</em>).</p>
 <p>W szczególności DAG nie może mieć pętli. Jego graf nieskierowany może jednak zawierać cykle proste: ważne jest jedynie to, że żadnego z nich nie można przejść zgodnie z kierunkami wszystkich krawędzi.</p>
-<div id="7769c822" class="cell">
+<div id="53b3d4bf" class="cell">
 <details class="code-fold">
 <summary>Kod</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dag <span class="op">=</span> nx.DiGraph()</span>

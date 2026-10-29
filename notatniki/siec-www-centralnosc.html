@@ -204,6 +204,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i macierz sąsiedztwa</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../zadania/lista-03-centralnosc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -552,6 +558,13 @@ Adres blogu lidera: atrios.blogspot.com</code></pre>
 </div>
 </div>
 <p><strong>Zadanie 2:</strong> Znajdź w grafie <code>florencja</code> następującą sytuację: po połączeniu pewnych dwóch rodzin, trzecia rodzina, która wcześniej nie miała największej centralności, staje się najbardziej centralna.</p>
+<p><strong>Ściągawka do zadania 2</strong></p>
+<ul>
+<li><code>c = nx.eigenvector_centrality(F, max_iter=2000, tol=1e-12, weight=None)</code> — oblicza centralność grafu <code>F</code>. Wynik jest słownikiem: <code>c[v]</code> to centralność wierzchołka <code>v</code>. Tutaj centralność ma normę <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℓ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\ell_2</annotation></semantics></math> równą 1 (nie jak na wykładzie)</li>
+<li><code>F.has_edge(a, b)</code> — zwraca <code>True</code>, jeśli w grafie jest krawędź między <code>a</code> i <code>b</code>, a w przeciwnym razie <code>False</code>.</li>
+<li><code>F.add_edge(a, b)</code> — dodaje krawędź między <code>a</code> i <code>b</code>, zmieniając graf <code>F</code>. Jeśli krawędź już istnieje, w naszym grafie nie powstaje druga.</li>
+</ul>
+<p>Jeżeli modyfikujemy wyjściowy graf, dobrze to robić na świerzej kopii: <code>F_nowy = F.copy()</code>.</p>
 </section>
 <section id="macierz-i-metoda-potęgowa-dla-małych-grafów" class="level2">
 <h2 class="anchored" data-anchor-id="macierz-i-metoda-potęgowa-dla-małych-grafów">Macierz i metoda potęgowa — dla małych grafów</h2>
