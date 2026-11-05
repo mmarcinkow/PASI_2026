@@ -944,6 +944,46 @@
   align-self: center;
 }
 
+.walk-widget[data-walk-centrality] {
+  grid-template-columns: minmax(0, 1fr) minmax(22rem, 25rem);
+}
+
+.walk-widget[data-walk-centrality] .virus-widget__shares {
+  grid-template-columns: 1fr;
+}
+
+.walk-widget[data-walk-centrality] .virus-widget__share {
+  grid-template-columns: 1.8rem minmax(0, 1fr) 4.2rem 6rem;
+}
+
+.walk-widget__share-heading {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.walk-widget__probability-heading {
+  grid-column: 2 / 4;
+}
+
+.walk-widget__centrality-value {
+  padding-left: 0.6rem;
+  border-left: 1px solid var(--bs-border-color, #d9dee2);
+}
+
+.walk-widget__centrality-note {
+  margin: -0.3rem 0 0.9rem;
+  color: var(--bs-secondary-color, #5c636a);
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+@media (max-width: 767.98px) {
+  .walk-widget[data-walk-centrality] {
+    grid-template-columns: 1fr;
+  }
+}
+
 .walk-widget .virus-widget__node-label {
   font-size: 22px;
 }
