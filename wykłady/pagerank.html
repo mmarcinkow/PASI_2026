@@ -220,6 +220,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../zadania/lista-04-pagerank.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">PageRank</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -310,7 +316,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="theorem-title"><strong>Definicja 4.1 (Spacer losowy)</strong></span> <strong>Spacerem losowym</strong> na grafie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> nazywamy następujący proces. Zaczynamy w wybranym wierzchołku. W każdym kroku, znajdując się w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>, losujemy jedną z krawędzi wychodzących z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>, każdą z prawdopodobieństwem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><msup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo>+</mo></msup><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">1/\deg^+(v)</annotation></semantics></math>, i przechodzimy do jej końca.</p>
 </div>
 <p>Jeżeli z wierzchołka wychodzą trzy krawędzie, każdą wybieramy z prawdopodobieństwem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">1/3</annotation></semantics></math>. Dwie krawędzie prowadzące do tego samego sąsiada dają łączne prawdopodobieństwo <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">2/3</annotation></semantics></math> przejścia do niego. Losujemy więc <strong>krawędź</strong>, nie sąsiada.</p>
-<div id="fig-spacer-losowy-jeden-krok" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Dwa fragmenty grafów. Po lewej z v wychodzą trzy krawędzie do trzech różnych wierzchołków: na każdej krawędzi i w każdym wierzchołku docelowym jest jedna trzecia. Po prawej z v wychodzą trzy krawędzie, z których dwie prowadzą do tego samego sąsiada. Na każdej krawędzi jest jedna trzecia, a w dwóch wierzchołkach docelowych odpowiednio jedna trzecia i dwie trzecie.">
+<div id="fig-spacer-losowy-jeden-krok" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Dwa fragmenty grafów. Po lewej z v wychodzą trzy krawędzie do trzech różnych wierzchołków: na każdej krawędzi i w każdym wierzchołku docelowym jest jedna trzecia. Po prawej z v wychodzą trzy krawędzie, z których dwie prowadzą do tego samego sąsiada. Na każdej krawędzi jest jedna trzecia, a w dwóch wierzchołkach docelowych odpowiednio jedna trzecia i dwie trzecie." data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-spacer-losowy-jeden-krok-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="images/spacer-losowy-jeden-krok.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Rysunek&nbsp;4.1: Jeden krok spaceru losowego. Liczby na krawędziach oznaczają prawdopodobieństwa ich wyboru, a liczby w wierzchołkach - prawdopodobieństwa dotarcia do nich."><img src="images/spacer-losowy-jeden-krok.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%" alt="Dwa fragmenty grafów. Po lewej z v wychodzą trzy krawędzie do trzech różnych wierzchołków: na każdej krawędzi i w każdym wierzchołku docelowym jest jedna trzecia. Po prawej z v wychodzą trzy krawędzie, z których dwie prowadzą do tego samego sąsiada. Na każdej krawędzi jest jedna trzecia, a w dwóch wierzchołkach docelowych odpowiednio jedna trzecia i dwie trzecie."></a>
@@ -467,7 +473,7 @@ r(w)=\sum_{u\to w}\frac{r(u)}{\deg^+(u)}.
 </annotation></semantics></math></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Dowód</em>. </span>Macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> jest prymitywna, a jej wartość Perrona wynosi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> na mocy faktu <a href="#prp-wartosc-wlasna-macierzy-spaceru" class="quarto-xref"><span>4.3</span></a>. Wektor <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> jest więc jej znormalizowanym dodatnim wektorem własnym Perrona. Z twierdzenia <a href="centralnosc.html#thm-zbieznosc-do-wektora-perrona" class="quarto-xref"><span>3.3</span></a>, zastosowanego do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, otrzymujemy</p>
+<p><span class="proof-title"><em>Dowód</em>. </span>Macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> jest prymitywna, a jej wartość własna Perrona-Frobeniusa wynosi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> na mocy faktu <a href="#prp-wartosc-wlasna-macierzy-spaceru" class="quarto-xref"><span>4.3</span></a>. Z twierdzenia <a href="centralnosc.html#thm-zbieznosc-do-wektora-perrona" class="quarto-xref"><span>3.3</span></a>, zastosowanego do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, otrzymujemy</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>α</mi><msup><mi>M</mi><mi>n</mi></msup></mrow><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>M</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow></mfrac><mo>→</mo><mi>r</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
 \frac{\alpha M^n}{\|\alpha M^n\|_1}\longrightarrow r.
 </annotation></semantics></math></p>
@@ -1166,16 +1172,8 @@ h_n=\sum_{u:\deg^+(u)=0}\alpha_n(u)
   });
   </script>
 <nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../wykłady/centralnosc.html" class="pagination-link" aria-label="Centralność">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../zadania/lista-01-grafy.html" class="pagination-link" aria-label="[1]{.chapter-number}&nbsp; [Grafy]{.chapter-title}">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
+<div class="nav-page nav-page-previous"><a href="../wykłady/centralnosc.html" class="pagination-link" aria-label="3 Centralność"><i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span></a></div>
+<div class="nav-page nav-page-next"><a href="../zadania/lista-01-grafy.html" class="pagination-link" aria-label="1 Grafy"><span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span> <i class="bi bi-arrow-right-short"></i></a></div>
 </nav>
 </div> <!-- /content -->
 <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
