@@ -318,17 +318,6 @@
     ]
   },
   {
-    "objectID": "zadania/lista-04-pagerank.html",
-    "href": "zadania/lista-04-pagerank.html",
-    "title": "4  PageRank",
-    "section": "",
-    "text": "Zadanie 1 Rozważ „graf przykładowy” z eksperymentu ze spacerowiczem. W chwili 00 spacerowicz znajduje się w wierzchołku v9v_9 i wykonuje spacer losowy bez teleportacji.\nWyznacz rozkład prawdopodobieństwa po jednym, dwóch i trzech krokach. Zapisz wyniki jako wektory w kolejności v0,…,v9v_0,\\ldots,v_9, a następnie sprawdź je w animacji.\n\n\nZadanie 2 Pokaż na odpowiednio skomplikowanym przykładzie, że αM\\alpha M odpowiada jednemu krokowi spaceru losowego.\n\n\nZadanie 3 Niech GG będzie skończonym symetrycznym grafem skierowanym, w którym każdy wierzchołek ma co najmniej jedną krawędź wychodzącą, a MM jego macierzą spaceru losowego.\nMacierz sąsiedztwa grafu GG jest symetryczna, ale macierz MM nie musi być symetryczna.\n\nPodaj przykład ilustrujący tę różnicę.\nKiedy macierz MM jest symetryczna? Sformułuj warunek konieczny i wystarczający w terminach stopni wierzchołków grafu.\n\n\n\nZadanie 4 Rozważ graf skierowany o wierzchołkach a,b,ca,b,c i krawędziach\na→b,a→c,b→c,c→a.\na\\to b,\\qquad a\\to c,\\qquad b\\to c,\\qquad c\\to a.\n\nCzy wektor (2/5,1/5,2/5)(2/5,1/5,2/5) jest jego PageRankiem? A wektor (1/3,1/3,1/3)(1/3,1/3,1/3)? Współrzędne zapisujemy w kolejności a,b,ca,b,c. Uzasadnij odpowiedzi, sprawdzając odpowiednie równanie.\n\n\nZadanie 5 Niech GG będzie skończonym silnie spójnym, symetrycznym grafem skierowanym. Wyznacz PageRank wierzchołków grafu GG.\n\n\nZadanie 6 Niech GG będzie skończonym grafem skierowanym, w którym każdy wierzchołek ma co najmniej jedną krawędź wychodzącą, a MM jego macierzą spaceru losowego. Niech vv będzie dowolnym wektorem kolumnowym przypisującym wartości rzeczywiste wierzchołkom grafu GG.\nZinterpretuj wektor MvMv w terminach grafu. Zapisz wzór na jego współrzędne.\n\n\nZadanie 7 Niech GG będzie skończonym niepustym grafem skierowanym, który może mieć wierzchołki bez krawędzi wychodzących, a AA jego macierzą sąsiedztwa. Macierz M0M_0 otrzymujemy z AA, dzieląc każdy niezerowy wiersz przez sumę jego wyrazów, a wiersze zerowe pozostawiając bez zmian.\nNiech α\\alpha będzie wierszowym wektorem nieujemnym o sumie współrzędnych równej 11. Wyznacz sumę współrzędnych wektora αM0\\alpha M_0. Kiedy ta suma jest równa 11? Zinterpretuj wynik w terminach spaceru losowego.\n\n\nZadanie 8 Pokaż, że macierz MM jest sprzężona do macierzy symetrycznej. Wywnioskuj, że wszystkie wartości własne macierzy MM są rzeczywiste.\n\n\nZadanie 9 Zaproponuj uogólnienie pojęcia centralności, które będzie dobrze określone dla każdego skończonego grafu skierowanego z co najmniej jednym wierzchołkiem. Konstrukcja może być oparta na teleportacji.\nWyjaśnij szczegóły swojej konstrukcji, w tym rolę ewentualnych parametrów i sposób normalizacji. Uzasadnij, że po ich ustaleniu zaproponowana centralność istnieje i jest wyznaczona jednoznacznie. Czy można ją obliczać metodą potęgową? Jeśli tak, opisz odpowiednią iterację i uzasadnij jej zbieżność.\n\n\nZadanie 10 Zrób zadanie 3 z notatnik 2",
-    "crumbs": [
-      "Listy zadań",
-      "[4]{.chapter-number}  [PageRank]{.chapter-title}"
-    ]
-  },
-  {
     "objectID": "notatniki/siec-www-centralnosc.html",
     "href": "notatniki/siec-www-centralnosc.html",
     "title": "2  Sieć WWW, centralność i PageRank",
@@ -436,6 +425,17 @@
     "crumbs": [
       "Notatniki",
       "[2]{.chapter-number}  [Sieć WWW, centralność i PageRank]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "zadania/lista-04-pagerank.html",
+    "href": "zadania/lista-04-pagerank.html",
+    "title": "4  PageRank",
+    "section": "",
+    "text": "Zadanie 1 Rozważ „graf przykładowy” z eksperymentu ze spacerowiczem. W chwili 00 spacerowicz znajduje się w wierzchołku v9v_9 i wykonuje spacer losowy bez teleportacji.\nWyznacz rozkład prawdopodobieństwa po jednym, dwóch i trzech krokach. Zapisz wyniki jako wektory w kolejności v0,…,v9v_0,\\ldots,v_9, a następnie sprawdź je w animacji.\n\n\nZadanie 2 Pokaż na odpowiednio skomplikowanym przykładzie, że αM\\alpha M odpowiada jednemu krokowi spaceru losowego.\n\n\nZadanie 3 Niech GG będzie grafem nieskierowanym, w którym każdy wierzchołek ma dodatni stopień, a MM jego macierzą spaceru losowego.\nMacierz sąsiedztwa grafu GG jest symetryczna, ale macierz MM nie musi być symetryczna.\n\nPodaj przykład ilustrujący tę różnicę.\nKiedy macierz MM jest symetryczna? Sformułuj warunek konieczny i wystarczający w terminach stopni wierzchołków grafu.\n\n\n\nZadanie 4 Rozważ graf skierowany o wierzchołkach a,b,ca,b,c i krawędziach\na→b,a→c,b→c,c→a.\na\\to b,\\qquad a\\to c,\\qquad b\\to c,\\qquad c\\to a.\n\nCzy wektor (2/5,1/5,2/5)(2/5,1/5,2/5) jest jego PageRankiem? A wektor (1/3,1/3,1/3)(1/3,1/3,1/3)? Współrzędne zapisujemy w kolejności a,b,ca,b,c. Uzasadnij odpowiedzi, sprawdzając odpowiednie równanie.\n\n\nZadanie 5 Niech GG będzie grafem nieskierowanym. Wyznacz PageRank wierzchołków grafu GG.\n\n\nZadanie 6 Niech GG będzie grafem skierowanym, w którym każdy wierzchołek ma co najmniej jedną krawędź wychodzącą, a MM jego macierzą spaceru losowego. Niech vv będzie dowolnym wektorem kolumnowym przypisującym wartości rzeczywiste wierzchołkom grafu GG.\nZinterpretuj wektor MvMv w terminach grafu. Zapisz wzór na jego współrzędne.\n\n\nZadanie 7 Niech GG będzie niepustym grafem skierowanym, który może mieć wierzchołki bez krawędzi wychodzących, a AA jego macierzą sąsiedztwa. Macierz M0M_0 otrzymujemy z AA, dzieląc każdy niezerowy wiersz przez sumę jego wyrazów, a wiersze zerowe pozostawiając bez zmian.\nNiech α\\alpha będzie wierszowym wektorem nieujemnym o sumie współrzędnych równej 11. Wyznacz sumę współrzędnych wektora αM0\\alpha M_0. Kiedy ta suma jest równa 11? Zinterpretuj wynik w terminach spaceru losowego.\n\n\nZadanie 8 Pokaż, że macierz MM dowolnego grafu skierowanego jest sprzężona do macierzy symetrycznej. Wywnioskuj, że wszystkie wartości własne macierzy MM są rzeczywiste.\n\n\nZadanie 9 Zaproponuj uogólnienie pojęcia centralności, które będzie dobrze określone dla każdego grafu skierowanego z co najmniej jednym wierzchołkiem. Konstrukcja może być oparta na teleportacji.\nWyjaśnij szczegóły swojej konstrukcji, w tym rolę ewentualnych parametrów i sposób normalizacji. Uzasadnij, że po ich ustaleniu zaproponowana centralność istnieje i jest wyznaczona jednoznacznie. Czy można ją obliczać metodą potęgową? Jeśli tak, opisz odpowiednią iterację i uzasadnij jej zbieżność.\n\n\nZadanie 10 Zrób zadanie 3 z notatnik 2",
+    "crumbs": [
+      "Listy zadań",
+      "[4]{.chapter-number}  [PageRank]{.chapter-title}"
     ]
   }
 ]
