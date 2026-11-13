@@ -116,6 +116,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css?v=99144ab59fec">
+<script>
+window.MathJax = {
+  output: {
+    font: "mathjax-modern",
+    fontPath: "https://cdn.jsdelivr.net/npm/@mathjax/%%FONT%%-font@4.1.3"
+  },
+  startup: {
+    ready() {
+      MathJax.startup.defaultReady();
+      window.Quarto = window.Quarto || {};
+      window.Quarto.typesetMath = (element) =>
+        MathJax.startup.promise.then(() => MathJax.typesetPromise([element]));
+    }
+  }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml-nofont.js" type="text/javascript"></script>
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -599,77 +642,77 @@ Rysunek&nbsp;1.4: Przykładowy multigraf skierowany.
 <div id="def-graf-skierowany" class="definition-boxed theorem definition">
 <p><span class="theorem-title"><strong>Definicja 1.1</strong></span> <strong>Grafem skierowanym</strong> nazywamy następujący zestaw danych:</p>
 <ul>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math> — zbiór wierzchołków,</li>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math> — zbiór krawędzi,</li>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">s\colon E \to V</annotation></semantics></math> — funkcja przypisująca krawędzi jej początek,</li>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">t\colon E \to V</annotation></semantics></math> — funkcja przypisująca krawędzi jej koniec.</li>
+<li><span class="math inline">\(V\)</span> — zbiór wierzchołków,</li>
+<li><span class="math inline">\(E\)</span> — zbiór krawędzi,</li>
+<li><span class="math inline">\(s\colon E \to V\)</span> — funkcja przypisująca krawędzi jej początek,</li>
+<li><span class="math inline">\(t\colon E \to V\)</span> — funkcja przypisująca krawędzi jej koniec.</li>
 </ul>
 </div>
-<p>O zbiorze <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math> myślimy jako o unikalnych identyfikatorach krawędzi. Wierzchołek <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">s(e)</annotation></semantics></math> jest początkiem krawędzi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>, natomiast <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">t(e)</annotation></semantics></math> jest jej końcem. Krawędź <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math> jest pętlą, jeśli <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">s(e)=t(e)</annotation></semantics></math>. Dwie różne krawędzie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>1</mn></msub><annotation encoding="application/x-tex">e_1</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>2</mn></msub><annotation encoding="application/x-tex">e_2</annotation></semantics></math> są krawędziami wielokrotnymi, jeśli</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo><mspace width="2.0em"></mspace><mtext mathvariant="normal">oraz</mtext><mspace width="2.0em"></mspace><mi>t</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>t</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p>O zbiorze <span class="math inline">\(E\)</span> myślimy jako o unikalnych identyfikatorach krawędzi. Wierzchołek <span class="math inline">\(s(e)\)</span> jest początkiem krawędzi <span class="math inline">\(e\)</span>, natomiast <span class="math inline">\(t(e)\)</span> jest jej końcem. Krawędź <span class="math inline">\(e\)</span> jest pętlą, jeśli <span class="math inline">\(s(e)=t(e)\)</span>. Dwie różne krawędzie <span class="math inline">\(e_1\)</span> i <span class="math inline">\(e_2\)</span> są krawędziami wielokrotnymi, jeśli</p>
+<p><span class="math display">\[
 s(e_1)=s(e_2)
 \qquad\text{oraz}\qquad
 t(e_1)=t(e_2).
-</annotation></semantics></math></p>
+\]</span></p>
 <div id="exm-formalny-opis-multigrafu-skierowanego" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.5</strong></span> Graf z przykładu <a href="#exm-multigraf-skierowany" class="quarto-xref"><span>1.4</span></a> możemy opisać za pomocą zbiorów</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false" form="postfix">}</mo><mo>,</mo><mspace width="2.0em"></mspace><mi>E</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><msub><mi>e</mi><mn>2</mn></msub><mo>,</mo><msub><mi>e</mi><mn>3</mn></msub><mo>,</mo><msub><mi>e</mi><mn>4</mn></msub><mo stretchy="false" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 V=\{A,B\},
 \qquad
 E=\{e_1,e_2,e_3,e_4\}.
-</annotation></semantics></math></p>
-<p>Wartości funkcji <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> są następujące:</p>
+\]</span></p>
+<p>Wartości funkcji <span class="math inline">\(s\)</span> i <span class="math inline">\(t\)</span> są następujące:</p>
 <div class="function-values-table">
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math></th>
-<th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>1</mn></msub><annotation encoding="application/x-tex">e_1</annotation></semantics></math></th>
-<th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>2</mn></msub><annotation encoding="application/x-tex">e_2</annotation></semantics></math></th>
-<th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>3</mn></msub><annotation encoding="application/x-tex">e_3</annotation></semantics></math></th>
-<th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>4</mn></msub><annotation encoding="application/x-tex">e_4</annotation></semantics></math></th>
+<th style="text-align: center;"><span class="math inline">\(e\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(e_1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(e_2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(e_3\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(e_4\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">s(e)</annotation></semantics></math></td>
-<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
-<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
-<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
-<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
+<td style="text-align: center;"><span class="math inline">\(s(e)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(A\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(A\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(A\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(A\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">t(e)</annotation></semantics></math></td>
-<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
-<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math></td>
-<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math></td>
-<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math></td>
+<td style="text-align: center;"><span class="math inline">\(t(e)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(A\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(A\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(B\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(B\)</span></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Krawędzie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>1</mn></msub><annotation encoding="application/x-tex">e_1</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>2</mn></msub><annotation encoding="application/x-tex">e_2</annotation></semantics></math> są pętlami, natomiast <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>3</mn></msub><annotation encoding="application/x-tex">e_3</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>4</mn></msub><annotation encoding="application/x-tex">e_4</annotation></semantics></math> są krawędziami wielokrotnymi skierowanymi z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
+<p>Krawędzie <span class="math inline">\(e_1\)</span> i <span class="math inline">\(e_2\)</span> są pętlami, natomiast <span class="math inline">\(e_3\)</span> i <span class="math inline">\(e_4\)</span> są krawędziami wielokrotnymi skierowanymi z <span class="math inline">\(A\)</span> do <span class="math inline">\(B\)</span>.</p>
 </div>
 <p>Graf nieskierowany możemy opisać za pomocą grafów skierowanych. Intuicyjnie, każdą krawędź nieskierowaną (również pętlę) zapiszemy jako dwie krawędzie skierowane o przeciwnych zwrotach.</p>
 </section>
 <section id="graf-nieskierowany" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="graf-nieskierowany"><span class="header-section-number">1.2.2</span> Graf nieskierowany</h3>
 <div id="def-graf-nieskierowany" class="definition-boxed fullscreen-half-image theorem definition" data-fullscreen-include="#fig-krawedz-nieskierowana">
-<p><span class="theorem-title"><strong>Definicja 1.2</strong></span> <strong>Grafem nieskierowanym</strong> nazywamy graf skierowany <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> z dodatkową funkcją <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Definicja 1.2</strong></span> <strong>Grafem nieskierowanym</strong> nazywamy graf skierowany <span class="math inline">\(G\)</span> z dodatkową funkcją <span class="math display">\[
 i:E\to E
-</annotation></semantics></math></p>
-<p>taką, że dla każdego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">e\in E</annotation></semantics></math> mamy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>e</mi><mo>,</mo></mtd><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>≠</mo><mi>e</mi><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\]</span></p>
+<p>taką, że dla każdego <span class="math inline">\(e\in E\)</span> mamy</p>
+<p><span class="math display">\[
 \begin{aligned}
 i(i(e))&amp;=e, &amp; i(e)&amp;\neq e,
 \end{aligned}
-</annotation></semantics></math></p>
-<p>oraz <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mtd><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\]</span></p>
+<p>oraz <span class="math display">\[
 \begin{aligned}
 s(i(e))&amp;=t(e), &amp; t(i(e))&amp;=s(e).
 \end{aligned}
-</annotation></semantics></math></p>
-<p>Krawędź <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">i(e)</annotation></semantics></math> nazywamy <strong>krawędzią odwrotną</strong> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>. Para <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>e</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{e,i(e)\}</annotation></semantics></math> reprezentuje jedną krawędź nieskierowaną.</p>
+\]</span></p>
+<p>Krawędź <span class="math inline">\(i(e)\)</span> nazywamy <strong>krawędzią odwrotną</strong> do <span class="math inline">\(e\)</span>. Para <span class="math inline">\(\{e,i(e)\}\)</span> reprezentuje jedną krawędź nieskierowaną.</p>
 </div>
 <div id="fig-krawedz-nieskierowana" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Dwa wierzchołki A i B. Krawędź e prowadzi z A do B, a krawędź odwrotna i(e) z B do A.">
 <figure class="quarto-float quarto-float-fig figure">
@@ -677,14 +720,14 @@ s(i(e))&amp;=t(e), &amp; t(i(e))&amp;=s(e).
 <a href="images/krawedz-nieskierowana.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Rysunek&nbsp;1.5: Jedna krawędź nieskierowana jako para krawędzi skierowanych e i i(e)."><img src="images/krawedz-nieskierowana.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:43.3333%" alt="Dwa wierzchołki A i B. Krawędź e prowadzi z A do B, a krawędź odwrotna i(e) z B do A."></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-krawedz-nieskierowana-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Rysunek&nbsp;1.5: Jedna krawędź nieskierowana jako para krawędzi skierowanych <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">i(e)</annotation></semantics></math>.
+Rysunek&nbsp;1.5: Jedna krawędź nieskierowana jako para krawędzi skierowanych <span class="math inline">\(e\)</span> i <span class="math inline">\(i(e)\)</span>.
 </figcaption>
 </figure>
 </div>
 <p>Często z kontekstu wynika o jakim grafie mówimy - skierowanym lub nie. Wtedy po prostu używamy określenia <strong>graf</strong>.</p>
 <div id="exm-formalny-opis-mapy-drogowej" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.6 (Formalny opis mapy drogowej)</strong></span> W mapie drogowej z przykładu <a href="#exm-mapa-drogowa" class="quarto-xref"><span>1.2</span></a> każdą drogę zastępujemy dwiema krawędziami skierowanymi. Zbiór ich identyfikatorów ma postać</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>E</mi><mo>=</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">{</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>−</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">D</mi><mi mathvariant="normal">K</mi><mn mathvariant="normal">92</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">D</mi><mi mathvariant="normal">K</mi><mn mathvariant="normal">92</mn></mrow><mo>−</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">1</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">1</mn></mrow><mo>−</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">8</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">8</mn></mrow><mo>−</mo></msup><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">5</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">5</mn></mrow><mo>−</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">7</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">7</mn></mrow><mo>−</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">17</mn></mrow><mo>+</mo></msup><mo>,</mo><msup><mrow><mi mathvariant="normal">S</mi><mn mathvariant="normal">17</mn></mrow><mo>−</mo></msup><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">}</mo><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{aligned}
 E=\bigl\{&amp;
 \mathrm{A2}^{+},\mathrm{A2}^{-},
@@ -696,23 +739,23 @@ E=\bigl\{&amp;
 \mathrm{S17}^{+},\mathrm{S17}^{-}
 \bigr\}.
 \end{aligned}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>Wybierzmy dla drogi A2 zwrot z Warszawy do Łodzi jako dodatni. Wtedy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>+</mo></msup><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mtext mathvariant="normal">Warszawa</mtext><mo>,</mo></mtd><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>t</mi><mo stretchy="false" form="prefix">(</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>+</mo></msup><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mtext mathvariant="normal">Łódź</mtext><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>−</mo></msup><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mtext mathvariant="normal">Łódź</mtext><mo>,</mo></mtd><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>t</mi><mo stretchy="false" form="prefix">(</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>−</mo></msup><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mtext mathvariant="normal">Warszawa</mtext><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{aligned}
 s(\mathrm{A2}^{+})&amp;=\text{Warszawa}, &amp;
 t(\mathrm{A2}^{+})&amp;=\text{Łódź},\\
 s(\mathrm{A2}^{-})&amp;=\text{Łódź}, &amp;
 t(\mathrm{A2}^{-})&amp;=\text{Warszawa},
 \end{aligned}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>oraz</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false" form="prefix">(</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>+</mo></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>−</mo></msup><mo>,</mo><mspace width="2.0em"></mspace><mi>i</mi><mo stretchy="false" form="prefix">(</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>−</mo></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>+</mo></msup><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 i(\mathrm{A2}^{+})=\mathrm{A2}^{-},
 \qquad
 i(\mathrm{A2}^{-})=\mathrm{A2}^{+}.
-</annotation></semantics></math></p>
-<p>Wybór, który zwrot oznaczamy znakiem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>+</mi><annotation encoding="application/x-tex">+</annotation></semantics></math>, jest dowolny.</p>
+\]</span></p>
+<p>Wybór, który zwrot oznaczamy znakiem <span class="math inline">\(+\)</span>, jest dowolny.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
@@ -725,45 +768,45 @@ i(\mathrm{A2}^{-})=\mathrm{A2}^{+}.
 </div>
 </div>
 <div id="exm-krawedzie-jako-pary" class="theorem example">
-<p><span class="theorem-title"><strong>Przykład 1.7 (Krawędzie jako pary wierzchołków)</strong></span> Jeżeli graf skierowany nie ma krawędzi wielokrotnych, to każda krawędź jest jednoznacznie określona przez swój początek i koniec. Za identyfikator krawędzi możemy wtedy przyjąć uporządkowaną parę jej końców <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(s(e),t(e))</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Przykład 1.7 (Krawędzie jako pary wierzchołków)</strong></span> Jeżeli graf skierowany nie ma krawędzi wielokrotnych, to każda krawędź jest jednoznacznie określona przez swój początek i koniec. Za identyfikator krawędzi możemy wtedy przyjąć uporządkowaną parę jej końców <span class="math inline">\((s(e),t(e))\)</span>.</p>
 <p>Dla mapy turystycznej z przykładu <a href="#exm-mapa-turystyczna" class="quarto-xref"><span>1.3</span></a> możemy zapisać</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mtext mathvariant="normal">Karpacz</mtext><mo>,</mo><mtext mathvariant="normal">Śnieżka</mtext><mo>,</mo><mtext mathvariant="normal">Szklarska</mtext><mo>,</mo><mtext mathvariant="normal">Szrenica</mtext><mo>,</mo><mtext mathvariant="normal">Piechowice</mtext><mo>,</mo><mtext mathvariant="normal">Szyszak</mtext><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 V=\{\text{Karpacz},\text{Śnieżka},\text{Szklarska},\text{Szrenica},
 \text{Piechowice},\text{Szyszak}\}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>oraz, wypisując tylko kilka pierwszych krawędzi,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">{</mo><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">Karpacz</mtext><mo>,</mo><mtext mathvariant="normal">Śnieżka</mtext><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">Śnieżka</mtext><mo>,</mo><mtext mathvariant="normal">Karpacz</mtext><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">Szklarska</mtext><mo>,</mo><mtext mathvariant="normal">Szrenica</mtext><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">Szrenica</mtext><mo>,</mo><mtext mathvariant="normal">Szklarska</mtext><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mi>…</mi><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 E=\bigl\{
 (\text{Karpacz},\text{Śnieżka}),
 (\text{Śnieżka},\text{Karpacz}),
 (\text{Szklarska},\text{Szrenica}),
 (\text{Szrenica},\text{Szklarska}),\ldots
 \bigr\}.
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
-<p>Zachodzi wtedy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>⊂</mo><mi>V</mi><mo>×</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">E \subset V \times V</annotation></semantics></math>.</p>
+<p>Zachodzi wtedy <span class="math inline">\(E \subset V \times V\)</span>.</p>
 </section>
 </section>
 <section id="sec-dodatkowe-dane" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="sec-dodatkowe-dane"><span class="header-section-number">1.3</span> Dodatkowe dane</h2>
-<p>Wierzchołki i krawędzie mogą mieć przypisane dodatkowe informacje. Matematycznie możemy zapisać je jako funkcje o dziedzinie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math> albo <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>.</p>
+<p>Wierzchołki i krawędzie mogą mieć przypisane dodatkowe informacje. Matematycznie możemy zapisać je jako funkcje o dziedzinie <span class="math inline">\(V\)</span> albo <span class="math inline">\(E\)</span>.</p>
 <div id="exm-funkcja-wagi" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.8</strong></span> Funkcja</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>:</mo><mi>E</mi><mo>→</mo><msub><mi mathvariant="double-struck">ℝ</mi><mrow><mo>&gt;</mo><mn>0</mn></mrow></msub></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 w:E\to\mathbb{R}_{&gt;0}
-</annotation></semantics></math></p>
-<p>przypisuje krawędziom dodatnie wagi. W mapie drogowej (przykład <a href="#exm-mapa-drogowa" class="quarto-xref"><span>1.2</span></a>) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> byłoby długością drogi, np.:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo stretchy="false" form="prefix">(</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>+</mo></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>w</mi><mo stretchy="false" form="prefix">(</mo><msup><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo>−</mo></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>130</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\]</span></p>
+<p>przypisuje krawędziom dodatnie wagi. W mapie drogowej (przykład <a href="#exm-mapa-drogowa" class="quarto-xref"><span>1.2</span></a>) <span class="math inline">\(w\)</span> byłoby długością drogi, np.:</p>
+<p><span class="math display">\[
 w(\mathrm{A2}^{+})=w(\mathrm{A2}^{-})=130.
-</annotation></semantics></math></p>
-<p>W takich sytuacjach jak powyżej nadużywamy notacji i piszemy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">A</mi><mn mathvariant="normal">2</mn></mrow><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>130</mn></mrow><annotation encoding="application/x-tex">w(\mathrm{A2}) = 130</annotation></semantics></math>.</p>
+\]</span></p>
+<p>W takich sytuacjach jak powyżej nadużywamy notacji i piszemy <span class="math inline">\(w(\mathrm{A2}) = 130\)</span>.</p>
 </div>
-<p>W grafie nieskierowanym nasza funkcja ewaluowana na <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">i(e)</annotation></semantics></math> zawsze musi mieć tę samą wartość, bo myślimy, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math> oraz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">i(e)</annotation></semantics></math> to jest ta sama nieskierowana krawędź.</p>
+<p>W grafie nieskierowanym nasza funkcja ewaluowana na <span class="math inline">\(e\)</span> i <span class="math inline">\(i(e)\)</span> zawsze musi mieć tę samą wartość, bo myślimy, że <span class="math inline">\(e\)</span> oraz <span class="math inline">\(i(e)\)</span> to jest ta sama nieskierowana krawędź.</p>
 <div id="exm-kolorowanie" class="theorem example">
 <p><span class="theorem-title"><strong>Przykład 1.9</strong></span> Funkcja</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>:</mo><mi>V</mi><mo>→</mo><mo stretchy="false" form="prefix">{</mo><mtext mathvariant="normal">zielony</mtext><mo>,</mo><mtext mathvariant="normal">czerwony</mtext><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 c:V\to\{\text{zielony},\text{czerwony}\}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>przypisuje wierzchołkom kolory.</p>
 </div>
 <p>Analogicznie za pomocą funkcji możemy uwzględnić nazwy, etykiety, współrzędne lub dowolne inne informacje.</p>
@@ -773,66 +816,66 @@ c:V\to\{\text{zielony},\text{czerwony}\}
 <section id="stopnie-wierzchołków" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="stopnie-wierzchołków"><span class="header-section-number">1.4.1</span> Stopnie wierzchołków</h3>
 <div id="def-stopnie-skierowane" class="fullscreen-half-image fullscreen-image-27-5 theorem definition" data-fullscreen-include="#fullscreen-stopnie-skierowane">
-<p><span class="theorem-title"><strong>Definicja 1.3 (Stopień wejściowy i stopień wyjściowy)</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie grafem skierowanym, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">v\in V</annotation></semantics></math> jego wierzchołkiem. <strong>Stopniem wejściowym</strong> (<em>in-degree</em>) wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> nazywamy liczbę krawędzi kończących się w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mi>G</mi><mo>−</mo></msubsup><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">|</mo><mo stretchy="false" form="prefix">{</mo><mi>e</mi><mo>∈</mo><mi>E</mi><mo>:</mo><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>v</mi><mo stretchy="false" form="postfix">}</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">|</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Definicja 1.3 (Stopień wejściowy i stopień wyjściowy)</strong></span> Niech <span class="math inline">\(G\)</span> będzie grafem skierowanym, a <span class="math inline">\(v\in V\)</span> jego wierzchołkiem. <strong>Stopniem wejściowym</strong> (<em>in-degree</em>) wierzchołka <span class="math inline">\(v\)</span> nazywamy liczbę krawędzi kończących się w <span class="math inline">\(v\)</span>:</p>
+<p><span class="math display">\[
 \deg_G^{-}(v)
 =
 \bigl|\{e\in E:t(e)=v\}\bigr|.
-</annotation></semantics></math></p>
-<p><strong>Stopniem wyjściowym</strong> (<em>out-degree</em>) wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> nazywamy liczbę krawędzi zaczynających się w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mi>G</mi><mo>+</mo></msubsup><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">|</mo><mo stretchy="false" form="prefix">{</mo><mi>e</mi><mo>∈</mo><mi>E</mi><mo>:</mo><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>v</mi><mo stretchy="false" form="postfix">}</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">|</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\]</span></p>
+<p><strong>Stopniem wyjściowym</strong> (<em>out-degree</em>) wierzchołka <span class="math inline">\(v\)</span> nazywamy liczbę krawędzi zaczynających się w <span class="math inline">\(v\)</span>:</p>
+<p><span class="math display">\[
 \deg_G^{+}(v)
 =
 \bigl|\{e\in E:s(e)=v\}\bigr|.
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/stopnie-skierowane.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="images/stopnie-skierowane.png" id="fullscreen-stopnie-skierowane" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:55.0%"></a></p>
 </figure>
 </div>
-<p>Pętla zaczynająca się i kończąca w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> zwiększa zarówno stopień wejściowy, jak i stopień wyjściowy tego wierzchołka o jeden.</p>
-<p>Niech teraz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie grafem nieskierowanym. Funkcja <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> przyporządkowuje krawędzi zaczynającej się w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> krawędź odwrotną, która kończy się w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>. Jest to bijekcja, a zatem</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mi>G</mi><mo>−</mo></msubsup><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mi>G</mi><mo>+</mo></msubsup><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p>Pętla zaczynająca się i kończąca w <span class="math inline">\(v\)</span> zwiększa zarówno stopień wejściowy, jak i stopień wyjściowy tego wierzchołka o jeden.</p>
+<p>Niech teraz <span class="math inline">\(G\)</span> będzie grafem nieskierowanym. Funkcja <span class="math inline">\(i\)</span> przyporządkowuje krawędzi zaczynającej się w <span class="math inline">\(v\)</span> krawędź odwrotną, która kończy się w <span class="math inline">\(v\)</span>. Jest to bijekcja, a zatem</p>
+<p><span class="math display">\[
 \deg_G^{-}(v)=\deg_G^{+}(v).
-</annotation></semantics></math></p>
+\]</span></p>
 <div id="def-stopien-nieskierowany" class="theorem definition">
-<p><span class="theorem-title"><strong>Definicja 1.4 (Stopień wierzchołka w grafie nieskierowanym)</strong></span> <strong>Stopniem</strong> wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> w grafie nieskierowanym nazywamy wspólną wartość jego stopnia wejściowego i wyjściowego. Piszemy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mi>G</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mi>G</mi><mo>−</mo></msubsup><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mi>G</mi><mo>+</mo></msubsup><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Definicja 1.4 (Stopień wierzchołka w grafie nieskierowanym)</strong></span> <strong>Stopniem</strong> wierzchołka <span class="math inline">\(v\)</span> w grafie nieskierowanym nazywamy wspólną wartość jego stopnia wejściowego i wyjściowego. Piszemy</p>
+<p><span class="math display">\[
 \deg_G(v)=\deg_G^{-}(v)=\deg_G^{+}(v).
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
-<p>Pętla nieskierowana jest reprezentowana przez parę <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>e</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{e,i(e)\}</annotation></semantics></math>. Obie krawędzie zaczynają się i kończą w tym samym wierzchołku, dlatego pętla zwiększa jego stopień o dwa.</p>
+<p>Pętla nieskierowana jest reprezentowana przez parę <span class="math inline">\(\{e,i(e)\}\)</span>. Obie krawędzie zaczynają się i kończą w tym samym wierzchołku, dlatego pętla zwiększa jego stopień o dwa.</p>
 </section>
 <section id="ścieżki" class="level3" data-number="1.4.2">
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="ścieżki"><span class="header-section-number">1.4.2</span> Ścieżki</h3>
-<p>Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie grafem (skierowanym lub nie).</p>
+<p>Niech <span class="math inline">\(G\)</span> będzie grafem (skierowanym lub nie).</p>
 <div id="def-sciezka" class="fullscreen-half-image fullscreen-image-75 theorem definition" data-fullscreen-include="#fullscreen-sciezka-prosta">
-<p><span class="theorem-title"><strong>Definicja 1.5</strong></span> <strong>Ścieżką</strong> w grafie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> nazywamy skończony ciąg krawędzi</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>e</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Definicja 1.5</strong></span> <strong>Ścieżką</strong> w grafie <span class="math inline">\(G\)</span> nazywamy skończony ciąg krawędzi</p>
+<p><span class="math display">\[
 p=(e_1,\ldots,e_n)
-</annotation></semantics></math></p>
+\]</span></p>
 <p>taki, że</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mrow><mi>j</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 t(e_j)=s(e_{j+1})
-</annotation></semantics></math></p>
-<p>dla każdego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">j=1,\ldots,n-1</annotation></semantics></math>.</p>
+\]</span></p>
+<p>dla każdego <span class="math inline">\(j=1,\ldots,n-1\)</span>.</p>
 </div>
-<p>Mówimy, że ścieżka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> składa się z krawędzi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>e</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">e_1,\ldots,e_n</annotation></semantics></math> oraz, że przechodzi kolejno przez wierzchołki</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>=</mo><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>v</mi><mi>j</mi></msub><mo>=</mo><mi>t</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">dla </mtext><mspace width="0.333em"></mspace></mrow><mi>j</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>n</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p>Mówimy, że ścieżka <span class="math inline">\(p\)</span> składa się z krawędzi <span class="math inline">\(e_1,\ldots,e_n\)</span> oraz, że przechodzi kolejno przez wierzchołki</p>
+<p><span class="math display">\[
 v_0=s(e_1),
 \qquad
 v_j=t(e_j)\quad\text{dla }j=1,\ldots,n.
-</annotation></semantics></math></p>
-<p>Na przykład ścieżka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>e</mi><mn>6</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p=(e_1,\ldots,e_6)</annotation></semantics></math> przedstawiona poniżej przechodzi kolejno przez wierzchołki <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mn>6</mn></msub></mrow><annotation encoding="application/x-tex">v_0,\ldots,v_6</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Na przykład ścieżka <span class="math inline">\(p=(e_1,\ldots,e_6)\)</span> przedstawiona poniżej przechodzi kolejno przez wierzchołki <span class="math inline">\(v_0,\ldots,v_6\)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/sciezka-prosta.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="images/sciezka-prosta.png" id="fullscreen-sciezka-prosta" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" style="width:75.0%"></a></p>
 </figure>
 </div>
-<p>Wierzchołek <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>0</mn></msub><annotation encoding="application/x-tex">v_0</annotation></semantics></math> nazywamy <strong>początkiem</strong>, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>n</mi></msub><annotation encoding="application/x-tex">v_n</annotation></semantics></math> <strong>końcem</strong> ścieżki.</p>
+<p>Wierzchołek <span class="math inline">\(v_0\)</span> nazywamy <strong>początkiem</strong>, a <span class="math inline">\(v_n\)</span> <strong>końcem</strong> ścieżki.</p>
 <p>Kolejność oraz identyfikatory krawędzi są istotne. W szczególności dwie ścieżki w multigrafie mogą przechodzić kolejno przez te same wierzchołki, ale składać się z różnych krawędzi wielokrotnych.</p>
-<p>Dla każdego wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> dopuszczamy również <strong>ścieżkę pustą</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ε</mi><mi>v</mi></msub><annotation encoding="application/x-tex">\varepsilon_v</annotation></semantics></math>. Ścieżka ta nie zawiera żadnych krawędzi, a jej początkiem i końcem jest <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
+<p>Dla każdego wierzchołka <span class="math inline">\(v\)</span> dopuszczamy również <strong>ścieżkę pustą</strong> <span class="math inline">\(\varepsilon_v\)</span>. Ścieżka ta nie zawiera żadnych krawędzi, a jej początkiem i końcem jest <span class="math inline">\(v\)</span>.</p>
 <div id="def-sciezka-prosta" class="theorem definition">
 <p><span class="theorem-title"><strong>Definicja 1.6 (Ścieżka prosta)</strong></span> Ścieżkę nazywamy <strong>prostą</strong>, jeżeli wszystkie wierzchołki, przez które przechodzi, są parami różne.</p>
 </div>
@@ -956,12 +999,12 @@ Rysunek&nbsp;1.6: Przykłady ścieżek: (a) ścieżka prosta; (b) ścieżka, kt�
 </figure>
 </div>
 <p>Ścieżka z panelu (a) jest prosta. Ścieżki z paneli (b) i (c) nie są proste, ponieważ przechodzą więcej niż raz przez ten sam wierzchołek. Na panelu (d) ścieżki</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><msub><mi>e</mi><mn>3</mn></msub><mo stretchy="false" form="postfix">)</mo><mspace width="2.0em"></mspace><mtext mathvariant="normal">oraz</mtext><mspace width="2.0em"></mspace><mi>q</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>2</mn></msub><mo>,</mo><msub><mi>e</mi><mn>3</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 p=(e_1,e_3)
 \qquad\text{oraz}\qquad
 q=(e_2,e_3)
-</annotation></semantics></math></p>
-<p>przechodzą kolejno przez te same wierzchołki, ale są różne, ponieważ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>1</mn></msub><annotation encoding="application/x-tex">e_1</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mn>2</mn></msub><annotation encoding="application/x-tex">e_2</annotation></semantics></math> są różnymi krawędziami wielokrotnymi.</p>
+\]</span></p>
+<p>przechodzą kolejno przez te same wierzchołki, ale są różne, ponieważ <span class="math inline">\(e_1\)</span> i <span class="math inline">\(e_2\)</span> są różnymi krawędziami wielokrotnymi.</p>
 </div>
 </section>
 <section id="cykle" class="level3" data-number="1.4.3">
@@ -970,76 +1013,76 @@ q=(e_2,e_3)
 <p><span class="theorem-title"><strong>Definicja 1.7</strong></span> <strong>Cyklem</strong> nazywamy niepustą ścieżkę, której początek jest równy końcowi.</p>
 </div>
 <div id="def-cykl-prosty" class="theorem definition">
-<p><span class="theorem-title"><strong>Definicja 1.8 (Cykl prosty)</strong></span> Niech cykl <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>e</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p=(e_1,\ldots,e_n)</annotation></semantics></math> przechodzi kolejno przez wierzchołki</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mi>n</mi></msub><mo>=</mo><msub><mi>v</mi><mn>0</mn></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Definicja 1.8 (Cykl prosty)</strong></span> Niech cykl <span class="math inline">\(p=(e_1,\ldots,e_n)\)</span> przechodzi kolejno przez wierzchołki</p>
+<p><span class="math display">\[
 v_0,v_1,\ldots,v_n=v_0.
-</annotation></semantics></math></p>
-<p>Cykl <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> nazywamy <strong>prostym</strong>, jeżeli wierzchołki <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">v_0,v_1,\ldots,v_{n-1}</annotation></semantics></math> są parami różne.</p>
+\]</span></p>
+<p>Cykl <span class="math inline">\(p\)</span> nazywamy <strong>prostym</strong>, jeżeli wierzchołki <span class="math inline">\(v_0,v_1,\ldots,v_{n-1}\)</span> są parami różne.</p>
 </div>
-<p>W grafie nieskierowanym ustalamy dodatkowo, że cykl postaci <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(e,i(e))</annotation></semantics></math> nie jest cyklem prostym, choć zpełnia powyższą definicję.</p>
-<p>Uwaga: cykl prosty traktowany jako ścieżka nie jest ścieżką prostą, ponieważ przechodzi więcej niż raz przez wierzchołek <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>0</mn></msub><annotation encoding="application/x-tex">v_0</annotation></semantics></math>.</p>
+<p>W grafie nieskierowanym ustalamy dodatkowo, że cykl postaci <span class="math inline">\((e,i(e))\)</span> nie jest cyklem prostym, choć zpełnia powyższą definicję.</p>
+<p>Uwaga: cykl prosty traktowany jako ścieżka nie jest ścieżką prostą, ponieważ przechodzi więcej niż raz przez wierzchołek <span class="math inline">\(v_0\)</span>.</p>
 <p>Ścieżka z panelu (b) na rysunku <a href="#fig-sciezki" class="quarto-xref"><span>1.6</span></a> jest cyklem prostym w grafie skierowanym, chociaż nie jest ścieżką prostą. Ścieżka z panelu (c) nie jest cyklem, ponieważ kończy się w innym wierzchołku, niż się zaczyna. Jej trzy pierwsze krawędzie tworzą jednak cykl prosty.</p>
 </section>
 <section id="spójność" class="level3" data-number="1.4.4">
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="spójność"><span class="header-section-number">1.4.4</span> Spójność</h3>
 <div id="def-osiagalnosc" class="theorem definition">
-<p><span class="theorem-title"><strong>Definicja 1.9 (Osiągalność)</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math> będą wierzchołkami grafu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>. Mówimy, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> jest <strong>osiągalny</strong> z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>, jeżeli istnieje ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Definicja 1.9 (Osiągalność)</strong></span> Niech <span class="math inline">\(u,v\)</span> będą wierzchołkami grafu <span class="math inline">\(G\)</span>. Mówimy, że <span class="math inline">\(v\)</span> jest <strong>osiągalny</strong> z <span class="math inline">\(u\)</span>, jeżeli istnieje ścieżka z <span class="math inline">\(u\)</span> do <span class="math inline">\(v\)</span>.</p>
 </div>
 <p>Każdy wierzchołek jest osiągalny z samego siebie, ponieważ dopuściliśmy ścieżki puste.</p>
 <div id="def-silna-spojnosc" class="theorem definition">
-<p><span class="theorem-title"><strong>Definicja 1.10 (Graf silnie spójny)</strong></span> Graf skierowany nazywamy <strong>silnie spójnym</strong>, jeżeli dla każdych dwóch wierzchołków <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math> istnieje ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Definicja 1.10 (Graf silnie spójny)</strong></span> Graf skierowany nazywamy <strong>silnie spójnym</strong>, jeżeli dla każdych dwóch wierzchołków <span class="math inline">\(u,v\)</span> istnieje ścieżka z <span class="math inline">\(u\)</span> do <span class="math inline">\(v\)</span>.</p>
 </div>
-<p>Jeżeli graf jest silnie spójny, to dla każdych <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math> istnieje zarówno ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>, jak i ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>.</p>
+<p>Jeżeli graf jest silnie spójny, to dla każdych <span class="math inline">\(u,v\)</span> istnieje zarówno ścieżka z <span class="math inline">\(u\)</span> do <span class="math inline">\(v\)</span>, jak i ścieżka z <span class="math inline">\(v\)</span> do <span class="math inline">\(u\)</span>.</p>
 <div id="def-spojnosc" class="theorem definition">
-<p><span class="theorem-title"><strong>Definicja 1.11 (Graf spójny)</strong></span> Graf nieskierowany nazywamy <strong>spójnym</strong>, jeżeli dla każdych dwóch wierzchołków <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">u,v</annotation></semantics></math> istnieje ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Definicja 1.11 (Graf spójny)</strong></span> Graf nieskierowany nazywamy <strong>spójnym</strong>, jeżeli dla każdych dwóch wierzchołków <span class="math inline">\(u,v\)</span> istnieje ścieżka z <span class="math inline">\(u\)</span> do <span class="math inline">\(v\)</span>.</p>
 </div>
 <p>W przypadku grafów skierowanych będziemy zawsze używali określenia „silnie spójny”. Określenie „spójny” bez dodatkowego przymiotnika rezerwujemy dla grafów nieskierowanych.</p>
 </section>
 <section id="długość-ścieżki" class="level3" data-number="1.4.5">
 <h3 data-number="1.4.5" class="anchored" data-anchor-id="długość-ścieżki"><span class="header-section-number">1.4.5</span> Długość ścieżki</h3>
-<p>Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie grafem z wyróżnioną funkcją wagową</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>:</mo><mi>E</mi><mo>→</mo><msub><mi mathvariant="double-struck">ℝ</mi><mrow><mo>&gt;</mo><mn>0</mn></mrow></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p>Niech <span class="math inline">\(G\)</span> będzie grafem z wyróżnioną funkcją wagową</p>
+<p><span class="math display">\[
 w:E\to\mathbb{R}_{&gt;0}.
-</annotation></semantics></math></p>
-<p>Wartość <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">w(e)</annotation></semantics></math> interpretujemy jako długość krawędzi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Wartość <span class="math inline">\(w(e)\)</span> interpretujemy jako długość krawędzi <span class="math inline">\(e\)</span>.</p>
 <div id="def-dlugosc-sciezki" class="theorem definition">
-<p><span class="theorem-title"><strong>Definicja 1.12</strong></span> <strong>Długością</strong> ścieżki <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>e</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p=(e_1,\ldots,e_n)</annotation></semantics></math> nazywamy liczbę</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>w</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>w</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Definicja 1.12</strong></span> <strong>Długością</strong> ścieżki <span class="math inline">\(p=(e_1,\ldots,e_n)\)</span> nazywamy liczbę</p>
+<p><span class="math display">\[
 w(p)=w(e_1)+\cdots+w(e_n).
-</annotation></semantics></math></p>
-<p>Długość ścieżki pustej wynosi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>ε</mi><mi>v</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">w(\varepsilon_v)=0</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Długość ścieżki pustej wynosi <span class="math inline">\(w(\varepsilon_v)=0\)</span>.</p>
 </div>
 <p>Jeżeli graf nie ma wyróżnionej funkcji wagowej, przyjmujemy, że</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 w(e)=1
-</annotation></semantics></math></p>
-<p>dla każdej krawędzi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>.</p>
+\]</span></p>
+<p>dla każdej krawędzi <span class="math inline">\(e\)</span>.</p>
 </section>
 <section id="odległość-i-średnica" class="level3" data-number="1.4.6">
 <h3 data-number="1.4.6" class="anchored" data-anchor-id="odległość-i-średnica"><span class="header-section-number">1.4.6</span> Odległość i średnica</h3>
 <div id="def-odleglosc" class="theorem definition">
-<p><span class="theorem-title"><strong>Definicja 1.13</strong></span> <strong>Odległością</strong> z wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> nazywamy liczbę</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>w</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">inf</mi><mo>⁡</mo></mrow><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">{</mo><mi>w</mi><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>:</mo><mi>p</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> jest ścieżką z </mtext><mspace width="0.333em"></mspace></mrow><mi>u</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> do </mtext><mspace width="0.333em"></mspace></mrow><mi>v</mi><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Definicja 1.13</strong></span> <strong>Odległością</strong> z wierzchołka <span class="math inline">\(u\)</span> do wierzchołka <span class="math inline">\(v\)</span> nazywamy liczbę</p>
+<p><span class="math display">\[
 d_w(u,v)
 =
 \inf\bigl\{
 w(p): p\text{ jest ścieżką z }u\text{ do }v
 \bigr\}.
-</annotation></semantics></math></p>
-<p>Jeżeli nie istnieje ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>, przyjmujemy, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>w</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">d_w(u,v)=\infty</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Jeżeli nie istnieje ścieżka z <span class="math inline">\(u\)</span> do <span class="math inline">\(v\)</span>, przyjmujemy, że <span class="math inline">\(d_w(u,v)=\infty\)</span>.</p>
 </div>
 <p>W grafie skierowanym odległość nie musi być symetryczna. W ogólności</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>w</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>≠</mo><msub><mi>d</mi><mi>w</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo>,</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 d_w(u,v)\neq d_w(v,u).
-</annotation></semantics></math></p>
-<p>Jeżeli graf nie ma wyróżnionej funkcji wagowej, wszystkie krawędzie mają wagę równą <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. W tej sytuacji piszemy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">d(u,v)</annotation></semantics></math> zamiast <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>w</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">d_w(u,v)</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Jeżeli graf nie ma wyróżnionej funkcji wagowej, wszystkie krawędzie mają wagę równą <span class="math inline">\(1\)</span>. W tej sytuacji piszemy <span class="math inline">\(d(u,v)\)</span> zamiast <span class="math inline">\(d_w(u,v)\)</span>.</p>
 <div id="def-srednica" class="theorem definition">
-<p><span class="theorem-title"><strong>Definicja 1.14 (Średnica grafu)</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie grafem z funkcją wagową <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>. <strong>Średnicą</strong> grafu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> nazywamy liczbę</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">diam</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>G</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mi mathvariant="normal">sup</mi><mrow><mi>u</mi><mo>,</mo><mi>v</mi><mo>∈</mo><mi>V</mi></mrow></munder><msub><mi>d</mi><mi>w</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Definicja 1.14 (Średnica grafu)</strong></span> Niech <span class="math inline">\(G\)</span> będzie grafem z funkcją wagową <span class="math inline">\(w\)</span>. <strong>Średnicą</strong> grafu <span class="math inline">\(G\)</span> nazywamy liczbę</p>
+<p><span class="math display">\[
 \operatorname{diam}(G)
 =
 \sup_{u,v\in V} d_w(u,v).
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <p>Jeżeli graf skierowany nie jest silnie spójny, to jego średnica jest nieskończona.</p>
 </section>
@@ -1051,13 +1094,13 @@ d_w(u,v)\neq d_w(v,u).
 <div id="def-graf-dwudzielny" class="fullscreen-half-image theorem definition" data-fullscreen-include="#fig-graf-dwudzielny-autorzy">
 <p><span class="theorem-title"><strong>Definicja 1.15</strong></span> <strong>Grafem dwudzielnym</strong> nazywamy graf, którego wierzchołki można pokolorować na dwa kolory w taki sposób, aby końce każdej krawędzi miały różne kolory.</p>
 <p>Formalnie oznacza to, że istnieje funkcja</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>:</mo><mi>V</mi><mo>→</mo><mo stretchy="false" form="prefix">{</mo><mtext mathvariant="normal">biały</mtext><mo>,</mo><mtext mathvariant="normal">czarny</mtext><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 c:V\to\{\text{biały},\text{czarny}\}
-</annotation></semantics></math></p>
-<p>taka, że dla każdej krawędzi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">e\in E</annotation></semantics></math> zachodzi</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">)</mo><mo>≠</mo><mi>c</mi><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\]</span></p>
+<p>taka, że dla każdej krawędzi <span class="math inline">\(e\in E\)</span> zachodzi</p>
+<p><span class="math display">\[
 c\bigl(s(e)\bigr)\neq c\bigl(t(e)\bigr).
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <p>Definicja działa zarówno dla grafów skierowanych, jak i nieskierowanych. Kierunek krawędzi nie ma w niej znaczenia. Graf dwudzielny nie może mieć pętli, może natomiast mieć krawędzie wielokrotne.</p>
 <p>Grafy dwudzielne pojawiają się naturalnie wtedy, gdy wierzchołki opisują obiekty dwóch różnych rodzajów. Mogą to być na przykład użytkownicy i produkty, które kupili lub ocenili, albo autorzy i artykuły naukowe.</p>
@@ -1217,7 +1260,7 @@ Rysunek&nbsp;1.8: Przykładowe drzewo.
 <section id="ukorzenione-drzewa-skierowane" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="ukorzenione-drzewa-skierowane"><span class="header-section-number">1.5.3</span> Ukorzenione drzewa skierowane</h3>
 <div id="def-ukorzenione-drzewo-skierowane" class="fullscreen-half-image theorem definition" data-fullscreen-include="#fig-drzewo-skierowane-ukorzenione">
-<p><span class="theorem-title"><strong>Definicja 1.17</strong></span> <strong>Ukorzenionym drzewem skierowanym</strong> nazywamy graf skierowany <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> z wyróżnionym wierzchołkiem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>, zwanym <strong>korzeniem</strong>, taki że dla każdego wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">v\in V</annotation></semantics></math> istnieje dokładnie jedna ścieżka z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Definicja 1.17</strong></span> <strong>Ukorzenionym drzewem skierowanym</strong> nazywamy graf skierowany <span class="math inline">\(G\)</span> z wyróżnionym wierzchołkiem <span class="math inline">\(r\)</span>, zwanym <strong>korzeniem</strong>, taki że dla każdego wierzchołka <span class="math inline">\(v\in V\)</span> istnieje dokładnie jedna ścieżka z <span class="math inline">\(r\)</span> do <span class="math inline">\(v\)</span>.</p>
 </div>
 <p>Krawędzie ukorzenionego drzewa skierowanego są zwrócone od korzenia. Każdy wierzchołek różny od korzenia ma dokładnie jedną krawędź wchodzącą.</p>
 <div id="15420ea5" class="cell">
@@ -1345,7 +1388,7 @@ Rysunek&nbsp;1.10: Przykładowy graf skierowany acykliczny.
 </figcaption>
 </figure>
 </div>
-<p>Na rysunku <a href="#fig-dag" class="quarto-xref"><span>1.10</span></a> wszystkie krawędzie prowadzą od lewej do prawej, dlatego graf nie zawiera cyklu. Po pominięciu kierunków krawędzi wierzchołki <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><msub><mi>v</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">v_0,v_1,v_2</annotation></semantics></math> tworzą jednak cykl prosty. Każde ukorzenione drzewo skierowane jest DAG-iem.</p>
+<p>Na rysunku <a href="#fig-dag" class="quarto-xref"><span>1.10</span></a> wszystkie krawędzie prowadzą od lewej do prawej, dlatego graf nie zawiera cyklu. Po pominięciu kierunków krawędzi wierzchołki <span class="math inline">\(v_0,v_1,v_2\)</span> tworzą jednak cykl prosty. Każde ukorzenione drzewo skierowane jest DAG-iem.</p>
 </section>
 </section>
 <section id="dwie-historyjki" class="level2" data-number="1.6">
@@ -1367,28 +1410,28 @@ Rysunek&nbsp;1.11: Schemat mostów królewieckich i odpowiadający mu multigraf.
 <p>Każdemu obszarowi lądu przypisujemy wierzchołek, a każdemu mostowi krawędź. Krawędzie wielokrotne pojawiają się wtedy, gdy dwa obszary lądu są połączone więcej niż jednym mostem.</p>
 <section id="ścieżki-i-cykle-eulerowskie" class="level4" data-number="1.6.1.1">
 <h4 data-number="1.6.1.1" class="anchored" data-anchor-id="ścieżki-i-cykle-eulerowskie"><span class="header-section-number">1.6.1.1</span> Ścieżki i cykle eulerowskie</h4>
-<p>Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie grafem nieskierowanym, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>e</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p=(e_1,\ldots,e_n)</annotation></semantics></math> ścieżką w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>.</p>
+<p>Niech <span class="math inline">\(G\)</span> będzie grafem nieskierowanym, a <span class="math inline">\(p=(e_1,\ldots,e_n)\)</span> ścieżką w <span class="math inline">\(G\)</span>.</p>
 <div id="def-sciezka-eulerowska" class="theorem definition">
 <p><span class="theorem-title"><strong>Definicja 1.19</strong></span> <strong>Ścieżką eulerowską</strong> nazywamy ścieżkę, która przechodzi przez każdą krawędź nieskierowaną dokładnie raz.</p>
-<p>Formalnie: dla każdej krawędzi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">e\in E</annotation></semantics></math> wymagamy, aby <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math> albo <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">i(e)</annotation></semantics></math> pojawiło się w naszej ścieżce dokładnie raz.</p>
+<p>Formalnie: dla każdej krawędzi <span class="math inline">\(e\in E\)</span> wymagamy, aby <span class="math inline">\(e\)</span> albo <span class="math inline">\(i(e)\)</span> pojawiło się w naszej ścieżce dokładnie raz.</p>
 </div>
 <div id="def-cykl-eulerowski" class="theorem definition">
 <p><span class="theorem-title"><strong>Definicja 1.20</strong></span> <strong>Cyklem eulerowskim</strong> nazywamy ścieżkę eulerowską, która jest cyklem.</p>
 </div>
 <div id="thm-euler" class="theorem">
-<p><span class="theorem-title"><strong>Twierdzenie 1.1 (Twierdzenie Eulera)</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym spójnym grafem nieskierowanym zawierającym co najmniej jedną krawędź.</p>
+<p><span class="theorem-title"><strong>Twierdzenie 1.1 (Twierdzenie Eulera)</strong></span> Niech <span class="math inline">\(G\)</span> będzie skończonym spójnym grafem nieskierowanym zawierającym co najmniej jedną krawędź.</p>
 <ol type="1">
-<li>Graf <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> ma cykl eulerowski wtedy i tylko wtedy, gdy każdy wierzchołek grafu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> ma parzysty stopień.</li>
-<li>Graf <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> ma ścieżkę eulerowską wtedy i tylko wtedy, gdy liczba wierzchołków nieparzystego stopnia jest równa zero albo dwa.</li>
+<li>Graf <span class="math inline">\(G\)</span> ma cykl eulerowski wtedy i tylko wtedy, gdy każdy wierzchołek grafu <span class="math inline">\(G\)</span> ma parzysty stopień.</li>
+<li>Graf <span class="math inline">\(G\)</span> ma ścieżkę eulerowską wtedy i tylko wtedy, gdy liczba wierzchołków nieparzystego stopnia jest równa zero albo dwa.</li>
 </ol>
 <p>Jeżeli dokładnie dwa wierzchołki mają nieparzysty stopień, to każda ścieżka eulerowska zaczyna się w jednym z nich, a kończy w drugim.</p>
 </div>
 <p>W multigrafie mostów królewieckich mamy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>D</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>3</mn><mo>,</mo><mspace width="2.0em"></mspace><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>5</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \deg(A)=\deg(B)=\deg(D)=3,
 \qquad
 \deg(C)=5.
-</annotation></semantics></math></p>
+\]</span></p>
 <p>Wszystkie cztery wierzchołki mają nieparzysty stopień. Z twierdzenia <a href="#thm-euler" class="quarto-xref"><span>1.1</span></a> wynika więc, że nie istnieje ani ścieżka, ani cykl eulerowski przechodzący przez siedem mostów.</p>
 </section>
 <section id="znajdowanie-ścieżek-eulerowskich" class="level4" data-number="1.6.1.2">
@@ -1406,7 +1449,7 @@ Rysunek&nbsp;1.11: Schemat mostów królewieckich i odpowiadający mu multigraf.
 <p><span class="theorem-title"><strong>Definicja 1.22</strong></span> <strong>Cyklem hamiltonowskim</strong> nazywamy cykl prosty, który przechodzi przez każdy wierzchołek grafu.</p>
 </div>
 <p>Dla ścieżek i cykli hamiltonowskich nie znamy prostego, efektywnie sprawdzalnego warunku koniecznego i wystarczającego analogicznego do twierdzenia Eulera. Znamy wiele warunków koniecznych i wiele warunków wystarczających, ale żaden z nich nie rozstrzyga efektywnie problemu dla wszystkich grafów.</p>
-<p>Istnieją algorytmy sprawdzające wszystkie możliwości, jednak ich czas działania rośnie wykładniczo. Problem istnienia ścieżki hamiltonowskiej oraz problem istnienia cyklu hamiltonowskiego jest tak zwanym problemem NP-zupełnym. Nie znamy dla nich algorytmu wielomianowego. Znalezienie takiego algorytmu oznaczałoby w szczególności rozwiązanie jednego z najważniejszych problemów informatyki: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="sans-serif">𝖯</mi><mo>=</mo><mrow><mi mathvariant="sans-serif">𝖭</mi><mi mathvariant="sans-serif">𝖯</mi></mrow></mrow><annotation encoding="application/x-tex">\mathsf{P}=\mathsf{NP}</annotation></semantics></math>.</p>
+<p>Istnieją algorytmy sprawdzające wszystkie możliwości, jednak ich czas działania rośnie wykładniczo. Problem istnienia ścieżki hamiltonowskiej oraz problem istnienia cyklu hamiltonowskiego jest tak zwanym problemem NP-zupełnym. Nie znamy dla nich algorytmu wielomianowego. Znalezienie takiego algorytmu oznaczałoby w szczególności rozwiązanie jednego z najważniejszych problemów informatyki: <span class="math inline">\(\mathsf{P}=\mathsf{NP}\)</span>.</p>
 </section>
 </section>
 <section id="eksperyment-milgrama" class="level3" data-number="1.6.2">
@@ -1424,7 +1467,7 @@ Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcu
 </figcaption>
 </figure>
 </div>
-<p>Spośród 296 rozpoczętych łańcuchów do celu dotarły 64. W ukończonych łańcuchach występowało średnio <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>,</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">5{,}2</annotation></semantics></math> osoby pośredniczącej, a więc około sześciu kolejnych relacji znajomości. Oznacza to, że dla badanych par osób średnia odległość w grafie znajomości była nie większa niż około <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><mo>,</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">6{,}2</annotation></semantics></math>. Stąd wywodzi się popularne określenie <strong>sześciu stopni oddalenia</strong>.</p>
+<p>Spośród 296 rozpoczętych łańcuchów do celu dotarły 64. W ukończonych łańcuchach występowało średnio <span class="math inline">\(5{,}2\)</span> osoby pośredniczącej, a więc około sześciu kolejnych relacji znajomości. Oznacza to, że dla badanych par osób średnia odległość w grafie znajomości była nie większa niż około <span class="math inline">\(6{,}2\)</span>. Stąd wywodzi się popularne określenie <strong>sześciu stopni oddalenia</strong>.</p>
 <p>W naszym grafowym języku wierzchołkami są osoby, a dwie osoby łączymy krawędzią, jeżeli znają się osobiście. Znajomość traktujemy jako relację wzajemną, dlatego otrzymujemy graf nieskierowany, taki jak graf znajomości z przykładu <a href="#exm-graf-znajomosci" class="quarto-xref"><span>1.1</span></a>.</p>
 <section id="kontrowersje" class="level4" data-number="1.6.2.1">
 <h4 data-number="1.6.2.1" class="anchored" data-anchor-id="kontrowersje"><span class="header-section-number">1.6.2.1</span> Kontrowersje</h4>
@@ -1434,7 +1477,7 @@ Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcu
 </section>
 <section id="facebook" class="level4" data-number="1.6.2.2">
 <h4 data-number="1.6.2.2" class="anchored" data-anchor-id="facebook"><span class="header-section-number">1.6.2.2</span> Facebook</h4>
-<p>Relacje znajomości na Facebooku również tworzą ogromny graf nieskierowany: wierzchołkami są użytkownicy, a krawędziami wzajemne znajomości. W <a href="https://vigna.di.unimi.it/ftp/papers/FourDegreesOfSeparation.pdf">badaniu z 2011 roku</a> przeanalizowano graf około 721 milionów aktywnych użytkowników połączonych około 69 miliardami krawędzi. Średnia odległość między użytkownikami wyniosła <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>,</mo><mn>74</mn></mrow><annotation encoding="application/x-tex">4{,}74</annotation></semantics></math>, była więc mniejsza niż sześć. W zależności od przyjętej konwencji wynik ten opisywano także jako <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>,</mo><mn>74</mn></mrow><annotation encoding="application/x-tex">3{,}74</annotation></semantics></math> osoby pośredniczącej.</p>
+<p>Relacje znajomości na Facebooku również tworzą ogromny graf nieskierowany: wierzchołkami są użytkownicy, a krawędziami wzajemne znajomości. W <a href="https://vigna.di.unimi.it/ftp/papers/FourDegreesOfSeparation.pdf">badaniu z 2011 roku</a> przeanalizowano graf około 721 milionów aktywnych użytkowników połączonych około 69 miliardami krawędzi. Średnia odległość między użytkownikami wyniosła <span class="math inline">\(4{,}74\)</span>, była więc mniejsza niż sześć. W zależności od przyjętej konwencji wynik ten opisywano także jako <span class="math inline">\(3{,}74\)</span> osoby pośredniczącej.</p>
 <p>Wynik Facebooka dotyczy średniej. Nie mówi, że każda para użytkowników jest połączona ścieżką tej samej długości. Pokazuje jednak, że nawet w sieci obejmującej setki milionów osób typowy łańcuch łączący dwoje ludzi jest bardzo krótki.</p>
 <p><em>Ten rozdział opracowano na podstawie dwóch źródeł: S. N. Dorogovtsev, <strong>Lectures on Complex Networks</strong>, sekcje 1.5 i 11.3, oraz M. Newman, <strong>Networks</strong>, sekcja 4.6.</em></p>
 
@@ -1446,6 +1489,25 @@ Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcu
 </main> <!-- /main -->
 <script>
 (() => {
+  let mathJaxReady;
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+      const script = document.querySelector('script[src*="mathjax" i]');
+      if (!script) return;
+      await new Promise((resolve) => {
+        const loaded = () => {
+          script.removeEventListener("load", loaded);
+          script.removeEventListener("error", loaded);
+          resolve();
+        };
+        script.addEventListener("load", loaded, { once: true });
+        script.addEventListener("error", loaded, { once: true });
+      });
+    }
+    await globalThis.MathJax?.startup?.promise;
+    return globalThis.MathJax;
+  })();
+
   const initializeTheoremFullscreen = () => {
     const blocks = document.querySelectorAll(
       "#quarto-document-content .theorem:not(.exercise)"
@@ -1468,6 +1530,21 @@ Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcu
     const content = dialog.querySelector(".theorem-fullscreen-content");
     const closeButton = dialog.querySelector(".theorem-fullscreen-close");
     let lastTrigger = null;
+
+    const typesetCopy = async (copy) => {
+      try {
+        const mathJax = await waitForMathJax();
+        if (!dialog.open || !copy.isConnected || !mathJax?.typesetPromise) return;
+        try {
+          await mathJax.typesetPromise([copy]);
+        } finally {
+          // The dialog may have been closed while MathJax was loading a font.
+          if (!dialog.open || !copy.isConnected) mathJax.typesetClear?.([copy]);
+        }
+      } catch (error) {
+        console.warn("Nie udało się złożyć wzorów w powiększeniu.", error);
+      }
+    };
 
     const closeDialog = () => {
       if (dialog.open) {
@@ -1504,11 +1581,13 @@ Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcu
         element.removeAttribute("aria-controls");
       });
 
+      globalThis.MathJax?.typesetClear?.([content]);
       content.replaceChildren(copy);
       dialog.setAttribute("aria-label", title);
       lastTrigger = trigger;
       dialog.showModal();
       closeButton.focus();
+      void typesetCopy(copy);
     };
 
     closeButton.addEventListener("click", closeDialog);
@@ -1518,6 +1597,7 @@ Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcu
       }
     });
     dialog.addEventListener("close", () => {
+      globalThis.MathJax?.typesetClear?.([content]);
       content.replaceChildren();
       lastTrigger?.focus();
       lastTrigger = null;
@@ -1573,6 +1653,45 @@ Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcu
 </script>
 <script>
 (() => {
+  const scheduledMath = new WeakSet();
+  let mathJaxReady;
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+      const script = document.querySelector('script[src*="mathjax" i]');
+      if (!script) return;
+      await new Promise((resolve) => {
+        const loaded = () => {
+          script.removeEventListener("load", loaded);
+          script.removeEventListener("error", loaded);
+          resolve();
+        };
+        script.addEventListener("load", loaded, { once: true });
+        script.addEventListener("error", loaded, { once: true });
+      });
+    }
+    await globalThis.MathJax?.startup?.promise;
+    return globalThis.MathJax;
+  })();
+
+  const typesetPreviewMath = (root) => {
+    if (!globalThis.MathJax && !document.querySelector?.('script[src*="mathjax" i]')) return;
+    const formulas = [...root.querySelectorAll(".tippy-content .math")]
+      .filter((formula) => !scheduledMath.has(formula) && !formula.querySelector("mjx-container"));
+    if (!formulas.length) return;
+    // MathJax mutates this subtree too; schedule each source element only once.
+    formulas.forEach((formula) => scheduledMath.add(formula));
+    void waitForMathJax().then(async (mathJax) => {
+      const attached = formulas.filter((formula) => formula.isConnected && !formula.querySelector("mjx-container"));
+      if (!attached.length || !mathJax?.typesetPromise) return;
+      try {
+        await mathJax.typesetPromise(attached);
+      } finally {
+        const removed = attached.filter((formula) => !formula.isConnected);
+        if (removed.length) mathJax.typesetClear?.(removed);
+      }
+    }).catch((error) => console.warn("Nie udało się złożyć wzorów w podglądzie.", error));
+  };
+
   const fixPreviewUrls = (root) => {
     const reference = root._tippy?.reference;
     if (!reference?.matches("a.quarto-xref")) return;
@@ -1612,7 +1731,10 @@ Rysunek&nbsp;1.12: Schemat eksperymentu Milgrama. Część rozpoczętych łańcu
           node.querySelectorAll("[data-tippy-root]").forEach((root) => roots.add(root));
         });
       });
-      roots.forEach(fixPreviewUrls);
+      roots.forEach((root) => {
+        fixPreviewUrls(root);
+        typesetPreviewMath(root);
+      });
     });
     observer.observe(document.body, { childList: true, subtree: true });
   };

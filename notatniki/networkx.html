@@ -113,6 +113,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css?v=99144ab59fec">
+<script>
+window.MathJax = {
+  output: {
+    font: "mathjax-modern",
+    fontPath: "https://cdn.jsdelivr.net/npm/@mathjax/%%FONT%%-font@4.1.3"
+  },
+  startup: {
+    ready() {
+      MathJax.startup.defaultReady();
+      window.Quarto = window.Quarto || {};
+      window.Quarto.typesetMath = (element) =>
+        MathJax.startup.promise.then(() => MathJax.typesetPromise([element]));
+    }
+  }
+};
+</script>
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -548,6 +564,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </main> <!-- /main -->
 <script>
 (() => {
+  let mathJaxReady;
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+      const script = document.querySelector('script[src*="mathjax" i]');
+      if (!script) return;
+      await new Promise((resolve) => {
+        const loaded = () => {
+          script.removeEventListener("load", loaded);
+          script.removeEventListener("error", loaded);
+          resolve();
+        };
+        script.addEventListener("load", loaded, { once: true });
+        script.addEventListener("error", loaded, { once: true });
+      });
+    }
+    await globalThis.MathJax?.startup?.promise;
+    return globalThis.MathJax;
+  })();
+
   const initializeTheoremFullscreen = () => {
     const blocks = document.querySelectorAll(
       "#quarto-document-content .theorem:not(.exercise)"
@@ -570,6 +605,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     const content = dialog.querySelector(".theorem-fullscreen-content");
     const closeButton = dialog.querySelector(".theorem-fullscreen-close");
     let lastTrigger = null;
+
+    const typesetCopy = async (copy) => {
+      try {
+        const mathJax = await waitForMathJax();
+        if (!dialog.open || !copy.isConnected || !mathJax?.typesetPromise) return;
+        try {
+          await mathJax.typesetPromise([copy]);
+        } finally {
+          // The dialog may have been closed while MathJax was loading a font.
+          if (!dialog.open || !copy.isConnected) mathJax.typesetClear?.([copy]);
+        }
+      } catch (error) {
+        console.warn("Nie udało się złożyć wzorów w powiększeniu.", error);
+      }
+    };
 
     const closeDialog = () => {
       if (dialog.open) {
@@ -606,11 +656,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         element.removeAttribute("aria-controls");
       });
 
+      globalThis.MathJax?.typesetClear?.([content]);
       content.replaceChildren(copy);
       dialog.setAttribute("aria-label", title);
       lastTrigger = trigger;
       dialog.showModal();
       closeButton.focus();
+      void typesetCopy(copy);
     };
 
     closeButton.addEventListener("click", closeDialog);
@@ -620,6 +672,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
     });
     dialog.addEventListener("close", () => {
+      globalThis.MathJax?.typesetClear?.([content]);
       content.replaceChildren();
       lastTrigger?.focus();
       lastTrigger = null;
@@ -675,6 +728,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </script>
 <script>
 (() => {
+  const scheduledMath = new WeakSet();
+  let mathJaxReady;
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+      const script = document.querySelector('script[src*="mathjax" i]');
+      if (!script) return;
+      await new Promise((resolve) => {
+        const loaded = () => {
+          script.removeEventListener("load", loaded);
+          script.removeEventListener("error", loaded);
+          resolve();
+        };
+        script.addEventListener("load", loaded, { once: true });
+        script.addEventListener("error", loaded, { once: true });
+      });
+    }
+    await globalThis.MathJax?.startup?.promise;
+    return globalThis.MathJax;
+  })();
+
+  const typesetPreviewMath = (root) => {
+    if (!globalThis.MathJax && !document.querySelector?.('script[src*="mathjax" i]')) return;
+    const formulas = [...root.querySelectorAll(".tippy-content .math")]
+      .filter((formula) => !scheduledMath.has(formula) && !formula.querySelector("mjx-container"));
+    if (!formulas.length) return;
+    // MathJax mutates this subtree too; schedule each source element only once.
+    formulas.forEach((formula) => scheduledMath.add(formula));
+    void waitForMathJax().then(async (mathJax) => {
+      const attached = formulas.filter((formula) => formula.isConnected && !formula.querySelector("mjx-container"));
+      if (!attached.length || !mathJax?.typesetPromise) return;
+      try {
+        await mathJax.typesetPromise(attached);
+      } finally {
+        const removed = attached.filter((formula) => !formula.isConnected);
+        if (removed.length) mathJax.typesetClear?.(removed);
+      }
+    }).catch((error) => console.warn("Nie udało się złożyć wzorów w podglądzie.", error));
+  };
+
   const fixPreviewUrls = (root) => {
     const reference = root._tippy?.reference;
     if (!reference?.matches("a.quarto-xref")) return;
@@ -714,7 +806,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           node.querySelectorAll("[data-tippy-root]").forEach((root) => roots.add(root));
         });
       });
-      roots.forEach(fixPreviewUrls);
+      roots.forEach((root) => {
+        fixPreviewUrls(root);
+        typesetPreviewMath(root);
+      });
     });
     observer.observe(document.body, { childList: true, subtree: true });
   };

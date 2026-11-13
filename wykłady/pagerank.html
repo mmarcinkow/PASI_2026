@@ -116,6 +116,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css?v=89dd97b07f70">
+<script>
+window.MathJax = {
+  output: {
+    font: "mathjax-modern",
+    fontPath: "https://cdn.jsdelivr.net/npm/@mathjax/%%FONT%%-font@4.1.3"
+  },
+  startup: {
+    ready() {
+      MathJax.startup.defaultReady();
+      window.Quarto = window.Quarto || {};
+      window.Quarto.typesetMath = (element) =>
+        MathJax.startup.promise.then(() => MathJax.typesetPromise([element]));
+    }
+  }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml-nofont.js" type="text/javascript"></script>
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -311,11 +354,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sec-spacer-losowy" class="level2 page-columns page-full" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="sec-spacer-losowy"><span class="header-section-number">4.2</span> Spacer losowy</h2>
-<p>Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym grafem skierowanym o wierzchołkach <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mi>N</mi></msub><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">V=\{v_1,\ldots,v_N\}</annotation></semantics></math>, gdzie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">N\geq1</annotation></semantics></math>. Dopuszczamy pętle i krawędzie wielokrotne. Na razie zakładamy, że <strong>każdy wierzchołek ma co najmniej jedną krawędź wychodzącą</strong>. Liczbę kroków będziemy oznaczać przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+<p>Niech <span class="math inline">\(G\)</span> będzie skończonym grafem skierowanym o wierzchołkach <span class="math inline">\(V=\{v_1,\ldots,v_N\}\)</span>, gdzie <span class="math inline">\(N\geq1\)</span>. Dopuszczamy pętle i krawędzie wielokrotne. Na razie zakładamy, że <strong>każdy wierzchołek ma co najmniej jedną krawędź wychodzącą</strong>. Liczbę kroków będziemy oznaczać przez <span class="math inline">\(n\)</span>.</p>
 <div id="def-spacer-losowy" class="definition-boxed fullscreen-half-image fullscreen-image-75 theorem definition" data-fullscreen-include="#fig-spacer-losowy-jeden-krok">
-<p><span class="theorem-title"><strong>Definicja 4.1 (Spacer losowy)</strong></span> <strong>Spacerem losowym</strong> na grafie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> nazywamy następujący proces. Zaczynamy w wybranym wierzchołku. W każdym kroku, znajdując się w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>, losujemy jedną z krawędzi wychodzących z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>, każdą z prawdopodobieństwem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><msup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo>+</mo></msup><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">1/\deg^+(v)</annotation></semantics></math>, i przechodzimy do jej końca.</p>
+<p><span class="theorem-title"><strong>Definicja 4.1 (Spacer losowy)</strong></span> <strong>Spacerem losowym</strong> na grafie <span class="math inline">\(G\)</span> nazywamy następujący proces. Zaczynamy w wybranym wierzchołku. W każdym kroku, znajdując się w <span class="math inline">\(v\)</span>, losujemy jedną z krawędzi wychodzących z <span class="math inline">\(v\)</span>, każdą z prawdopodobieństwem <span class="math inline">\(1/\deg^+(v)\)</span>, i przechodzimy do jej końca.</p>
 </div>
-<p>Jeżeli z wierzchołka wychodzą trzy krawędzie, każdą wybieramy z prawdopodobieństwem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">1/3</annotation></semantics></math>. Dwie krawędzie prowadzące do tego samego sąsiada dają łączne prawdopodobieństwo <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">2/3</annotation></semantics></math> przejścia do niego. Losujemy więc <strong>krawędź</strong>, nie sąsiada.</p>
+<p>Jeżeli z wierzchołka wychodzą trzy krawędzie, każdą wybieramy z prawdopodobieństwem <span class="math inline">\(1/3\)</span>. Dwie krawędzie prowadzące do tego samego sąsiada dają łączne prawdopodobieństwo <span class="math inline">\(2/3\)</span> przejścia do niego. Losujemy więc <strong>krawędź</strong>, nie sąsiada.</p>
 <div id="fig-spacer-losowy-jeden-krok" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Dwa fragmenty grafów. Po lewej z v wychodzą trzy krawędzie do trzech różnych wierzchołków: na każdej krawędzi i w każdym wierzchołku docelowym jest jedna trzecia. Po prawej z v wychodzą trzy krawędzie, z których dwie prowadzą do tego samego sąsiada. Na każdej krawędzi jest jedna trzecia, a w dwóch wierzchołkach docelowych odpowiednio jedna trzecia i dwie trzecie." data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-spacer-losowy-jeden-krok-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -328,42 +371,42 @@ Rysunek&nbsp;4.1: Jeden krok spaceru losowego. Liczby na krawędziach oznaczają
 </div>
 <section id="eksperyment-ze-spacerowiczem" class="level3 page-columns page-full" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="eksperyment-ze-spacerowiczem"><span class="header-section-number">4.2.1</span> Eksperyment ze spacerowiczem</h3>
-<p>W poniższej animacji kolor wierzchołka i liczby po prawej przedstawiają <strong>prawdopodobieństwo</strong>, że spacerowicz znajdzie się w danym miejscu po <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> krokach.</p>
-<p>Obok prawdopodobieństw pokazujemy dla porównania <strong>centralność</strong> tego samego grafu, znormalizowaną do sumy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. Graf przykładowy jest ten sam co w eksperymencie z wirusem.</p>
+<p>W poniższej animacji kolor wierzchołka i liczby po prawej przedstawiają <strong>prawdopodobieństwo</strong>, że spacerowicz znajdzie się w danym miejscu po <span class="math inline">\(n\)</span> krokach.</p>
+<p>Obok prawdopodobieństw pokazujemy dla porównania <strong>centralność</strong> tego samego grafu, znormalizowaną do sumy <span class="math inline">\(1\)</span>. Graf przykładowy jest ten sam co w eksperymencie z wirusem.</p>
 <p>Kliknij wierzchołek, aby wybrać początek. Przycisk „Nowa trajektoria” ponownie losuje przebieg spaceru z tego samego miejsca. Cofanie i ponowne odtwarzanie zachowuje już wylosowaną trajektorię.</p>
 <div class="column-page">
 <div class="virus-widget walk-widget" data-walk-widget="" data-walk-mode="basic" data-walk-rounds="120" data-walk-centrality="">
   <p>Animacja spaceru losowego wymaga włączonej obsługi JavaScript.</p>
 </div>
 </div>
-<p>W grafie przykładowym rozkład zbliża się do stałych wartości. Zmiana początku zmienia pierwsze rundy, ale nie obserwowaną granicę. Na cyklu prawdopodobieństwo krąży razem ze spacerowiczem. W grafie z dwoma zamkniętymi obszarami spacerowicz może trafić do pętli albo do cyklu długości <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math> i nie może już opuścić wybranego obszaru.</p>
-<p>Rozkład prawdopodobieństwa w kolejnym kroku wyznaczamy następująco: każdy wierzchołek <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> dzieli przypisane mu prawdopodobieństwo po równo między swoje krawędzie wychodzące i przekazuje odpowiednie części do wierzchołków na ich końcach. Nowe prawdopodobieństwo w danym wierzchołku jest sumą wszystkich otrzymanych przez niego wkładów.</p>
-<p>Istnieje też prosty wzór na prawdopodobieństwo dojścia z wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> do wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> krokach. Najpierw musimy rozpatrzeć zbiór wszystkich ścieżek z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> o długości <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>. Oznaczmy ten zbiór przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi mathvariant="script">𝒮</mi><mi>w</mi><mi>v</mi></msubsup><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{S}^v_w(n)</annotation></semantics></math>. Prawdopodobieństwo, że wybierzemy konkretną ścieżkę <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>e</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">s = (e_1,\ldots,e_n)</annotation></semantics></math> wynosi</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munderover><mo>∏</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfrac><mn>1</mn><mrow><msup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo>+</mo></msup><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mi>k</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p>W grafie przykładowym rozkład zbliża się do stałych wartości. Zmiana początku zmienia pierwsze rundy, ale nie obserwowaną granicę. Na cyklu prawdopodobieństwo krąży razem ze spacerowiczem. W grafie z dwoma zamkniętymi obszarami spacerowicz może trafić do pętli albo do cyklu długości <span class="math inline">\(2\)</span> i nie może już opuścić wybranego obszaru.</p>
+<p>Rozkład prawdopodobieństwa w kolejnym kroku wyznaczamy następująco: każdy wierzchołek <span class="math inline">\(v\)</span> dzieli przypisane mu prawdopodobieństwo po równo między swoje krawędzie wychodzące i przekazuje odpowiednie części do wierzchołków na ich końcach. Nowe prawdopodobieństwo w danym wierzchołku jest sumą wszystkich otrzymanych przez niego wkładów.</p>
+<p>Istnieje też prosty wzór na prawdopodobieństwo dojścia z wierzchołka <span class="math inline">\(v\)</span> do wierzchołka <span class="math inline">\(w\)</span> w <span class="math inline">\(n\)</span> krokach. Najpierw musimy rozpatrzeć zbiór wszystkich ścieżek z <span class="math inline">\(v\)</span> do <span class="math inline">\(w\)</span> o długości <span class="math inline">\(n\)</span>. Oznaczmy ten zbiór przez <span class="math inline">\(\mathcal{S}^v_w(n)\)</span>. Prawdopodobieństwo, że wybierzemy konkretną ścieżkę <span class="math inline">\(s = (e_1,\ldots,e_n)\)</span> wynosi</p>
+<p><span class="math display">\[
 p(s) = \prod_{k=1}^n\frac{1}{\deg^+(s(e_k))}.
-</annotation></semantics></math></p>
+\]</span></p>
 <p>Zatem szukane prawdopodobieństwo jest równe</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>∑</mo><mrow><mi>s</mi><mo>∈</mo><mrow><msubsup><mi mathvariant="script">𝒮</mi><mi mathvariant="script">𝓌</mi><mi mathvariant="script">𝓋</mi></msubsup><mo stretchy="false" form="prefix" mathvariant="script">(</mo><mi mathvariant="script">𝓃</mi><mo stretchy="false" form="postfix" mathvariant="script">)</mo></mrow></mrow></munder><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \sum_{s\in\mathcal{S^v_w(n)}}p(s).
-</annotation></semantics></math></p>
+\]</span></p>
 </section>
 <section id="macierz-spaceru-losowego" class="level3 page-columns page-full" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="macierz-spaceru-losowego"><span class="header-section-number">4.2.2</span> Macierz spaceru losowego</h3>
-<p>Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> będzie macierzą sąsiedztwa <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> zgodnie z definicją <a href="siec_www.html#def-macierz-sasiedztwa" class="quarto-xref"><span>2.3</span></a>: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">A_{ij}</annotation></semantics></math> liczy krawędzie z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>. Oznaczmy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><msup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo>+</mo></msup><mo stretchy="false" form="prefix">(</mo><msub><mi>v</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>,</mo><mspace width="2.0em"></mspace><mi>D</mi><mo>=</mo><mrow><mi mathvariant="normal">diag</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>d</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>d</mi><mi>N</mi></msub><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p>Niech <span class="math inline">\(A\)</span> będzie macierzą sąsiedztwa <span class="math inline">\(G\)</span> zgodnie z definicją <a href="siec_www.html#def-macierz-sasiedztwa" class="quarto-xref"><span>2.3</span></a>: <span class="math inline">\(A_{ij}\)</span> liczy krawędzie z <span class="math inline">\(v_i\)</span> do <span class="math inline">\(v_j\)</span>. Oznaczmy</p>
+<p><span class="math display">\[
 d_i=\deg^+(v_i)=\sum_{j=1}^N A_{ij},
 \qquad D=\operatorname{diag}(d_1,\ldots,d_N).
-</annotation></semantics></math></p>
-<p>Wszystkie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mi>i</mi></msub><annotation encoding="application/x-tex">d_i</annotation></semantics></math> są dodatnie, więc macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math> jest odwracalna.</p>
+\]</span></p>
+<p>Wszystkie <span class="math inline">\(d_i\)</span> są dodatnie, więc macierz <span class="math inline">\(D\)</span> jest odwracalna.</p>
 <div id="def-macierz-spaceru-losowego" class="definition-boxed theorem definition">
 <p><span class="theorem-title"><strong>Definicja 4.2 (Macierz spaceru losowego)</strong></span> <strong>Macierzą spaceru losowego</strong> nazywamy macierz</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>=</mo><msup><mi>D</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mi>A</mi><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>M</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mfrac><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msub><mi>d</mi><mi>i</mi></msub></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 M=D^{-1}A,
 \qquad M_{ij}=\frac{A_{ij}}{d_i}.
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
-<p>Wyraz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>M</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">M_{ij}</annotation></semantics></math> jest prawdopodobieństwem przejścia z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math> w jednym kroku: spośród <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mi>i</mi></msub><annotation encoding="application/x-tex">d_i</annotation></semantics></math> jednakowo prawdopodobnych krawędzi dokładnie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">A_{ij}</annotation></semantics></math> prowadzi do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>. Mnożenie przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>D</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">D^{-1}</annotation></semantics></math> z lewej strony dzieli <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>-ty wiersz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mi>i</mi></msub><annotation encoding="application/x-tex">d_i</annotation></semantics></math>.</p>
-<p>Wróćmy do grafu z przykładu przy definicji macierzy sąsiedztwa <a href="siec_www.html#def-macierz-sasiedztwa" class="quarto-xref"><span>2.3</span></a>. Graf pozostaje ten sam, ale zamiast liczb krawędzi wpisujemy do macierzy prawdopodobieństwa przejść. Na przykład z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>1</mn></msub><annotation encoding="application/x-tex">v_1</annotation></semantics></math> wychodzą trzy krawędzie: pętla i dwie krawędzie do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>2</mn></msub><annotation encoding="application/x-tex">v_2</annotation></semantics></math>. Dlatego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mn>11</mn></msub><mo>=</mo><mn>1</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">M_{11}=1/3</annotation></semantics></math>, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mn>12</mn></msub><mo>=</mo><mn>2</mn><mi>/</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">M_{12}=2/3</annotation></semantics></math>.</p>
+<p>Wyraz <span class="math inline">\(M_{ij}\)</span> jest prawdopodobieństwem przejścia z <span class="math inline">\(v_i\)</span> do <span class="math inline">\(v_j\)</span> w jednym kroku: spośród <span class="math inline">\(d_i\)</span> jednakowo prawdopodobnych krawędzi dokładnie <span class="math inline">\(A_{ij}\)</span> prowadzi do <span class="math inline">\(v_j\)</span>. Mnożenie przez <span class="math inline">\(D^{-1}\)</span> z lewej strony dzieli <span class="math inline">\(i\)</span>-ty wiersz <span class="math inline">\(A\)</span> przez <span class="math inline">\(d_i\)</span>.</p>
+<p>Wróćmy do grafu z przykładu przy definicji macierzy sąsiedztwa <a href="siec_www.html#def-macierz-sasiedztwa" class="quarto-xref"><span>2.3</span></a>. Graf pozostaje ten sam, ale zamiast liczb krawędzi wpisujemy do macierzy prawdopodobieństwa przejść. Na przykład z <span class="math inline">\(v_1\)</span> wychodzą trzy krawędzie: pętla i dwie krawędzie do <span class="math inline">\(v_2\)</span>. Dlatego <span class="math inline">\(M_{11}=1/3\)</span>, a <span class="math inline">\(M_{12}=2/3\)</span>.</p>
 <p>Kliknięcie wierzchołka lub krawędzi zaznacza odpowiednie wiersze i kolumny, tak jak w poprzedniej lekcji. Krawędzie równoległe wskazują tę samą komórkę, która uwzględnia ich łączny wkład.</p>
 <div class="column-page">
   <div class="adjacency-widget" data-adjacency-widget="" data-adjacency-mode="walk">
@@ -384,28 +427,28 @@ M=D^{-1}A,
 </div>
 <noscript><p>Interaktywny graf i macierz wymagają włączonej obsługi JavaScript.</p></noscript>
 <script src="widgets/macierz-sasiedztwa.js"></script>
-<p>Wyrazy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> są nieujemne i <strong>każdy wiersz sumuje się do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math></strong>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><msub><mi>M</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><msub><mi>d</mi><mi>i</mi></msub></mfrac><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mn>1</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p>Wyrazy <span class="math inline">\(M\)</span> są nieujemne i <strong>każdy wiersz sumuje się do <span class="math inline">\(1\)</span></strong>:</p>
+<p><span class="math display">\[
 \sum_{j=1}^N M_{ij}
 =\frac{1}{d_i}\sum_{j=1}^N A_{ij}=1.
-</annotation></semantics></math></p>
+\]</span></p>
 </section>
 <section id="potęgi-m" class="level3" data-number="4.2.3">
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="potęgi-m"><span class="header-section-number">4.2.3</span> Potęgi M</h3>
-<p>Rozkład prawdopodobieństwa zapisujemy jako wektor wierszowy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>:</mo><mi>V</mi><mo>→</mo><mi mathvariant="double-struck">ℝ</mi></mrow><annotation encoding="application/x-tex">\alpha:V\to\mathbb R</annotation></semantics></math>, którego współrzędne są nieujemne i sumują się do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. Wartość <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\alpha(v)</annotation></semantics></math> oznacza prawdopodobieństwo przebywania w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> na początku spaceru. Jeśli wyruszamy z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>, rozkładem początkowym jest <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>δ</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\delta_i</annotation></semantics></math>.</p>
+<p>Rozkład prawdopodobieństwa zapisujemy jako wektor wierszowy <span class="math inline">\(\alpha:V\to\mathbb R\)</span>, którego współrzędne są nieujemne i sumują się do <span class="math inline">\(1\)</span>. Wartość <span class="math inline">\(\alpha(v)\)</span> oznacza prawdopodobieństwo przebywania w <span class="math inline">\(v\)</span> na początku spaceru. Jeśli wyruszamy z <span class="math inline">\(v_i\)</span>, rozkładem początkowym jest <span class="math inline">\(\delta_i\)</span>.</p>
 <div id="prp-potegi-macierzy-spaceru" class="fact theorem proposition">
-<p><span class="theorem-title"><strong>Fakt 4.1</strong></span> Dla <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n\geq0</annotation></semantics></math> wyraz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msup><mi>M</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">)</mo><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(M^n)_{ij}</annotation></semantics></math> jest prawdopodobieństwem znalezienia się w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math> po <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> krokach spaceru rozpoczętego w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>. Dla dowolnego początkowego rozkładu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> rozkład po <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> krokach jest równy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><msup><mi>M</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\alpha M^n</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Fakt 4.1</strong></span> Dla <span class="math inline">\(n\geq0\)</span> wyraz <span class="math inline">\((M^n)_{ij}\)</span> jest prawdopodobieństwem znalezienia się w <span class="math inline">\(v_j\)</span> po <span class="math inline">\(n\)</span> krokach spaceru rozpoczętego w <span class="math inline">\(v_i\)</span>. Dla dowolnego początkowego rozkładu <span class="math inline">\(\alpha\)</span> rozkład po <span class="math inline">\(n\)</span> krokach jest równy <span class="math inline">\(\alpha M^n\)</span>.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Dowód</em>. </span>Dla <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n=0</annotation></semantics></math> mamy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>M</mi><mn>0</mn></msup><mo>=</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">M^0=I</annotation></semantics></math>: spacerowicz jest w swoim punkcie startowym. Przypadek jednego kroku wynika z definicji <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>.</p>
-<p>Załóżmy teraz, że teza zachodzi dla <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>. Aby po <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math> krokach znaleźć się w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>, po <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> krokach musimy być w pewnym <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>k</mi></msub><annotation encoding="application/x-tex">v_k</annotation></semantics></math>, a następnie przejść z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>k</mi></msub><annotation encoding="application/x-tex">v_k</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>. Prawdopodobieństwo tego przebiegu wynosi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msup><mi>M</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">)</mo><mrow><mi>i</mi><mi>k</mi></mrow></msub><msub><mi>M</mi><mrow><mi>k</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(M^n)_{ik}M_{kj}</annotation></semantics></math>. Możliwości odpowiadające różnym <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math> są rozłączne, więc ich prawdopodobieństwa sumujemy:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><mo stretchy="false" form="prefix">(</mo><msup><mi>M</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">)</mo><mrow><mi>i</mi><mi>k</mi></mrow></msub><msub><mi>M</mi><mrow><mi>k</mi><mi>j</mi></mrow></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>M</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><msub><mo stretchy="false" form="postfix">)</mo><mrow><mi>i</mi><mi>j</mi></mrow></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="proof-title"><em>Dowód</em>. </span>Dla <span class="math inline">\(n=0\)</span> mamy <span class="math inline">\(M^0=I\)</span>: spacerowicz jest w swoim punkcie startowym. Przypadek jednego kroku wynika z definicji <span class="math inline">\(M\)</span>.</p>
+<p>Załóżmy teraz, że teza zachodzi dla <span class="math inline">\(n\)</span>. Aby po <span class="math inline">\(n+1\)</span> krokach znaleźć się w <span class="math inline">\(v_j\)</span>, po <span class="math inline">\(n\)</span> krokach musimy być w pewnym <span class="math inline">\(v_k\)</span>, a następnie przejść z <span class="math inline">\(v_k\)</span> do <span class="math inline">\(v_j\)</span>. Prawdopodobieństwo tego przebiegu wynosi <span class="math inline">\((M^n)_{ik}M_{kj}\)</span>. Możliwości odpowiadające różnym <span class="math inline">\(k\)</span> są rozłączne, więc ich prawdopodobieństwa sumujemy:</p>
+<p><span class="math display">\[
 \sum_{k=1}^N (M^n)_{ik}M_{kj}=(M^{n+1})_{ij}.
-</annotation></semantics></math></p>
-<p>Jeżeli początek również jest losowy, z prawdopodobieństwem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>v</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\alpha(v_i)</annotation></semantics></math> wybieramy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>. Prawdopodobieństwo zakończenia w <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math> wynosi zatem</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><mi>α</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>v</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>M</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">)</mo><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>α</mi><msup><mi>M</mi><mi>n</mi></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>v</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\]</span></p>
+<p>Jeżeli początek również jest losowy, z prawdopodobieństwem <span class="math inline">\(\alpha(v_i)\)</span> wybieramy <span class="math inline">\(v_i\)</span>. Prawdopodobieństwo zakończenia w <span class="math inline">\(v_j\)</span> wynosi zatem</p>
+<p><span class="math display">\[
 \sum_{i=1}^N\alpha(v_i)(M^n)_{ij}=(\alpha M^n)(v_j).
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 </section>
 </section>
@@ -413,59 +456,59 @@ M=D^{-1}A,
 <h2 data-number="4.3" class="anchored" data-anchor-id="sec-pagerank-bez-teleportacji"><span class="header-section-number">4.3</span> PageRank</h2>
 <section id="prawy-i-lewy-wektor-własny" class="level3" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="prawy-i-lewy-wektor-własny"><span class="header-section-number">4.3.1</span> Prawy i lewy wektor własny</h3>
-<p>Liczbę <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> nazywamy <strong>prawą wartością własną</strong> macierzy kwadratowej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, jeżeli istnieje niezerowy wektor kolumnowy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> spełniający <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>x</mi><mo>=</mo><mi>μ</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">Mx=\mu x</annotation></semantics></math>. Wektor <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> nazywamy wtedy <strong>prawym wektorem własnym</strong> odpowiadającym wartości własnej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>. Analogicznie, liczbę <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> nazywamy <strong>lewą wartością własną</strong> macierzy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, jeżeli istnieje niezerowy wektor wierszowy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> spełniający <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mi>M</mi><mo>=</mo><mi>μ</mi><mi>v</mi></mrow><annotation encoding="application/x-tex">vM=\mu v</annotation></semantics></math>. Wektor <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> nazywamy wtedy <strong>lewym wektorem własnym</strong> odpowiadającym wartości własnej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>.</p>
+<p>Liczbę <span class="math inline">\(\mu\)</span> nazywamy <strong>prawą wartością własną</strong> macierzy kwadratowej <span class="math inline">\(M\)</span>, jeżeli istnieje niezerowy wektor kolumnowy <span class="math inline">\(x\)</span> spełniający <span class="math inline">\(Mx=\mu x\)</span>. Wektor <span class="math inline">\(x\)</span> nazywamy wtedy <strong>prawym wektorem własnym</strong> odpowiadającym wartości własnej <span class="math inline">\(\mu\)</span>. Analogicznie, liczbę <span class="math inline">\(\mu\)</span> nazywamy <strong>lewą wartością własną</strong> macierzy <span class="math inline">\(M\)</span>, jeżeli istnieje niezerowy wektor wierszowy <span class="math inline">\(v\)</span> spełniający <span class="math inline">\(vM=\mu v\)</span>. Wektor <span class="math inline">\(v\)</span> nazywamy wtedy <strong>lewym wektorem własnym</strong> odpowiadającym wartości własnej <span class="math inline">\(\mu\)</span>.</p>
 <div id="prp-lewe-prawe-wartosci-wlasne" class="fact theorem proposition">
-<p><span class="theorem-title"><strong>Fakt 4.2</strong></span> Lewe i prawe wartości własne macierzy kwadratowej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> są takie same.</p>
+<p><span class="theorem-title"><strong>Fakt 4.2</strong></span> Lewe i prawe wartości własne macierzy kwadratowej <span class="math inline">\(M\)</span> są takie same.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Dowód</em>. </span>Z algebry wiadomo, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> jest prawą wartością własną <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> wtedy i tylko wtedy, gdy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>−</mo><mi>μ</mi><mi>I</mi></mrow><annotation encoding="application/x-tex">M-\mu I</annotation></semantics></math> jest nieodwracalna. Analogiczny dowód pokazuje, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> jest lewą wartością własną wtedy i tylko wtedy, gdy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>−</mo><mi>μ</mi><mi>I</mi></mrow><annotation encoding="application/x-tex">M-\mu I</annotation></semantics></math> jest nieodwracalna. Dostaliśmy ten sam warunek na lewe i prawe wartości własne, zatem są one takie same.</p>
+<p><span class="proof-title"><em>Dowód</em>. </span>Z algebry wiadomo, że <span class="math inline">\(\mu\)</span> jest prawą wartością własną <span class="math inline">\(M\)</span> wtedy i tylko wtedy, gdy <span class="math inline">\(M-\mu I\)</span> jest nieodwracalna. Analogiczny dowód pokazuje, że <span class="math inline">\(\mu\)</span> jest lewą wartością własną wtedy i tylko wtedy, gdy <span class="math inline">\(M-\mu I\)</span> jest nieodwracalna. Dostaliśmy ten sam warunek na lewe i prawe wartości własne, zatem są one takie same.</p>
 </div>
 <p>Lewe i prawe wartości własne są takie same, ale odpowiadające im wektory własne mogą być jednak różne.</p>
-<p>Wróćmy do macierzy spaceru losowego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>. Oznaczmy przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn mathvariant="bold">𝟏</mn><annotation encoding="application/x-tex">\mathbf1</annotation></semantics></math> <strong>kolumnowy</strong> wektor samych jedynek. Ponieważ każdy wiersz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> sumuje się do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>, mamy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mn mathvariant="bold">𝟏</mn><mo>=</mo><mn mathvariant="bold">𝟏</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p>Wróćmy do macierzy spaceru losowego <span class="math inline">\(M\)</span>. Oznaczmy przez <span class="math inline">\(\mathbf1\)</span> <strong>kolumnowy</strong> wektor samych jedynek. Ponieważ każdy wiersz <span class="math inline">\(M\)</span> sumuje się do <span class="math inline">\(1\)</span>, mamy</p>
+<p><span class="math display">\[
 M\mathbf1=\mathbf1.
-</annotation></semantics></math></p>
-<p>Znamy więc prawy wektor własny odpowiadający wartości <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. My jednak opisujemy rozkłady przez wektory wierszowe i, podobnie jak w centralności, będziemy szukać <strong>lewego</strong> wektora <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>, dla którego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>M</mi><mo>=</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">rM=r</annotation></semantics></math>. Ten wektor jest znacznie mniej oczywisty i zależy od struktury całego grafu.</p>
+\]</span></p>
+<p>Znamy więc prawy wektor własny odpowiadający wartości <span class="math inline">\(1\)</span>. My jednak opisujemy rozkłady przez wektory wierszowe i, podobnie jak w centralności, będziemy szukać <strong>lewego</strong> wektora <span class="math inline">\(r\)</span>, dla którego <span class="math inline">\(rM=r\)</span>. Ten wektor jest znacznie mniej oczywisty i zależy od struktury całego grafu.</p>
 <div id="prp-wartosc-wlasna-macierzy-spaceru" class="fact theorem proposition">
-<p><span class="theorem-title"><strong>Fakt 4.3</strong></span> Jeżeli <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> ma wyrazy nieujemne i każdy jej wiersz sumuje się do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>, to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> jest jej największą rzeczywistą wartością własną.</p>
+<p><span class="theorem-title"><strong>Fakt 4.3</strong></span> Jeżeli <span class="math inline">\(M\)</span> ma wyrazy nieujemne i każdy jej wiersz sumuje się do <span class="math inline">\(1\)</span>, to <span class="math inline">\(1\)</span> jest jej największą rzeczywistą wartością własną.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Dowód</em>. </span>Równość <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mn mathvariant="bold">𝟏</mn><mo>=</mo><mn mathvariant="bold">𝟏</mn></mrow><annotation encoding="application/x-tex">M\mathbf1=\mathbf1</annotation></semantics></math> pokazuje, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> jest wartością własną.</p>
-<p>Niech teraz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> będzie dowolną rzeczywistą wartością własną <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> odpowiadającym jej niezerowym rzeczywistym wektorem kolumnowym: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>x</mi><mo>=</mo><mi>μ</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">Mx=\mu x</annotation></semantics></math>. Mnożąc w razie potrzeby <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>, możemy założyć, że jego największa współrzędna jest dodatnia. Wybierzmy indeks <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> taki, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><msub><mrow><mi mathvariant="normal">max</mi><mo>⁡</mo></mrow><mi>j</mi></msub><msub><mi>x</mi><mi>j</mi></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x_i=\max_j x_j&gt;0</annotation></semantics></math>. Ponieważ wyrazy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> są nieujemne,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>M</mi><mi>x</mi><msub><mo stretchy="false" form="postfix">)</mo><mi>i</mi></msub><mo>=</mo><munder><mo>∑</mo><mi>j</mi></munder><msub><mi>M</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msub><mi>x</mi><mi>j</mi></msub><mo>≤</mo><munder><mo>∑</mo><mi>j</mi></munder><msub><mi>M</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><msub><mi>x</mi><mi>i</mi></msub><munder><mo>∑</mo><mi>j</mi></munder><msub><mi>M</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>i</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="proof-title"><em>Dowód</em>. </span>Równość <span class="math inline">\(M\mathbf1=\mathbf1\)</span> pokazuje, że <span class="math inline">\(1\)</span> jest wartością własną.</p>
+<p>Niech teraz <span class="math inline">\(\mu\)</span> będzie dowolną rzeczywistą wartością własną <span class="math inline">\(M\)</span>, a <span class="math inline">\(x\)</span> odpowiadającym jej niezerowym rzeczywistym wektorem kolumnowym: <span class="math inline">\(Mx=\mu x\)</span>. Mnożąc w razie potrzeby <span class="math inline">\(x\)</span> przez <span class="math inline">\(-1\)</span>, możemy założyć, że jego największa współrzędna jest dodatnia. Wybierzmy indeks <span class="math inline">\(i\)</span> taki, że <span class="math inline">\(x_i=\max_j x_j&gt;0\)</span>. Ponieważ wyrazy <span class="math inline">\(M\)</span> są nieujemne,</p>
+<p><span class="math display">\[
 \mu x_i=(Mx)_i
 =\sum_jM_{ij}x_j
 \leq\sum_jM_{ij}x_i
 =x_i\sum_jM_{ij}
 =x_i.
-</annotation></semantics></math></p>
-<p>Po podzieleniu przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x_i&gt;0</annotation></semantics></math> otrzymujemy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\mu\leq1</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Po podzieleniu przez <span class="math inline">\(x_i&gt;0\)</span> otrzymujemy <span class="math inline">\(\mu\leq1\)</span>.</p>
 </div>
-<p>Z twierdzenia Perrona–Frobeniusa <a href="centralnosc.html#thm-perron-frobenius" class="quarto-xref"><span>3.1</span></a> wynika, że dla grafu silnie spójnego istnieje dokładnie jeden wektor wierszowy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> o sumie współrzędnych równej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>, dla którego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>M</mi><mo>=</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">rM=r</annotation></semantics></math>.</p>
+<p>Z twierdzenia Perrona–Frobeniusa <a href="centralnosc.html#thm-perron-frobenius" class="quarto-xref"><span>3.1</span></a> wynika, że dla grafu silnie spójnego istnieje dokładnie jeden wektor wierszowy <span class="math inline">\(r\)</span> o sumie współrzędnych równej <span class="math inline">\(1\)</span>, dla którego <span class="math inline">\(rM=r\)</span>.</p>
 <div id="def-pagerank-bez-teleportacji" class="definition-boxed theorem definition">
-<p><span class="theorem-title"><strong>Definicja 4.3 (PageRank)</strong></span> <strong>PageRankiem</strong> silnie spójnego grafu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>, w którym każdy wierzchołek ma krawędź wychodzącą, nazywamy wektor wierszowy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> spełniający</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>M</mi><mo>=</mo><mi>r</mi><mo>,</mo><mspace width="2.0em"></mspace><munder><mo>∑</mo><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow></munder><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Definicja 4.3 (PageRank)</strong></span> <strong>PageRankiem</strong> silnie spójnego grafu <span class="math inline">\(G\)</span>, w którym każdy wierzchołek ma krawędź wychodzącą, nazywamy wektor wierszowy <span class="math inline">\(r\)</span> spełniający</p>
+<p><span class="math display">\[
 rM=r,\qquad \sum_{v\in V}r(v)=1.
-</annotation></semantics></math></p>
-<p>Wartość <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">r(v)</annotation></semantics></math> nazywamy PageRankiem wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Wartość <span class="math inline">\(r(v)\)</span> nazywamy PageRankiem wierzchołka <span class="math inline">\(v\)</span>.</p>
 </div>
 <p>Po rozpisaniu równania współrzędnymi otrzymujemy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mo>∑</mo><mrow><mi>u</mi><mo>→</mo><mi>w</mi></mrow></munder><mfrac><mrow><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo>+</mo></msup><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 r(w)=\sum_{u\to w}\frac{r(u)}{\deg^+(u)}.
-</annotation></semantics></math></p>
-<p>Sumujemy po krawędziach, więc krawędzie równoległe wnoszą osobne składniki. Wierzchołek <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math> dzieli swoją ważność jednakowo między wszystkie krawędzie wychodzące.</p>
+\]</span></p>
+<p>Sumujemy po krawędziach, więc krawędzie równoległe wnoszą osobne składniki. Wierzchołek <span class="math inline">\(u\)</span> dzieli swoją ważność jednakowo między wszystkie krawędzie wychodzące.</p>
 <div id="prp-zbieznosc-spaceru" class="fact theorem proposition">
-<p><span class="theorem-title"><strong>Fakt 4.4</strong></span> Jeżeli <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> jest aperiodyczny, to dla każdego początkowego rozkładu prawdopodobieństwa <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> zachodzi</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><msup><mi>M</mi><mi>n</mi></msup><mo>→</mo><mi>r</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Fakt 4.4</strong></span> Jeżeli <span class="math inline">\(G\)</span> jest aperiodyczny, to dla każdego początkowego rozkładu prawdopodobieństwa <span class="math inline">\(\alpha\)</span> zachodzi</p>
+<p><span class="math display">\[
 \alpha M^n\longrightarrow r.
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Dowód</em>. </span>Macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> jest prymitywna, a jej wartość własna Perrona-Frobeniusa wynosi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> na mocy faktu <a href="#prp-wartosc-wlasna-macierzy-spaceru" class="quarto-xref"><span>4.3</span></a>. Z twierdzenia <a href="centralnosc.html#thm-zbieznosc-do-wektora-perrona" class="quarto-xref"><span>3.3</span></a>, zastosowanego do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, otrzymujemy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>α</mi><msup><mi>M</mi><mi>n</mi></msup></mrow><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>M</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow></mfrac><mo>→</mo><mi>r</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="proof-title"><em>Dowód</em>. </span>Macierz <span class="math inline">\(M\)</span> jest prymitywna, a jej wartość własna Perrona-Frobeniusa wynosi <span class="math inline">\(1\)</span> na mocy faktu <a href="#prp-wartosc-wlasna-macierzy-spaceru" class="quarto-xref"><span>4.3</span></a>. Z twierdzenia <a href="centralnosc.html#thm-zbieznosc-do-wektora-perrona" class="quarto-xref"><span>3.3</span></a>, zastosowanego do <span class="math inline">\(M\)</span>, otrzymujemy</p>
+<p><span class="math display">\[
 \frac{\alpha M^n}{\|\alpha M^n\|_1}\longrightarrow r.
-</annotation></semantics></math></p>
-<p>Ponieważ <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> jest rozkładem prawdopodobieństwa, a mnożenie przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> zachowuje nieujemność i sumę współrzędnych, mamy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>M</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\|\alpha M^n\|_1=1</annotation></semantics></math>. Zatem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><msup><mi>M</mi><mi>n</mi></msup><mo>→</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">\alpha M^n\to r</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Ponieważ <span class="math inline">\(\alpha\)</span> jest rozkładem prawdopodobieństwa, a mnożenie przez <span class="math inline">\(M\)</span> zachowuje nieujemność i sumę współrzędnych, mamy <span class="math inline">\(\|\alpha M^n\|_1=1\)</span>. Zatem <span class="math inline">\(\alpha M^n\to r\)</span>.</p>
 </div>
 <p>Podobnie jak w przypadku centralnośći, silna spójność zapewnia jednoznaczność RageRank’u, ale <strong>nie wystarcza do zbieżności</strong>. Na cyklu skierowanym rozkład jednostajny jest RageRankiem, mimo że spacer rozpoczęty w jednym wierzchołku nigdy nie ma takiego rozkładu.</p>
 </section>
@@ -475,49 +518,49 @@ r(w)=\sum_{u\to w}\frac{r(u)}{\deg^+(u)}.
 <p>Wykonamy modyfikację podobną do tej którą robiliśmy przy centralności, ale tym razem będzie ona dawała dobrze określony PageRank dla wszystkich grafów skierowanych.</p>
 <section id="teleportacja" class="level3" data-number="4.4.1">
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="teleportacja"><span class="header-section-number">4.4.1</span> Teleportacja</h3>
-<p>Zauważmy, że jeżel w grafie mamy wierzchołek bez krawędzi wychodzących, nie możemy poprawnie zdefiniować macierzy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, bo dzielimy w niej przez stopień wychodzący. Zmodyfikujmy definicję <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> wprowadzając następującą zasadę: jeżeli spacerowicz trafi do wierzchołka bez krawędzi wychodzących, w następnym kroku wybiera z równym prawdopodobieństwem dowolny wierzchołek grafu. Może przy tym wybrać również ten, w którym właśnie jest.</p>
-<p>Macierz uzupełnionego spaceru oznaczamy przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>M</mi><mo accent="true">̃</mo></mover><annotation encoding="application/x-tex">\widetilde M</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>M</mi><mo accent="true">̃</mo></mover><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mstyle displaystyle="true"><mfrac><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msub><mi>d</mi><mi>i</mi></msub></mfrac></mstyle><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>d</mi><mi>i</mi></msub><mo>&gt;</mo><mn>0</mn><mo>,</mo></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>N</mi></mfrac></mstyle><mo>,</mo></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn><mi>.</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+<p>Zauważmy, że jeżel w grafie mamy wierzchołek bez krawędzi wychodzących, nie możemy poprawnie zdefiniować macierzy <span class="math inline">\(M\)</span>, bo dzielimy w niej przez stopień wychodzący. Zmodyfikujmy definicję <span class="math inline">\(M\)</span> wprowadzając następującą zasadę: jeżeli spacerowicz trafi do wierzchołka bez krawędzi wychodzących, w następnym kroku wybiera z równym prawdopodobieństwem dowolny wierzchołek grafu. Może przy tym wybrać również ten, w którym właśnie jest.</p>
+<p>Macierz uzupełnionego spaceru oznaczamy przez <span class="math inline">\(\widetilde M\)</span>:</p>
+<p><span class="math display">\[
 \widetilde M_{ij}=
 \begin{cases}
 \dfrac{A_{ij}}{d_i},&amp;d_i&gt;0,\\[4pt]
 \dfrac1N,&amp;d_i=0.
 \end{cases}
-</annotation></semantics></math></p>
-<p>Każdy wiersz ponownie sumuje się do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. To jeszcze nie sprawia, że macierz jest prymitywna, więc nie mamy gwarancji istnienia i jednoznaczności PageRanku. Wprowadzimy więc dodatkową zmianę.</p>
-<p>Ustalmy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>β</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;\beta&lt;1</annotation></semantics></math>. W każdym kroku spacerowicz:</p>
+\]</span></p>
+<p>Każdy wiersz ponownie sumuje się do <span class="math inline">\(1\)</span>. To jeszcze nie sprawia, że macierz jest prymitywna, więc nie mamy gwarancji istnienia i jednoznaczności PageRanku. Wprowadzimy więc dodatkową zmianę.</p>
+<p>Ustalmy <span class="math inline">\(0&lt;\beta&lt;1\)</span>. W każdym kroku spacerowicz:</p>
 <ul>
-<li>z prawdopodobieństwem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math> wykonuje krok według <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>M</mi><mo accent="true">̃</mo></mover><annotation encoding="application/x-tex">\widetilde M</annotation></semantics></math>;</li>
-<li>z prawdopodobieństwem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">1-\beta</annotation></semantics></math> wybiera jednostajnie dowolny wierzchołek, niezależnie od aktualnego położenia. Ten ruch nazywamy <strong>teleportacją</strong>.</li>
+<li>z prawdopodobieństwem <span class="math inline">\(\beta\)</span> wykonuje krok według <span class="math inline">\(\widetilde M\)</span>;</li>
+<li>z prawdopodobieństwem <span class="math inline">\(1-\beta\)</span> wybiera jednostajnie dowolny wierzchołek, niezależnie od aktualnego położenia. Ten ruch nazywamy <strong>teleportacją</strong>.</li>
 </ul>
-<p>Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math> będzie macierzą <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>×</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">N\times N</annotation></semantics></math> złożoną z samych jedynek. Macierz nowego spaceru to</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi>β</mi><mover><mi>M</mi><mo accent="true">̃</mo></mover><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>β</mi><mo stretchy="false" form="postfix">)</mo><mfrac><mi>J</mi><mi>N</mi></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p>Niech <span class="math inline">\(J\)</span> będzie macierzą <span class="math inline">\(N\times N\)</span> złożoną z samych jedynek. Macierz nowego spaceru to</p>
+<p><span class="math display">\[
 P=\beta\widetilde M+(1-\beta)\frac{J}{N}.
-</annotation></semantics></math></p>
-<p>Jej wyraz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">P_{ij}</annotation></semantics></math> uwzględnia dwie możliwości przejścia z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>: zwykły krok i teleportację. W wierzchołku bez wyjścia obie reguły prowadzą do wyboru jednostajnego, więc odpowiedni wiersz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math> ma wszystkie wyrazy równe <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>N</mi></mrow><annotation encoding="application/x-tex">1/N</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Jej wyraz <span class="math inline">\(P_{ij}\)</span> uwzględnia dwie możliwości przejścia z <span class="math inline">\(v_i\)</span> do <span class="math inline">\(v_j\)</span>: zwykły krok i teleportację. W wierzchołku bez wyjścia obie reguły prowadzą do wyboru jednostajnego, więc odpowiedni wiersz <span class="math inline">\(P\)</span> ma wszystkie wyrazy równe <span class="math inline">\(1/N\)</span>.</p>
 <div id="def-pagerank" class="definition-boxed theorem definition">
-<p><span class="theorem-title"><strong>Definicja 4.4 (PageRank z teleportacją)</strong></span> <strong>PageRankiem</strong> grafu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> z parametrem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo>∈</mo><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\beta\in(0,1)</annotation></semantics></math> i teleportacją nazywamy wektor wierszowy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> spełniający</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>P</mi><mo>=</mo><mi>r</mi><mo>,</mo><mspace width="2.0em"></mspace><munder><mo>∑</mo><mrow><mi>v</mi><mo>∈</mo><mi>V</mi></mrow></munder><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Definicja 4.4 (PageRank z teleportacją)</strong></span> <strong>PageRankiem</strong> grafu <span class="math inline">\(G\)</span> z parametrem <span class="math inline">\(\beta\in(0,1)\)</span> i teleportacją nazywamy wektor wierszowy <span class="math inline">\(r\)</span> spełniający</p>
+<p><span class="math display">\[
 rP=r,\qquad \sum_{v\in V}r(v)=1.
-</annotation></semantics></math></p>
-<p>Wartość <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">r(v)</annotation></semantics></math> nazywamy PageRankiem wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Wartość <span class="math inline">\(r(v)\)</span> nazywamy PageRankiem wierzchołka <span class="math inline">\(v\)</span>.</p>
 </div>
 <div id="prp-pagerank-istnienie-zbieznosc" class="fact theorem proposition">
-<p><span class="theorem-title"><strong>Fakt 4.5</strong></span> Dla każdego skończonego grafu skierowanego i każdego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>β</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;\beta&lt;1</annotation></semantics></math> PageRank istnieje, jest wyznaczony jednoznacznie i ma wszystkie współrzędne dodatnie. Dla dowolnego początkowego rozkładu prawdopodobieństwa <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> mamy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><msup><mi>P</mi><mi>n</mi></msup><mo>→</mo><mi>r</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Fakt 4.5</strong></span> Dla każdego skończonego grafu skierowanego i każdego <span class="math inline">\(0&lt;\beta&lt;1\)</span> PageRank istnieje, jest wyznaczony jednoznacznie i ma wszystkie współrzędne dodatnie. Dla dowolnego początkowego rozkładu prawdopodobieństwa <span class="math inline">\(\alpha\)</span> mamy</p>
+<p><span class="math display">\[
 \alpha P^n\longrightarrow r.
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Dowód</em>. </span>Każdy wiersz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math> sumuje się do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>, a ponadto</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>≥</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>β</mi></mrow><mi>N</mi></mfrac><mo>&gt;</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="proof-title"><em>Dowód</em>. </span>Każdy wiersz <span class="math inline">\(P\)</span> sumuje się do <span class="math inline">\(1\)</span>, a ponadto</p>
+<p><span class="math display">\[
 P_{ij}\geq\frac{1-\beta}{N}&gt;0.
-</annotation></semantics></math></p>
-<p>Macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math> jest więc prymitywna już z wykładnikiem <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. Jej największa rzeczywista wartość własna wynosi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> na mocy faktu <a href="#prp-wartosc-wlasna-macierzy-spaceru" class="quarto-xref"><span>4.3</span></a>. Twierdzenie Perrona–Frobeniusa <a href="centralnosc.html#thm-perron-frobenius" class="quarto-xref"><span>3.1</span></a> daje jednoznaczny dodatni wektor własny <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> o sumie współrzędnych równej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. Z twierdzenia <a href="centralnosc.html#thm-zbieznosc-do-wektora-perrona" class="quarto-xref"><span>3.3</span></a>, zastosowanego do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>, otrzymujemy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>α</mi><msup><mi>P</mi><mi>n</mi></msup></mrow><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>P</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow></mfrac><mo>→</mo><mi>r</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\]</span></p>
+<p>Macierz <span class="math inline">\(P\)</span> jest więc prymitywna już z wykładnikiem <span class="math inline">\(1\)</span>. Jej największa rzeczywista wartość własna wynosi <span class="math inline">\(1\)</span> na mocy faktu <a href="#prp-wartosc-wlasna-macierzy-spaceru" class="quarto-xref"><span>4.3</span></a>. Twierdzenie Perrona–Frobeniusa <a href="centralnosc.html#thm-perron-frobenius" class="quarto-xref"><span>3.1</span></a> daje jednoznaczny dodatni wektor własny <span class="math inline">\(r\)</span> o sumie współrzędnych równej <span class="math inline">\(1\)</span>. Z twierdzenia <a href="centralnosc.html#thm-zbieznosc-do-wektora-perrona" class="quarto-xref"><span>3.3</span></a>, zastosowanego do <span class="math inline">\(P\)</span>, otrzymujemy</p>
+<p><span class="math display">\[
 \frac{\alpha P^n}{\|\alpha P^n\|_1}\longrightarrow r.
-</annotation></semantics></math></p>
-<p>Mnożenie przez <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math> zachowuje nieujemność i sumę współrzędnych równą <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>, więc <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>P</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\|\alpha P^n\|_1=1</annotation></semantics></math>. Stąd <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><msup><mi>P</mi><mi>n</mi></msup><mo>→</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">\alpha P^n\to r</annotation></semantics></math>.</p>
+\]</span></p>
+<p>Mnożenie przez <span class="math inline">\(P\)</span> zachowuje nieujemność i sumę współrzędnych równą <span class="math inline">\(1\)</span>, więc <span class="math inline">\(\|\alpha P^n\|_1=1\)</span>. Stąd <span class="math inline">\(\alpha P^n\to r\)</span>.</p>
 </div>
 <p>Nie musimy zakładać silnej spójności ani aperiodyczności pierwotnego grafu. Teleportacja pozwala opuścić każdy zamknięty obszar i przejść między dowolnymi częściami sieci.</p>
 <p>Teleportacja nie jest związana jedynie z PageRankiem. Różne wersje teleportacji można zastosować też do centralności.</p>
@@ -537,15 +580,15 @@ P_{ij}\geq\frac{1-\beta}{N}&gt;0.
 <section id="sec-pagerank-mapreduce" class="level2 page-columns page-full" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="sec-pagerank-mapreduce"><span class="header-section-number">4.5</span> MapReduce</h2>
 <p><strong>MapReduce</strong> jest modelem przetwarzania danych pozwalającym szybko liczyć funkcje typu PageRank czy centralność (<a href="https://research.google/pubs/mapreduce-simplified-data-processing-on-large-clusters/"><em>MapReduce: Simplified Data Processing on Large Clusters</em></a>). Obliczenia mogą być wykonane równolegle oraz bez zapisywania całej macierzy w pamięci.</p>
-<p>Opiszmy najpierw najprostszy przypadek dla PageRanku bez teleportacji. Na początku każdy komputer w klastrze otrzymuje część wierzchołków i ich krawędzi wychodzących oraz odpowiadające im wartości <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\alpha_n(u)</annotation></semantics></math>. Proces obliczeń składa się z trzech etapów:</p>
+<p>Opiszmy najpierw najprostszy przypadek dla PageRanku bez teleportacji. Na początku każdy komputer w klastrze otrzymuje część wierzchołków i ich krawędzi wychodzących oraz odpowiadające im wartości <span class="math inline">\(\alpha_n(u)\)</span>. Proces obliczeń składa się z trzech etapów:</p>
 <ol type="1">
-<li><p><strong>Map.</strong> Dla każdej krawędzi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>→</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">u\to w</annotation></semantics></math> tworzymy parę <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>w</mi><mo>,</mo><mfrac><mrow><mi>β</mi><msub><mi>α</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo>+</mo></msup><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<li><p><strong>Map.</strong> Dla każdej krawędzi <span class="math inline">\(u\to w\)</span> tworzymy parę <span class="math display">\[
 \left(w,\frac{\beta\alpha_n(u)}{\deg^+(u)}\right).
-</annotation></semantics></math> Kluczem jest wierzchołek docelowy, a wartością przekazywany wkład.</p></li>
-<li><p><strong>Shuffle i grupowanie.</strong> System przesyła pary do zadań Reduce zgodnie z ich kluczami. Wszystkie pary o tym samym kluczu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> trafiają do tego samego zadania, niezależnie od tego, z którego komputera pochodzą. Grupowanie odbywa się na komputerach wykonujących te zadania.</p></li>
+\]</span> Kluczem jest wierzchołek docelowy, a wartością przekazywany wkład.</p></li>
+<li><p><strong>Shuffle i grupowanie.</strong> System przesyła pary do zadań Reduce zgodnie z ich kluczami. Wszystkie pary o tym samym kluczu <span class="math inline">\(w\)</span> trafiają do tego samego zadania, niezależnie od tego, z którego komputera pochodzą. Grupowanie odbywa się na komputerach wykonujących te zadania.</p></li>
 <li><p><strong>Reduce.</strong> Każde zadanie sumuje wkłady osobno dla każdego przypisanego mu klucza. Jedno zadanie może obsługiwać wiele kluczy, a różne zadania mogą działać równolegle na różnych komputerach.</p></li>
 </ol>
-<p>Na przykład wkłady <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo>,</mo><mn>0</mn><mo>,</mo><mn>03</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(w,0{,}03)</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo>,</mo><mn>0</mn><mo>,</mo><mn>02</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(w,0{,}02)</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo>,</mo><mn>0</mn><mo>,</mo><mn>01</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(w,0{,}01)</annotation></semantics></math> po zgrupowaniu dają sumę <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mn>06</mn></mrow><annotation encoding="application/x-tex">0{,}06</annotation></semantics></math>. Nie musimy wiedzieć, który komputer wyznaczył poszczególne składniki.</p>
+<p>Na przykład wkłady <span class="math inline">\((w,0{,}03)\)</span>, <span class="math inline">\((w,0{,}02)\)</span> i <span class="math inline">\((w,0{,}01)\)</span> po zgrupowaniu dają sumę <span class="math inline">\(0{,}06\)</span>. Nie musimy wiedzieć, który komputer wyznaczył poszczególne składniki.</p>
 <div class="page-columns page-full">
 <div id="fig-mapreduce-rozproszone" class="lightbox quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" alt="Spójny graf skierowany o sześciu wierzchołkach i krawędziach w trzech kolorach, po jednym na komputer. Pogrubione krawędzie tworzą pary klucz i wkład. Komputer 1 tworzy pary w i 0,03 oraz z i 0,06; komputer 2 tworzy pary po 0,02 dla w i z; komputer 3 tworzy pary po 0,01 dla w i z. Shuffle przesyła i grupuje pary według klucza u reduktorów. Dwa zadania Reduce obliczają sumy 0,06 dla w i 0,09 dla z." data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
@@ -553,24 +596,24 @@ P_{ij}\geq\frac{1-\beta}{N}&gt;0.
 <a href="images/mapreduce-rozproszone.svg?v=c25e9cfaca4d" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-2" title="Rysunek&nbsp;4.2: Jeden krok MapReduce bez teleportacji. Kolory krawędzi oznaczają komputery przechowujące fragmenty grafu, a pogrubienia wskazują wybrane wyniki Map: wkłady dla kluczy w i z. Panel po prawej jest logicznym widokiem rozproszonego grupowania i sumowania w dwóch zadaniach Reduce."><img src="images/mapreduce-rozproszone.svg?v=c25e9cfaca4d" class="img-fluid quarto-figure quarto-figure-center figure-img column-page" style="width:100.0%" alt="Spójny graf skierowany o sześciu wierzchołkach i krawędziach w trzech kolorach, po jednym na komputer. Pogrubione krawędzie tworzą pary klucz i wkład. Komputer 1 tworzy pary w i 0,03 oraz z i 0,06; komputer 2 tworzy pary po 0,02 dla w i z; komputer 3 tworzy pary po 0,01 dla w i z. Shuffle przesyła i grupuje pary według klucza u reduktorów. Dwa zadania Reduce obliczają sumy 0,06 dla w i 0,09 dla z."></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mapreduce-rozproszone-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Rysunek&nbsp;4.2: Jeden krok MapReduce bez teleportacji. Kolory krawędzi oznaczają komputery przechowujące fragmenty grafu, a pogrubienia wskazują wybrane wyniki Map: wkłady dla kluczy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>. Panel po prawej jest logicznym widokiem rozproszonego grupowania i sumowania w dwóch zadaniach Reduce.
+Rysunek&nbsp;4.2: Jeden krok MapReduce bez teleportacji. Kolory krawędzi oznaczają komputery przechowujące fragmenty grafu, a pogrubienia wskazują wybrane wyniki Map: wkłady dla kluczy <span class="math inline">\(w\)</span> i <span class="math inline">\(z\)</span>. Panel po prawej jest logicznym widokiem rozproszonego grupowania i sumowania w dwóch zadaniach Reduce.
 </figcaption>
 </figure>
 </div>
 </div>
 <p>Jeżeli mamy teleportację i wierzchołki bez krawędzi wychodzących, musimy zmodyfikować część Reduce.</p>
 <p>Oznaczmy przez</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>n</mi></msub><mo>=</mo><munder><mo>∑</mo><mrow><mi>u</mi><mo>:</mo><msup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo>+</mo></msup><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn></mrow></munder><msub><mi>α</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 h_n=\sum_{u:\deg^+(u)=0}\alpha_n(u)
-</annotation></semantics></math></p>
-<p>łączne prawdopodobieństwo przebywania w wierzchołkach bez wyjścia. Każdy komputer może zsumować wartości dla swoich takich wierzchołków, a następnie łączymy te sumy w jedną liczbę <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mi>n</mi></msub><annotation encoding="application/x-tex">h_n</annotation></semantics></math>. Ostatecznie dla każdego <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> otrzymujemy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>β</mi><munder><mo>∑</mo><mrow><mi>u</mi><mo>→</mo><mi>w</mi></mrow></munder><mfrac><mrow><msub><mi>α</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msup><mrow><mi mathvariant="normal">deg</mi><mo>⁡</mo></mrow><mo>+</mo></msup><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>β</mi><msub><mi>h</mi><mi>n</mi></msub></mrow><mi>N</mi></mfrac><mo>+</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>β</mi></mrow><mi>N</mi></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\]</span></p>
+<p>łączne prawdopodobieństwo przebywania w wierzchołkach bez wyjścia. Każdy komputer może zsumować wartości dla swoich takich wierzchołków, a następnie łączymy te sumy w jedną liczbę <span class="math inline">\(h_n\)</span>. Ostatecznie dla każdego <span class="math inline">\(w\)</span> otrzymujemy</p>
+<p><span class="math display">\[
 \alpha_{n+1}(w)
 =\beta\sum_{u\to w}\frac{\alpha_n(u)}{\deg^+(u)}
 +\frac{\beta h_n}{N}+\frac{1-\beta}{N}.
-</annotation></semantics></math></p>
+\]</span></p>
 <p>Pierwszy składnik pochodzi z rzeczywistych krawędzi. Drugi rozdziela prawdopodobieństwo z wierzchołków bez wyjścia. Trzeci opisuje teleportację. W szczególności aktualizujemy <strong>każdy</strong> wierzchołek, także ten, który nie dostał żadnej pary w fazie <em>map</em>.</p>
-<p>Poniższy kod jest implementacją algorytmu PageRank (bez obsługi systemu rozproszonego). Słownik <code>sasiedzi</code> zawiera listę końców krawędzi wychodzących z każdego wierzchołka, także pustą dla wierzchołka bez wyjścia. Powtórzenie końca na liście oznacza krawędź wielokrotną. Zakładamy niepusty graf, rozkład <code>alpha</code> o sumie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mtext mathvariant="monospace">𝚋𝚎𝚝𝚊</mtext><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;\texttt{beta}&lt;1</annotation></semantics></math>.</p>
+<p>Poniższy kod jest implementacją algorytmu PageRank (bez obsługi systemu rozproszonego). Słownik <code>sasiedzi</code> zawiera listę końców krawędzi wychodzących z każdego wierzchołka, także pustą dla wierzchołka bez wyjścia. Powtórzenie końca na liście oznacza krawędź wielokrotną. Zakładamy niepusty graf, rozkład <code>alpha</code> o sumie <span class="math inline">\(1\)</span> i <span class="math inline">\(0&lt;\texttt{beta}&lt;1\)</span>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> krok_pagerank(sasiedzi, alpha, beta<span class="op">=</span><span class="fl">0.85</span>):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="bu">len</span>(sasiedzi)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Globalna suma wkładów z wierzchołków bez wyjścia.</span></span>
@@ -592,6 +635,25 @@ h_n=\sum_{u:\deg^+(u)=0}\alpha_n(u)
 </main> <!-- /main -->
 <script>
 (() => {
+  let mathJaxReady;
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+      const script = document.querySelector('script[src*="mathjax" i]');
+      if (!script) return;
+      await new Promise((resolve) => {
+        const loaded = () => {
+          script.removeEventListener("load", loaded);
+          script.removeEventListener("error", loaded);
+          resolve();
+        };
+        script.addEventListener("load", loaded, { once: true });
+        script.addEventListener("error", loaded, { once: true });
+      });
+    }
+    await globalThis.MathJax?.startup?.promise;
+    return globalThis.MathJax;
+  })();
+
   const initializeTheoremFullscreen = () => {
     const blocks = document.querySelectorAll(
       "#quarto-document-content .theorem:not(.exercise)"
@@ -614,6 +676,21 @@ h_n=\sum_{u:\deg^+(u)=0}\alpha_n(u)
     const content = dialog.querySelector(".theorem-fullscreen-content");
     const closeButton = dialog.querySelector(".theorem-fullscreen-close");
     let lastTrigger = null;
+
+    const typesetCopy = async (copy) => {
+      try {
+        const mathJax = await waitForMathJax();
+        if (!dialog.open || !copy.isConnected || !mathJax?.typesetPromise) return;
+        try {
+          await mathJax.typesetPromise([copy]);
+        } finally {
+          // The dialog may have been closed while MathJax was loading a font.
+          if (!dialog.open || !copy.isConnected) mathJax.typesetClear?.([copy]);
+        }
+      } catch (error) {
+        console.warn("Nie udało się złożyć wzorów w powiększeniu.", error);
+      }
+    };
 
     const closeDialog = () => {
       if (dialog.open) {
@@ -650,11 +727,13 @@ h_n=\sum_{u:\deg^+(u)=0}\alpha_n(u)
         element.removeAttribute("aria-controls");
       });
 
+      globalThis.MathJax?.typesetClear?.([content]);
       content.replaceChildren(copy);
       dialog.setAttribute("aria-label", title);
       lastTrigger = trigger;
       dialog.showModal();
       closeButton.focus();
+      void typesetCopy(copy);
     };
 
     closeButton.addEventListener("click", closeDialog);
@@ -664,6 +743,7 @@ h_n=\sum_{u:\deg^+(u)=0}\alpha_n(u)
       }
     });
     dialog.addEventListener("close", () => {
+      globalThis.MathJax?.typesetClear?.([content]);
       content.replaceChildren();
       lastTrigger?.focus();
       lastTrigger = null;
@@ -719,6 +799,45 @@ h_n=\sum_{u:\deg^+(u)=0}\alpha_n(u)
 </script>
 <script>
 (() => {
+  const scheduledMath = new WeakSet();
+  let mathJaxReady;
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+      const script = document.querySelector('script[src*="mathjax" i]');
+      if (!script) return;
+      await new Promise((resolve) => {
+        const loaded = () => {
+          script.removeEventListener("load", loaded);
+          script.removeEventListener("error", loaded);
+          resolve();
+        };
+        script.addEventListener("load", loaded, { once: true });
+        script.addEventListener("error", loaded, { once: true });
+      });
+    }
+    await globalThis.MathJax?.startup?.promise;
+    return globalThis.MathJax;
+  })();
+
+  const typesetPreviewMath = (root) => {
+    if (!globalThis.MathJax && !document.querySelector?.('script[src*="mathjax" i]')) return;
+    const formulas = [...root.querySelectorAll(".tippy-content .math")]
+      .filter((formula) => !scheduledMath.has(formula) && !formula.querySelector("mjx-container"));
+    if (!formulas.length) return;
+    // MathJax mutates this subtree too; schedule each source element only once.
+    formulas.forEach((formula) => scheduledMath.add(formula));
+    void waitForMathJax().then(async (mathJax) => {
+      const attached = formulas.filter((formula) => formula.isConnected && !formula.querySelector("mjx-container"));
+      if (!attached.length || !mathJax?.typesetPromise) return;
+      try {
+        await mathJax.typesetPromise(attached);
+      } finally {
+        const removed = attached.filter((formula) => !formula.isConnected);
+        if (removed.length) mathJax.typesetClear?.(removed);
+      }
+    }).catch((error) => console.warn("Nie udało się złożyć wzorów w podglądzie.", error));
+  };
+
   const fixPreviewUrls = (root) => {
     const reference = root._tippy?.reference;
     if (!reference?.matches("a.quarto-xref")) return;
@@ -758,7 +877,10 @@ h_n=\sum_{u:\deg^+(u)=0}\alpha_n(u)
           node.querySelectorAll("[data-tippy-root]").forEach((root) => roots.add(root));
         });
       });
-      roots.forEach(fixPreviewUrls);
+      roots.forEach((root) => {
+        fixPreviewUrls(root);
+        typesetPreviewMath(root);
+      });
     });
     observer.observe(document.body, { childList: true, subtree: true });
   };

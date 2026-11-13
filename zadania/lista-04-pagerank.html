@@ -78,6 +78,49 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../styles.css?v=89dd97b07f70">
+<script>
+window.MathJax = {
+  output: {
+    font: "mathjax-modern",
+    fontPath: "https://cdn.jsdelivr.net/npm/@mathjax/%%FONT%%-font@4.1.3"
+  },
+  startup: {
+    ready() {
+      MathJax.startup.defaultReady();
+      window.Quarto = window.Quarto || {};
+      window.Quarto.typesetMath = (element) =>
+        MathJax.startup.promise.then(() => MathJax.typesetPromise([element]));
+    }
+  }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml-nofont.js" type="text/javascript"></script>
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -244,40 +287,40 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div id="exr-spacer-od-wierzcholka-dziewiec" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 1</strong></span> Rozważ „graf przykładowy” z <a href="../wykłady/pagerank.html#eksperyment-ze-spacerowiczem">eksperymentu ze spacerowiczem</a>. W chwili <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math> spacerowicz znajduje się w wierzchołku <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>9</mn></msub><annotation encoding="application/x-tex">v_9</annotation></semantics></math> i wykonuje spacer losowy bez teleportacji.</p>
-<p>Wyznacz rozkład prawdopodobieństwa po jednym, dwóch i trzech krokach. Zapisz wyniki jako wektory w kolejności <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>v</mi><mn>9</mn></msub></mrow><annotation encoding="application/x-tex">v_0,\ldots,v_9</annotation></semantics></math>, a następnie sprawdź je w animacji.</p>
+<p><span class="theorem-title"><strong>Zadanie 1</strong></span> Rozważ „graf przykładowy” z <a href="../wykłady/pagerank.html#eksperyment-ze-spacerowiczem">eksperymentu ze spacerowiczem</a>. W chwili <span class="math inline">\(0\)</span> spacerowicz znajduje się w wierzchołku <span class="math inline">\(v_9\)</span> i wykonuje spacer losowy bez teleportacji.</p>
+<p>Wyznacz rozkład prawdopodobieństwa po jednym, dwóch i trzech krokach. Zapisz wyniki jako wektory w kolejności <span class="math inline">\(v_0,\ldots,v_9\)</span>, a następnie sprawdź je w animacji.</p>
 </div>
 <div id="exr-spacer-macierz" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 2</strong></span> Pokaż na odpowiednio skomplikowanym przykładzie, że <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">\alpha M</annotation></semantics></math> odpowiada jednemu krokowi spaceru losowego.</p>
+<p><span class="theorem-title"><strong>Zadanie 2</strong></span> Pokaż na odpowiednio skomplikowanym przykładzie, że <span class="math inline">\(\alpha M\)</span> odpowiada jednemu krokowi spaceru losowego.</p>
 </div>
 <div id="exr-symetria-macierzy-spaceru" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 3</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie grafem nieskierowanym, w którym każdy wierzchołek ma dodatni stopień, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> jego <a href="../wykłady/pagerank.html#def-macierz-spaceru-losowego" class="quarto-xref">macierzą spaceru losowego</a>.</p>
-<p>Macierz sąsiedztwa grafu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> jest symetryczna, ale macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> nie musi być symetryczna.</p>
+<p><span class="theorem-title"><strong>Zadanie 3</strong></span> Niech <span class="math inline">\(G\)</span> będzie grafem nieskierowanym, w którym każdy wierzchołek ma dodatni stopień, a <span class="math inline">\(M\)</span> jego <a href="../wykłady/pagerank.html#def-macierz-spaceru-losowego" class="quarto-xref">macierzą spaceru losowego</a>.</p>
+<p>Macierz sąsiedztwa grafu <span class="math inline">\(G\)</span> jest symetryczna, ale macierz <span class="math inline">\(M\)</span> nie musi być symetryczna.</p>
 <ul>
 <li>Podaj przykład ilustrujący tę różnicę.</li>
-<li>Kiedy macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> jest symetryczna? Sformułuj warunek konieczny i wystarczający w terminach stopni wierzchołków grafu.</li>
+<li>Kiedy macierz <span class="math inline">\(M\)</span> jest symetryczna? Sformułuj warunek konieczny i wystarczający w terminach stopni wierzchołków grafu.</li>
 </ul>
 </div>
 <div id="exr-sprawdzanie-pageranku" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 4</strong></span> Rozważ graf skierowany o wierzchołkach <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math> i krawędziach</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>→</mo><mi>b</mi><mo>,</mo><mspace width="2.0em"></mspace><mi>a</mi><mo>→</mo><mi>c</mi><mo>,</mo><mspace width="2.0em"></mspace><mi>b</mi><mo>→</mo><mi>c</mi><mo>,</mo><mspace width="2.0em"></mspace><mi>c</mi><mo>→</mo><mi>a</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Zadanie 4</strong></span> Rozważ graf skierowany o wierzchołkach <span class="math inline">\(a,b,c\)</span> i krawędziach</p>
+<p><span class="math display">\[
 a\to b,\qquad a\to c,\qquad b\to c,\qquad c\to a.
-</annotation></semantics></math></p>
-<p>Czy wektor <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>/</mi><mn>5</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>5</mn><mo>,</mo><mn>2</mn><mi>/</mi><mn>5</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(2/5,1/5,2/5)</annotation></semantics></math> jest jego <a href="../wykłady/pagerank.html#def-pagerank-bez-teleportacji" class="quarto-xref">PageRankiem</a>? A wektor <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mi>/</mi><mn>3</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>3</mn><mo>,</mo><mn>1</mn><mi>/</mi><mn>3</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(1/3,1/3,1/3)</annotation></semantics></math>? Współrzędne zapisujemy w kolejności <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a,b,c</annotation></semantics></math>. Uzasadnij odpowiedzi, sprawdzając odpowiednie równanie.</p>
+\]</span></p>
+<p>Czy wektor <span class="math inline">\((2/5,1/5,2/5)\)</span> jest jego <a href="../wykłady/pagerank.html#def-pagerank-bez-teleportacji" class="quarto-xref">PageRankiem</a>? A wektor <span class="math inline">\((1/3,1/3,1/3)\)</span>? Współrzędne zapisujemy w kolejności <span class="math inline">\(a,b,c\)</span>. Uzasadnij odpowiedzi, sprawdzając odpowiednie równanie.</p>
 </div>
 <div id="exr-pagerank-grafu-symetrycznego" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 5</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie grafem nieskierowanym. Wyznacz <a href="../wykłady/pagerank.html#def-pagerank-bez-teleportacji" class="quarto-xref">PageRank</a> wierzchołków grafu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Zadanie 5</strong></span> Niech <span class="math inline">\(G\)</span> będzie grafem nieskierowanym. Wyznacz <a href="../wykłady/pagerank.html#def-pagerank-bez-teleportacji" class="quarto-xref">PageRank</a> wierzchołków grafu <span class="math inline">\(G\)</span>.</p>
 </div>
 <div id="exr-macierz-spaceru-razy-wektor-kolumnowy" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 6</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie grafem skierowanym, w którym każdy wierzchołek ma co najmniej jedną krawędź wychodzącą, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> jego <a href="../wykłady/pagerank.html#def-macierz-spaceru-losowego" class="quarto-xref">macierzą spaceru losowego</a>. Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> będzie dowolnym wektorem kolumnowym przypisującym wartości rzeczywiste wierzchołkom grafu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>.</p>
-<p>Zinterpretuj wektor <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>v</mi></mrow><annotation encoding="application/x-tex">Mv</annotation></semantics></math> w terminach grafu. Zapisz wzór na jego współrzędne.</p>
+<p><span class="theorem-title"><strong>Zadanie 6</strong></span> Niech <span class="math inline">\(G\)</span> będzie grafem skierowanym, w którym każdy wierzchołek ma co najmniej jedną krawędź wychodzącą, a <span class="math inline">\(M\)</span> jego <a href="../wykłady/pagerank.html#def-macierz-spaceru-losowego" class="quarto-xref">macierzą spaceru losowego</a>. Niech <span class="math inline">\(v\)</span> będzie dowolnym wektorem kolumnowym przypisującym wartości rzeczywiste wierzchołkom grafu <span class="math inline">\(G\)</span>.</p>
+<p>Zinterpretuj wektor <span class="math inline">\(Mv\)</span> w terminach grafu. Zapisz wzór na jego współrzędne.</p>
 </div>
 <div id="exr-pagerank-utrata-prawdopodobienstwa" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 7</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie niepustym grafem skierowanym, który może mieć wierzchołki bez krawędzi wychodzących, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> jego macierzą sąsiedztwa. Macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>M</mi><mn>0</mn></msub><annotation encoding="application/x-tex">M_0</annotation></semantics></math> otrzymujemy z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>, dzieląc każdy niezerowy wiersz przez sumę jego wyrazów, a wiersze zerowe pozostawiając bez zmian.</p>
-<p>Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> będzie wierszowym wektorem nieujemnym o sumie współrzędnych równej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. Wyznacz sumę współrzędnych wektora <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><msub><mi>M</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\alpha M_0</annotation></semantics></math>. Kiedy ta suma jest równa <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>? Zinterpretuj wynik w terminach spaceru losowego.</p>
+<p><span class="theorem-title"><strong>Zadanie 7</strong></span> Niech <span class="math inline">\(G\)</span> będzie niepustym grafem skierowanym, który może mieć wierzchołki bez krawędzi wychodzących, a <span class="math inline">\(A\)</span> jego macierzą sąsiedztwa. Macierz <span class="math inline">\(M_0\)</span> otrzymujemy z <span class="math inline">\(A\)</span>, dzieląc każdy niezerowy wiersz przez sumę jego wyrazów, a wiersze zerowe pozostawiając bez zmian.</p>
+<p>Niech <span class="math inline">\(\alpha\)</span> będzie wierszowym wektorem nieujemnym o sumie współrzędnych równej <span class="math inline">\(1\)</span>. Wyznacz sumę współrzędnych wektora <span class="math inline">\(\alpha M_0\)</span>. Kiedy ta suma jest równa <span class="math inline">\(1\)</span>? Zinterpretuj wynik w terminach spaceru losowego.</p>
 </div>
 <div id="exr-sprzezona-macierz-spaceru" class="extra theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 8</strong></span> Pokaż, że macierz <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> dowolnego grafu nieskierowanego jest sprzężona do macierzy symetrycznej. Wywnioskuj, że wszystkie wartości własne macierzy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> są rzeczywiste.</p>
+<p><span class="theorem-title"><strong>Zadanie 8</strong></span> Pokaż, że macierz <span class="math inline">\(M\)</span> dowolnego grafu nieskierowanego jest sprzężona do macierzy symetrycznej. Wywnioskuj, że wszystkie wartości własne macierzy <span class="math inline">\(M\)</span> są rzeczywiste.</p>
 </div>
 <div id="exr-centralnosc-dowolnego-grafu-skierowanego" class="extra theorem exercise">
 <p><span class="theorem-title"><strong>Zadanie 9</strong></span> Zaproponuj uogólnienie pojęcia <a href="../wykłady/centralnosc.html#def-centralnosc-wektora-wlasnego" class="quarto-xref">centralności</a>, które będzie dobrze określone dla każdego grafu skierowanego z co najmniej jednym wierzchołkiem. Konstrukcja może być oparta na teleportacji.</p>
@@ -292,6 +335,25 @@ a\to b,\qquad a\to c,\qquad b\to c,\qquad c\to a.
 </main> <!-- /main -->
 <script>
 (() => {
+  let mathJaxReady;
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+      const script = document.querySelector('script[src*="mathjax" i]');
+      if (!script) return;
+      await new Promise((resolve) => {
+        const loaded = () => {
+          script.removeEventListener("load", loaded);
+          script.removeEventListener("error", loaded);
+          resolve();
+        };
+        script.addEventListener("load", loaded, { once: true });
+        script.addEventListener("error", loaded, { once: true });
+      });
+    }
+    await globalThis.MathJax?.startup?.promise;
+    return globalThis.MathJax;
+  })();
+
   const initializeTheoremFullscreen = () => {
     const blocks = document.querySelectorAll(
       "#quarto-document-content .theorem:not(.exercise)"
@@ -314,6 +376,21 @@ a\to b,\qquad a\to c,\qquad b\to c,\qquad c\to a.
     const content = dialog.querySelector(".theorem-fullscreen-content");
     const closeButton = dialog.querySelector(".theorem-fullscreen-close");
     let lastTrigger = null;
+
+    const typesetCopy = async (copy) => {
+      try {
+        const mathJax = await waitForMathJax();
+        if (!dialog.open || !copy.isConnected || !mathJax?.typesetPromise) return;
+        try {
+          await mathJax.typesetPromise([copy]);
+        } finally {
+          // The dialog may have been closed while MathJax was loading a font.
+          if (!dialog.open || !copy.isConnected) mathJax.typesetClear?.([copy]);
+        }
+      } catch (error) {
+        console.warn("Nie udało się złożyć wzorów w powiększeniu.", error);
+      }
+    };
 
     const closeDialog = () => {
       if (dialog.open) {
@@ -350,11 +427,13 @@ a\to b,\qquad a\to c,\qquad b\to c,\qquad c\to a.
         element.removeAttribute("aria-controls");
       });
 
+      globalThis.MathJax?.typesetClear?.([content]);
       content.replaceChildren(copy);
       dialog.setAttribute("aria-label", title);
       lastTrigger = trigger;
       dialog.showModal();
       closeButton.focus();
+      void typesetCopy(copy);
     };
 
     closeButton.addEventListener("click", closeDialog);
@@ -364,6 +443,7 @@ a\to b,\qquad a\to c,\qquad b\to c,\qquad c\to a.
       }
     });
     dialog.addEventListener("close", () => {
+      globalThis.MathJax?.typesetClear?.([content]);
       content.replaceChildren();
       lastTrigger?.focus();
       lastTrigger = null;
@@ -419,6 +499,45 @@ a\to b,\qquad a\to c,\qquad b\to c,\qquad c\to a.
 </script>
 <script>
 (() => {
+  const scheduledMath = new WeakSet();
+  let mathJaxReady;
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+      const script = document.querySelector('script[src*="mathjax" i]');
+      if (!script) return;
+      await new Promise((resolve) => {
+        const loaded = () => {
+          script.removeEventListener("load", loaded);
+          script.removeEventListener("error", loaded);
+          resolve();
+        };
+        script.addEventListener("load", loaded, { once: true });
+        script.addEventListener("error", loaded, { once: true });
+      });
+    }
+    await globalThis.MathJax?.startup?.promise;
+    return globalThis.MathJax;
+  })();
+
+  const typesetPreviewMath = (root) => {
+    if (!globalThis.MathJax && !document.querySelector?.('script[src*="mathjax" i]')) return;
+    const formulas = [...root.querySelectorAll(".tippy-content .math")]
+      .filter((formula) => !scheduledMath.has(formula) && !formula.querySelector("mjx-container"));
+    if (!formulas.length) return;
+    // MathJax mutates this subtree too; schedule each source element only once.
+    formulas.forEach((formula) => scheduledMath.add(formula));
+    void waitForMathJax().then(async (mathJax) => {
+      const attached = formulas.filter((formula) => formula.isConnected && !formula.querySelector("mjx-container"));
+      if (!attached.length || !mathJax?.typesetPromise) return;
+      try {
+        await mathJax.typesetPromise(attached);
+      } finally {
+        const removed = attached.filter((formula) => !formula.isConnected);
+        if (removed.length) mathJax.typesetClear?.(removed);
+      }
+    }).catch((error) => console.warn("Nie udało się złożyć wzorów w podglądzie.", error));
+  };
+
   const fixPreviewUrls = (root) => {
     const reference = root._tippy?.reference;
     if (!reference?.matches("a.quarto-xref")) return;
@@ -458,7 +577,10 @@ a\to b,\qquad a\to c,\qquad b\to c,\qquad c\to a.
           node.querySelectorAll("[data-tippy-root]").forEach((root) => roots.add(root));
         });
       });
-      roots.forEach(fixPreviewUrls);
+      roots.forEach((root) => {
+        fixPreviewUrls(root);
+        typesetPreviewMath(root);
+      });
     });
     observer.observe(document.body, { childList: true, subtree: true });
   };

@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Podstawowe Algorytmy Sztucznej Inteligencji",
     "section": "",
-    "text": "Wprowadzenie\nTo są notatki do wykładu Podstawowe algorytmy sztucznej inteligencji. Na zajęciach poznamy różnorodne algorytmy grafowe do analizy sieci złożonych oraz podstawowe algorytmy przeszukiwania i uczenia wykorzystywane w sztucznej inteligencji.",
+    "text": "Wprowadzenie\nTo są notatki do wykładu Podstawowe algorytmy sztucznej inteligencji. Na zajęciach poznamy różnorodne algorytmy grafowe do analizy sieci złożonych oraz podstawowe algorytmy przeszukiwania i uczenia wykorzystywane w sztucznej inteligencji.\nPodstawową literaturę do wykładu stanowią:\n\nMark Newman, Networks.\nStuart Russell i Peter Norvig, Artificial Intelligence: A Modern Approach.",
     "crumbs": [
       "Wprowadzenie"
     ]

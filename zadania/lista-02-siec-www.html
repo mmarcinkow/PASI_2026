@@ -78,6 +78,49 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../styles.css?v=99144ab59fec">
+<script>
+window.MathJax = {
+  output: {
+    font: "mathjax-modern",
+    fontPath: "https://cdn.jsdelivr.net/npm/@mathjax/%%FONT%%-font@4.1.3"
+  },
+  startup: {
+    ready() {
+      MathJax.startup.defaultReady();
+      window.Quarto = window.Quarto || {};
+      window.Quarto.typesetMath = (element) =>
+        MathJax.startup.promise.then(() => MathJax.typesetPromise([element]));
+    }
+  }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml-nofont.js" type="text/javascript"></script>
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -244,80 +287,80 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div id="exr-wlasnosci-osiagalnosci" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 1</strong></span> Udowodnij Fakt <a href="../wykłady/siec_www.html#prp-osiagalnosc" class="quarto-xref"><span>2.1</span></a>: pokaż, że dla dowolnych wierzchołków <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>,</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">v,w</annotation></semantics></math> grafu skierowanego zachodzą implikacje</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>∈</mo><mrow><mi mathvariant="normal">Out</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mspace width="1.0em"></mspace><mo>⇒</mo><mspace width="1.0em"></mspace><mrow><mi mathvariant="normal">Out</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo><mo>⊆</mo><mrow><mi mathvariant="normal">Out</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Zadanie 1</strong></span> Udowodnij Fakt <a href="../wykłady/siec_www.html#prp-osiagalnosc" class="quarto-xref"><span>2.1</span></a>: pokaż, że dla dowolnych wierzchołków <span class="math inline">\(v,w\)</span> grafu skierowanego zachodzą implikacje</p>
+<p><span class="math display">\[
 w\in\operatorname{Out}(v)
 \quad\Longrightarrow\quad
 \operatorname{Out}(w)\subseteq\operatorname{Out}(v)
-</annotation></semantics></math></p>
+\]</span></p>
 <p>oraz</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>∈</mo><mrow><mi mathvariant="normal">In</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mspace width="1.0em"></mspace><mo>⇒</mo><mspace width="1.0em"></mspace><mrow><mi mathvariant="normal">In</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo><mo>⊆</mo><mrow><mi mathvariant="normal">In</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 w\in\operatorname{In}(v)
 \quad\Longrightarrow\quad
 \operatorname{In}(w)\subseteq\operatorname{In}(v).
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div id="exr-wlasnosci-silnie-spojnych-skladowych" class="theorem exercise">
 <p><span class="theorem-title"><strong>Zadanie 2</strong></span> Udowodnij Fakt <a href="../wykłady/siec_www.html#prp-silnie-spojne-skladowe" class="quarto-xref"><span>2.2</span></a>: wykaż następujące własności silnie spójnych składowych:</p>
 <ol type="1">
 <li><p>Silnie spójne składowe są parami rozłączne.</p></li>
-<li><p>Dla każdego wierzchołka <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> zachodzi równość</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">SCC</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">In</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>∩</mo><mrow><mi mathvariant="normal">Out</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<li><p>Dla każdego wierzchołka <span class="math inline">\(v\)</span> zachodzi równość</p>
+<p><span class="math display">\[
 \operatorname{SCC}(v)
 =
 \operatorname{In}(v)\cap\operatorname{Out}(v).
-</annotation></semantics></math></p></li>
-<li><p>Jeżeli <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> znajdują się w tej samej silnej składowej spójności, to</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">In</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">In</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><mrow><mi mathvariant="normal">Out</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi mathvariant="normal">Out</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\]</span></p></li>
+<li><p>Jeżeli <span class="math inline">\(v\)</span> i <span class="math inline">\(w\)</span> znajdują się w tej samej silnej składowej spójności, to</p>
+<p><span class="math display">\[
 \operatorname{In}(v)=\operatorname{In}(w),
 \qquad
 \operatorname{Out}(v)=\operatorname{Out}(w).
-</annotation></semantics></math></p></li>
+\]</span></p></li>
 </ol>
 </div>
 <div id="exr-sciezka-wewnatrz-scc" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 3</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> będą wierzchołkami grafu skierowanego należącymi do tej samej silnie spójnej składowej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math> (definicja <a href="../wykłady/siec_www.html#def-scc" class="quarto-xref"><span>2.2</span></a>). Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> będzie ścieżką skierowaną z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>.</p>
-<p>Pokaż, że każdy wierzchołek, przez który przechodzi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>, należy do <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Zadanie 3</strong></span> Niech <span class="math inline">\(v\)</span> i <span class="math inline">\(w\)</span> będą wierzchołkami grafu skierowanego należącymi do tej samej silnie spójnej składowej <span class="math inline">\(C\)</span> (definicja <a href="../wykłady/siec_www.html#def-scc" class="quarto-xref"><span>2.2</span></a>). Niech <span class="math inline">\(p\)</span> będzie ścieżką skierowaną z <span class="math inline">\(v\)</span> do <span class="math inline">\(w\)</span>.</p>
+<p>Pokaż, że każdy wierzchołek, przez który przechodzi <span class="math inline">\(p\)</span>, należy do <span class="math inline">\(C\)</span>.</p>
 </div>
 <div id="exr-nazwa-sieci-bezskalowej" class="theorem exercise">
 <p><span class="theorem-title"><strong>Zadanie 4</strong></span> Załóżmy, że rozkład stopni wierzchołków dużej sieci ma w przybliżeniu postać</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>C</mi><msup><mi>k</mi><mrow><mi>−</mi><mi>α</mi></mrow></msup><mo>,</mo></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 F(k)=Ck^{-\alpha},
-</annotation></semantics></math></p>
-<p>gdzie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">F(k)</annotation></semantics></math> to liczba wierzchołków o stopniu <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">C&gt;0</annotation></semantics></math> i <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\alpha&gt;0</annotation></semantics></math>. Zmieńmy teraz skalę na osi <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">OX</annotation></semantics></math>, tzn. rozważmy funkcję <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>a</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">F_a(k) = F(ak)</annotation></semantics></math>, gdzie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a&gt;0</annotation></semantics></math> jest pewną stałą.</p>
-<p>Jak funkcja <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>a</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">F_a(k)</annotation></semantics></math> zapisuje się w terminach <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">F(k)</annotation></semantics></math>? Zinterperetuj wynik.</p>
+\]</span></p>
+<p>gdzie <span class="math inline">\(F(k)\)</span> to liczba wierzchołków o stopniu <span class="math inline">\(k\)</span>, a <span class="math inline">\(C&gt;0\)</span> i <span class="math inline">\(\alpha&gt;0\)</span>. Zmieńmy teraz skalę na osi <span class="math inline">\(OX\)</span>, tzn. rozważmy funkcję <span class="math inline">\(F_a(k) = F(ak)\)</span>, gdzie <span class="math inline">\(a&gt;0\)</span> jest pewną stałą.</p>
+<p>Jak funkcja <span class="math inline">\(F_a(k)\)</span> zapisuje się w terminach <span class="math inline">\(F(k)\)</span>? Zinterperetuj wynik.</p>
 </div>
 <div id="exr-rozklad-potegowy-skala-logarytmiczna" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 5</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>C</mi><msup><mi>k</mi><mrow><mi>−</mi><mi>α</mi></mrow></msup></mrow><annotation encoding="application/x-tex">F(k)=Ck^{-\alpha}</annotation></semantics></math>, gdzie <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k&gt;0</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">C&gt;0</annotation></semantics></math>. Jak wygląda wykres tej funkcji, jeżeli zmienimy skalę na osi poziomej i pionowej na logarytmiczną?</p>
+<p><span class="theorem-title"><strong>Zadanie 5</strong></span> Niech <span class="math inline">\(F(k)=Ck^{-\alpha}\)</span>, gdzie <span class="math inline">\(k&gt;0\)</span>, <span class="math inline">\(C&gt;0\)</span>. Jak wygląda wykres tej funkcji, jeżeli zmienimy skalę na osi poziomej i pionowej na logarytmiczną?</p>
 </div>
 <div id="exr-macierz-sasiedztwa-razy-wektor-kolumnowy" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 6</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym grafem skierowanym, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> jego macierzą sąsiedztwa, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>:</mo><mi>V</mi><mo>→</mo><mi mathvariant="double-struck">ℝ</mi></mrow><annotation encoding="application/x-tex">\alpha:V\to\mathbb{R}</annotation></semantics></math> dowolną funkcją na wierzchołkach. W tym zadaniu traktujemy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> jako <strong>wektor kolumnowy</strong>.</p>
-<p>Zinterpretuj iloczyn <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">A\alpha</annotation></semantics></math> w terminach grafu: opisz, z których wierzchołków pochodzą wartości sumowane we współrzędnej <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mi>α</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(A\alpha)(v)</annotation></semantics></math>. Zapisz odpowiedni wzór, uwzględniając pętle i krawędzie wielokrotne.</p>
+<p><span class="theorem-title"><strong>Zadanie 6</strong></span> Niech <span class="math inline">\(G\)</span> będzie skończonym grafem skierowanym, <span class="math inline">\(A\)</span> jego macierzą sąsiedztwa, a <span class="math inline">\(\alpha:V\to\mathbb{R}\)</span> dowolną funkcją na wierzchołkach. W tym zadaniu traktujemy <span class="math inline">\(\alpha\)</span> jako <strong>wektor kolumnowy</strong>.</p>
+<p>Zinterpretuj iloczyn <span class="math inline">\(A\alpha\)</span> w terminach grafu: opisz, z których wierzchołków pochodzą wartości sumowane we współrzędnej <span class="math inline">\((A\alpha)(v)\)</span>. Zapisz odpowiedni wzór, uwzględniając pętle i krawędzie wielokrotne.</p>
 </div>
 <div id="exr-interpretacja-metody-potegowej" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 7</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym silnie spójnym i aperiodycznym grafem skierowanym, a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> jego macierzą sąsiedztwa. Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\alpha=(1,\ldots,1)</annotation></semantics></math> będzie wektorem wierszowym przypisującym każdemu wierzchołkowi wartość <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. Dla <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n\geq 0</annotation></semantics></math> określmy</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>n</mi></msub><mo>=</mo><mfrac><mrow><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup></mrow><mrow><mo stretchy="false" form="postfix">∥</mo><mi>α</mi><msup><mi>A</mi><mi>n</mi></msup><msub><mo stretchy="false" form="postfix">∥</mo><mn>1</mn></msub></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="theorem-title"><strong>Zadanie 7</strong></span> Niech <span class="math inline">\(G\)</span> będzie skończonym silnie spójnym i aperiodycznym grafem skierowanym, a <span class="math inline">\(A\)</span> jego macierzą sąsiedztwa. Niech <span class="math inline">\(\alpha=(1,\ldots,1)\)</span> będzie wektorem wierszowym przypisującym każdemu wierzchołkowi wartość <span class="math inline">\(1\)</span>. Dla <span class="math inline">\(n\geq 0\)</span> określmy</p>
+<p><span class="math display">\[
 \alpha_n=\frac{\alpha A^n}{\|\alpha A^n\|_1}.
-</annotation></semantics></math></p>
-<p>Zinterpretuj współrzędną <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\alpha_n(w)</annotation></semantics></math> w terminach liczby ścieżek długości <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>. Co liczymy w liczniku, a co w mianowniku?</p>
+\]</span></p>
+<p>Zinterpretuj współrzędną <span class="math inline">\(\alpha_n(w)\)</span> w terminach liczby ścieżek długości <span class="math inline">\(n\)</span>. Co liczymy w liczniku, a co w mianowniku?</p>
 </div>
 <div id="exr-macierz-sasiedztwa-grafu-dwudzielnego" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 8</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym nieskierowanym grafem dwudzielnym o podziale wierzchołków <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>=</mo><mi>U</mi><mo>⊔</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">V=U\sqcup W</annotation></semantics></math>.</p>
+<p><span class="theorem-title"><strong>Zadanie 8</strong></span> Niech <span class="math inline">\(G\)</span> będzie skończonym nieskierowanym grafem dwudzielnym o podziale wierzchołków <span class="math inline">\(V=U\sqcup W\)</span>.</p>
 <ol type="1">
-<li><p>Pokaż, że po uporządkowaniu wierzchołków tak, aby najpierw występowały wierzchołki z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>, a następnie z <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math>, jego macierz sąsiedztwa ma postać</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mi>C</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msup><mi>C</mi><mi>T</mi></msup></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<li><p>Pokaż, że po uporządkowaniu wierzchołków tak, aby najpierw występowały wierzchołki z <span class="math inline">\(U\)</span>, a następnie z <span class="math inline">\(W\)</span>, jego macierz sąsiedztwa ma postać</p>
+<p><span class="math display">\[
 A=\begin{pmatrix}
 0 &amp; C\\
 C^T &amp; 0
 \end{pmatrix}
-</annotation></semantics></math></p>
-<p>dla pewnej macierzy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>.</p></li>
-<li><p>Opisz, jaką informację o grafie dają wyrazy macierzy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><msup><mi>C</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">CC^T</annotation></semantics></math>.</p></li>
+\]</span></p>
+<p>dla pewnej macierzy <span class="math inline">\(C\)</span>.</p></li>
+<li><p>Opisz, jaką informację o grafie dają wyrazy macierzy <span class="math inline">\(CC^T\)</span>.</p></li>
 </ol>
 </div>
 <div id="exr-macierz-sasiedztwa-grafu-wazonego" class="theorem exercise">
-<p><span class="theorem-title"><strong>Zadanie 9</strong></span> Niech <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> będzie skończonym ważonym grafem skierowanym z wagami <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>:</mo><mi>E</mi><mo>→</mo><mi mathvariant="double-struck">ℝ</mi></mrow><annotation encoding="application/x-tex">w:E\to\mathbb{R}</annotation></semantics></math> na krawędziach.</p>
-<p>Jak zdefiniować jego macierz sąsiedztwa <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>, uwzględniając wagi krawędzi? Jaka jest interpretacja wyrazów macierzy <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>A</mi><mi>n</mi></msup><annotation encoding="application/x-tex">A^n</annotation></semantics></math> dla <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n\geq 1</annotation></semantics></math>?</p>
+<p><span class="theorem-title"><strong>Zadanie 9</strong></span> Niech <span class="math inline">\(G\)</span> będzie skończonym ważonym grafem skierowanym z wagami <span class="math inline">\(w:E\to\mathbb{R}\)</span> na krawędziach.</p>
+<p>Jak zdefiniować jego macierz sąsiedztwa <span class="math inline">\(A\)</span>, uwzględniając wagi krawędzi? Jaka jest interpretacja wyrazów macierzy <span class="math inline">\(A^n\)</span> dla <span class="math inline">\(n\geq 1\)</span>?</p>
 </div>
 <div id="exr-notatnik-siec-www-centralnosc-zad1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Zadanie 10</strong></span> Zrób zadanie 1 z <a href="../notatniki/siec-www-centralnosc.html">Notatnik 2</a></p>
@@ -328,6 +371,25 @@ C^T &amp; 0
 </main> <!-- /main -->
 <script>
 (() => {
+  let mathJaxReady;
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+      const script = document.querySelector('script[src*="mathjax" i]');
+      if (!script) return;
+      await new Promise((resolve) => {
+        const loaded = () => {
+          script.removeEventListener("load", loaded);
+          script.removeEventListener("error", loaded);
+          resolve();
+        };
+        script.addEventListener("load", loaded, { once: true });
+        script.addEventListener("error", loaded, { once: true });
+      });
+    }
+    await globalThis.MathJax?.startup?.promise;
+    return globalThis.MathJax;
+  })();
+
   const initializeTheoremFullscreen = () => {
     const blocks = document.querySelectorAll(
       "#quarto-document-content .theorem:not(.exercise)"
@@ -350,6 +412,21 @@ C^T &amp; 0
     const content = dialog.querySelector(".theorem-fullscreen-content");
     const closeButton = dialog.querySelector(".theorem-fullscreen-close");
     let lastTrigger = null;
+
+    const typesetCopy = async (copy) => {
+      try {
+        const mathJax = await waitForMathJax();
+        if (!dialog.open || !copy.isConnected || !mathJax?.typesetPromise) return;
+        try {
+          await mathJax.typesetPromise([copy]);
+        } finally {
+          // The dialog may have been closed while MathJax was loading a font.
+          if (!dialog.open || !copy.isConnected) mathJax.typesetClear?.([copy]);
+        }
+      } catch (error) {
+        console.warn("Nie udało się złożyć wzorów w powiększeniu.", error);
+      }
+    };
 
     const closeDialog = () => {
       if (dialog.open) {
@@ -386,11 +463,13 @@ C^T &amp; 0
         element.removeAttribute("aria-controls");
       });
 
+      globalThis.MathJax?.typesetClear?.([content]);
       content.replaceChildren(copy);
       dialog.setAttribute("aria-label", title);
       lastTrigger = trigger;
       dialog.showModal();
       closeButton.focus();
+      void typesetCopy(copy);
     };
 
     closeButton.addEventListener("click", closeDialog);
@@ -400,6 +479,7 @@ C^T &amp; 0
       }
     });
     dialog.addEventListener("close", () => {
+      globalThis.MathJax?.typesetClear?.([content]);
       content.replaceChildren();
       lastTrigger?.focus();
       lastTrigger = null;
@@ -455,6 +535,45 @@ C^T &amp; 0
 </script>
 <script>
 (() => {
+  const scheduledMath = new WeakSet();
+  let mathJaxReady;
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+      const script = document.querySelector('script[src*="mathjax" i]');
+      if (!script) return;
+      await new Promise((resolve) => {
+        const loaded = () => {
+          script.removeEventListener("load", loaded);
+          script.removeEventListener("error", loaded);
+          resolve();
+        };
+        script.addEventListener("load", loaded, { once: true });
+        script.addEventListener("error", loaded, { once: true });
+      });
+    }
+    await globalThis.MathJax?.startup?.promise;
+    return globalThis.MathJax;
+  })();
+
+  const typesetPreviewMath = (root) => {
+    if (!globalThis.MathJax && !document.querySelector?.('script[src*="mathjax" i]')) return;
+    const formulas = [...root.querySelectorAll(".tippy-content .math")]
+      .filter((formula) => !scheduledMath.has(formula) && !formula.querySelector("mjx-container"));
+    if (!formulas.length) return;
+    // MathJax mutates this subtree too; schedule each source element only once.
+    formulas.forEach((formula) => scheduledMath.add(formula));
+    void waitForMathJax().then(async (mathJax) => {
+      const attached = formulas.filter((formula) => formula.isConnected && !formula.querySelector("mjx-container"));
+      if (!attached.length || !mathJax?.typesetPromise) return;
+      try {
+        await mathJax.typesetPromise(attached);
+      } finally {
+        const removed = attached.filter((formula) => !formula.isConnected);
+        if (removed.length) mathJax.typesetClear?.(removed);
+      }
+    }).catch((error) => console.warn("Nie udało się złożyć wzorów w podglądzie.", error));
+  };
+
   const fixPreviewUrls = (root) => {
     const reference = root._tippy?.reference;
     if (!reference?.matches("a.quarto-xref")) return;
@@ -494,7 +613,10 @@ C^T &amp; 0
           node.querySelectorAll("[data-tippy-root]").forEach((root) => roots.add(root));
         });
       });
-      roots.forEach(fixPreviewUrls);
+      roots.forEach((root) => {
+        fixPreviewUrls(root);
+        typesetPreviewMath(root);
+      });
     });
     observer.observe(document.body, { childList: true, subtree: true });
   };
