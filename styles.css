@@ -1336,3 +1336,36 @@
     display: none;
   }
 }
+
+/* Sidebar illustration */
+#quarto-sidebar .sidebar-title {
+  display: none;
+}
+
+#quarto-sidebar .sidebar-logo-link {
+  display: block;
+  width: 100%;
+  background: #fff;
+}
+
+#quarto-sidebar .sidebar-logo {
+  width: 100%;
+  max-width: 13rem;
+  max-height: none;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.quarto-light #quarto-sidebar .sidebar-logo.light-content,
+.quarto-dark #quarto-sidebar .sidebar-logo.dark-content {
+  display: block !important;
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  #quarto-sidebar .sidebar-logo {
+    content: url("assets/krasnal-horyzont-static.svg");
+  }
+}
+/* End sidebar illustration */
