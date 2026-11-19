@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Rdzenie i społeczności – Podstawowe Algorytmy Sztucznej Inteligencji</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../zadania/lista-01-grafy.html" rel="next">
+<link href="../wykłady/pagerank.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9284228ca7e91ca044f135275a559bce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź",
+    "search-label": "Szukaj"
+  }
+}</script>
+<script>
+
+window.MathJax = {
+
+  output: {
+
+    font: "mathjax-modern",
+
+    fontPath: "https://cdn.jsdelivr.net/npm/@mathjax/%%FONT%%-font@4.1.3"
+
+  },
+
+  startup: {
+
+    ready() {
+
+      MathJax.startup.defaultReady();
+
+      window.Quarto = window.Quarto || {};
+
+      window.Quarto.typesetMath = (element) =>
+
+        MathJax.startup.promise.then(() => MathJax.typesetPromise([element]));
+
+    }
+
+  }
+
+};
+
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml-nofont.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css?v=874765fc4a72">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../wykłady/grafy.html">Wykłady</a></li><li class="breadcrumb-item"><a href="../wykłady/05-rdzenie-spolecznosci.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rdzenie i społeczności</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Szukaj" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/krasnal-horyzont.svg" alt="Podstawowe Algorytmy Sztucznej Inteligencji — krasnal spacerujący po kolorowym grafie ku horyzontowi" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/krasnal-horyzont.svg" alt="Podstawowe Algorytmy Sztucznej Inteligencji — krasnal spacerujący po kolorowym grafie ku horyzontowi" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Podstawowe Algorytmy Sztucznej Inteligencji</a>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Szukaj"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container">
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wprowadzenie</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Wykłady</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a>
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../wykłady/grafy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../wykłady/siec_www.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i macierz sąsiedztwa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../wykłady/centralnosc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../wykłady/pagerank.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">PageRank</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../wykłady/05-rdzenie-spolecznosci.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rdzenie i społeczności</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Listy zadań</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a>
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../zadania/lista-01-grafy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../zadania/lista-02-siec-www.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW i macierz sąsiedztwa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../zadania/lista-03-centralnosc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Centralność</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../zadania/lista-04-pagerank.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">PageRank</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Notatniki</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Przełącz sekcję">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a>
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../notatniki/networkx.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">NetworkX</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../notatniki/siec-www-centralnosc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sieć WWW, centralność i PageRank</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Spis treści</h2>
+
+  <ul>
+  <li><a href="#rdzenie-i-społeczności---intuicja" id="toc-rdzenie-i-społeczności---intuicja" class="nav-link active" data-scroll-target="#rdzenie-i-społeczności---intuicja"><span class="header-section-number">5.1</span> Rdzenie i społeczności - intuicja</a></li>
+  <li><a href="#rozkład-na-rdzenie" id="toc-rozkład-na-rdzenie" class="nav-link" data-scroll-target="#rozkład-na-rdzenie"><span class="header-section-number">5.2</span> Rozkład na rdzenie</a>
+  <ul class="collapse">
+  <li><a href="#usuwanie-peryferii" id="toc-usuwanie-peryferii" class="nav-link" data-scroll-target="#usuwanie-peryferii"><span class="header-section-number">5.2.1</span> Usuwanie peryferii</a></li>
+  <li><a href="#przykład-krok-po-kroku" id="toc-przykład-krok-po-kroku" class="nav-link" data-scroll-target="#przykład-krok-po-kroku"><span class="header-section-number">5.2.2</span> Przykład krok po kroku</a></li>
+  <li><a href="#rdzenie-i-powłoki" id="toc-rdzenie-i-powłoki" class="nav-link" data-scroll-target="#rdzenie-i-powłoki"><span class="header-section-number">5.2.3</span> Rdzenie i powłoki</a></li>
+  <li><a href="#polityczne-retweety" id="toc-polityczne-retweety" class="nav-link" data-scroll-target="#polityczne-retweety"><span class="header-section-number">5.2.4</span> Polityczne retweety</a></li>
+  <li><a href="#do-czego-służą-rdzenie" id="toc-do-czego-służą-rdzenie" class="nav-link" data-scroll-target="#do-czego-służą-rdzenie"><span class="header-section-number">5.2.5</span> Do czego służą rdzenie?</a></li>
+  <li><a href="#charakterystyka-rdzenia" id="toc-charakterystyka-rdzenia" class="nav-link" data-scroll-target="#charakterystyka-rdzenia"><span class="header-section-number">5.2.6</span> Charakterystyka rdzenia</a></li>
+  </ul></li>
+  <li><a href="#algorytm-louvain" id="toc-algorytm-louvain" class="nav-link" data-scroll-target="#algorytm-louvain"><span class="header-section-number">5.3</span> Algorytm Louvain</a>
+  <ul class="collapse">
+  <li><a href="#modularność" id="toc-modularność" class="nav-link" data-scroll-target="#modularność"><span class="header-section-number">5.3.1</span> Modularność</a></li>
+  <li><a href="#opis-algorytmu" id="toc-opis-algorytmu" class="nav-link" data-scroll-target="#opis-algorytmu"><span class="header-section-number">5.3.2</span> Opis algorytmu</a></li>
+  <li><a href="#sec-louvain-belgia" id="toc-sec-louvain-belgia" class="nav-link" data-scroll-target="#sec-louvain-belgia"><span class="header-section-number">5.3.3</span> Rozmowy telefoniczne w Belgii</a></li>
+  <li><a href="#sec-oczekiwana-liczba-krawedzi" id="toc-sec-oczekiwana-liczba-krawedzi" class="nav-link" data-scroll-target="#sec-oczekiwana-liczba-krawedzi"><span class="header-section-number">5.3.4</span> Oczekiwana liczba krawędzi w grupie</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../wykłady/grafy.html">Wykłady</a></li><li class="breadcrumb-item"><a href="../wykłady/05-rdzenie-spolecznosci.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rdzenie i społeczności</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rdzenie i społeczności</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+
+
+
+  </div>
+
+
+
+</header>
+
+
+<p>W poprzednich wykładach badaliśmy znaczenie pojedynczego wierzchołka. Teraz przyjrzymy się grupom wierzchołków. Będziemy pytać, jak głęboko dany wierzchołek jest osadzony wewnątrz grafu oraz które wierzchołki tworzą wyraźnie gęstsze podgrafy.</p>
+<section id="rdzenie-i-społeczności---intuicja" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="rdzenie-i-społeczności---intuicja"><span class="header-section-number">5.1</span> Rdzenie i społeczności - intuicja</h2>
+<p><strong>Rdzeń</strong> można sobie wyobrazić jako grupę wierzchołków, w której każdy ma odpowiednio wielu sąsiadów należących do tej grupy.</p>
+<p><strong>Społeczność</strong>, nazywana również <strong>klastrem</strong>, to grupa wierzchołków stosunkowo silnie powiązanych między sobą, a słabiej z resztą grafu. Można o niej myśleć jak o kręgu znajomych, w którym kontakty wewnętrzne przeważają nad kontaktami z innymi kręgami. Nie oznacza to, że każdy zna każdego ani że między grupami nie ma połączeń.</p>
+<p>Będziemy rozważać grafy skończone, nieskierowane. W niektórych przykładach krawędzie mają wagi.</p>
+</section>
+<section id="rozkład-na-rdzenie" class="level2 page-columns page-full" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="rozkład-na-rdzenie"><span class="header-section-number">5.2</span> Rozkład na rdzenie</h2>
+<section id="usuwanie-peryferii" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="usuwanie-peryferii"><span class="header-section-number">5.2.1</span> Usuwanie peryferii</h3>
+<p>Wyobraźmy sobie grupę znajomych oraz ustalmy liczbę <span class="math inline">\(k\)</span>. W grupie chcą pozostać tylko osoby, które mają co najmniej <span class="math inline">\(k\)</span> znajomych. Reszta osób jest ‘peryferyjna’ i odchodzi z grupy. Po odejściu pierwszej partii osób z peryferii, nowe osoby stają się peryferyjne, one również odchodzą z grupy itd.</p>
+<p>Powyższy proces można opisać precyzyjnie za pomocą następującego algorytmu.</p>
+<div id="fig-algorytm-k-rdzenia" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Diagram blokowy: rozpocznij od grafu G i liczby k; wyznacz wszystkie wierzchołki o stopniu mniejszym niż k w aktualnym G; jeśli zbiór jest pusty, zakończ; w przeciwnym razie usuń te wierzchołki wraz z krawędziami i powtórz.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-algorytm-k-rdzenia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/algorytm-k-rdzenia.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Rysunek&nbsp;5.1: Wyznaczanie k-rdzenia przez kolejne usuwanie wierzchołków o stopniu mniejszym niż k."><img src="images/algorytm-k-rdzenia.svg" class="img-fluid figure-img" alt="Diagram blokowy: rozpocznij od grafu G i liczby k; wyznacz wszystkie wierzchołki o stopniu mniejszym niż k w aktualnym G; jeśli zbiór jest pusty, zakończ; w przeciwnym razie usuń te wierzchołki wraz z krawędziami i powtórz."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-algorytm-k-rdzenia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.1: Wyznaczanie <span class="math inline">\(k\)</span>-rdzenia przez kolejne usuwanie wierzchołków o stopniu mniejszym niż <span class="math inline">\(k\)</span>.
+</figcaption>
+</figure>
+</div>
+<div id="def-k-rdzen" class="definition-boxed theorem definition">
+<p><span class="theorem-title"><strong>Definicja 5.1 (Rdzeń grafu)</strong></span> <strong><span class="math inline">\(k\)</span>-rdzeniem grafu <span class="math inline">\(G\)</span></strong> nazywamy graf pozostały po zakończeniu powyższej procedury. Oznaczamy go przez <span class="math inline">\(G_k\)</span>.</p>
+</div>
+<p>Na przykład cykl jest swoim <span class="math inline">\(2\)</span>-rdzeniem, ale jego <span class="math inline">\(3\)</span>-rdzeń jest pusty. Graf pełny <span class="math inline">\(K_4\)</span> jest swoim <span class="math inline">\(3\)</span>-rdzeniem, a jego <span class="math inline">\(4\)</span>-rdzeń jest pusty.</p>
+</section>
+<section id="przykład-krok-po-kroku" class="level3 page-columns page-full" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="przykład-krok-po-kroku"><span class="header-section-number">5.2.2</span> Przykład krok po kroku</h3>
+<p>W poniższym grafie mamy gęsty środek, doczepioną ścieżkę długości <span class="math inline">\(4\)</span>, cykl, gwiazdę oraz wierzchołek izolowany. Wybierz <span class="math inline">\(k\)</span>, a następnie przechodź przez kolejne rundy. Liczby wewnątrz wierzchołków oznaczają ich <strong>aktualne stopnie</strong>, nie numery wierzchołków.</p>
+<p>Turkusowe obwódki zaznaczają całą grupę przeznaczoną do usunięcia w następnym kroku. Usunięte elementy pozostają widoczne w jasnoszarym kolorze, aby łatwiej porównywać stany. Zmiana <span class="math inline">\(k\)</span> rozpoczyna procedurę ponownie od całego grafu.</p>
+<div class="column-page">
+  <div class="core-widget" data-core-widget="" data-src="data/rdzenie.json" tabindex="0" aria-label="Wyznaczanie rdzenia grafu krok po kroku">
+    <div class="core-widget__graph">
+      <svg viewbox="0 0 590 460" role="img" aria-label="Graf i aktualne stopnie wierzchołków"></svg>
+    </div>
+    <div class="core-widget__panel">
+      <label>Wyznacz <select data-core-k="" aria-label="Numer rdzenia k">
+        <option value="0">0-rdzeń</option><option value="1">1-rdzeń</option>
+        <option value="2" selected="">2-rdzeń</option><option value="3">3-rdzeń</option>
+        <option value="4">4-rdzeń</option><option value="5">5-rdzeń</option>
+      </select></label>
+      <p class="core-widget__round" data-core-round="">Wczytywanie…</p>
+      <dl><dt>Pozostałe wierzchołki</dt><dd data-core-count="">—</dd>
+      <dt>Do usunięcia w następnej rundzie</dt><dd data-core-remove="">—</dd></dl>
+      <div class="core-widget__controls">
+        <button type="button" data-core-action="previous" disabled="">Poprzednia runda</button>
+        <button type="button" data-core-action="next" disabled="">Kolejna runda</button>
+        <button type="button" data-core-action="reset">Od początku</button>
+        <button type="button" data-core-action="fullscreen" aria-label="Powiększ ilustrację">⛶ Powiększ</button>
+      </div>
+      <p class="core-widget__legend"><span class="core-widget__dot"></span> pozostaje
+      <span class="core-widget__dot is-next"></span> do usunięcia
+      <span class="core-widget__dot is-removed"></span> usunięty</p>
+      <p class="core-widget__status" data-core-status="" aria-live="polite">Wczytywanie śladu algorytmu.</p>
+      <p class="core-widget__hint">Strzałki ← i → zmieniają rundę, gdy ilustracja ma fokus.</p>
+    </div>
+  </div>
+</div>
+<noscript><p>Animacja wymaga JavaScript. Wybrane rdzenie pokazuje także rysunek poniżej.</p></noscript>
+<script src="widgets/rdzenie.js"></script>
+<p>Dla <span class="math inline">\(k=2\)</span> ścieżka znika od końca, po jednym wierzchołku na rundę. Dopiero po czterech rundach otrzymujemy rdzeń. Środek doczepionej gwiazdy początkowo ma wielu sąsiadów, ale traci ich po usunięciu liści, więc również nie należy do <span class="math inline">\(2\)</span>-rdzenia. Duży stopień początkowy nie gwarantuje przynależności do głębokiego rdzenia.</p>
+<div id="fig-rdzenie-przyklad" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="1-rdzeń, 2-rdzeń i 4-rdzeń grafu z doczepioną ścieżką, gwiazdą i gęstym środkiem.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rdzenie-przyklad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="generated/rdzenie-przyklad.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Rysunek&nbsp;5.2: Wybrane rdzenie tego samego grafu. Kolorem zaznaczono wierzchołki pozostające po zakończeniu procedury."><img src="generated/rdzenie-przyklad.svg" class="img-fluid figure-img" alt="1-rdzeń, 2-rdzeń i 4-rdzeń grafu z doczepioną ścieżką, gwiazdą i gęstym środkiem."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rdzenie-przyklad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.2: Wybrane rdzenie tego samego grafu. Kolorem zaznaczono wierzchołki pozostające po zakończeniu procedury.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="rdzenie-i-powłoki" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="rdzenie-i-powłoki"><span class="header-section-number">5.2.3</span> Rdzenie i powłoki</h3>
+<p>Powtarzając procedurę dla kolejnych <span class="math inline">\(k\)</span>, otrzymujemy <strong>rozkład na rdzenie</strong> (ang. <em>k-core decomposition</em>). Rdzenie są zagnieżdżone:</p>
+<p><span class="math display">\[
+G=G_0\supseteq G_1\supseteq G_2\supseteq G_3\supseteq\cdots.
+\]</span></p>
+<p>Dodatkowo, można wyznaczać następny rdzeń, kontynuując usuwanie w poprzednim, zamiast zaczynać od całego <span class="math inline">\(G\)</span>.</p>
+<div id="def-powloka-rdzenia" class="definition-boxed theorem definition">
+<p><span class="theorem-title"><strong>Definicja 5.2 (Powłoka i numer rdzenia)</strong></span> <strong><span class="math inline">\(k\)</span>-powłoką</strong> nazywamy zbiór wierzchołków <span class="math inline">\(V_{G_k}\setminus V_{G_{k+1}}\)</span>. <strong>Numerem rdzenia wierzchołka <span class="math inline">\(v\)</span></strong> nazywamy największe <span class="math inline">\(k\)</span>, dla którego <span class="math inline">\(v\in V_{G_k}\)</span>, i oznaczamy go przez <span class="math inline">\(\kappa(v)\)</span>.</p>
+</div>
+<p>Wierzchołki izolowane tworzą <span class="math inline">\(0\)</span>-powłokę. Powłoki, w odróżnieniu od rdzeni, dzielą zbiór wierzchołków na rozłączne części.</p>
+<div id="fig-powloki-przyklad" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Ten sam graf co w przykładzie rdzeni: izolat należy do 0-powłoki; ścieżka i gwiazda do 1-powłoki; cykl po prawej do 2-powłoki; klika na dole do 3-powłoki; środkowa klika do 4-powłoki. Gładkie, zagnieżdżone linie oddzielają kolejne powłoki.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-powloki-przyklad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="generated/powloki-przyklad.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Rysunek&nbsp;5.3: Powłoki przykładowego grafu. Kolor wierzchołka wskazuje jego powłokę, a linie podobne do poziomic otaczają kolejne rdzenie G_1, G_2, G_3 i G_4. Granice narysowano schematycznie."><img src="generated/powloki-przyklad.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%" alt="Ten sam graf co w przykładzie rdzeni: izolat należy do 0-powłoki; ścieżka i gwiazda do 1-powłoki; cykl po prawej do 2-powłoki; klika na dole do 3-powłoki; środkowa klika do 4-powłoki. Gładkie, zagnieżdżone linie oddzielają kolejne powłoki."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-powloki-przyklad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.3: Powłoki przykładowego grafu. Kolor wierzchołka wskazuje jego powłokę, a linie podobne do poziomic otaczają kolejne rdzenie <span class="math inline">\(G_1\)</span>, <span class="math inline">\(G_2\)</span>, <span class="math inline">\(G_3\)</span> i <span class="math inline">\(G_4\)</span>. Granice narysowano schematycznie.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="polityczne-retweety" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="polityczne-retweety"><span class="header-section-number">5.2.4</span> Polityczne retweety</h3>
+<p>Poniższy przykład (<em>A First Course in Network Science</em>, §3.6, rysunek 3.9 oraz <a href="https://ojs.aaai.org/index.php/icwsm/article/view/14126"><em>Political Polarization on Twitter</em></a>) dotyczy politycznych retweetów w USA przed wyborami do Kongresu w 2010 roku. Wierzchołki reprezentują konta użytkowników, a połączenia — przekazywanie cudzych wpisów. Widoczne grupy odpowiadają przede wszystkim środowiskom progresywnym i konserwatywnym.</p>
+<p>Na rysunku <a href="#fig-rdzenie-retweetow" class="quarto-xref"><span>5.4</span></a> wykorzystujemy publiczną sieć retweetów z tego zbioru. Pomijamy kierunki i pętle, a powtarzające się połączenia między daną parą kont zastępujemy jedną krawędzią. Tak przygotowany graf ma <span class="math inline">\(18\,470\)</span> wierzchołków i <span class="math inline">\(48\,053\)</span> krawędzie. Przy przechodzeniu do głębszych rdzeni odpada wiele kont peryferyjnych, co pozwala obejrzeć mniejszą, silniej wzajemnie powiązaną część sieci.</p>
+<div id="fig-rdzenie-retweetow" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Całe rdzenie politycznej sieci retweetów dla k równego 1, 4 i 16, w kolorach dwóch środowisk politycznych.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rdzenie-retweetow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="generated/rdzenie-retweetow.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Rysunek&nbsp;5.4: Rdzenie sieci retweetów: na każdym panelu cały wskazany rdzeń. Kolory oznaczają etykiety środowisk z danych, nie wynik rozkładu na rdzenie. Źródło danych: Conover i współautorzy (2011)."><img src="generated/rdzenie-retweetow.png" class="img-fluid figure-img" alt="Całe rdzenie politycznej sieci retweetów dla k równego 1, 4 i 16, w kolorach dwóch środowisk politycznych."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rdzenie-retweetow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.4: Rdzenie sieci retweetów: na każdym panelu cały wskazany rdzeń. Kolory oznaczają etykiety środowisk z danych, nie wynik rozkładu na rdzenie. Źródło danych: Conover i współautorzy (2011).
+</figcaption>
+</figure>
+</div>
+<p>Najgłębszy niepusty rdzeń ma poziom <span class="math inline">\(18\)</span>. Kolory polityczne nie biorą udziału w wyznaczaniu rdzeni.</p>
+</section>
+<section id="do-czego-służą-rdzenie" class="level3" data-number="5.2.5">
+<h3 data-number="5.2.5" class="anchored" data-anchor-id="do-czego-służą-rdzenie"><span class="header-section-number">5.2.5</span> Do czego służą rdzenie?</h3>
+<p>Rozkład na rdzenie pozwala usuwać peryferie przed wizualizacją dużej sieci i wyszukiwać grupy, których uczestnicy mają wielu sąsiadów pozostających w tej samej grupie. Numer rdzenia opisuje inne zjawisko niż stopień: uwzględnia nie tylko liczbę własnych sąsiadów, lecz również to, czy oni sami przetrwają kolejne rundy usuwania.</p>
+<p>Nie jest to jednak podział na społeczności. Jeden rdzeń może zawierać kilka różnych społeczności, a nawet być niespójny. Warunek na stopnie nie oznacza też, że wszystkie pary wierzchołków są połączone.</p>
+</section>
+<section id="charakterystyka-rdzenia" class="level3" data-number="5.2.6">
+<h3 data-number="5.2.6" class="anchored" data-anchor-id="charakterystyka-rdzenia"><span class="header-section-number">5.2.6</span> Charakterystyka rdzenia</h3>
+<div id="def-podgraf-indukowany" class="definition-boxed theorem definition">
+<p><span class="theorem-title"><strong>Definicja 5.3 (Podgraf indukowany)</strong></span> Niech <span class="math inline">\(W\subseteq V_G\)</span>. <strong>Podgrafem indukowanym przez <span class="math inline">\(W\)</span></strong> nazywamy graf <span class="math inline">\(G[W]\)</span>, którego zbiorem wierzchołków jest <span class="math inline">\(W\)</span>, a zbiorem krawędzi - wszystkie krawędzie <span class="math inline">\(G\)</span> o obu końcach w <span class="math inline">\(W\)</span>.</p>
+</div>
+<p>Niech <span class="math inline">\(G=K_4\)</span>, a <span class="math inline">\(W\)</span> składa się z trzech zewnętrznych wierzchołków na rysunku. Oba przedstawione podgrafy mają ten sam zbiór wierzchołków <span class="math inline">\(W\)</span>.</p>
+<div id="fig-podgraf-indukowany-przyklad" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Trzy grafy obok siebie: szary graf pełny K4, niebieski trójkąt na jego trzech zewnętrznych wierzchołkach oraz niebieska ścieżka na tych samych wierzchołkach, pozbawiona jednego boku trójkąta.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-podgraf-indukowany-przyklad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/podgraf-indukowany-przyklad.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Rysunek&nbsp;5.5: Podgraf indukowany przez W i podgraf nieindukowany przez żaden zbiór wierzchołków."><img src="images/podgraf-indukowany-przyklad.svg" class="img-fluid figure-img" alt="Trzy grafy obok siebie: szary graf pełny K4, niebieski trójkąt na jego trzech zewnętrznych wierzchołkach oraz niebieska ścieżka na tych samych wierzchołkach, pozbawiona jednego boku trójkąta."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-podgraf-indukowany-przyklad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.5: Podgraf indukowany przez <span class="math inline">\(W\)</span> i podgraf nieindukowany przez żaden zbiór wierzchołków.
+</figcaption>
+</figure>
+</div>
+<p>Rdzeń <span class="math inline">\(G_k\)</span> jest zawsze podgrafem indukowanym przez swój zbiór wierzchołków. Ma też następującą własność maksymalności:</p>
+<div id="prp-charakterystyka-rdzenia" class="fact theorem proposition">
+<p><span class="theorem-title"><strong>Fakt 5.1</strong></span> <span class="math inline">\(k\)</span>-rdzeń <span class="math inline">\(G_k\)</span> jest największym podgrafem indukowanym grafu <span class="math inline">\(G\)</span>, w którym każdy wierzchołek ma stopień co najmniej <span class="math inline">\(k\)</span>. Dokładniej: sam <span class="math inline">\(G_k\)</span> spełnia ten warunek, a każdy podgraf indukowany <span class="math inline">\(H\subseteq G\)</span> spełniający ten warunek jest zawarty w <span class="math inline">\(G_k\)</span>.</p>
+</div>
+<details class="proof-details">
+<summary>
+Dowód
+</summary>
+<div class="proof">
+<p><span class="proof-title"><em>Dowód</em>. </span>Łatwo zauważyć, że każdy wierzchołek w <span class="math inline">\(G_k\)</span> ma stopień co najmniej <span class="math inline">\(k\)</span>.</p>
+<p>Niech teraz <span class="math inline">\(H\)</span> będzie dowolnym podgrafem indukowanym <span class="math inline">\(G\)</span>, w którym wszystkie stopnie są co najmniej <span class="math inline">\(k\)</span>. W pierwszej rundzie algorytmu nie zostanie usunięty żaden wierzchołek <span class="math inline">\(H\)</span>. To samo tyczy się każdej kolejnej rundy, a zatem <span class="math inline">\(H\subseteq G_k\)</span>.</p>
+</div>
+</details>
+<p>W szczególności <span class="math inline">\(G_{k+1}\subseteq G_k\)</span>: stopnie w <span class="math inline">\(G_{k+1}\)</span> są co najmniej <span class="math inline">\(k+1\)</span>, więc także co najmniej <span class="math inline">\(k\)</span>, i możemy zastosować fakt <a href="#prp-charakterystyka-rdzenia" class="quarto-xref"><span>5.1</span></a>. Ten sam argument pokazuje, że rozpoczęcie wyznaczania <span class="math inline">\((k+1)\)</span>-rdzenia od <span class="math inline">\(G_k\)</span> daje ten sam wynik co rozpoczęcie od <span class="math inline">\(G\)</span>.</p>
+</section>
+</section>
+<section id="algorytm-louvain" class="level2 page-columns page-full" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="algorytm-louvain"><span class="header-section-number">5.3</span> Algorytm Louvain</h2>
+<p><strong>Algorytm Louvain</strong> jest jednym z podstawowych algorytmów wykrywania społeczności w sieciach liczących miliony wierzchołków. Metoda zastała opublikowana w 2008 roku w pracy <a href="https://arxiv.org/abs/0803.0476"><em>Fast unfolding of communities in large networks</em></a>. Nazwa nawiązuje do Université catholique de Louvain w Belgii, z którym związana była część autorów.</p>
+<p>W tej części będziemy rozważać grafy nieskierowane.</p>
+<section id="modularność" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="modularność"><span class="header-section-number">5.3.1</span> Modularność</h3>
+<p>Zakładamy, że mamy dany graf oraz ustalony podział jego wierzchołków na społeczności (grupy). Każdy wierzchołek należy do dokładnie jednej społeczności. Chcemy obliczyć liczbę, która oceni, jak dobry jest ten podział. Tę liczbę nazwiemy <strong>modularnością</strong>.</p>
+<p>Pierwszym pomysłem mogłoby być obliczenie ilorazu: liczba krawędzi wewnątrz grup do liczby wszystkich krawędzi. Sama ta wielkość jednak nie jest dobra: jeśli wszystkie wierzchołki umieścimy w jednej grupie, otrzymamy maksymalną wartość <span class="math inline">\(1\)</span>, mimo, że graf może mieć znacznie lepszy podział na społeczności.</p>
+<p>Potrzebujemy innej miary. Pomysł jest taki, aby porównać liczbę połączeń w obrębie grupy z oczekiwaną liczbą połaczęń, jaka wystąpiłaby przy losowym tworzeniu połączeń. Modularność mierzy różnicę między tymi wielkościami. Wartość dodatnia oznacza więcej połączeń wewnętrznych w porównaniu z oczekiwaną liczbą, a ujemna ich niedobór.</p>
+<p>Wprowadzamy oznaczenia. Słowa społeczność i grupa są używane zamiennie.</p>
+<ul>
+<li><span class="math inline">\(\mathcal{C} = \{ c_1, c_2, \ldots, c_r \}\)</span> - dany podział na społeczności, gdzie <span class="math inline">\(c_i \subseteq V_G\)</span> i <span class="math inline">\(\sum_{c \in \mathcal{C}} c = V_G\)</span>.</li>
+<li><span class="math inline">\(k_i\)</span> - stopień wierzchołka <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(m\)</span> - liczba krawędzi grafu;</li>
+<li><span class="math inline">\(E_c\)</span> - liczba krawędzi nieskierowanych o obu końcach w grupie <span class="math inline">\(c\)</span>.</li>
+<li><span class="math inline">\(K_c\)</span> - suma stopni wierzchołków należących do <span class="math inline">\(c\)</span> (stopień liczony w całym grafie, nie zawęzony do grupy).</li>
+</ul>
+<p>Krawędź łącząca <span class="math inline">\(c\)</span> z inną społecznością liczy się do <span class="math inline">\(K_c\)</span>, ale nie liczy się do <span class="math inline">\(E_c\)</span>.</p>
+<p>Na poniższym rysunku <span class="math inline">\(c_1=\{a,b,c\}\)</span> tworzy trójkąt, a <span class="math inline">\(c_2=\{d,e,f,g\}\)</span> tworzy cykl z jedną przekątną. Stąd <span class="math inline">\(E_{c_1}=3\)</span> i <span class="math inline">\(E_{c_2}=5\)</span>. Każda krawędź wewnętrzna wnosi do sumy stopni swojej grupy dwa końce. Dwie przerywane krawędzie mają po jednym końcu w każdej grupie, więc dodają po <span class="math inline">\(2\)</span> do obu sum stopni. Otrzymujemy <span class="math inline">\(K_{c_1}=8\)</span> i <span class="math inline">\(K_{c_2}=12\)</span>.</p>
+<div id="fig-modularnosc-liczenie-krawedzi" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Grupa c1 to trójkąt a, b, c. Ma 3 krawędzie wewnętrzne i sumę stopni 8. Grupa c2 to cykl d, e, f, g z przekątną d–f. Ma 5 krawędzi wewnętrznych i sumę stopni 12. Dwie przerywane krawędzie łączą b z d oraz c z g.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-modularnosc-liczenie-krawedzi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="generated/modularnosc-liczenie-krawedzi.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Rysunek&nbsp;5.6: Krawędzie wewnętrzne i sumy stopni dla dwóch społeczności. Linią przerywaną oznaczono krawędzie między grupami."><img src="generated/modularnosc-liczenie-krawedzi.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%" alt="Grupa c1 to trójkąt a, b, c. Ma 3 krawędzie wewnętrzne i sumę stopni 8. Grupa c2 to cykl d, e, f, g z przekątną d–f. Ma 5 krawędzi wewnętrznych i sumę stopni 12. Dwie przerywane krawędzie łączą b z d oraz c z g."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-modularnosc-liczenie-krawedzi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.6: Krawędzie wewnętrzne i sumy stopni dla dwóch społeczności. Linią przerywaną oznaczono krawędzie między grupami.
+</figcaption>
+</figure>
+</div>
+<div id="def-modularnosc" class="definition-boxed theorem definition">
+<p><span class="theorem-title"><strong>Definicja 5.4 (Modularność)</strong></span> <strong>Modularnością grafu <span class="math inline">\(G\)</span> przy podziale <span class="math inline">\(\mathcal{C}\)</span></strong> nazywamy liczbę</p>
+<p><span id="eq-modularnosc"><span class="math display">\[
+Q(G,\mathcal{C})
+=\frac{1}{2m}\sum_{c\in\mathcal{C}}
+\left(2E_c-\frac{K_c^2}{2m}\right).
+\tag{5.1}\]</span></span></p>
+</div>
+<div id="prp-ograniczenie-modularnosci" class="fact theorem proposition">
+<p><span class="theorem-title"><strong>Fakt 5.2</strong></span> Dla każdego grafu nieskierowanego z co najmniej jedną krawędzią oraz każdego podziału <span class="math inline">\(\mathcal{C}\)</span> jego wierzchołków na społeczności zachodzi</p>
+<p><span class="math display">\[
+-1\leq Q(G,\mathcal{C})\leq 1.
+\]</span></p>
+</div>
+<details class="proof-details">
+<summary>
+Dowód
+</summary>
+<div class="proof">
+<p><span class="proof-title"><em>Dowód</em>. </span>Przepiszmy definicję w postaci</p>
+<p><span class="math display">\[
+Q(G,\mathcal{C})
+=\frac{\sum_{c\in\mathcal{C}}E_c}{m}
+-\sum_{c\in\mathcal{C}}\left(\frac{K_c}{2m}\right)^2.
+\]</span></p>
+<p>Każda krawędź jest wewnętrzna dla co najwyżej jednej społeczności, więc <span class="math inline">\(0\leq\sum_c E_c\leq m\)</span>. Pierwszy składnik należy zatem do przedziału <span class="math inline">\([0,1]\)</span>.</p>
+<p>Ponieważ społeczności tworzą podział zbioru wierzchołków, suma <span class="math inline">\(K_c\)</span> po wszystkich grupach jest sumą stopni wszystkich wierzchołków: <span class="math inline">\(\sum_c K_c=2m\)</span>. Wszystkie <span class="math inline">\(K_c\)</span> są nieujemne, a więc</p>
+<p><span class="math display">\[
+0\leq\sum_c\left(\frac{K_c}{2m}\right)^2
+\leq\left(\sum_c\frac{K_c}{2m}\right)^2=1.
+\]</span></p>
+<p>Drugi składnik również należy do <span class="math inline">\([0,1]\)</span>. Ich różnica leży zatem w przedziale <span class="math inline">\([-1,1]\)</span>.</p>
+<p>Co więcej, przynajmniej jedno <span class="math inline">\(K_c\)</span> jest dodatnie, więc drugi składnik jest dodatni. W rzeczywistości mamy zatem <span class="math inline">\(Q(G,\mathcal{C})&lt;1\)</span>.</p>
+</div>
+</details>
+<p>Uzasadnienie, dlaczego w definicji modularności pojawia się składnik <span class="math inline">\(K_c^2/(2m)\)</span>, przedstawimy w podrozdziale <a href="#sec-oczekiwana-liczba-krawedzi" class="quarto-xref"><span>5.3.4</span></a>. Na razie sprawdzimy, jakie wyniki daje wzór dla dwóch skrajnych podziałów.</p>
+<div id="exm-modularnosc-skrajne" class="theorem example">
+<p><span class="theorem-title"><strong>Przykład 5.1 (Jedna społeczność i społeczności jednoelementowe)</strong></span> Jeśli wszystkie wierzchołki należą do jednej społeczności <span class="math inline">\(c=V_G\)</span>, to <span class="math inline">\(E_c=m\)</span> oraz <span class="math inline">\(K_c=2m\)</span>. Zatem dla każdego takiego grafu</p>
+<p><span class="math display">\[
+Q=\frac{1}{2m}\left(2m-\frac{(2m)^2}{2m}\right)=0.
+\]</span></p>
+<p>Drugim ekstremalnym przypadkiem jest podział, w którym każdy wierzchołek tworzy osobną społeczność. Ponieważ graf nie ma pętli, wszystkie <span class="math inline">\(E_c\)</span> są wtedy zerowe, więc</p>
+<p><span class="math display">\[
+Q=-\sum_i\left(\frac{k_i}{2m}\right)^2&lt;0.
+\]</span></p>
+</div>
+</section>
+<section id="opis-algorytmu" class="level3 page-columns page-full" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="opis-algorytmu"><span class="header-section-number">5.3.2</span> Opis algorytmu</h3>
+<p>Chcielibyśmy znaleźć podział, który ma największą modularność. Niestety nie są znane efektywne algorytmy, które by taki podział konstruowały. Algorytm Louvain jest algorytmem zachłannym, który znajduje pewien podział dający dużą modularność.</p>
+<p>Zaczynamy od tendencyjnego podziału, w którym każdy wierzchołek należy do swojej własnej, jednoelementowej grupy. Algorytm składa się z dwóch kroków, które powatarzamy wielokrotnie:</p>
+<ol type="1">
+<li><p><strong>Lokalne ruchy.</strong> Załóżmy, że mamy jakis aktualny podział <span class="math inline">\(\mathcal{C}\)</span>. Przeglądamy wierzchołki kolejno, w ustalonej kolejności. Dla rozpatrywanego wierzchołka <span class="math inline">\(i\)</span> sprawdzamy możliwość przeniesienia go do każdej innej grupy zawierającej przynajmniej jednego jego sąsiada. Dla każdej takiej grupy obliczamy zmianę modularności <span class="math inline">\(\Delta Q=Q_{\mathrm{po}}-Q_{\mathrm{przed}}\)</span>. Uwzględniamy przy tym zarówno usunięcie <span class="math inline">\(i\)</span> z dotychczasowej grupy, jak i dołączenie go do nowej.</p>
+<div id="fig-louvain-ruch" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Cztery grupy oznaczone kolorami i literami A, B, C, D. Grupa C ma trzy wierzchołki połączone dwiema krawędziami, pozostałe grupy po dwa wierzchołki. Wyróżniony wierzchołek i z grupy A ma sąsiada we własnej grupie, dwóch sąsiadów w B oraz po jednym w C i D.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-louvain-ruch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/louvain-ruch.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Rysunek&nbsp;5.7: Wierzchołek i należy do grupy A. Rozważamy przeniesienie go do grupy B, C lub D: do B prowadzą dwie krawędzie, a do C i D po jednej."><img src="images/louvain-ruch.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%" alt="Cztery grupy oznaczone kolorami i literami A, B, C, D. Grupa C ma trzy wierzchołki połączone dwiema krawędziami, pozostałe grupy po dwa wierzchołki. Wyróżniony wierzchołek i z grupy A ma sąsiada we własnej grupie, dwóch sąsiadów w B oraz po jednym w C i D."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-louvain-ruch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.7: Wierzchołek <span class="math inline">\(i\)</span> należy do grupy <span class="math inline">\(A\)</span>. Rozważamy przeniesienie go do grupy <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span> lub <span class="math inline">\(D\)</span>: do <span class="math inline">\(B\)</span> prowadzą dwie krawędzie, a do <span class="math inline">\(C\)</span> i <span class="math inline">\(D\)</span> po jednej.
+</figcaption>
+</figure>
+</div>
+<p>Jeśli największa z tych zmian jest dodatnia, wykonujemy odpowiadający jej ruch; w razie remisu wybieramy jedną z najlepszych grup. Jeśli żaden ruch nie zwiększa modularności, wierzchołek pozostaje w swojej grupie. Ewentualną pustą grupę usuwamy. Każdy wykonany ruch od razu zmienia podział, na którym oceniamy ruchy kolejnych wierzchołków.</p>
+<p>Po przejrzeniu wszystkich wierzchołków rozpoczynamy kolejny przegląd. <strong>Przechodzimy do punktu 2 dopiero wtedy, gdy podczas całego przeglądu nie wykonamy ani jednego ruchu.</strong> Zauważmy, że ten sam wierzchołek może zmieniać grupę wielokrotnie. Wynik algorytmu zależy od tego w jakiej kolejności przeglądamy wierzchołki.</p></li>
+<li><p><strong>Agregacja.</strong> Każdą znalezioną grupę zastępujemy jednym wierzchołkiem nowego grafu. Dwa wierzchołki nowego grafu łączymy tyloma krawędziami ile wynosi liczba krawędzi łączących odpowiadające im grupy w starym grafie. W szczególności każdy wierzchołek nowego grafu ma tyle pętli, ile było krawędzi w grupie, którą zastąpił. W nowym grafie każdy wierzchołek należy do osobnej grupy.</p>
+<div id="fig-louvain-agregacja" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Po lewej graf z czterema grupami: C ma trzy wierzchołki i dwie krawędzie wewnętrzne, pozostałe grupy po dwa wierzchołki i jednej krawędzi wewnętrznej. Po prawej cztery wierzchołki A, B, C, D w różnych kolorach. C ma dwie pętle, a A, B, D po jednej. A i B łączą dwie równoległe krawędzie, A i C jedna krawędź, A i D jedna krawędź.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-louvain-agregacja-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/louvain-agregacja.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Rysunek&nbsp;5.8: Agregacja tego samego grafu: grupy A, B, C, D stają się czterema wierzchołkami. Grupa C ma trzy wierzchołki i dwie krawędzie wewnętrzne, więc po agregacji wierzchołek C ma dwie pętle. Pozostałe wierzchołki mają po jednej pętli, a między A i B pozostają dwie krawędzie. Kolory po prawej oznaczają osobne, jednoelementowe grupy."><img src="images/louvain-agregacja.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:67.0%" alt="Po lewej graf z czterema grupami: C ma trzy wierzchołki i dwie krawędzie wewnętrzne, pozostałe grupy po dwa wierzchołki i jednej krawędzi wewnętrznej. Po prawej cztery wierzchołki A, B, C, D w różnych kolorach. C ma dwie pętle, a A, B, D po jednej. A i B łączą dwie równoległe krawędzie, A i C jedna krawędź, A i D jedna krawędź."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-louvain-agregacja-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.8: Agregacja tego samego grafu: grupy <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(D\)</span> stają się czterema wierzchołkami. Grupa <span class="math inline">\(C\)</span> ma trzy wierzchołki i dwie krawędzie wewnętrzne, więc po agregacji wierzchołek <span class="math inline">\(C\)</span> ma dwie pętle. Pozostałe wierzchołki mają po jednej pętli, a między <span class="math inline">\(A\)</span> i <span class="math inline">\(B\)</span> pozostają dwie krawędzie. Kolory po prawej oznaczają osobne, jednoelementowe grupy.
+</figcaption>
+</figure>
+</div>
+<p>Przechodzimy do punktu 1. Pojedynczy ruch na nowym grafie odpowiada przenoszeniu całej grupy wierzchołków grafu wyjściowego.</p>
+<p><strong>Cały algorytm kończymy, gdy pierwszy przegląd lokalnych ruchów po agreacji nie wykona żadnego przeniesienia zwiększającego modularność.</strong> Wynik odczytujemy jako podział wierzchołków grafu wyjściowego.</p></li>
+</ol>
+<div id="fig-algorytm-louvain" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Rozpocznij od grafu G i grup jednoelementowych. Wylicz modularność Q tego podziału. Wykonuj pełne przeglądy wierzchołków i ruchy o największym dodatnim przyroście modularności. Po każdym ruchu dodaj jego przyrost do Q. Gdy cały przegląd przebiegnie bez ruchu, sprawdź, czy był to pierwszy przegląd na tym poziomie. Jeśli tak, zakończ i odczytaj podział grafu wyjściowego. W przeciwnym razie zastąp G jego agregacją i rozpocznij kolejny poziom od grup jednoelementowych.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-algorytm-louvain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/algorytm-louvain.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Rysunek&nbsp;5.9: Diagram blokowy algorytmu Louvain."><img src="images/algorytm-louvain.svg" class="img-fluid figure-img" alt="Rozpocznij od grafu G i grup jednoelementowych. Wylicz modularność Q tego podziału. Wykonuj pełne przeglądy wierzchołków i ruchy o największym dodatnim przyroście modularności. Po każdym ruchu dodaj jego przyrost do Q. Gdy cały przegląd przebiegnie bez ruchu, sprawdź, czy był to pierwszy przegląd na tym poziomie. Jeśli tak, zakończ i odczytaj podział grafu wyjściowego. W przeciwnym razie zastąp G jego agregacją i rozpocznij kolejny poziom od grup jednoelementowych."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-algorytm-louvain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.9: Diagram blokowy algorytmu Louvain.
+</figcaption>
+</figure>
+</div>
+<div id="prp-agregacja-modularnosc" class="fact theorem proposition">
+<p><span class="theorem-title"><strong>Fakt 5.3</strong></span> Niech <span class="math inline">\(G'\)</span> będzie grafem powstałym przez agregację grup podziału <span class="math inline">\(\mathcal{C}\)</span> grafu <span class="math inline">\(G\)</span>. Wówczas:</p>
+<ol type="1">
+<li><p>Agregacja zachowuje modularność: <span class="math display">\[
+Q(G,\mathcal{C})=Q(G',\mathcal{C}'),
+\]</span> gdzie <span class="math inline">\(\mathcal{C}'\)</span> jest podziałem wierzchołków <span class="math inline">\(G'\)</span> na grupy jednoelementowe.</p></li>
+<li><p>Przeniesienie jednego wierzchołka <span class="math inline">\(v\)</span> do innej grupy w <span class="math inline">\(G'\)</span> daje taką samą zmianę modularności jak jednoczesne przeniesienie wszystkich reprezentowanych przez <span class="math inline">\(v\)</span> wierzchołków w grafie <span class="math inline">\(G\)</span>.</p></li>
+</ol>
+</div>
+<p><strong>Jak obliczać zmianę modularności po lokalnym ruchu?</strong> Na koniec opisu algorytmu pokażemy jeszcze, jak obliczyć zmianę modularności <span class="math inline">\(\Delta Q\)</span> przy przeniesieniu wierzchołka do innej grupy.</p>
+<p>Niech wierzchołek <span class="math inline">\(i\)</span> przechodzi z grupy <span class="math inline">\(a\)</span> do innej grupy <span class="math inline">\(b\)</span>. Oznaczmy przez <span class="math inline">\(k_i\)</span> jego stopień, a przez <span class="math inline">\(k_{i,a}\)</span> i <span class="math inline">\(k_{i,b}\)</span> liczby krawędzi łączących go odpowiednio z wierzchołkami <span class="math inline">\(a\setminus\{i\}\)</span> oraz <span class="math inline">\(b\)</span>. Niech <span class="math inline">\(K_a\)</span> i <span class="math inline">\(K_b\)</span> oznaczają sumy stopni w tych grupach <strong>przed przeniesieniem</strong> wierzchołka <span class="math inline">\(i\)</span>. Wówczas</p>
+<p><span id="eq-louvain-delta-q"><span class="math display">\[
+\Delta Q
+=\frac{k_{i,b}-k_{i,a}}{m}
+-\frac{k_i\bigl(K_b-K_a+k_i\bigr)}{2m^2}.
+\tag{5.2}\]</span></span></p>
+<p>Do obliczenia <span class="math inline">\(\Delta Q\)</span> wystarczą zatem informacje o krawędziach przy <span class="math inline">\(i\)</span> oraz zapamiętane wartości <span class="math inline">\(m\)</span>, <span class="math inline">\(K_a\)</span> i <span class="math inline">\(K_b\)</span>. Po wykonaniu ruchu aktualizujemy również sumy stopni: <span class="math inline">\(K_a\leftarrow K_a-k_i\)</span> oraz <span class="math inline">\(K_b\leftarrow K_b+k_i\)</span>. Wartości <span class="math inline">\(E_a\)</span> oraz <span class="math inline">\(E_b\)</span> nie musimy pamiętać.</p>
+<p>Zatem aby uaktualnić <span class="math inline">\(Q\)</span> po ruchu, nie trzeba obliczać modularności od nowa: wystarczy wykonać <span class="math inline">\(Q\leftarrow Q+\Delta Q\)</span>. Koszt obliczenia <span class="math inline">\(\Delta Q\)</span> zależy tlyko od liczby sąsiadów wierzchołka <span class="math inline">\(i\)</span>. Początkową wartość <span class="math inline">\(Q\)</span> obliczamy tylko raz, dla podziału na grupy jednoelementowe. Wymaga to jednego przejścia po wszystkich wierzchołkach.</p>
+<p>Prześledźmy działanie algorytmu na grafie z 11 wierzchołkami. W tym przykładzie niektóre wierzchołki zmieniają grupę więcej niż raz, a po agregacji pojawia się kolejny ruch zwiększający modularność. Na każdym poziomie przeglądamy wierzchołki w kolejności ich etykiet; przy remisie wybieramy grupę o mniejszym numerze. Te same kolory w obu widokach oznaczają te same grupy. Wybierz wierzchołek bieżącego grafu, aby wyróżnić reprezentowane przez niego wierzchołki grafu wyjściowego.</p>
+<div class="column-page">
+  <div id="louvain-krok-po-kroku" class="louvain-widget" data-louvain-widget="" data-src="data/louvain.json" tabindex="0" role="region" aria-label="Algorytm Louvain krok po kroku" aria-busy="true">
+    <div class="louvain-widget__header">
+      <div><p class="louvain-widget__eyebrow" data-louvain-stage="">Louvain krok po kroku</p><p class="louvain-widget__title" data-louvain-title="">Wczytywanie przykładu…</p></div>
+      <div class="louvain-widget__metrics"><span>Modularność <strong data-louvain-q="">—</strong></span><span>Grupy <strong data-louvain-count="">—</strong></span><span>Krawędzie <strong data-louvain-m="">—</strong></span></div>
+    </div>
+    <div class="louvain-widget__controls">
+      <button type="button" data-louvain-action="previous" disabled="">← Poprzedni krok</button>
+      <button type="button" data-louvain-action="next" disabled="">Następny krok →</button>
+      <button type="button" data-louvain-action="play" disabled="">Odtwarzaj</button>
+      <button type="button" data-louvain-action="reset" disabled="">Od początku</button>
+      <label>Przejdź do <select data-louvain-jump="" aria-label="Wybierz etap algorytmu" disabled=""><option value="">etapu…</option></select></label>
+      <button type="button" data-louvain-action="fullscreen">⛶ Powiększ</button>
+    </div>
+    <label class="louvain-widget__timeline"><span data-louvain-step="">Krok 0</span><input type="range" data-louvain-slider="" min="0" max="0" value="0" aria-label="Krok algorytmu Louvain" disabled=""></label>
+    <p class="louvain-widget__status" data-louvain-status="" aria-live="polite">Wczytywanie grafu i kolejnych ruchów.</p>
+    <div class="louvain-widget__graphs">
+      <section class="louvain-widget__graph"><h4 class="anchored">Graf wyjściowy</h4><p>Wierzchołki i krawędzie pozostają te same; zmieniają się grupy.</p><svg data-louvain-original="" viewbox="0 0 500 340" role="group" aria-label="Graf wyjściowy z bieżącym podziałem na grupy"></svg></section>
+      <section class="louvain-widget__graph"><h4 data-louvain-current-title="" class="anchored">Graf bieżący</h4><p data-louvain-current-description="">Każdy wierzchołek reprezentuje jeden wierzchołek wyjściowy.</p><svg data-louvain-current="" viewbox="0 0 500 340" role="group" aria-label="Bieżący graf na aktualnym poziomie agregacji"></svg></section>
+    </div>
+    <div class="louvain-widget__legend"><span><i class="louvain-widget__key is-active"></i>rozpatrywany wierzchołek</span><span><i class="louvain-widget__key is-target"></i>najlepsza próbowana grupa</span><span><i class="louvain-widget__line is-source"></i>krawędzie do własnej grupy</span><span><i class="louvain-widget__line is-target"></i>krawędzie do próbowanej grupy</span><span>×n przy pętli oznacza n pętli.</span></div>
+    <div class="louvain-widget__details">
+      <section class="louvain-widget__candidates"><h4 data-louvain-candidates-title="" class="anchored">Możliwe ruchy</h4><div data-louvain-candidates=""></div></section>
+      <section class="louvain-widget__calculation"><h4 data-louvain-calculation-title="" class="anchored">Obliczenie ΔQ</h4><div data-louvain-calculation=""></div></section>
+    </div>
+    <div class="louvain-widget__mapping">
+      <section><h4 class="anchored">Wierzchołki bieżące → wierzchołki wyjściowe</h4><div data-louvain-members=""></div></section>
+      <section><h4 class="anchored">Odczytany podział grafu wyjściowego</h4><div data-louvain-groups=""></div></section>
+    </div>
+    <p class="louvain-widget__hint" data-louvain-hover="">Najedź na wierzchołek lub wybierz go, aby sprawdzić, co reprezentuje. Strzałki ← i → zmieniają krok.</p>
+  </div>
+</div>
+<noscript><p>Przykład krok po kroku wymaga JavaScript. Opis ruchów i diagram algorytmu znajdują się powyżej.</p></noscript>
+<script src="widgets/louvain.js"></script>
+</section>
+<section id="sec-louvain-belgia" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="sec-louvain-belgia"><span class="header-section-number">5.3.3</span> Rozmowy telefoniczne w Belgii</h3>
+<p>Jednym z oryginalnych zastosowań algorytmu Louvain była analiza belgijskiej sieci telefonii komórkowej ( <a href="https://arxiv.org/abs/0803.0476"><em>Fast unfolding of communities in large networks</em></a>). Analizowano sieć około 2,6 miliona klientów belgijskiego operatora telefonii komórkowej. Wierzchołki oznaczały klientów, a wagi krawędzi opisywały intensywność rozmów (zastosowano wersję algorytmu, która uwzględnia wagi krawędzi). Algorytm zatrzymał się po pięciu agregacjach.</p>
+<p>Społeczności znalezione na podstawie połączeń wyraźnie odzwierciedlały podział językowy na osoby francusko- i niderlandzkojęzyczne. Informacja o języku pozwalała zinterpretować wynik; nie trzeba było podawać jej algorytmowi jako gotowego podziału.</p>
+<p>Na rysunku <a href="#fig-belgia-spolecznosci" class="quarto-xref"><span>5.10</span></a>, pochodzącym z tej pracy, każdy widoczny wierzchołek reprezentuje całą społeczność liczącą ponad sto osób, a nie pojedynczego klienta. Są to grupy na ostatnim, piątym poziomie agregacji. Pomiędzy dwiema dużymim grupami językowymi widoczna jest społeczność mieszana. Powiększenie pokazuje jej wewnętrzny podział na grupy, tym razem na czwartym poziomie agregacji.</p>
+<div id="fig-belgia-spolecznosci" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Oryginalny graf społeczności belgijskich klientów telefonii: czerwone społeczności francuskojęzyczne, zielone niderlandzkojęzyczne i mieszana społeczność między nimi, pokazana również w powiększeniu.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-belgia-spolecznosci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/belgia-spolecznosci-blondel.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Rysunek&nbsp;5.10: Społeczności w belgijskiej sieci telefonicznej, wykryte metodą Louvain. Wielkość wierzchołka odpowiada liczbie osób w społeczności, a kolor — dominującemu językowi: czerwony francuskiemu, zielony niderlandzkiemu. Pokazano społeczności liczące ponad 100 osób, obejmujące łącznie około 2 milionów klientów. Źródło: V. D. Blondel, J.-L. Guillaume, R. Lambiotte i E. Lefebvre, Fast unfolding of communities in large networks, 2008, rysunek 3."><img src="images/belgia-spolecznosci-blondel.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%" alt="Oryginalny graf społeczności belgijskich klientów telefonii: czerwone społeczności francuskojęzyczne, zielone niderlandzkojęzyczne i mieszana społeczność między nimi, pokazana również w powiększeniu."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-belgia-spolecznosci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.10: Społeczności w belgijskiej sieci telefonicznej, wykryte metodą Louvain. Wielkość wierzchołka odpowiada liczbie osób w społeczności, a kolor — dominującemu językowi: czerwony francuskiemu, zielony niderlandzkiemu. Pokazano społeczności liczące ponad 100 osób, obejmujące łącznie około 2 milionów klientów. Źródło: V. D. Blondel, J.-L. Guillaume, R. Lambiotte i E. Lefebvre, <a href="https://arxiv.org/pdf/0803.0476"><em>Fast unfolding of communities in large networks</em></a>, 2008, rysunek 3.
+</figcaption>
+</figure>
+</div>
+<p>Wyniki pokazały silną segregację językową kontaktów: spośród 36 społeczności liczących ponad 10 tysięcy klientów aż 35 miało ponad 85% członków posługujących się tym samym językiem. Społeczność mieszana, widoczna między dwoma skupiskami, składała się natomiast z silnie połączonych podspołeczności, które również były językowo mieszane. Autorzy wskazywali na możliwą rolę takich grup w integracji środowisk francusko- i niderlandzkojęzycznych. Zaobserwowali także, że ponad 60% klientów niemieckojęzycznych skupiało się w jednej społeczności, podczas gdy klienci anglojęzyczni byli rozproszeni po różnych grupach.</p>
+</section>
+<section id="sec-oczekiwana-liczba-krawedzi" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="sec-oczekiwana-liczba-krawedzi"><span class="header-section-number">5.3.4</span> Oczekiwana liczba krawędzi w grupie</h3>
+<p>Wyjaśnimy teraz, skąd bierze się składnik <span class="math inline">\(K_c^2/(2m)\)</span> w modularności. Chcemy porównać liczbę krawędzi wewnątrz grupy z liczbą, której oczekiwalibyśmy przy losowym tworzeniu połączeń. Losowanie powinno uwzględniać całkowitą liczbę krawędzi grafu oraz stopnie wierzchołków: wierzchołek mający duży stopień powinien częściej pojawiać się jako koniec krawędzi w losowym grafie.</p>
+<p>Niech graf wyjściowy ma <span class="math inline">\(m&gt;0\)</span> krawędzi i <span class="math inline">\(n\)</span> wierzchołków ponumerowanych od <span class="math inline">\(1\)</span> do <span class="math inline">\(n\)</span>. Wierzchołki tego grafu mają stopnie <span class="math inline">\(k_1,\ldots,k_n\)</span>. Ponieważ <span class="math inline">\(\sum_i k_i=2m\)</span>, liczby</p>
+<p><span class="math display">\[
+p_i=\frac{k_i}{2m}
+\]</span></p>
+<p>sumują się do <span class="math inline">\(1\)</span> i mogą służyć jako prawdopodobieństwa losowania wierzchołków. Tworzymy losowy graf na tym samym zbiorze wierzchołków w następujący sposób:</p>
+<ol type="1">
+<li>Losujemy pierwszy koniec krawędzi: wybieramy wierzchołek <span class="math inline">\(i\)</span> z prawdopodobieństwem <span class="math inline">\(p_i\)</span>.</li>
+<li>Niezależnie, według tych samych prawdopodobieństw, losujemy drugi koniec i łączymy oba wylosowane wierzchołki krawędzią.</li>
+<li>Powtarzamy te losowania niezależnie <span class="math inline">\(m\)</span> razy.</li>
+</ol>
+<p>Otrzymany graf ma dokładnie tyle samo krawędzi co graf wyjściowy. W tym modelu dopuszczamy pętle i krawędzie wielokrotne.</p>
+<p>Opisana wyżej procedura nazywa się <strong>modelem grafu losowego</strong>. Formalnie, mając dane <span class="math inline">\(n\)</span>, <span class="math inline">\(m\)</span>, i prawdopodobieństwa <span class="math inline">\(p_1,\ldots,p_n\)</span>, definiuje ona rozkład prawdopodobieństwa na zbiorze wszystkich grafów z <span class="math inline">\(n\)</span> ponumerowanymi wierzchołkami i <span class="math inline">\(m\)</span> krawędziami.</p>
+<div id="exm-rozklad-losowych-grafow" class="theorem example">
+<p><span class="theorem-title"><strong>Przykład 5.2 (Rozkład na grafach z dwiema krawędziami)</strong></span> Graf wyjściowy ma krawędzie <span class="math inline">\(1\!-\!2\)</span> i <span class="math inline">\(1\!-\!3\)</span>. Mamy <span class="math inline">\(m=2\)</span> oraz stopnie <span class="math inline">\(k_1=2\)</span>, <span class="math inline">\(k_2=k_3=1\)</span>, zatem</p>
+<p><span class="math display">\[
+p_1=\frac{2}{4}=\frac12,\qquad
+p_2=p_3=\frac14.
+\]</span></p>
+<p>Na rysunku utożsamiamy grafy, które różnią się jedynie zamianą <span class="math inline">\(2\)</span> i <span class="math inline">\(3\)</span>. Ta zamiana zachowuje prawdopodobieństwa wierzchołków. Otrzymujemy <span class="math inline">\(13\)</span> klas. Pod każdym reprezentantem podano prawdopodobieństwo jego klasy. Zapis <span class="math inline">\(2\times q\)</span> oznacza, że klasa zawiera dwa grafy, każdy o prawdopodobieństwie <span class="math inline">\(q\)</span>. Na przykład klasa dwóch równoległych krawędzi <span class="math inline">\(1\!-\!2\)</span> obejmuje również graf z dwiema równoległymi krawędziami <span class="math inline">\(1\!-\!3\)</span>. Każdy z nich ma prawdopodobieństwo <span class="math inline">\((1/4)^2=1/16\)</span>, stąd podpis <span class="math inline">\(2\times\frac{1}{16}\)</span>.</p>
+<div id="fig-rozklad-losowych-grafow" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Trzynaście klas grafów w trzech rzędach. Zapis ij oznacza krawędź między i i j, a ii oznacza pętlę. Bez pętli: pary 12 i 12 oraz 12 i 23 mają po 2 razy 1/16, para 12 i 13 ma 1/8, a para 23 i 23 ma 1/64. Jedna pętla: para 11 i 12 ma 2 razy 1/8, para 11 i 23 ma 1/16, pary 12 i 22 oraz 12 i 33 mają po 2 razy 1/32, a para 22 i 23 ma 2 razy 1/64. Dwie pętle: para 11 i 11 ma 1/16, para 11 i 22 ma 2 razy 1/32, para 22 i 22 ma 2 razy 1/256, a para 22 i 33 ma 1/128.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rozklad-losowych-grafow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="generated/rozklad-losowych-grafow.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Rysunek&nbsp;5.11: Możliwe grafy z dwiema krawędziami z dokładnością do zamiany wierzchołków 2 i 3. Pod każdym reprezentantem widnieje prawdopodobieństwo jego klasy."><img src="generated/rozklad-losowych-grafow.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:95.0%" alt="Trzynaście klas grafów w trzech rzędach. Zapis ij oznacza krawędź między i i j, a ii oznacza pętlę. Bez pętli: pary 12 i 12 oraz 12 i 23 mają po 2 razy 1/16, para 12 i 13 ma 1/8, a para 23 i 23 ma 1/64. Jedna pętla: para 11 i 12 ma 2 razy 1/8, para 11 i 23 ma 1/16, pary 12 i 22 oraz 12 i 33 mają po 2 razy 1/32, a para 22 i 23 ma 2 razy 1/64. Dwie pętle: para 11 i 11 ma 1/16, para 11 i 22 ma 2 razy 1/32, para 22 i 22 ma 2 razy 1/256, a para 22 i 33 ma 1/128."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rozklad-losowych-grafow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Rysunek&nbsp;5.11: Możliwe grafy z dwiema krawędziami z dokładnością do zamiany wierzchołków <span class="math inline">\(2\)</span> i <span class="math inline">\(3\)</span>. Pod każdym reprezentantem widnieje prawdopodobieństwo jego klasy.
+</figcaption>
+</figure>
+</div>
+</div>
+<div id="prp-oczekiwany-stopien" class="fact theorem proposition">
+<p><span class="theorem-title"><strong>Fakt 5.4</strong></span> Niech <span class="math inline">\(G\)</span> będzie grafem nieskierowanym. Rozważmy prodecurę losowania grafów opisaną wyżej. Niech <span class="math inline">\(D_i\)</span> oznacza stopień wierzchołka <span class="math inline">\(i\)</span> w losowym grafie. Wówczas</p>
+<p><span class="math display">\[
+\mathbb{E}D_i=2mp_i=k_i.
+\]</span></p>
+</div>
+<details class="proof-details">
+<summary>
+Dowód
+</summary>
+<div class="proof">
+<p><span class="proof-title"><em>Dowód</em>. </span>Formalnie, <span class="math inline">\(D_i\)</span> jest zmienną losową na wyżej zdefiniowanej przestrzeni probabilistycznej, przyporządkowującą wierzchołkowi <span class="math inline">\(i\)</span> jego stopień. Dla <span class="math inline">\(t=1,\ldots,2m\)</span> niech <span class="math inline">\(I_{i,t}\)</span> ma wartość <span class="math inline">\(1\)</span>, gdy <span class="math inline">\(t\)</span>-ty wylosowany koniec krawędzi trafi do <span class="math inline">\(i\)</span>, i <span class="math inline">\(0\)</span> w przeciwnym razie. Wtedy <span class="math inline">\(\mathbb{E}I_{i,t}=p_i\)</span>. Stopień <span class="math inline">\(D_i\)</span> jest sumą tych wskaźników. Pętla przy <span class="math inline">\(i\)</span> wnosi do sumy <span class="math inline">\(2\)</span>, bo oba jej końce są przy <span class="math inline">\(i\)</span>. Z liniowości wartości oczekiwanej</p>
+<p><span class="math display">\[
+\mathbb{E}D_i
+=\sum_{t=1}^{2m}\mathbb{E}I_{i,t}
+=2mp_i=k_i.
+\]</span></p>
+</div>
+</details>
+<div id="prp-oczekiwana-liczba-krawedzi" class="fact theorem proposition">
+<p><span class="theorem-title"><strong>Fakt 5.5</strong></span> Niech <span class="math inline">\(G\)</span> będzie grafem nieskierowanym podzielonym na grupy <span class="math inline">\(\mathcal C\)</span>. Ustalmy grupę wierzchołków <span class="math inline">\(c\)</span> i rozważmy procedurę losowania grafów opisaną powyżej. Niech <span class="math inline">\(X_c\)</span> będzie zmienną losową, która każdemu wylosowanemu grafowi przypisuje liczbę krawędzi o obu końcach w <span class="math inline">\(c\)</span>. Jeśli <span class="math inline">\(K_c=\sum_{i\in c} k_i\)</span> jest sumą stopni wierzchołków grupy <span class="math inline">\(c\)</span> w grafie wyjściowym, to</p>
+<p><span id="eq-oczekiwana-krawedzie-grupy"><span class="math display">\[
+\mathbb{E}X_c=\frac{K_c^2}{4m}.
+\tag{5.3}\]</span></span></p>
+</div>
+<details class="proof-details">
+<summary>
+Dowód
+</summary>
+<div class="proof">
+<p><span class="proof-title"><em>Dowód</em>. </span>Prawdopodobieństwo, że jeden losowany koniec krawędzi trafi do <span class="math inline">\(c\)</span>, wynosi</p>
+<p><span class="math display">\[
+p_c=\sum_{i\in c}p_i=\frac{K_c}{2m}.
+\]</span></p>
+<p>Oba końce losujemy niezależnie, więc prawdopodobieństwo, że oba trafią do <span class="math inline">\(c\)</span>, wynosi <span class="math inline">\(p_c^2\)</span>. Niech <span class="math inline">\(J_t\)</span> będzie wskaźnikiem tego zdarzenia dla <span class="math inline">\(t\)</span>-tej krawędzi. Mamy <span class="math inline">\(X_c=\sum_{t=1}^m J_t\)</span> i <span class="math inline">\(\mathbb{E}J_t=p_c^2\)</span>. Z liniowości wartości oczekiwanej otrzymujemy</p>
+<p><span class="math display">\[
+\mathbb{E}X_c
+=\sum_{t=1}^m\mathbb{E}J_t
+=m p_c^2
+=m\left(\frac{K_c}{2m}\right)^2
+=\frac{K_c^2}{4m}.
+\]</span></p>
+</div>
+</details>
+<p>W grafie wyjściowym grupa <span class="math inline">\(c\)</span> ma <span class="math inline">\(E_c\)</span> krawędzi wewnętrznych. Różnica <span class="math inline">\(E_c-\mathbb{E}X_c\)</span> mierzy nadwyżkę albo niedobór takich krawędzi względem modelu losowego. Modularność podziału otrzymujemy, sumując te różnice po grupach i dzieląc przez łączną liczbę krawędzi <span class="math inline">\(m\)</span>.</p>
+<p><span class="math display">\[
+Q(G,\mathcal{C})
+=\frac{1}{m}\sum_{c\in\mathcal{C}}
+\left(E_c-\mathbb{E}X_c\right)
+=\frac{1}{m}\sum_{c\in\mathcal{C}}
+\left(E_c-\frac{K_c^2}{4m}\right).
+\]</span></p>
+<p>Dodatnie <span class="math inline">\(Q\)</span> oznacza, że łącznie wewnątrz grup jest więcej krawędzi, niż oczekujemy w modelu losowym. Ujemne <span class="math inline">\(Q\)</span> oznacza, że jest ich mniej. Dla ustalonego grafu większe <span class="math inline">\(Q\)</span> odpowiada większej łącznej nadwyżce.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+(() => {
+
+  const initializeSidebarToggle = () => {
+
+    const sidebar = document.getElementById("quarto-sidebar");
+
+    if (!sidebar || document.getElementById("book-sidebar-toggle")) return;
+
+
+
+    const desktop = window.matchMedia("(min-width: 992px)");
+
+    const body = document.body;
+
+    const panels = [
+
+      { element: sidebar, name: "sidebar", label: "menu", side: "left" },
+
+      { element: document.querySelector("#quarto-margin-sidebar:has(#TOC)"),
+
+        name: "toc", label: "spis treści", side: "right" }
+
+    ].filter((panel) => panel.element);
+
+
+
+    if (panels.length === 1) body.classList.add("book-toc-absent");
+
+
+
+    const positionButtons = () => {
+
+      if (!desktop.matches) return;
+
+      for (const panel of panels) {
+
+        const rect = panel.element.getBoundingClientRect();
+
+        const offset = panel.collapsed ? 2 : panel.side === "left"
+
+          ? Math.max(2, rect.right - 26)
+
+          : Math.max(2, document.documentElement.clientWidth - rect.right + 2);
+
+        panel.button.style[panel.side] = `${offset}px`;
+
+      }
+
+    };
+
+
+
+    for (const panel of panels) {
+
+      panel.preferenceKey = `book-${panel.name}-collapsed`;
+
+      panel.collapsed = false;
+
+      try {
+
+        panel.collapsed = localStorage.getItem(panel.preferenceKey) === "true";
+
+      } catch (_) {
+
+        // The arrows also work when browser storage is unavailable.
+
+      }
+
+      const button = document.createElement("button");
+
+      button.id = `book-${panel.name}-toggle`;
+
+      button.className = `book-panel-toggle book-panel-toggle--${panel.side}`;
+
+      button.type = "button";
+
+      button.setAttribute("aria-controls", panel.element.id);
+
+      button.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>';
+
+      body.append(button);
+
+      panel.button = button;
+
+      button.addEventListener("click", () => {
+
+        panel.collapsed = !panel.collapsed;
+
+        try {
+
+          localStorage.setItem(panel.preferenceKey, String(panel.collapsed));
+
+        } catch (_) {}
+
+        update();
+
+      });
+
+    }
+
+    body.classList.add("book-panel-toggles-ready");
+
+
+
+    const update = () => {
+
+      for (const panel of panels) {
+
+        const hidden = desktop.matches && panel.collapsed;
+
+        body.classList.toggle(`book-${panel.name}-collapsed`, hidden);
+
+        panel.element.inert = hidden;
+
+        if (hidden) panel.element.setAttribute("aria-hidden", "true");
+
+        else panel.element.removeAttribute("aria-hidden");
+
+        panel.button.setAttribute("aria-expanded", String(!hidden));
+
+        const label = `${hidden ? "Rozwiń" : "Zwiń"} ${panel.label}`;
+
+        panel.button.setAttribute("aria-label", label);
+
+        panel.button.title = label;
+
+      }
+
+      // Let Quarto recalculate the sidebar and table of contents positions.
+
+      window.dispatchEvent(new Event("resize"));
+
+      positionButtons();
+
+    };
+
+
+
+    desktop.addEventListener("change", update);
+
+    window.addEventListener("resize", positionButtons);
+
+    update();
+
+  };
+
+
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener("DOMContentLoaded", initializeSidebarToggle, { once: true });
+
+  } else {
+
+    initializeSidebarToggle();
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+(() => {
+
+  let mathJaxReady;
+
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+
+      const script = document.querySelector('script[src*="mathjax" i]');
+
+      if (!script) return;
+
+      await new Promise((resolve) => {
+
+        const loaded = () => {
+
+          script.removeEventListener("load", loaded);
+
+          script.removeEventListener("error", loaded);
+
+          resolve();
+
+        };
+
+        script.addEventListener("load", loaded, { once: true });
+
+        script.addEventListener("error", loaded, { once: true });
+
+      });
+
+    }
+
+    await globalThis.MathJax?.startup?.promise;
+
+    return globalThis.MathJax;
+
+  })();
+
+
+
+  const initializeTheoremFullscreen = () => {
+
+    const blocks = document.querySelectorAll(
+
+      "#quarto-document-content .theorem:not(.exercise)"
+
+    );
+
+
+
+    if (blocks.length === 0 || document.getElementById("theorem-fullscreen-dialog")) {
+
+      return;
+
+    }
+
+
+
+    const dialog = document.createElement("dialog");
+
+    dialog.id = "theorem-fullscreen-dialog";
+
+    dialog.innerHTML = `
+
+      <div class="theorem-fullscreen-panel">
+
+        <button class="theorem-fullscreen-close" type="button" aria-label="Zamknij">×</button>
+
+        <div class="theorem-fullscreen-content"></div>
+
+      </div>
+
+    `;
+
+    document.body.append(dialog);
+
+
+
+    const content = dialog.querySelector(".theorem-fullscreen-content");
+
+    const closeButton = dialog.querySelector(".theorem-fullscreen-close");
+
+    let lastTrigger = null;
+
+
+
+    const typesetCopy = async (copy) => {
+
+      try {
+
+        const mathJax = await waitForMathJax();
+
+        if (!dialog.open || !copy.isConnected || !mathJax?.typesetPromise) return;
+
+        try {
+
+          await mathJax.typesetPromise([copy]);
+
+        } finally {
+
+          // The dialog may have been closed while MathJax was loading a font.
+
+          if (!dialog.open || !copy.isConnected) mathJax.typesetClear?.([copy]);
+
+        }
+
+      } catch (error) {
+
+        console.warn("Nie udało się złożyć wzorów w powiększeniu.", error);
+
+      }
+
+    };
+
+
+
+    const closeDialog = () => {
+
+      if (dialog.open) {
+
+        dialog.close();
+
+      }
+
+    };
+
+
+
+    const openDialog = (block, trigger) => {
+
+      const copy = block.cloneNode(true);
+
+      const title = block.querySelector(".theorem-title")?.textContent.trim() ||
+
+        "Definicja, przykład lub twierdzenie";
+
+      const includeSelector = block.dataset.fullscreenInclude;
+
+
+
+      copy.classList.add("theorem-fullscreen-copy");
+
+      copy.removeAttribute("data-fullscreen-include");
+
+
+
+      if (includeSelector) {
+
+        document.querySelectorAll(includeSelector).forEach((element) => {
+
+          const includedCopy = element.cloneNode(true);
+
+          includedCopy.classList.add("theorem-fullscreen-extra");
+
+          copy.append(includedCopy);
+
+        });
+
+      }
+
+
+
+      copy.removeAttribute("id");
+
+      copy.querySelectorAll("[id]").forEach((element) => element.removeAttribute("id"));
+
+      copy.querySelectorAll(".theorem-expand-button").forEach((button) => button.remove());
+
+      copy.querySelectorAll(".theorem-expand-trigger").forEach((element) => {
+
+        element.classList.remove("theorem-expand-trigger");
+
+        element.removeAttribute("role");
+
+        element.removeAttribute("tabindex");
+
+        element.removeAttribute("title");
+
+        element.removeAttribute("aria-haspopup");
+
+        element.removeAttribute("aria-controls");
+
+      });
+
+
+
+      globalThis.MathJax?.typesetClear?.([content]);
+
+      content.replaceChildren(copy);
+
+      dialog.setAttribute("aria-label", title);
+
+      lastTrigger = trigger;
+
+      dialog.showModal();
+
+      closeButton.focus();
+
+      void typesetCopy(copy);
+
+    };
+
+
+
+    closeButton.addEventListener("click", closeDialog);
+
+    dialog.addEventListener("click", (event) => {
+
+      if (event.target === dialog) {
+
+        closeDialog();
+
+      }
+
+    });
+
+    dialog.addEventListener("close", () => {
+
+      globalThis.MathJax?.typesetClear?.([content]);
+
+      content.replaceChildren();
+
+      lastTrigger?.focus();
+
+      lastTrigger = null;
+
+    });
+
+
+
+    blocks.forEach((block) => {
+
+      if (block.dataset.fullscreenReady === "true") {
+
+        return;
+
+      }
+
+      block.dataset.fullscreenReady = "true";
+
+
+
+      const title = block.querySelector(".theorem-title");
+
+      const label = title?.textContent.trim() || "definicję, przykład lub twierdzenie";
+
+      const button = document.createElement("button");
+
+      button.type = "button";
+
+      button.className = "theorem-expand-button";
+
+      button.title = `Powiększ: ${label}`;
+
+      button.setAttribute("aria-label", `Powiększ: ${label}`);
+
+      button.setAttribute("aria-haspopup", "dialog");
+
+      button.setAttribute("aria-controls", dialog.id);
+
+      button.innerHTML = `
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+
+          <path d="M8 3H3v5 M16 3h5v5 M21 16v5h-5 M8 21H3v-5"></path>
+
+        </svg>
+
+      `;
+
+      button.addEventListener("click", () => openDialog(block, button));
+
+      block.append(button);
+
+
+
+      if (title) {
+
+        title.classList.add("theorem-expand-trigger");
+
+        title.setAttribute("role", "button");
+
+        title.setAttribute("tabindex", "0");
+
+        title.setAttribute("title", `Powiększ: ${label}`);
+
+        title.setAttribute("aria-haspopup", "dialog");
+
+        title.setAttribute("aria-controls", dialog.id);
+
+        title.addEventListener("click", () => openDialog(block, title));
+
+        title.addEventListener("keydown", (event) => {
+
+          if (event.key === "Enter" || event.key === " ") {
+
+            event.preventDefault();
+
+            openDialog(block, title);
+
+          }
+
+        });
+
+      }
+
+    });
+
+  };
+
+
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener("DOMContentLoaded", initializeTheoremFullscreen, { once: true });
+
+  } else {
+
+    initializeTheoremFullscreen();
+
+  }
+
+})();
+
+</script>
+
+<script>
+
+(() => {
+
+  const scheduledMath = new WeakSet();
+
+  let mathJaxReady;
+
+  const waitForMathJax = () => mathJaxReady ||= (async () => {
+
+    if (!globalThis.MathJax?.startup?.promise && !globalThis.MathJax?.typesetPromise) {
+
+      const script = document.querySelector('script[src*="mathjax" i]');
+
+      if (!script) return;
+
+      await new Promise((resolve) => {
+
+        const loaded = () => {
+
+          script.removeEventListener("load", loaded);
+
+          script.removeEventListener("error", loaded);
+
+          resolve();
+
+        };
+
+        script.addEventListener("load", loaded, { once: true });
+
+        script.addEventListener("error", loaded, { once: true });
+
+      });
+
+    }
+
+    await globalThis.MathJax?.startup?.promise;
+
+    return globalThis.MathJax;
+
+  })();
+
+
+
+  const typesetPreviewMath = (root) => {
+
+    if (!globalThis.MathJax && !document.querySelector?.('script[src*="mathjax" i]')) return;
+
+    const formulas = [...root.querySelectorAll(".tippy-content .math")]
+
+      .filter((formula) => !scheduledMath.has(formula) && !formula.querySelector("mjx-container"));
+
+    if (!formulas.length) return;
+
+    // MathJax mutates this subtree too; schedule each source element only once.
+
+    formulas.forEach((formula) => scheduledMath.add(formula));
+
+    void waitForMathJax().then(async (mathJax) => {
+
+      const attached = formulas.filter((formula) => formula.isConnected && !formula.querySelector("mjx-container"));
+
+      if (!attached.length || !mathJax?.typesetPromise) return;
+
+      try {
+
+        await mathJax.typesetPromise(attached);
+
+      } finally {
+
+        const removed = attached.filter((formula) => !formula.isConnected);
+
+        if (removed.length) mathJax.typesetClear?.(removed);
+
+      }
+
+    }).catch((error) => console.warn("Nie udało się złożyć wzorów w podglądzie.", error));
+
+  };
+
+
+
+  const fixPreviewUrls = (root) => {
+
+    const reference = root._tippy?.reference;
+
+    if (!reference?.matches("a.quarto-xref")) return;
+
+
+
+    // Quarto copies HTML from the referenced page into the current page.
+
+    // Relative image and link URLs must still use the referenced page as base.
+
+    const base = new URL(reference.getAttribute("href"), document.baseURI);
+
+    root.querySelectorAll(".tippy-content img[src], .tippy-content a[href]")
+
+      .forEach((element) => {
+
+        const attribute = element.tagName === "IMG" ? "src" : "href";
+
+        const value = element.getAttribute(attribute);
+
+        if (value && !/^(?:[a-z][a-z\d+.-]*:|\/\/|\/)/i.test(value)) {
+
+          element.setAttribute(attribute, new URL(value, base).href);
+
+        }
+
+      });
+
+  };
+
+
+
+  const initializeXrefPreviews = () => {
+
+    // Quarto reads cross-page fragments with new URL(href), without a base.
+
+    document.querySelectorAll("a.quarto-xref[href]").forEach((reference) => {
+
+      const href = reference.getAttribute("href");
+
+      if (href && !href.startsWith("#")) {
+
+        reference.setAttribute("href", new URL(href, document.baseURI).href);
+
+      }
+
+    });
+
+    const observer = new MutationObserver((mutations) => {
+
+      const roots = new Set();
+
+      mutations.forEach((mutation) => {
+
+        const root = mutation.target.parentElement?.closest("[data-tippy-root]");
+
+        if (root) roots.add(root);
+
+        if (mutation.target instanceof Element && mutation.target.matches("[data-tippy-root]")) {
+
+          roots.add(mutation.target);
+
+        }
+
+        mutation.addedNodes.forEach((node) => {
+
+          if (!(node instanceof Element)) return;
+
+          if (node.matches("[data-tippy-root]")) roots.add(node);
+
+          node.querySelectorAll("[data-tippy-root]").forEach((root) => roots.add(root));
+
+        });
+
+      });
+
+      roots.forEach((root) => {
+
+        fixPreviewUrls(root);
+
+        typesetPreviewMath(root);
+
+      });
+
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+  };
+
+
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener("DOMContentLoaded", initializeXrefPreviews, { once: true });
+
+  } else {
+
+    initializeXrefPreviews();
+
+  }
+
+})();
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Skopiowano!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Skopiowano!");
+        tooltip = new bootstrap.Tooltip(button,
+          { trigger: "manual",
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config);
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined;
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              }
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            }
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../wykłady/pagerank.html" class="pagination-link" aria-label="PageRank">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">PageRank</span></span>
+      </a>
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../zadania/lista-01-grafy.html" class="pagination-link" aria-label="1 Grafy">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Grafy</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      }
+    });
+
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+
+  };
+
+})();
+          </script>
+
+
+
+
+</body></html>

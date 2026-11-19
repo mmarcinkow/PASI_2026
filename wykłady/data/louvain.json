@@ -1,0 +1,3915 @@
+{
+  "m": 15,
+  "original": {
+    "nodes": [
+      {
+        "id": 1,
+        "label": "1",
+        "members": [
+          1
+        ],
+        "k": 3,
+        "loops": 0,
+        "x": 196.527,
+        "y": 68.873,
+        "from_nodes": [
+          1
+        ],
+        "from_group": 1
+      },
+      {
+        "id": 2,
+        "label": "2",
+        "members": [
+          2
+        ],
+        "k": 5,
+        "loops": 0,
+        "x": 270.0,
+        "y": 45.0,
+        "from_nodes": [
+          2
+        ],
+        "from_group": 2
+      },
+      {
+        "id": 3,
+        "label": "3",
+        "members": [
+          3
+        ],
+        "k": 2,
+        "loops": 0,
+        "x": 343.473,
+        "y": 68.873,
+        "from_nodes": [
+          3
+        ],
+        "from_group": 3
+      },
+      {
+        "id": 4,
+        "label": "4",
+        "members": [
+          4
+        ],
+        "k": 3,
+        "loops": 0,
+        "x": 388.882,
+        "y": 131.373,
+        "from_nodes": [
+          4
+        ],
+        "from_group": 4
+      },
+      {
+        "id": 5,
+        "label": "5",
+        "members": [
+          5
+        ],
+        "k": 4,
+        "loops": 0,
+        "x": 388.882,
+        "y": 208.627,
+        "from_nodes": [
+          5
+        ],
+        "from_group": 5
+      },
+      {
+        "id": 6,
+        "label": "6",
+        "members": [
+          6
+        ],
+        "k": 3,
+        "loops": 0,
+        "x": 343.473,
+        "y": 271.127,
+        "from_nodes": [
+          6
+        ],
+        "from_group": 6
+      },
+      {
+        "id": 7,
+        "label": "7",
+        "members": [
+          7
+        ],
+        "k": 2,
+        "loops": 0,
+        "x": 270.0,
+        "y": 295.0,
+        "from_nodes": [
+          7
+        ],
+        "from_group": 7
+      },
+      {
+        "id": 8,
+        "label": "8",
+        "members": [
+          8
+        ],
+        "k": 2,
+        "loops": 0,
+        "x": 196.527,
+        "y": 271.127,
+        "from_nodes": [
+          8
+        ],
+        "from_group": 8
+      },
+      {
+        "id": 9,
+        "label": "9",
+        "members": [
+          9
+        ],
+        "k": 3,
+        "loops": 0,
+        "x": 151.118,
+        "y": 208.627,
+        "from_nodes": [
+          9
+        ],
+        "from_group": 9
+      },
+      {
+        "id": 10,
+        "label": "10",
+        "members": [
+          10
+        ],
+        "k": 2,
+        "loops": 0,
+        "x": 151.118,
+        "y": 131.373,
+        "from_nodes": [
+          10
+        ],
+        "from_group": 10
+      },
+      {
+        "id": 11,
+        "label": "11",
+        "members": [
+          11
+        ],
+        "k": 1,
+        "loops": 0,
+        "x": 65.0,
+        "y": 235.0,
+        "from_nodes": [
+          11
+        ],
+        "from_group": 11
+      }
+    ],
+    "edges": [
+      {
+        "u": 1,
+        "v": 2,
+        "count": 1
+      },
+      {
+        "u": 1,
+        "v": 5,
+        "count": 1
+      },
+      {
+        "u": 1,
+        "v": 10,
+        "count": 1
+      },
+      {
+        "u": 2,
+        "v": 3,
+        "count": 1
+      },
+      {
+        "u": 2,
+        "v": 4,
+        "count": 1
+      },
+      {
+        "u": 2,
+        "v": 5,
+        "count": 1
+      },
+      {
+        "u": 2,
+        "v": 6,
+        "count": 1
+      },
+      {
+        "u": 3,
+        "v": 4,
+        "count": 1
+      },
+      {
+        "u": 4,
+        "v": 5,
+        "count": 1
+      },
+      {
+        "u": 5,
+        "v": 6,
+        "count": 1
+      },
+      {
+        "u": 6,
+        "v": 7,
+        "count": 1
+      },
+      {
+        "u": 7,
+        "v": 8,
+        "count": 1
+      },
+      {
+        "u": 8,
+        "v": 9,
+        "count": 1
+      },
+      {
+        "u": 9,
+        "v": 10,
+        "count": 1
+      },
+      {
+        "u": 9,
+        "v": 11,
+        "count": 1
+      }
+    ]
+  },
+  "levels": [
+    {
+      "nodes": [
+        {
+          "id": 1,
+          "label": "1",
+          "members": [
+            1
+          ],
+          "k": 3,
+          "loops": 0,
+          "x": 196.527,
+          "y": 68.873,
+          "from_nodes": [
+            1
+          ],
+          "from_group": 1
+        },
+        {
+          "id": 2,
+          "label": "2",
+          "members": [
+            2
+          ],
+          "k": 5,
+          "loops": 0,
+          "x": 270.0,
+          "y": 45.0,
+          "from_nodes": [
+            2
+          ],
+          "from_group": 2
+        },
+        {
+          "id": 3,
+          "label": "3",
+          "members": [
+            3
+          ],
+          "k": 2,
+          "loops": 0,
+          "x": 343.473,
+          "y": 68.873,
+          "from_nodes": [
+            3
+          ],
+          "from_group": 3
+        },
+        {
+          "id": 4,
+          "label": "4",
+          "members": [
+            4
+          ],
+          "k": 3,
+          "loops": 0,
+          "x": 388.882,
+          "y": 131.373,
+          "from_nodes": [
+            4
+          ],
+          "from_group": 4
+        },
+        {
+          "id": 5,
+          "label": "5",
+          "members": [
+            5
+          ],
+          "k": 4,
+          "loops": 0,
+          "x": 388.882,
+          "y": 208.627,
+          "from_nodes": [
+            5
+          ],
+          "from_group": 5
+        },
+        {
+          "id": 6,
+          "label": "6",
+          "members": [
+            6
+          ],
+          "k": 3,
+          "loops": 0,
+          "x": 343.473,
+          "y": 271.127,
+          "from_nodes": [
+            6
+          ],
+          "from_group": 6
+        },
+        {
+          "id": 7,
+          "label": "7",
+          "members": [
+            7
+          ],
+          "k": 2,
+          "loops": 0,
+          "x": 270.0,
+          "y": 295.0,
+          "from_nodes": [
+            7
+          ],
+          "from_group": 7
+        },
+        {
+          "id": 8,
+          "label": "8",
+          "members": [
+            8
+          ],
+          "k": 2,
+          "loops": 0,
+          "x": 196.527,
+          "y": 271.127,
+          "from_nodes": [
+            8
+          ],
+          "from_group": 8
+        },
+        {
+          "id": 9,
+          "label": "9",
+          "members": [
+            9
+          ],
+          "k": 3,
+          "loops": 0,
+          "x": 151.118,
+          "y": 208.627,
+          "from_nodes": [
+            9
+          ],
+          "from_group": 9
+        },
+        {
+          "id": 10,
+          "label": "10",
+          "members": [
+            10
+          ],
+          "k": 2,
+          "loops": 0,
+          "x": 151.118,
+          "y": 131.373,
+          "from_nodes": [
+            10
+          ],
+          "from_group": 10
+        },
+        {
+          "id": 11,
+          "label": "11",
+          "members": [
+            11
+          ],
+          "k": 1,
+          "loops": 0,
+          "x": 65.0,
+          "y": 235.0,
+          "from_nodes": [
+            11
+          ],
+          "from_group": 11
+        }
+      ],
+      "edges": [
+        {
+          "u": 1,
+          "v": 2,
+          "count": 1
+        },
+        {
+          "u": 1,
+          "v": 5,
+          "count": 1
+        },
+        {
+          "u": 1,
+          "v": 10,
+          "count": 1
+        },
+        {
+          "u": 2,
+          "v": 3,
+          "count": 1
+        },
+        {
+          "u": 2,
+          "v": 4,
+          "count": 1
+        },
+        {
+          "u": 2,
+          "v": 5,
+          "count": 1
+        },
+        {
+          "u": 2,
+          "v": 6,
+          "count": 1
+        },
+        {
+          "u": 3,
+          "v": 4,
+          "count": 1
+        },
+        {
+          "u": 4,
+          "v": 5,
+          "count": 1
+        },
+        {
+          "u": 5,
+          "v": 6,
+          "count": 1
+        },
+        {
+          "u": 6,
+          "v": 7,
+          "count": 1
+        },
+        {
+          "u": 7,
+          "v": 8,
+          "count": 1
+        },
+        {
+          "u": 8,
+          "v": 9,
+          "count": 1
+        },
+        {
+          "u": 9,
+          "v": 10,
+          "count": 1
+        },
+        {
+          "u": 9,
+          "v": 11,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": 1,
+          "label": "A",
+          "members": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "k": 17,
+          "loops": 7,
+          "x": 346.942,
+          "y": 145.0,
+          "from_nodes": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "from_group": 4
+        },
+        {
+          "id": 2,
+          "label": "B",
+          "members": [
+            7,
+            8
+          ],
+          "k": 4,
+          "loops": 1,
+          "x": 233.263,
+          "y": 283.064,
+          "from_nodes": [
+            7,
+            8
+          ],
+          "from_group": 8
+        },
+        {
+          "id": 3,
+          "label": "C",
+          "members": [
+            1,
+            10
+          ],
+          "k": 5,
+          "loops": 1,
+          "x": 173.822,
+          "y": 100.123,
+          "from_nodes": [
+            1,
+            10
+          ],
+          "from_group": 10
+        },
+        {
+          "id": 4,
+          "label": "D",
+          "members": [
+            9,
+            11
+          ],
+          "k": 4,
+          "loops": 1,
+          "x": 108.059,
+          "y": 221.814,
+          "from_nodes": [
+            9,
+            11
+          ],
+          "from_group": 11
+        }
+      ],
+      "edges": [
+        {
+          "u": 1,
+          "v": 1,
+          "count": 7
+        },
+        {
+          "u": 1,
+          "v": 2,
+          "count": 1
+        },
+        {
+          "u": 1,
+          "v": 3,
+          "count": 2
+        },
+        {
+          "u": 2,
+          "v": 2,
+          "count": 1
+        },
+        {
+          "u": 2,
+          "v": 4,
+          "count": 1
+        },
+        {
+          "u": 3,
+          "v": 3,
+          "count": 1
+        },
+        {
+          "u": 3,
+          "v": 4,
+          "count": 1
+        },
+        {
+          "u": 4,
+          "v": 4,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": 1,
+          "label": "A",
+          "members": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "k": 17,
+          "loops": 7,
+          "x": 346.942,
+          "y": 145.0,
+          "from_nodes": [
+            1
+          ],
+          "from_group": 4
+        },
+        {
+          "id": 2,
+          "label": "B",
+          "members": [
+            1,
+            10
+          ],
+          "k": 5,
+          "loops": 1,
+          "x": 173.822,
+          "y": 100.123,
+          "from_nodes": [
+            3
+          ],
+          "from_group": 10
+        },
+        {
+          "id": 3,
+          "label": "C",
+          "members": [
+            7,
+            8,
+            9,
+            11
+          ],
+          "k": 8,
+          "loops": 3,
+          "x": 170.661,
+          "y": 252.439,
+          "from_nodes": [
+            2,
+            4
+          ],
+          "from_group": 11
+        }
+      ],
+      "edges": [
+        {
+          "u": 1,
+          "v": 1,
+          "count": 7
+        },
+        {
+          "u": 1,
+          "v": 2,
+          "count": 2
+        },
+        {
+          "u": 1,
+          "v": 3,
+          "count": 1
+        },
+        {
+          "u": 2,
+          "v": 2,
+          "count": 1
+        },
+        {
+          "u": 2,
+          "v": 3,
+          "count": 1
+        },
+        {
+          "u": 3,
+          "v": 3,
+          "count": 3
+        }
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "kind": "start",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": -47,
+        "d": 450
+      }
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": -47,
+        "d": 450
+      },
+      "vertex": 1,
+      "source": 1,
+      "target": 10,
+      "options": [
+        {
+          "target": 10,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 2,
+          "delta": {
+            "n": 4,
+            "d": 75
+          },
+          "q_after": {
+            "n": -23,
+            "d": 450
+          }
+        },
+        {
+          "target": 5,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 4,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": -29,
+            "d": 450
+          }
+        },
+        {
+          "target": 2,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 30
+          },
+          "q_after": {
+            "n": -16,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": -23,
+        "d": 450
+      },
+      "q_before": {
+        "n": -47,
+        "d": 450
+      },
+      "vertex": 1,
+      "source": 1,
+      "target": 10,
+      "options": [
+        {
+          "target": 10,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 2,
+          "delta": {
+            "n": 4,
+            "d": 75
+          },
+          "q_after": {
+            "n": -23,
+            "d": 450
+          }
+        },
+        {
+          "target": 5,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 4,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": -29,
+            "d": 450
+          }
+        },
+        {
+          "target": 2,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 30
+          },
+          "q_after": {
+            "n": -16,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": -23,
+        "d": 450
+      },
+      "vertex": 2,
+      "source": 2,
+      "target": 3,
+      "options": [
+        {
+          "target": 3,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 2,
+          "delta": {
+            "n": 2,
+            "d": 45
+          },
+          "q_after": {
+            "n": -1,
+            "d": 150
+          }
+        },
+        {
+          "target": 4,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 3,
+          "delta": {
+            "n": 1,
+            "d": 30
+          },
+          "q_after": {
+            "n": -4,
+            "d": 225
+          }
+        },
+        {
+          "target": 6,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 3,
+          "delta": {
+            "n": 1,
+            "d": 30
+          },
+          "q_after": {
+            "n": -4,
+            "d": 225
+          }
+        },
+        {
+          "target": 5,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 4,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": -13,
+            "d": 450
+          }
+        },
+        {
+          "target": 10,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 90
+          },
+          "q_after": {
+            "n": -1,
+            "d": 25
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": -1,
+        "d": 150
+      },
+      "q_before": {
+        "n": -23,
+        "d": 450
+      },
+      "vertex": 2,
+      "source": 2,
+      "target": 3,
+      "options": [
+        {
+          "target": 3,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 2,
+          "delta": {
+            "n": 2,
+            "d": 45
+          },
+          "q_after": {
+            "n": -1,
+            "d": 150
+          }
+        },
+        {
+          "target": 4,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 3,
+          "delta": {
+            "n": 1,
+            "d": 30
+          },
+          "q_after": {
+            "n": -4,
+            "d": 225
+          }
+        },
+        {
+          "target": 6,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 3,
+          "delta": {
+            "n": 1,
+            "d": 30
+          },
+          "q_after": {
+            "n": -4,
+            "d": 225
+          }
+        },
+        {
+          "target": 5,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 4,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": -13,
+            "d": 450
+          }
+        },
+        {
+          "target": 10,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 90
+          },
+          "q_after": {
+            "n": -1,
+            "d": 25
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": -1,
+        "d": 150
+      },
+      "vertex": 3,
+      "source": 3,
+      "target": 4,
+      "options": [
+        {
+          "target": 4,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 7,
+          "Kb": 3,
+          "delta": {
+            "n": 2,
+            "d": 225
+          },
+          "q_after": {
+            "n": 1,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": 1,
+        "d": 450
+      },
+      "q_before": {
+        "n": -1,
+        "d": 150
+      },
+      "vertex": 3,
+      "source": 3,
+      "target": 4,
+      "options": [
+        {
+          "target": 4,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 7,
+          "Kb": 3,
+          "delta": {
+            "n": 2,
+            "d": 225
+          },
+          "q_after": {
+            "n": 1,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": 1,
+        "d": 450
+      },
+      "vertex": 4,
+      "source": 4,
+      "target": 4,
+      "options": [
+        {
+          "target": 5,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 4,
+          "delta": {
+            "n": -1,
+            "d": 75
+          },
+          "q_after": {
+            "n": -1,
+            "d": 90
+          }
+        },
+        {
+          "target": 3,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 5,
+          "delta": {
+            "n": -1,
+            "d": 50
+          },
+          "q_after": {
+            "n": -4,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": 1,
+        "d": 450
+      },
+      "vertex": 5,
+      "source": 5,
+      "target": 6,
+      "options": [
+        {
+          "target": 6,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 3,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": 19,
+            "d": 450
+          }
+        },
+        {
+          "target": 3,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 11,
+            "d": 450
+          }
+        },
+        {
+          "target": 4,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 11,
+            "d": 450
+          }
+        },
+        {
+          "target": 10,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 11,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": 19,
+        "d": 450
+      },
+      "q_before": {
+        "n": 1,
+        "d": 450
+      },
+      "vertex": 5,
+      "source": 5,
+      "target": 6,
+      "options": [
+        {
+          "target": 6,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 3,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": 19,
+            "d": 450
+          }
+        },
+        {
+          "target": 3,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 11,
+            "d": 450
+          }
+        },
+        {
+          "target": 4,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 11,
+            "d": 450
+          }
+        },
+        {
+          "target": 10,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 11,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": 19,
+        "d": 450
+      },
+      "vertex": 6,
+      "source": 6,
+      "target": 7,
+      "options": [
+        {
+          "target": 7,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 7,
+          "Kb": 2,
+          "delta": {
+            "n": 1,
+            "d": 75
+          },
+          "q_after": {
+            "n": 1,
+            "d": 18
+          }
+        },
+        {
+          "target": 3,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 7,
+          "Kb": 5,
+          "delta": {
+            "n": -1,
+            "d": 150
+          },
+          "q_after": {
+            "n": 8,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": 1,
+        "d": 18
+      },
+      "q_before": {
+        "n": 19,
+        "d": 450
+      },
+      "vertex": 6,
+      "source": 6,
+      "target": 7,
+      "options": [
+        {
+          "target": 7,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 7,
+          "Kb": 2,
+          "delta": {
+            "n": 1,
+            "d": 75
+          },
+          "q_after": {
+            "n": 1,
+            "d": 18
+          }
+        },
+        {
+          "target": 3,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 7,
+          "Kb": 5,
+          "delta": {
+            "n": -1,
+            "d": 150
+          },
+          "q_after": {
+            "n": 8,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": 1,
+        "d": 18
+      },
+      "vertex": 7,
+      "source": 7,
+      "target": 8,
+      "options": [
+        {
+          "target": 8,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 2,
+          "delta": {
+            "n": 1,
+            "d": 225
+          },
+          "q_after": {
+            "n": 3,
+            "d": 50
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": 3,
+        "d": 50
+      },
+      "q_before": {
+        "n": 1,
+        "d": 18
+      },
+      "vertex": 7,
+      "source": 7,
+      "target": 8,
+      "options": [
+        {
+          "target": 8,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 2,
+          "delta": {
+            "n": 1,
+            "d": 225
+          },
+          "q_after": {
+            "n": 3,
+            "d": 50
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": 3,
+        "d": 50
+      },
+      "vertex": 8,
+      "source": 8,
+      "target": 8,
+      "options": [
+        {
+          "target": 9,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 3,
+          "delta": {
+            "n": -1,
+            "d": 225
+          },
+          "q_after": {
+            "n": 1,
+            "d": 18
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        9,
+        10,
+        11
+      ],
+      "q": {
+        "n": 3,
+        "d": 50
+      },
+      "vertex": 9,
+      "source": 9,
+      "target": 11,
+      "options": [
+        {
+          "target": 11,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 1,
+          "delta": {
+            "n": 3,
+            "d": 50
+          },
+          "q_after": {
+            "n": 3,
+            "d": 25
+          }
+        },
+        {
+          "target": 8,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 4,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": 1,
+            "d": 10
+          }
+        },
+        {
+          "target": 10,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 30
+          },
+          "q_after": {
+            "n": 7,
+            "d": 75
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 3,
+        "d": 25
+      },
+      "q_before": {
+        "n": 3,
+        "d": 50
+      },
+      "vertex": 9,
+      "source": 9,
+      "target": 11,
+      "options": [
+        {
+          "target": 11,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 1,
+          "delta": {
+            "n": 3,
+            "d": 50
+          },
+          "q_after": {
+            "n": 3,
+            "d": 25
+          }
+        },
+        {
+          "target": 8,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 4,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": 1,
+            "d": 10
+          }
+        },
+        {
+          "target": 10,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 30
+          },
+          "q_after": {
+            "n": 7,
+            "d": 75
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 3,
+        "d": 25
+      },
+      "vertex": 10,
+      "source": 10,
+      "target": 10,
+      "options": [
+        {
+          "target": 11,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 4,
+          "delta": {
+            "n": -1,
+            "d": 225
+          },
+          "q_after": {
+            "n": 26,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 3,
+        "d": 25
+      },
+      "vertex": 11,
+      "source": 11,
+      "target": 11,
+      "options": []
+    },
+    {
+      "kind": "sweep_end",
+      "level": 0,
+      "sweep": 1,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 3,
+        "d": 25
+      },
+      "moves": 7
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 3,
+        "d": 25
+      },
+      "vertex": 1,
+      "source": 10,
+      "target": 10,
+      "options": [
+        {
+          "target": 6,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 4,
+          "delta": {
+            "n": -1,
+            "d": 75
+          },
+          "q_after": {
+            "n": 8,
+            "d": 75
+          }
+        },
+        {
+          "target": 3,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 5,
+          "delta": {
+            "n": -1,
+            "d": 50
+          },
+          "q_after": {
+            "n": 1,
+            "d": 10
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 3,
+        "d": 25
+      },
+      "vertex": 2,
+      "source": 3,
+      "target": 4,
+      "options": [
+        {
+          "target": 4,
+          "ki": 5,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 5,
+          "Kb": 5,
+          "delta": {
+            "n": 7,
+            "d": 90
+          },
+          "q_after": {
+            "n": 89,
+            "d": 450
+          }
+        },
+        {
+          "target": 7,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 3,
+          "delta": {
+            "n": 1,
+            "d": 30
+          },
+          "q_after": {
+            "n": 23,
+            "d": 150
+          }
+        },
+        {
+          "target": 6,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 4,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 32,
+            "d": 225
+          }
+        },
+        {
+          "target": 10,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 90
+          },
+          "q_after": {
+            "n": 59,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 89,
+        "d": 450
+      },
+      "q_before": {
+        "n": 3,
+        "d": 25
+      },
+      "vertex": 2,
+      "source": 3,
+      "target": 4,
+      "options": [
+        {
+          "target": 4,
+          "ki": 5,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 5,
+          "Kb": 5,
+          "delta": {
+            "n": 7,
+            "d": 90
+          },
+          "q_after": {
+            "n": 89,
+            "d": 450
+          }
+        },
+        {
+          "target": 7,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 3,
+          "delta": {
+            "n": 1,
+            "d": 30
+          },
+          "q_after": {
+            "n": 23,
+            "d": 150
+          }
+        },
+        {
+          "target": 6,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 4,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 32,
+            "d": 225
+          }
+        },
+        {
+          "target": 10,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 90
+          },
+          "q_after": {
+            "n": 59,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 89,
+        "d": 450
+      },
+      "vertex": 3,
+      "source": 4,
+      "target": 4,
+      "options": []
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 89,
+        "d": 450
+      },
+      "vertex": 4,
+      "source": 4,
+      "target": 4,
+      "options": [
+        {
+          "target": 6,
+          "ki": 3,
+          "kia": 2,
+          "kib": 1,
+          "Ka": 10,
+          "Kb": 4,
+          "delta": {
+            "n": -7,
+            "d": 150
+          },
+          "q_after": {
+            "n": 34,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        6,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 89,
+        "d": 450
+      },
+      "vertex": 5,
+      "source": 6,
+      "target": 4,
+      "options": [
+        {
+          "target": 4,
+          "ki": 4,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 4,
+          "Kb": 10,
+          "delta": {
+            "n": 2,
+            "d": 45
+          },
+          "q_after": {
+            "n": 109,
+            "d": 450
+          }
+        },
+        {
+          "target": 7,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 3,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": 107,
+            "d": 450
+          }
+        },
+        {
+          "target": 10,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 11,
+            "d": 50
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 109,
+        "d": 450
+      },
+      "q_before": {
+        "n": 89,
+        "d": 450
+      },
+      "vertex": 5,
+      "source": 6,
+      "target": 4,
+      "options": [
+        {
+          "target": 4,
+          "ki": 4,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 4,
+          "Kb": 10,
+          "delta": {
+            "n": 2,
+            "d": 45
+          },
+          "q_after": {
+            "n": 109,
+            "d": 450
+          }
+        },
+        {
+          "target": 7,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 3,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": 107,
+            "d": 450
+          }
+        },
+        {
+          "target": 10,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 5,
+          "delta": {
+            "n": 1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 11,
+            "d": 50
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        7,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 109,
+        "d": 450
+      },
+      "vertex": 6,
+      "source": 7,
+      "target": 4,
+      "options": [
+        {
+          "target": 4,
+          "ki": 3,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 3,
+          "Kb": 14,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": 127,
+            "d": 450
+          }
+        },
+        {
+          "target": 8,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 4,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": 127,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "q_before": {
+        "n": 109,
+        "d": 450
+      },
+      "vertex": 6,
+      "source": 7,
+      "target": 4,
+      "options": [
+        {
+          "target": 4,
+          "ki": 3,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 3,
+          "Kb": 14,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": 127,
+            "d": 450
+          }
+        },
+        {
+          "target": 8,
+          "ki": 3,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 3,
+          "Kb": 4,
+          "delta": {
+            "n": 1,
+            "d": 25
+          },
+          "q_after": {
+            "n": 127,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 7,
+      "source": 8,
+      "target": 8,
+      "options": [
+        {
+          "target": 4,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 17,
+          "delta": {
+            "n": -1,
+            "d": 15
+          },
+          "q_after": {
+            "n": 97,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 8,
+      "source": 8,
+      "target": 8,
+      "options": [
+        {
+          "target": 11,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 4,
+          "delta": {
+            "n": -2,
+            "d": 225
+          },
+          "q_after": {
+            "n": 41,
+            "d": 150
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 9,
+      "source": 11,
+      "target": 11,
+      "options": [
+        {
+          "target": 8,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 4,
+          "delta": {
+            "n": -1,
+            "d": 50
+          },
+          "q_after": {
+            "n": 59,
+            "d": 225
+          }
+        },
+        {
+          "target": 10,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 5,
+          "delta": {
+            "n": -2,
+            "d": 75
+          },
+          "q_after": {
+            "n": 23,
+            "d": 90
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 10,
+      "source": 10,
+      "target": 10,
+      "options": [
+        {
+          "target": 11,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 4,
+          "delta": {
+            "n": -1,
+            "d": 225
+          },
+          "q_after": {
+            "n": 5,
+            "d": 18
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 11,
+      "source": 11,
+      "target": 11,
+      "options": []
+    },
+    {
+      "kind": "sweep_end",
+      "level": 0,
+      "sweep": 2,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "moves": 3
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 1,
+      "source": 10,
+      "target": 10,
+      "options": [
+        {
+          "target": 4,
+          "ki": 3,
+          "kia": 1,
+          "kib": 2,
+          "Ka": 5,
+          "Kb": 17,
+          "delta": {
+            "n": -1,
+            "d": 30
+          },
+          "q_after": {
+            "n": 56,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 2,
+      "source": 4,
+      "target": 4,
+      "options": [
+        {
+          "target": 10,
+          "ki": 5,
+          "kia": 4,
+          "kib": 1,
+          "Ka": 17,
+          "Kb": 5,
+          "delta": {
+            "n": -11,
+            "d": 90
+          },
+          "q_after": {
+            "n": 4,
+            "d": 25
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 3,
+      "source": 4,
+      "target": 4,
+      "options": []
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 4,
+      "source": 4,
+      "target": 4,
+      "options": []
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 5,
+      "source": 4,
+      "target": 4,
+      "options": [
+        {
+          "target": 10,
+          "ki": 4,
+          "kia": 3,
+          "kib": 1,
+          "Ka": 17,
+          "Kb": 5,
+          "delta": {
+            "n": -14,
+            "d": 225
+          },
+          "q_after": {
+            "n": 11,
+            "d": 50
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 6,
+      "source": 4,
+      "target": 4,
+      "options": [
+        {
+          "target": 8,
+          "ki": 3,
+          "kia": 2,
+          "kib": 1,
+          "Ka": 17,
+          "Kb": 4,
+          "delta": {
+            "n": 0,
+            "d": 1
+          },
+          "q_after": {
+            "n": 127,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 7,
+      "source": 8,
+      "target": 8,
+      "options": [
+        {
+          "target": 4,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 17,
+          "delta": {
+            "n": -1,
+            "d": 15
+          },
+          "q_after": {
+            "n": 97,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 8,
+      "source": 8,
+      "target": 8,
+      "options": [
+        {
+          "target": 11,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 4,
+          "delta": {
+            "n": -2,
+            "d": 225
+          },
+          "q_after": {
+            "n": 41,
+            "d": 150
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 9,
+      "source": 11,
+      "target": 11,
+      "options": [
+        {
+          "target": 8,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 4,
+          "delta": {
+            "n": -1,
+            "d": 50
+          },
+          "q_after": {
+            "n": 59,
+            "d": 225
+          }
+        },
+        {
+          "target": 10,
+          "ki": 3,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 5,
+          "delta": {
+            "n": -2,
+            "d": 75
+          },
+          "q_after": {
+            "n": 23,
+            "d": 90
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 10,
+      "source": 10,
+      "target": 10,
+      "options": [
+        {
+          "target": 11,
+          "ki": 2,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 4,
+          "delta": {
+            "n": -1,
+            "d": 225
+          },
+          "q_after": {
+            "n": 5,
+            "d": 18
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 11,
+      "source": 11,
+      "target": 11,
+      "options": []
+    },
+    {
+      "kind": "phase_end",
+      "level": 0,
+      "sweep": 3,
+      "partition": [
+        10,
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        8,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      }
+    },
+    {
+      "kind": "aggregate",
+      "level": 1,
+      "sweep": 1,
+      "partition": [
+        4,
+        8,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "from_count": 11,
+      "to_count": 4
+    },
+    {
+      "kind": "consider",
+      "level": 1,
+      "sweep": 1,
+      "partition": [
+        4,
+        8,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 1,
+      "source": 4,
+      "target": 4,
+      "options": [
+        {
+          "target": 10,
+          "ki": 17,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 17,
+          "Kb": 5,
+          "delta": {
+            "n": -1,
+            "d": 18
+          },
+          "q_after": {
+            "n": 17,
+            "d": 75
+          }
+        },
+        {
+          "target": 8,
+          "ki": 17,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 17,
+          "Kb": 4,
+          "delta": {
+            "n": -19,
+            "d": 225
+          },
+          "q_after": {
+            "n": 89,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 1,
+      "sweep": 1,
+      "partition": [
+        4,
+        8,
+        10,
+        11
+      ],
+      "q": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 2,
+      "source": 8,
+      "target": 11,
+      "options": [
+        {
+          "target": 11,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 4,
+          "delta": {
+            "n": 7,
+            "d": 225
+          },
+          "q_after": {
+            "n": 47,
+            "d": 150
+          }
+        },
+        {
+          "target": 4,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 17,
+          "delta": {
+            "n": -19,
+            "d": 225
+          },
+          "q_after": {
+            "n": 89,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "move",
+      "level": 1,
+      "sweep": 1,
+      "partition": [
+        4,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "q_before": {
+        "n": 127,
+        "d": 450
+      },
+      "vertex": 2,
+      "source": 8,
+      "target": 11,
+      "options": [
+        {
+          "target": 11,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 4,
+          "delta": {
+            "n": 7,
+            "d": 225
+          },
+          "q_after": {
+            "n": 47,
+            "d": 150
+          }
+        },
+        {
+          "target": 4,
+          "ki": 4,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 4,
+          "Kb": 17,
+          "delta": {
+            "n": -19,
+            "d": 225
+          },
+          "q_after": {
+            "n": 89,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 1,
+      "sweep": 1,
+      "partition": [
+        4,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "vertex": 3,
+      "source": 10,
+      "target": 10,
+      "options": [
+        {
+          "target": 11,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 8,
+          "delta": {
+            "n": -1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 131,
+            "d": 450
+          }
+        },
+        {
+          "target": 4,
+          "ki": 5,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 5,
+          "Kb": 17,
+          "delta": {
+            "n": -1,
+            "d": 18
+          },
+          "q_after": {
+            "n": 58,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 1,
+      "sweep": 1,
+      "partition": [
+        4,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "vertex": 4,
+      "source": 11,
+      "target": 11,
+      "options": [
+        {
+          "target": 10,
+          "ki": 4,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 8,
+          "Kb": 5,
+          "delta": {
+            "n": -2,
+            "d": 225
+          },
+          "q_after": {
+            "n": 137,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "sweep_end",
+      "level": 1,
+      "sweep": 1,
+      "partition": [
+        4,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "moves": 1
+    },
+    {
+      "kind": "consider",
+      "level": 1,
+      "sweep": 2,
+      "partition": [
+        4,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "vertex": 1,
+      "source": 4,
+      "target": 4,
+      "options": [
+        {
+          "target": 10,
+          "ki": 17,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 17,
+          "Kb": 5,
+          "delta": {
+            "n": -1,
+            "d": 18
+          },
+          "q_after": {
+            "n": 58,
+            "d": 225
+          }
+        },
+        {
+          "target": 11,
+          "ki": 17,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 17,
+          "Kb": 8,
+          "delta": {
+            "n": -53,
+            "d": 225
+          },
+          "q_after": {
+            "n": 7,
+            "d": 90
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 1,
+      "sweep": 2,
+      "partition": [
+        4,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "vertex": 2,
+      "source": 11,
+      "target": 11,
+      "options": [
+        {
+          "target": 4,
+          "ki": 4,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 8,
+          "Kb": 17,
+          "delta": {
+            "n": -26,
+            "d": 225
+          },
+          "q_after": {
+            "n": 89,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 1,
+      "sweep": 2,
+      "partition": [
+        4,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "vertex": 3,
+      "source": 10,
+      "target": 10,
+      "options": [
+        {
+          "target": 11,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 8,
+          "delta": {
+            "n": -1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 131,
+            "d": 450
+          }
+        },
+        {
+          "target": 4,
+          "ki": 5,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 5,
+          "Kb": 17,
+          "delta": {
+            "n": -1,
+            "d": 18
+          },
+          "q_after": {
+            "n": 58,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 1,
+      "sweep": 2,
+      "partition": [
+        4,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "vertex": 4,
+      "source": 11,
+      "target": 11,
+      "options": [
+        {
+          "target": 10,
+          "ki": 4,
+          "kia": 1,
+          "kib": 1,
+          "Ka": 8,
+          "Kb": 5,
+          "delta": {
+            "n": -2,
+            "d": 225
+          },
+          "q_after": {
+            "n": 137,
+            "d": 450
+          }
+        }
+      ]
+    },
+    {
+      "kind": "phase_end",
+      "level": 1,
+      "sweep": 2,
+      "partition": [
+        4,
+        11,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      }
+    },
+    {
+      "kind": "aggregate",
+      "level": 2,
+      "sweep": 1,
+      "partition": [
+        4,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "from_count": 4,
+      "to_count": 3
+    },
+    {
+      "kind": "consider",
+      "level": 2,
+      "sweep": 1,
+      "partition": [
+        4,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "vertex": 1,
+      "source": 4,
+      "target": 4,
+      "options": [
+        {
+          "target": 10,
+          "ki": 17,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 17,
+          "Kb": 5,
+          "delta": {
+            "n": -1,
+            "d": 18
+          },
+          "q_after": {
+            "n": 58,
+            "d": 225
+          }
+        },
+        {
+          "target": 11,
+          "ki": 17,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 17,
+          "Kb": 8,
+          "delta": {
+            "n": -53,
+            "d": 225
+          },
+          "q_after": {
+            "n": 7,
+            "d": 90
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 2,
+      "sweep": 1,
+      "partition": [
+        4,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "vertex": 2,
+      "source": 10,
+      "target": 10,
+      "options": [
+        {
+          "target": 11,
+          "ki": 5,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 5,
+          "Kb": 8,
+          "delta": {
+            "n": -1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 131,
+            "d": 450
+          }
+        },
+        {
+          "target": 4,
+          "ki": 5,
+          "kia": 0,
+          "kib": 2,
+          "Ka": 5,
+          "Kb": 17,
+          "delta": {
+            "n": -1,
+            "d": 18
+          },
+          "q_after": {
+            "n": 58,
+            "d": 225
+          }
+        }
+      ]
+    },
+    {
+      "kind": "consider",
+      "level": 2,
+      "sweep": 1,
+      "partition": [
+        4,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      },
+      "vertex": 3,
+      "source": 11,
+      "target": 11,
+      "options": [
+        {
+          "target": 10,
+          "ki": 8,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 8,
+          "Kb": 5,
+          "delta": {
+            "n": -1,
+            "d": 45
+          },
+          "q_after": {
+            "n": 131,
+            "d": 450
+          }
+        },
+        {
+          "target": 4,
+          "ki": 8,
+          "kia": 0,
+          "kib": 1,
+          "Ka": 8,
+          "Kb": 17,
+          "delta": {
+            "n": -53,
+            "d": 225
+          },
+          "q_after": {
+            "n": 7,
+            "d": 90
+          }
+        }
+      ]
+    },
+    {
+      "kind": "done",
+      "level": 2,
+      "sweep": 1,
+      "partition": [
+        4,
+        10,
+        11
+      ],
+      "q": {
+        "n": 47,
+        "d": 150
+      }
+    }
+  ],
+  "milestones": [
+    {
+      "index": 0,
+      "label": "Początek"
+    },
+    {
+      "index": 21,
+      "label": "Powtórny ruch wierzchołka"
+    },
+    {
+      "index": 46,
+      "label": "Przed agregacją 1"
+    },
+    {
+      "index": 47,
+      "label": "Po agregacji 1"
+    },
+    {
+      "index": 49,
+      "label": "Ruch po agregacji"
+    },
+    {
+      "index": 58,
+      "label": "Przed agregacją 2"
+    },
+    {
+      "index": 59,
+      "label": "Po agregacji 2"
+    },
+    {
+      "index": 63,
+      "label": "Gotowy podział"
+    }
+  ]
+}

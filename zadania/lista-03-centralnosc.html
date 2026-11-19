@@ -77,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css?v=88e58d803d1f">
+<link rel="stylesheet" href="../styles.css?v=874765fc4a72">
 <script>
 window.MathJax = {
   output: {
@@ -198,6 +198,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../wykłady/pagerank.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">PageRank</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container">
+  <a href="../wykłady/05-rdzenie-spolecznosci.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rdzenie i społeczności</span></span></a>
   </div>
 </li>
       </ul>
@@ -983,4 +989,86 @@ window.Quarto = {
 
 
 
+<script>
+(() => {
+  const initializeSidebarToggle = () => {
+    const sidebar = document.getElementById("quarto-sidebar");
+    if (!sidebar || document.getElementById("book-sidebar-toggle")) return;
+
+    const desktop = window.matchMedia("(min-width: 992px)");
+    const body = document.body;
+    const panels = [
+      { element: sidebar, name: "sidebar", label: "menu", side: "left" },
+      { element: document.querySelector("#quarto-margin-sidebar:has(#TOC)"),
+        name: "toc", label: "spis treści", side: "right" }
+    ].filter((panel) => panel.element);
+
+    if (panels.length === 1) body.classList.add("book-toc-absent");
+
+    const positionButtons = () => {
+      if (!desktop.matches) return;
+      for (const panel of panels) {
+        const rect = panel.element.getBoundingClientRect();
+        const offset = panel.collapsed ? 2 : panel.side === "left"
+          ? Math.max(2, rect.right - 26)
+          : Math.max(2, document.documentElement.clientWidth - rect.right + 2);
+        panel.button.style[panel.side] = `${offset}px`;
+      }
+    };
+
+    for (const panel of panels) {
+      panel.preferenceKey = `book-${panel.name}-collapsed`;
+      panel.collapsed = false;
+      try {
+        panel.collapsed = localStorage.getItem(panel.preferenceKey) === "true";
+      } catch (_) {
+        // The arrows also work when browser storage is unavailable.
+      }
+      const button = document.createElement("button");
+      button.id = `book-${panel.name}-toggle`;
+      button.className = `book-panel-toggle book-panel-toggle--${panel.side}`;
+      button.type = "button";
+      button.setAttribute("aria-controls", panel.element.id);
+      button.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>';
+      body.append(button);
+      panel.button = button;
+      button.addEventListener("click", () => {
+        panel.collapsed = !panel.collapsed;
+        try {
+          localStorage.setItem(panel.preferenceKey, String(panel.collapsed));
+        } catch (_) {}
+        update();
+      });
+    }
+    body.classList.add("book-panel-toggles-ready");
+
+    const update = () => {
+      for (const panel of panels) {
+        const hidden = desktop.matches && panel.collapsed;
+        body.classList.toggle(`book-${panel.name}-collapsed`, hidden);
+        panel.element.inert = hidden;
+        if (hidden) panel.element.setAttribute("aria-hidden", "true");
+        else panel.element.removeAttribute("aria-hidden");
+        panel.button.setAttribute("aria-expanded", String(!hidden));
+        const label = `${hidden ? "Rozwiń" : "Zwiń"} ${panel.label}`;
+        panel.button.setAttribute("aria-label", label);
+        panel.button.title = label;
+      }
+      // Let Quarto recalculate the sidebar and table of contents positions.
+      window.dispatchEvent(new Event("resize"));
+      positionButtons();
+    };
+
+    desktop.addEventListener("change", update);
+    window.addEventListener("resize", positionButtons);
+    update();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeSidebarToggle, { once: true });
+  } else {
+    initializeSidebarToggle();
+  }
+})();
+</script>
 </body></html>
