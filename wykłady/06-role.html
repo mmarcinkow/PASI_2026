@@ -494,9 +494,9 @@ w(p)Y\bigl(p(n)\bigr).
 \tag{6.1}\]</span></span></p>
 <p>gdzie</p>
 <p><span class="math display">\[
-\|X-WH\|_F^2=\sum_{i,j}\bigl(X_{ij}-(WH)_{ij}\bigr)^2.
+\|X-WH\|_F^2=\sum_{i,j}\bigl(X_{ij}-(WH)_{ij}\bigr)^2,
 \]</span></p>
-<p>Zapis <span class="math inline">\(W,H\geq0\)</span> oznacza, że wszystkie wyrazy macierzy <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span> są nieujemne.</p>
+<p>jest kwadratem normy Frobeniusa (normy euklidesowej). Zapis <span class="math inline">\(W,H\geq0\)</span> oznacza, że wszystkie wyrazy macierzy <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span> są nieujemne.</p>
 </section>
 <section id="jak-wyznaczyć-w-i-h" class="level3" data-number="6.4.2">
 <h3 data-number="6.4.2" class="anchored" data-anchor-id="jak-wyznaczyć-w-i-h"><span class="header-section-number">6.4.2</span> Jak wyznaczyć <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span>?</h3>
@@ -512,16 +512,15 @@ W_{ia}&amp;\leftarrow W_{ia}\frac{(XH^\top)_{ia}}{(WHH^\top)_{ia}}.
 </section>
 <section id="związek-z-svd" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="związek-z-svd"><span class="header-section-number">6.5</span> Związek z SVD</h2>
-<p>Problem optymalizacyjny <a href="#eq-nmf" class="quarto-xref"><span>6.1</span></a> jest podobny do problemu aproksymacji macierzy rzędu <span class="math inline">\(r\)</span> przy użyciu SVD. W SVD nie ma jednak ograniczenia nieujemności <span class="math inline">\(W,H\geq0\)</span>.</p>
-<p>Dla macierzy <span class="math inline">\(X\in\mathbb R^{n\times p}\)</span> o pełnym rzędzie <span class="math inline">\(\min(n,p)\)</span>, jej SVD zapisujemy jako <span class="math display">\[
-X\approx U_r\Sigma_rV_r^\top.
-\]</span></p>
-<p>Przyjmując <span class="math inline">\(W=U_r\Sigma_r\)</span> oraz <span class="math inline">\(H=V_r^\top\)</span>, otrzymujemy zapis <span class="math inline">\(X\approx WH\)</span>. Obcięte SVD rozwiązuje zadanie najlepszej aproksymacji macierzą rzędu co najwyżej <span class="math inline">\(r\)</span>. Możemy je też zapisać jako</p>
+<p>Każda macierz <span class="math inline">\(X\in\mathbb R^{n\times p}\)</span> ma rozkład SVD <span class="math inline">\(X=U\Sigma V^\top\)</span>. Jeśli jej rząd jest mniejszy niż <span class="math inline">\(\min(n,p)\)</span>, część wartości osobliwych jest równa zeru. Dla <span class="math inline">\(1\leq r\leq\min(n,p)\)</span> zachowujemy <span class="math inline">\(r\)</span> największych wartości osobliwych i odpowiadające im wektory, otrzymując obcięte SVD <span class="math display">\[
+X_r=U_r\Sigma_rV_r^\top.
+\]</span> Gdy <span class="math inline">\(r\geq\operatorname{rank}(X)\)</span>, mamy <span class="math inline">\(X_r=X\)</span>.</p>
+<p>Przyjmując <span class="math inline">\(W=U_r\Sigma_r\)</span> oraz <span class="math inline">\(H=V_r^\top\)</span>, otrzymujemy zapis <span class="math inline">\(X_r=WH\)</span>. Jest to najlepsza aproksymacja <span class="math inline">\(X\)</span> macierzą rzędu co najwyżej <span class="math inline">\(r\)</span> w normie Frobeniusa. Te macierze rozwiązują zadanie optymalizacyjne podobne do <a href="#eq-nmf" class="quarto-xref"><span>6.1</span></a>, ale bez warunku nieujemności czynników:</p>
 <p><span class="math display">\[
 \min_{W\in\mathbb R^{n\times r},\ H\in\mathbb R^{r\times p}}
 \|X-WH\|_F^2.
 \]</span></p>
-<p>Dodatkowy warunek <span class="math inline">\(W,H\geq0\)</span> może zwiększyć najmniejszy osiągalny błąd przy tej samej liczbie ról. W SVD potrafimy wyznaczyć rozwiązanie globalnie optymalne, natomiast w NMF stosujemy metody iteracyjne, których wynik może zależeć od inicjalizacji.</p>
+<p>Dodatkowy warunek <span class="math inline">\(W,H\geq0\)</span> może zwiększyć najmniejszy osiągalny błąd przy tej samej liczbie ról. SVD wyznacza rozwiązanie globalnie optymalne powyższego problemu, natomiast NMF, wyznacza pewne dodatnie macierze <span class="math inline">\(H\)</span> i <span class="math inline">\(W\)</span>, które niekoniecznie rozwiązują problem <a href="#eq-nmf" class="quarto-xref"><span>6.1</span></a>. Dodatkowo wynik NMF zależy od inicjalizacji, czyli od początkowo wybranych macierzy <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span>.</p>
 </section>
 <section id="rolx" class="level2 page-columns page-full" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="rolx"><span class="header-section-number">6.6</span> RolX</h2>
