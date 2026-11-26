@@ -488,7 +488,7 @@ w(p)Y\bigl(p(n)\bigr).
 \underbrace{W}_{n\times r}
 \underbrace{H}_{r\times p},\qquad W,H\geq0.
 \]</span></p>
-<p>To znaczy, że chcemy rozłożyć <span class="math inline">\(X\)</span> na produkt dwóch macierzy o współczynnikach nieujemnych (taki rozkład nazywa się non-negative matrix factorization, NMF). Słowo “przybliżać” można definiować na różne sposoby. Najbardziej klasycznym wyborem jest minimalizowanie sumy kwadratów błędów:</p>
+<p>To znaczy, że chcemy rozłożyć <span class="math inline">\(X\)</span> na produkt dwóch macierzy o wyrazach nieujemnych (taki rozkład nazywa się non-negative matrix factorization, NMF). Słowo “przybliżać” można definiować na różne sposoby. Najbardziej klasycznym wyborem jest minimalizowanie sumy kwadratów błędów:</p>
 <p><span id="eq-nmf"><span class="math display">\[
 \min_{W,H\geq0}\|X-WH\|_F^2,
 \tag{6.1}\]</span></span></p>
@@ -496,7 +496,7 @@ w(p)Y\bigl(p(n)\bigr).
 <p><span class="math display">\[
 \|X-WH\|_F^2=\sum_{i,j}\bigl(X_{ij}-(WH)_{ij}\bigr)^2,
 \]</span></p>
-<p>jest kwadratem normy Frobeniusa (normy euklidesowej). Zapis <span class="math inline">\(W,H\geq0\)</span> oznacza, że wszystkie wyrazy macierzy <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span> są nieujemne.</p>
+<p>jest kwadratem normy Frobeniusa (normy euklidesowej).</p>
 </section>
 <section id="jak-wyznaczyć-w-i-h" class="level3" data-number="6.4.2">
 <h3 data-number="6.4.2" class="anchored" data-anchor-id="jak-wyznaczyć-w-i-h"><span class="header-section-number">6.4.2</span> Jak wyznaczyć <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span>?</h3>
