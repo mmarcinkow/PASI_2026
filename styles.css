@@ -1548,3 +1548,111 @@
   .louvain-widget__controls select { max-width: 15rem; }
 }
 @media print { .louvain-widget { display: none; } }
+
+/* Wykład 6: interaktywny opis cech, profili i współczynników. */
+.feature-matrix {
+  --adjacency-source: #b7dbff;
+  --adjacency-target: #a6e8df;
+  --adjacency-both: #77c7df;
+  width: min(100%, 20rem);
+  margin: 1.25rem auto;
+}
+.feature-matrix__entry {
+  display: block; width: 100%; padding: 0;
+  color: inherit; font: inherit; background: transparent; border: 0; cursor: pointer;
+}
+.feature-matrix__entry:focus-visible { outline: 2px solid #365d91; outline-offset: 2px; }
+.feature-matrix__status { margin: .8rem 0 0; min-height: 3em; font-size: .85rem; }
+.feature-matrix--aggregation { width: min(100%, 44rem); }
+.feature-matrix--aggregation :is(th, td) { height: 3rem; }
+@media (max-width: 480px) {
+  .feature-matrix--aggregation table { font-size: clamp(.85rem, 4.5vw, .95rem); }
+  .feature-matrix--aggregation :is(th, td) { padding-inline: .1rem; }
+}
+.feature-matrix__status > p { margin: .5rem 0; }
+.feature-matrix__equation { max-width: 100%; overflow-x: auto; padding: .5rem 0; font-size: 1rem; }
+.role-lesson p:has(> math[display="block"]) { overflow-x: auto; }
+.role-lesson .math.display { display: block; max-width: 100%; overflow-x: auto; padding-block: .15rem; }
+.roles-widget {
+  --roles-ink: #243746;
+  color: var(--roles-ink);
+  background: #fff;
+  border: 1px solid #c7d2dc;
+  border-radius: .7rem;
+  padding: 1.2rem;
+  margin: 1.5rem 0;
+  font-size: .95rem;
+}
+.roles-widget__heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.roles-widget__heading h3 { margin: .1rem 0 .8rem; font-size: 1.6rem; }
+.roles-widget__eyebrow { margin: 0; color: #557087; font-size: .85rem; }
+.roles-widget button, .roles-widget select {
+  font: inherit; color: inherit; background: #fff; border: 1px solid #a9baca;
+  border-radius: .3rem; padding: .3rem .5rem;
+}
+.roles-widget button { cursor: pointer; }
+.roles-widget button:hover { background: #edf3f8; }
+.roles-widget :is(button, select, input, [tabindex]):focus-visible { outline: 3px solid #477fc6; outline-offset: 3px; }
+.roles-widget__controls { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 1rem; }
+.roles-widget__controls fieldset { border: 1px solid #d7e0e7; padding: .65rem .8rem; border-radius: .35rem; min-width: 0; }
+.roles-widget__controls legend { font-size: 1rem; font-weight: bold; float: none; width: auto; padding: 0 .2rem; margin-bottom: .3rem; }
+.roles-widget__controls label { display: flex; align-items: flex-start; gap: .4rem; margin-bottom: .4rem; }
+.roles-widget__controls input[type="checkbox"] { flex: 0 0 auto; margin-top: .25rem; accent-color: #376da4; }
+.roles-widget__controls select { max-width: 100%; }
+.roles-widget__controls fieldset:not(:first-child) label { flex-wrap: wrap; }
+.roles-widget__controls fieldset label.roles-widget__scale-control { flex-wrap: nowrap; }
+.roles-widget__scale-control > span { min-width: 0; }
+.roles-widget__status { min-height: 2.8em; margin: .8rem 0 .5rem; line-height: 1.4; }
+.roles-widget__metrics { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; padding: .65rem .8rem; background: #f0f5f9; border-radius: .3rem; }
+.roles-widget__workspace { display: grid; grid-template-columns: minmax(0,1.65fr) minmax(16rem,1fr); gap: 1rem; margin-top: 1rem; }
+.roles-widget__network { min-width: 0; }
+.roles-widget__network svg { width: 100%; display: block; }
+.roles-widget__network > p { color: #526574; font-size: .85rem; line-height: 1.45; margin: .5rem 0; }
+.roles-widget__edge { stroke: #abb8c4; stroke-width: 2; }
+.roles-widget__node { cursor: pointer; }
+.roles-widget__node circle { stroke: #fff; stroke-width: 2; }
+.roles-widget__node text { fill: #fff; font-size: 19px; pointer-events: none; font-family: sans-serif; }
+.roles-widget__node.is-neighbor circle { stroke: #4a5d6b; stroke-width: 3; stroke-dasharray: 4 3; }
+.roles-widget__node.is-selected circle { stroke: #142f45; stroke-width: 5; }
+.roles-widget__component-label { fill: #657987; font-size: 17px; }
+.roles-widget__legend { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; }
+.roles-widget__legend span { display: flex; align-items: center; gap: .3rem; }
+.roles-widget__legend i { width: .85rem; height: .85rem; border-radius: 50%; }
+.roles-widget__inspection { background: #f7f9fb; border: 1px solid #e0e7ec; border-radius: .4rem; padding: .85rem; min-width: 0; }
+.roles-widget__inspection h4 { font-size: 1.15rem; margin: .8rem 0; }
+.roles-widget__inspection > label { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.roles-widget__inspection > p { font-size: .85rem; line-height: 1.5; }
+.roles-widget__bar-row { display: grid; grid-template-columns: 1.6rem minmax(0,1fr) 3.5rem; align-items: center; gap: .5rem; margin-bottom: .4rem; font-variant-numeric: tabular-nums; }
+.roles-widget__bar-row > span:last-child { text-align: right; }
+.roles-widget__bar-track { display: block; background: #e2e9ee; height: .8rem; border-radius: .15rem; overflow: hidden; }
+.roles-widget__bar-track > span { display: block; height: 100%; }
+.roles-widget__calculation { overflow-wrap: anywhere; padding: .6rem 0; }
+.roles-widget details { margin-top: .8rem; min-width: 0; }
+.roles-widget summary { padding: .5rem 0; font-weight: bold; cursor: pointer; }
+.roles-widget__table-scroll { max-width: 100%; overflow: auto; max-height: 27rem; border: 1px solid #d9e2e9; border-radius: .2rem; }
+.roles-widget__table-scroll table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 0; font-size: .88rem; font-variant-numeric: tabular-nums; }
+.roles-widget__table-scroll th, .roles-widget__table-scroll td { padding: .35rem .6rem; text-align: right; border-bottom: 1px solid #e1e8ed; white-space: nowrap; }
+.roles-widget__table-scroll th { font-weight: normal; background: #edf3f7; }
+.roles-widget__table-scroll thead th { position: sticky; top: 0; z-index: 2; }
+.roles-widget__table-scroll tr > :first-child { position: sticky; left: 0; z-index: 1; text-align: left; background: #edf3f7; }
+.roles-widget__table-scroll thead tr > :first-child { z-index: 3; }
+.roles-widget__table-scroll .is-selected > * { background: #e0edfa; }
+.roles-widget__inspection .roles-widget__table-scroll { max-height: 18rem; }
+.roles-widget__scaling-note { margin: .8rem 0 0; font-size: .85rem; color: #526574; }
+.roles-widget.is-expanded { position: fixed; inset: 1rem; z-index: 1100; overflow: auto; margin: 0; box-shadow: 0 0 0 2rem #e9eef4ee; }
+body:has(.roles-widget.is-expanded) { overflow: hidden; }
+@media(max-width: 850px) {
+  .roles-widget__controls { grid-template-columns: 1fr 1fr; }
+  .roles-widget__controls fieldset:first-child { grid-column: 1 / -1; }
+  .roles-widget__workspace { grid-template-columns: 1fr; }
+}
+@media(max-width: 480px) {
+  .roles-widget { padding: .7rem; }
+  .roles-widget__controls { grid-template-columns: 1fr; }
+  .roles-widget__heading { align-items: flex-start; }
+  .roles-widget.is-expanded { inset: .3rem; }
+}
+@media print {
+  .roles-widget__heading button { display: none; }
+  .roles-widget__table-scroll { max-height: none; }
+}

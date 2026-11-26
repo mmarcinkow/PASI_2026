@@ -351,6 +351,83 @@
     ]
   },
   {
+    "objectID": "wykłady/06-role.html",
+    "href": "wykłady/06-role.html",
+    "title": "6  Role",
+    "section": "",
+    "text": "6.1 Co to jest rola?\nW poprzednim wykładzie szukaliśmy społeczności: grup wierzchołków silnie powiązanych między sobą. Teraz zapytamy o rolę wierzchołka, czyli sposób, w jaki wierzchołek jest osadzony w sieci.\nW tym rozdziale wszystkie grafy są symetryczne.\nRolą będziemy nazywać typ położenia wierzchołka w grafie, rozpoznawany na podstawie jego otoczenia. Wierzchołek może być łącznikiem między grupami, uczestnikiem gęstej grupy albo elementem długiej ścieżki. Wierzchołki o podobnej roli mogą leżeć daleko od siebie, nawet w różnych składowych grafu.\nPrzykładowo, dwie osoby mogą należeć do różnych środowisk, ale obie pełnić tę samą funkcję w swojej grupie. Dwa komputery mogą nie komunikować się ze sobą, a mimo to pełnić podobną rolę w sieci - np. być serwerami.\nNa poniższym rysunku role przypisaliśmy ręcznie, kierując się widoczną strukturą. Niebieskie kółka należą do gęstych grup, czerwone romby łączą różne fragmenty sieci, zielone trójkąty leżą na ścieżkach, a szare kwadraty tworzą pozostałe otoczenie łączników.",
+    "crumbs": [
+      "Wykłady",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Role</span>"
+    ]
+  },
+  {
+    "objectID": "wykłady/06-role.html#co-to-jest-rola",
+    "href": "wykłady/06-role.html#co-to-jest-rola",
+    "title": "6  Role",
+    "section": "",
+    "text": "Rysunek 6.1: Przykładowe role w sieci. Kolory i kształty oznaczają ręcznie wskazane typy otoczeń.",
+    "crumbs": [
+      "Wykłady",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Role</span>"
+    ]
+  },
+  {
+    "objectID": "wykłady/06-role.html#od-grafu-do-macierzy-cech",
+    "href": "wykłady/06-role.html#od-grafu-do-macierzy-cech",
+    "title": "6  Role",
+    "section": "6.2 Od grafu do macierzy cech",
+    "text": "6.2 Od grafu do macierzy cech\n\n6.2.1 Cechy wierzchołka\nRozważamy skończony prosty graf nieskierowany \\(G=(V,E)\\). Niech \\(N(v)\\) oznacza zbiór sąsiadów \\(v\\), \\(N[v]=\\{v\\}\\cup N(v)\\) zbiór sąsiadów wraz z wierzchołkiem \\(v\\), a \\(d(v)\\) jego stopień. Ego-net \\(E_v\\) wierzchołka \\(v\\) to podgraf indukowany na zbiorze \\(N[v]\\). Zawiera wierzchołek \\(v\\), jego sąsiadów oraz wszystkie krawędzie między nimi.\nChcemy do każdego wierzchołka przypisać zestaw liczb (cech), który zależy od jego otoczenia w grafie. Jako cechy początkowe możemy wybrać np.:\n\n\\(d(v)\\) - stopień;\n\\(e(v)\\) - liczbę krawędzi w ego-necie \\(E_v\\);\n\\(b(v)\\) - liczbę krawędzi z dokładnie jednym końcem w \\(N[v]\\), czyli wychodzących z ego-netu.\n\n\n\n\n\n\n\nRysunek 6.2: Graf do ręcznego wyznaczania cech oraz ego-net wierzchołka D. Niebieskie krawędzie leżą wewnątrz ego-netu, czerwone przerywane wychodzą poza niego.\n\n\n\nOtrzymujemy macierz, której wiersze odpowiadają kolejno wierzchołkom A, B, C, D, E, F, G, a kolumny cechom \\(d\\), \\(e\\), \\(b\\).\n\nMacierz cech wymaga włączonej obsługi JavaScript.\nNa przykład \\(N[D]=\\{C,D,E,F\\}\\). Wewnątrz ego-netu \\(E_D\\) leżą krawędzie \\(CD\\), \\(CE\\), \\(DE\\) i \\(DF\\), a na zewnątrz wychodzą \\(CA\\), \\(CB\\), \\(EG\\) i \\(FG\\). Krawędź \\(CE\\) należy do ego-netu, bo oba jej końce są sąsiadami \\(D\\). Wierzchołki \\(A\\) i \\(F\\) mają ten sam stopień, ale różnią się pozostałymi cechami.\nMożemy dobierać inne cechy, na przykład liczbę trójkątów \\(t(v)\\) zawierających \\(v\\) czy tzw. współczynnik skupienia (clustering coefficient):\n\\[\nC(v)=\\frac{t(v)}{\\binom{d(v)}{2}}\\quad\\text{dla }d(v)\\geq2.\n\\]\nPrzyjmujemy \\(C(v)=0\\) dla \\(d(v)=0\\) i \\(d(v)=1\\).\n\n\n6.2.2 Wierzchołek jako punkt w przestrzeni\nKażdą cechę możemy traktować jako funkcję na wierzchołkach albo wektor kolumnowy. Mając \\(p\\) cech oznaczonych przez \\(X_1,\\ldots,X_p\\), przypisujemy każdemu wierzchołkowi wektor wierszowy\n\\[\nx_v=\\bigl(X_1(v),\\ldots,X_p(v)\\bigr)\\in\\mathbb R^p.\n\\]\nW naszym przykładzie \\(x_A=(2,3,2)\\) i \\(x_F=(2,2,3)\\). Możemy teraz myśleć o wierzchołkach jako o punktach w przestrzeni cech.\n\nDefinicja 6.1 (Macierz cech) Ustalmy kolejność wierzchołków \\(v_1,\\ldots,v_n\\). Niech \\(X_i \\in \\mathbb R_{\\geq0}^{n}\\) dla \\(i=1,\\ldots,p\\), będzie wektorem kolumnowym \\(i-tej\\) cechy. Macierzą cech nazywamy macierz \\(X\\in\\mathbb R_{\\geq0}^{n\\times p}\\), w której\n\\[\nX = [X_1, \\ldots, X_p].\n\\]\n\nMacierz cech ma po jednej kolumnie na cechę. Nie zachowuje całej informacji o grafie. Na przykład A i B mają identyczne wiersze, więc metoda korzystająca tylko z macierzy \\(X\\) nie ma podstaw do rozróżnienia ich ról.",
+    "crumbs": [
+      "Wykłady",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Role</span>"
+    ]
+  },
+  {
+    "objectID": "wykłady/06-role.html#agregacja",
+    "href": "wykłady/06-role.html#agregacja",
+    "title": "6  Role",
+    "section": "6.3 Agregacja",
+    "text": "6.3 Agregacja\nWierzchołki \\(A\\) i \\(F\\) mają stopień \\(2\\). Sąsiedzi \\(A\\) mają stopnie \\(2\\) i \\(4\\), a sąsiedzi \\(F\\) mają stopnie \\(3\\) i \\(2\\). Średnia stopni sąsiadów rozróżnia więc te wierzchołki.\nDla dowolnej cechy \\(X_i\\) tworzymy jej sumę po sąsiadach oraz średnią po sąsiadach:\n\\[\nX^a_i(v)=\\sum_{u\\in N(v)}X_i(u),\\qquad\nX^m_i(v)=\\frac{1}{d(v)}\\sum_{u\\in N(v)}X_i(u).\n\\]\nDla wierzchołka izolowanego przyjmujemy \\(X^a_i(v) = X^m_i(v)=0\\). Ten proces nazywamy agregacją.\nAgregacja odbywa się jednocześnie: wartości nowej cechy obliczamy dla wszystkich wierzchołków na podstawie cech z poprzedniego poziomu.\nKolumna \\(X_i\\) zawiera wartości cechy \\(i\\). Sumę i średnią po sąsiadach możemy zapisać macierzowo jako\n\\[\nX^a_i=AX_i,\\qquad\nX^m_i=MX_i.\n\\]\nMacierz \\(M=D^{-1}A\\) znamy z wykładu o PageRanku. Dla wierzchołka izolowanego przyjmujemy w \\(M\\) wiersz zerowy.\nAgregując wszystkie cechy naraz, otrzymujemy \\(AX\\) dla sumy i \\(MX\\) dla średniej.\nMożemy agregować także cechy uzyskane w poprzedniej rundzie. W ten sposób sięgamy coraz dalej w grafie. Po dwóch rundach agregowania cechy \\(i\\) otrzymujemy możliwe kolumny\n\\[\nA^2X_i,\\quad M^2X_i,\\quad AMX_i,\\quad MAX_i.\n\\]\nZagregowane cechy dopisujemy jako nowe kolumny macierzy \\(X\\).\nDla grafu z rysunku 6.2 zbierzmy w jednej macierzy stopnie oraz ich agregacje. Kolumny to \\(d\\), \\(Ad\\), \\(Md\\), \\(A^2d\\), \\(M^2d\\), \\(AMd\\) i \\(MAd\\).\n\nMacierz agregacji i obliczenia wymagają włączonej obsługi JavaScript.\nNie każda cecha nadaje się do dalszego agregowania. Dla kolumny \\(c\\) z wartościami centralności wektora własnego w grafie nieskierowanym mamy \\(Ac=\\lambda c\\), więc agregacja przez sumę powtarza tę samą kolumnę z dokładnością do skali. Zazwyczaj zaczynamy od prostych cech lokalnych jak w przykładach powyżej.\n\n6.3.1 Agregacja uwzględnia większe otoczenie\nZagregowana cecha uwzględnia większe otoczenie danego wierzchołka. Wytłumaczymy to na przykładzie liczby sąsiadów \\(d(v)\\). Wartość \\((Md)(v)\\) uwzględnia stopnie sąsiadów \\(v\\), więc zależy od połączeń sięgających do odległości dwóch. Kolejna agregacja pozwala sięgnąć o jeszcze jedną krawędź dalej.\n\n\n\n\n\n\nRysunek 6.3: Otoczenia wierzchołka F do odległości 1, 2 i 3. Agregując stopnie sąsiadów, uwzględniamy stopniowo informacje z kolejnych takich otoczeń.\n\n\n\nOgólniej, każda agregacja rozszerza zasięg zależności wybranej cechy najwyżej o jedną krawędź. Trzeba przy tym uwzględnić jej zasięg początkowy: np. liczba \\(b(v)\\) już przed agregacją wymaga informacji o połączeniach sąsiadów z wierzchołkami spoza ego-netu, a więc do odległości dwóch.\nO wielokrotnej agregacji warto myśleć też w następujący sposób:\n\nFakt 6.1 Niech \\(Y\\) będzie cechą zapisaną jako wektor kolumnowy, \\(n\\geq0\\) liczbą całkowitą, a \\(P_n(v)\\) zbiorem wszystkich dróg długości \\(n\\) zaczynających się w \\(v\\). Drogę zapisujemy jako \\(p=(p(0),\\ldots,p(n))\\), gdzie \\(p(0)=v\\), a \\(p(n)\\) jest jej końcem. Wierzchołki i krawędzie na drodze mogą się powtarzać.\nWtedy\n\\[\n(A^n Y)(v)=\\sum_{p\\in P_n(v)}Y\\bigl(p(n)\\bigr).\n\\]\nKażda droga wnosi więc do sumy wartość cechy w swoim końcu. Dla agregacji przez średnią otrzymujemy sumę ważoną:\n\\[\n(M^n Y)(v)=\\sum_{p\\in P_n(v)}\nw(p)Y\\bigl(p(n)\\bigr).\n\\]\nWaga \\(w(p)=\\prod_{k=0}^{n-1}\\frac{1}{d(p(k))}\\) oznacza prawdopodobieństwo wybrania drogi \\(p\\) w spacerze losowym zaczynającym się od \\(v\\). Ten sam wierzchołek końcowy może występować w wielu składnikach, jeśli prowadzą do niego różne drogi.\n\nPodobnie interpretujemy agregacje mieszane, na przykład \\(AMAMY\\).",
+    "crumbs": [
+      "Wykłady",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Role</span>"
+    ]
+  },
+  {
+    "objectID": "wykłady/06-role.html#czym-są-role",
+    "href": "wykłady/06-role.html#czym-są-role",
+    "title": "6  Role",
+    "section": "6.4 Czym są role?",
+    "text": "6.4 Czym są role?\nZałóżmy, że mamy graf znajomości osób, które przyszły na pewien koncert. Krawędź łączy dwie osoby, które się znają. Przyjmijmy, że każda z osób na koncercie jest tam w roli muzyka, technika albo uczestnika.\nPrzypuśćmy, że stworzyliśmy macierz cech \\(X\\), która każdej z \\(n\\) osób przyporządkowuje \\(p\\) cech. Przypiszmy naszym 3 rolom wektory wierszowe: roli “muzyk” wektor \\(R_1\\), “technik” \\(R_2\\), a “widz” \\(R_3\\), każdy w przestrzeni \\(\\mathbb R^p\\). Każdy wektor roli jest punktem w tej samej przestrzeni cech \\(\\mathbb R^p\\), w której leżą punkty \\(x_v\\) opisujące poszczególne osoby. Myślimy o wektorze roli jako o wyimaginowanym, idealnym reprezentancie danej grupy. Na przykład, wektor \\(R_1\\) reprezentuje typowego, wyidealizowanego muzyka.\nLudzie mogą mieć różne stopnie zaangażowania w różne role. Dla każdej osoby \\(v\\) dobieramy trzy nieujemne współczynniki \\(w_{v1}, w_{v2}, w_{v3}\\), aby przybliżyć jej wektor cech \\(x_v\\).\n\\[\n\\boxed{x_v\\approx w_{v1}R_1+w_{v2}R_2+w_{v3}R_3.}\n\\]\nWspółczynnik \\(w_{va}\\) mówi, jaki udział ma rola \\(a\\) w opisie osoby \\(v\\). Gitarzysta, który po swoim występie pomaga ekipie technicznej, może mieć dodatnie współczynniki zarówno przy \\(R_1\\), jak i przy \\(R_2\\). Uczestnik koncertu, który również zajmuje się muzyką, może mieć dodatnie współczynniki przy \\(R_1\\) i \\(R_3\\). Współczynniki są nieujemne, bo nie ma sensu odejmować roli od osoby.\nMając graf \\(G\\) oraz jego macierz cech \\(X\\), naszym zadaniem będzie dobranie takich \\(r\\) wektorów w \\(\\mathbb R^p\\) oraz nieujemnych współczynników \\(w_{va}\\), aby jak najlepiej przybliżyć wszystkie wiersze \\(x_v\\) macierzy cech \\(X\\). Algorytm, który zastosujemy wymaga uprzedniego określenia liczby ról \\(r\\). To jak interpretować role (w optymistycznych sytuacjach) będzie jasne dopiero po zastosowaniu algorytmu.\n\n6.4.1 Zapis macierzowy\nPowyższy problem jest problemem optymalizacyjnym i może być zapisany w postaci macierzowej. Ustalmy liczbę ról \\(r\\) szukamy wektorów ról \\(R_i \\in \\mathbb R^p\\) oraz współczynników \\(w_{ia}\\).\nNiech \\(H\\) to macierz, której \\(i\\)-ty wiersz to wektor roli \\(R_i\\). Dla wierzchołka \\(v_i\\) niech \\(W_i=(w_{i 1},\\ldots,w_{i r})\\) będzie wektorem jego współczynników. Niech W to macierz, której \\(i\\)-ty wiersz to \\(W_i\\). Szukamy takich macierzy \\(W\\) i \\(H\\), aby przybliżyć macierz cech \\(X\\):\n\\[\n\\underbrace{X}_{n\\times p}\\approx\n\\underbrace{W}_{n\\times r}\n\\underbrace{H}_{r\\times p},\\qquad W,H\\geq0.\n\\]\nSłowo “przybliżać” można definiować na różne sposoby. Najbardziej klasycznym wyborem jest minimalizowanie sumy kwadratów błędów:\n\\[\n\\min_{W,H\\geq0}\\|X-WH\\|_F^2,\n\\tag{6.1}\\]\ngdzie\n\\[\n\\|X-WH\\|_F^2=\\sum_{i,j}\\bigl(X_{ij}-(WH)_{ij}\\bigr)^2.\n\\]\nZapis \\(W,H\\geq0\\) oznacza, że wszystkie wyrazy macierzy \\(W\\) i \\(H\\) są nieujemne.\n\n\n6.4.2 Jak wyznaczyć \\(W\\) i \\(H\\)?\nMacierze \\(W\\) i \\(H\\) można wyznaczyć metodą gradientu, zerując ujemne wyrazy jeżeli się pojawią. Inną metodą jest algorytm NMF. Zaczynamy od dodatnich macierzy \\(W,H\\) i poprawiamy je naprzemiennie robiąc poniższe aktualizacje:\n\\[\n\\begin{aligned}\nH_{aj}&\\leftarrow H_{aj}\\frac{(W^\\top X)_{aj}}{(W^\\top WH)_{aj}},\\\\\nW_{ia}&\\leftarrow W_{ia}\\frac{(XH^\\top)_{ia}}{(WHH^\\top)_{ia}}.\n\\end{aligned}\n\\]\nNajpierw aktualizujemy całą macierz \\(H\\), potem korzystamy z niej przy aktualizacji \\(W\\). Dla dodatnich mianowników wzory zachowują nieujemność; aktualizacje nie zwiększają błędu kwadratowego. Warto sprawdzić kilka inicjalizacji i wybrać wynik o najmniejszym błędzie. Opis i uzasadnienie metody znajdują się w pracy Algorithms for Non-negative Matrix Factorization.",
+    "crumbs": [
+      "Wykłady",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Role</span>"
+    ]
+  },
+  {
+    "objectID": "wykłady/06-role.html#związek-z-svd",
+    "href": "wykłady/06-role.html#związek-z-svd",
+    "title": "6  Role",
+    "section": "6.5 Związek z SVD",
+    "text": "6.5 Związek z SVD\nProblem optymalizacyjny 6.1 jest podobny do problemu aproksymacji macierzy rzędu \\(r\\) przy użyciu SVD. W SVD nie ma jednak ograniczenia nieujemności \\(W,H\\geq0\\).\nDla macierzy \\(X\\in\\mathbb R^{n\\times p}\\) o pełnym rzędzie \\(\\min(n,p)\\), jej SVD zapisujemy jako \\[\nX\\approx U_r\\Sigma_rV_r^\\top.\n\\]\nPrzyjmując \\(W=U_r\\Sigma_r\\) oraz \\(H=V_r^\\top\\), otrzymujemy zapis \\(X\\approx WH\\). Obcięte SVD rozwiązuje zadanie najlepszej aproksymacji macierzą rzędu co najwyżej \\(r\\). Możemy je też zapisać jako\n\\[\n\\min_{W\\in\\mathbb R^{n\\times r},\\ H\\in\\mathbb R^{r\\times p}}\n\\|X-WH\\|_F^2.\n\\]\nDodatkowy warunek \\(W,H\\geq0\\) może zwiększyć najmniejszy osiągalny błąd przy tej samej liczbie ról. W SVD potrafimy wyznaczyć rozwiązanie globalnie optymalne, natomiast w NMF stosujemy metody iteracyjne, których wynik może zależeć od inicjalizacji.",
+    "crumbs": [
+      "Wykłady",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Role</span>"
+    ]
+  },
+  {
+    "objectID": "wykłady/06-role.html#rolx",
+    "href": "wykłady/06-role.html#rolx",
+    "title": "6  Role",
+    "section": "6.6 RolX",
+    "text": "6.6 RolX\nOpiszemy teraz algorytm RolX, zaproponowany w pracy RolX: Structural Role Extraction & Mining in Large Graphs:\n\nWyznaczamy cechy wierzchołków i ich agregacje, otrzymując \\(X\\).\nDla wybranej liczby ról znajdujemy przybliżenie \\(X\\approx WH\\).\nDla każdego wierzchołka \\(v_i\\) wybieramy rolę \\(a\\) o największym współczynniku \\(w_{ia}\\).\n\nPoniżej znajduje się eksperyment pokazujący działanie algorytmu RolX dla konkretnego grafu. Graf zawiera dwie kliki \\(K_4\\), dwa rozgałęziające się łączniki, liście, ścieżkę i osobną składową złożoną z jednej krawędzi. Wierzchołki 1, 2 i 3 mają identyczne otoczenia, choć ich sąsiadami są różne osoby. Wierzchołki 11 i 18 mają ten sam stopień \\(1\\), ale pierwszy jest sąsiadem łącznika, a drugi ma sąsiada również o stopniu \\(1\\).\nWybierz cechy początkowe, rodzaj agregacji, liczbę rund i liczbę ról. Przy każdej rundzie dopisujemy kolumny z agregacjami cech z poprzedniego poziomu. Dla samych średnich i trzech cech początkowych otrzymujemy kolejno \\(3,6,9,12\\) kolumn. Przy jednoczesnym użyciu sum i średnich liczba kolumn rośnie szybciej.\nKolor wierzchołka \\(v_i\\) wskazuje rolę o największym współczynniku w wierszu \\(W_i\\) w wyznaczonym rozkładzie. Wybierz wierzchołek, aby zobaczyć jego współczynniki, obliczenie wybranej cechy oraz to jak odtworzono jego wektor cech za pomocą kombinacji liniowej wektorów ról.\nDla porównywalności skali możemy dzielić każdą niezerową kolumnę \\(X\\) przez jej maksimum. W przeciwnym razie np. sumy po kilku agregacjach mogłyby zdominować błąd tylko ze względu na większe wartości.\nBłąd względny to \\(\\|X-WH\\|_F/\\|X\\|_F\\). Porównując jego wartości, zachowaj te same cechy, agregacje i skalowanie. Więcej ról daje modelowi więcej możliwości dopasowania, ale wynik numeryczny zależy też od inicjalizacji i liczby iteracji.\nDla wybranej liczby ról widget oblicza \\(H\\) i \\(W\\) metodą NMF, stosując opisane wyżej aktualizacje. Widget wykonuje cztery próby z różnymi wartościami początkowymi. Każda próba trwa najwyżej 800 iteracji i kończy się wcześniej, gdy błąd jest bliski zeru lub prawie przestaje się zmieniać. Widget wybiera parę \\(H\\) i \\(W\\), dla której błąd \\(\\|X-WH\\|_F^2\\) jest najmniejszy spośród czterech wyników.\n\n\n  Graf → cechy → roleOdkrywanie ról⛶ Powiększ\n  \n    Cechy początkowe\n       Stopień d\n       Krawędzie w ego-necie e\n       Krawędzie na zewnątrz ego-netu b\n       Trójkąty t\n       Współczynnik skupienia C\n    \n    Agregacja\n      Liczba rund 0 — bez agregacji123\n      Agregujemy przez średniąsumęśrednią i sumę\n    \n    Rozkład X ≈ WH\n      Liczba ról 12345\n      Podziel każdą niezerową kolumnę X przez jej maksimum\n    \n  \n  Wczytywanie przykładu…\n  \n  \n    \n    \n      Badany wierzchołek \n      Opis wierzchołka\n      \n      \n      Obliczenie cechy \n      \n      Cechy i ich odtworzenie w oryginalnej skali\n    \n  \n  Przed rozkładem dzielimy każdą niezerową kolumnę X przez jej maksimum. Tabela odtworzenia przy wierzchołku wraca do oryginalnej skali.\n  Macierz cech X używana w rozkładzie\n  Wektory ról — macierz H\n  Współczynniki wierzchołków — macierz W\n\n\nInteraktywny eksperyment wymaga JavaScript. Definicje i ręczny przykład znajdują się powyżej.",
+    "crumbs": [
+      "Wykłady",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Role</span>"
+    ]
+  },
+  {
     "objectID": "notatniki/siec-www-centralnosc.html",
     "href": "notatniki/siec-www-centralnosc.html",
     "title": "2  Sieć WWW, centralność i PageRank",
@@ -480,6 +557,17 @@
     "crumbs": [
       "Listy zadań",
       "[5]{.chapter-number}  [Rdzenie i społeczności]{.chapter-title}"
+    ]
+  },
+  {
+    "objectID": "zadania/lista-06-role.html",
+    "href": "zadania/lista-06-role.html",
+    "title": "6  Role",
+    "section": "",
+    "text": "Zadanie 1 Rozważ graf złożony z trójkąta o wierzchołkach \\(1,2,3\\) oraz ścieżki \\(3-4-5\\) dołączonej do niego w wierzchołku \\(3\\).\nMacierz cech \\(X\\) ma wiersze w kolejności \\(1,2,3,4,5\\). Pierwsze trzy kolumny to stopień \\(d\\), liczba krawędzi w ego-necie \\(e\\) i liczba krawędzi wychodzących z ego-netu \\(b\\). Kolejne trzy kolumny zawierają sumy tych cech po sąsiadach, a ostatnie trzy ich średnie po sąsiadach, w obu przypadkach w kolejności \\(d,e,b\\).\n\nOblicz \\(d\\), \\(e\\) i \\(b\\) dla wierzchołków \\(1\\) i \\(4\\).\nWyznacz wyrazy \\(X_{1,4}\\), \\(X_{1,8}\\), \\(X_{4,6}\\) i \\(X_{4,7}\\). Przy każdym zapisz, jaką cechę agregujesz i jakich wartości u sąsiadów używasz.\n\n\n\nZadanie 2 Niech \\(A\\) będzie macierzą sąsiedztwa prostego grafu nieskierowanego o wierzchołkach \\(v_1,\\ldots,v_n\\), a \\(X\\) jego macierzą cech, z wierszami w tej samej kolejności. Uzasadnij, że dla każdej cechy \\(j\\) kolumna \\(j\\) macierzy \\(AX\\) zawiera sumy wartości tej cechy po sąsiadach poszczególnych wierzchołków.\n\n\nZadanie 3 Przypuśćmy, że chcemy rozwiązać problem optymalizacyjny 6.1 metodą gradientu. Niech \\(F(W,H)=\\|X-WH\\|_F^2\\). Parametrami są wyrazy macierzy \\(H\\) i \\(W\\). Wyraz w \\(i\\)-tym wierszu i \\(j\\)-tej kolumnie oznaczamy przez \\(h_{ij}\\) w macierzy \\(H\\) oraz przez \\(w_{ij}\\) w macierzy \\(W\\).\n\nOblicz pochodne cząstkowe \\(\\frac{\\partial F}{\\partial h_{ij}}\\) i \\(\\frac{\\partial F}{\\partial w_{ij}}\\).\nOpisz metodę gradientu, w której aktualizujesz naprzemiennie \\(H\\) i \\(W\\). Podaj wzory na jedną iterację z długością kroku \\(\\eta&gt;0\\). Wyjaśnij, jak po każdej aktualizacji zachowasz nieujemność macierzy i po czym poznasz, że można zakończyć obliczenia.\n* Korzystając z obliczonych pochodnych cząstkowych, zapisz gradienty \\(\\nabla_H F\\) i \\(\\nabla_W F\\) w postaci macierzowej.",
+    "crumbs": [
+      "Listy zadań",
+      "[6]{.chapter-number}  [Role]{.chapter-title}"
     ]
   },
   {
