@@ -1626,6 +1626,12 @@
 .roles-widget__bar-row > span:last-child { text-align: right; }
 .roles-widget__bar-track { display: block; background: #e2e9ee; height: .8rem; border-radius: .15rem; overflow: hidden; }
 .roles-widget__bar-track > span { display: block; height: 100%; }
+.roles-widget__bar-track--signed { position: relative; }
+.roles-widget__bar-track--signed > span { position: absolute; top: 0; }
+.roles-widget__bar-track--signed::after {
+  content: ""; position: absolute; inset-block: 0; left: 50%;
+  border-left: 1px solid #526574;
+}
 .roles-widget__calculation { overflow-wrap: anywhere; padding: .6rem 0; }
 .roles-widget details { margin-top: .8rem; min-width: 0; }
 .roles-widget summary { padding: .5rem 0; font-weight: bold; cursor: pointer; }

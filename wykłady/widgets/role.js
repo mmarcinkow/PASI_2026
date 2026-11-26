@@ -1,4 +1,4 @@
-/* Dydaktyczny ReFeX + NMF. Wszystkie obliczenia odbywają się lokalnie. */
+/* Dydaktyczny ReFeX z NMF i obciętym SVD. */
 (() => {
   'use strict';
   const graph = {
@@ -158,12 +158,71 @@
     best.relativeError=Math.sqrt(best.error/norm);
     return best;
   }
-  function dominantRole(row){
-    const maximum=Math.max(...row);
-    return maximum>1e-9?row.indexOf(maximum):null;
+  function truncatedSvd(X, rank){
+    if(!Array.isArray(X)||!X.length||!Array.isArray(X[0])||!X[0].length||
+      X.some(row=>!Array.isArray(row)||row.length!==X[0].length||row.some(x=>!Number.isFinite(x))))
+      throw new RangeError('Macierz musi być niepusta, prostokątna i skończona.');
+    const n=X.length,p=X[0].length;
+    if(!Number.isInteger(rank)||rank<1||rank>Math.min(n,p))
+      throw new RangeError('Niepoprawna liczba składników.');
+
+    // Jednostronne obroty Jacobiego ortogonalizują kolumny X bez tworzenia X^T X.
+    const columns=X[0].map((_,j)=>X.map(row=>row[j]));
+    const basis=zeros(p,p);
+    basis.forEach((column,j)=>{column[j]=1;});
+    const dot=(a,b)=>a.reduce((sum,value,i)=>sum+value*b[i],0);
+    const norm=columns.reduce((sum,column)=>sum+dot(column,column),0);
+    const zeroTolerance=Math.sqrt(norm)*Number.EPSILON*Math.max(n,p);
+    function rotate(a,b,cos,sin){
+      for(let i=0;i<a.length;i++){
+        const x=a[i],y=b[i];
+        a[i]=cos*x-sin*y;
+        b[i]=sin*x+cos*y;
+      }
+    }
+    for(let sweep=0;sweep<50;sweep++){
+      let changed=false;
+      for(let a=0;a<p;a++)for(let b=a+1;b<p;b++){
+        const x=columns[a],y=columns[b];
+        const xx=dot(x,x),yy=dot(y,y);
+        if(Math.min(xx,yy)<=zeroTolerance**2)continue;
+        const xy=dot(x,y);
+        if(Math.abs(xy)<=1e-12*Math.sqrt(xx)*Math.sqrt(yy))continue;
+        const tau=(yy-xx)/(2*xy);
+        const tangent=(Math.sign(tau)||1)/(Math.abs(tau)+Math.hypot(1,tau));
+        const cos=1/Math.hypot(1,tangent),sin=tangent*cos;
+        rotate(x,y,cos,sin);
+        rotate(basis[a],basis[b],cos,sin);
+        changed=true;
+      }
+      if(!changed)break;
+    }
+
+    const order=columns.map((column,index)=>({index,sigma:Math.sqrt(dot(column,column))}))
+      .sort((a,b)=>b.sigma-a.sigma).slice(0,rank);
+    const W=zeros(n,rank);
+    const H=order.map(({index,sigma},k)=>{
+      const vector=basis[index];
+      // Największa co do modułu współrzędna wektora z V ma znak dodatni.
+      const pivot=vector.reduce((best,value)=>Math.abs(value)>Math.abs(best)?value:best,0);
+      const sign=pivot<0?-1:1;
+      if(sigma>zeroTolerance)columns[index].forEach((value,i)=>{W[i][k]=sign*value;});
+      return vector.map(value=>sign*value);
+    });
+    const error=reconstructionError(X,multiply(W,H));
+    return {W,H,error,relativeError:norm?Math.sqrt(error/norm):0};
+  }
+  function normalizeSignedWeights(W){
+    const maximum=Math.max(...W.flat().map(Math.abs))||1;
+    return W.map(row=>row.map(weight=>weight/maximum));
+  }
+  function dominantRole(row, signed=false){
+    const values=signed?row.map(Math.abs):row;
+    const maximum=Math.max(...values);
+    return maximum>1e-9?values.indexOf(maximum):null;
   }
   const model={graph,smallGraph,baseFeatures,neighbors,baseValues,aggregate,featureMatrix,degreeAggregationMatrix,
-    scaleColumns,multiply,reconstructionError,nmf,dominantRole};
+    scaleColumns,multiply,reconstructionError,nmf,truncatedSvd,normalizeSignedWeights,dominantRole};
   if(typeof module!=='undefined'&&module.exports)module.exports=model;
   if(typeof document==='undefined')return;
 
@@ -340,7 +399,7 @@
     get('node').value=String(selected);
     function renderSelection(){
       if(!current)return;
-      const {raw,scaled,result,reconstructed}=current;
+      const {raw,scaled,weights,reconstructed,signed,components}=current;
       nodeElements.forEach((group,i)=>{
         group.classList.toggle('is-selected',i===selected);
         group.classList.toggle('is-neighbor',adj[selected].includes(i));
@@ -351,18 +410,27 @@
           row.classList.toggle('is-selected',Number(row.dataset.matrixRow)===selected);
         }
       }
-      const row=result.W[selected],maximum=Math.max(...row),bars=get('memberships');bars.replaceChildren();
+      const row=weights[selected],maximum=Math.max(...row),bars=get('memberships');bars.replaceChildren();
       row.forEach((weight,k)=>{
         const entry=el('div',{class:'roles-widget__bar-row'});
-        entry.append(el('span',{},`R${k+1}`));
-        const track=el('span',{class:'roles-widget__bar-track'}),bar=el('span',{
-          style:`width:${maximum?100*weight/maximum:0}%;background:${palette[k]}`});
-        track.append(bar);entry.append(track,el('span',{},fmt(weight)));bars.append(entry);
+        entry.append(el('span',{},components[k]));
+        const track=el('span',{class:'roles-widget__bar-track','aria-hidden':'true'});
+        const width=signed?50*Math.abs(weight):maximum?100*weight/maximum:0;
+        const bar=el('span',{style:`width:${width}%;background:${palette[k]}`});
+        if(signed){
+          track.classList.add('roles-widget__bar-track--signed');
+          bar.style.left=`${weight<0?50-width:50}%`;
+        }
+        track.append(bar);entry.append(track,el('span',{},fmt(signed&&Math.abs(weight)<.0005?0:weight)));bars.append(entry);
       });
       get('selection-title').textContent=`Opis wierzchołka ${graph.nodes[selected].label}`;
-      get('selection-note').textContent=maximum>1e-9?
-        'Słupki pokazują współczynniki W dla wybranego wierzchołka.':
-        'Wybrane cechy tego wierzchołka są zerowe; brak podstaw do wskazania dominującej roli.';
+      if(signed){
+        get('selection-note').textContent='Słupki SVD mają wspólną skalę od −1 do 1. Środek oznacza zero.';
+      }else{
+        get('selection-note').textContent=maximum>1e-9?
+          'Słupki pokazują współczynniki W dla wybranego wierzchołka.':
+          'Współczynniki są zerowe. Brak dominującej roli.';
+      }
       const detail=raw.columns.map((c,j)=>[raw.X[selected][j],reconstructed[selected][j]*scaled.scales[j]]);
       get('reconstruction').replaceChildren(matrixTable(detail,['Cecha','Odtworzenie'],raw.columns.map(c=>c.name),'Cechy i ich odtworzenie w oryginalnej skali'));
       feature=Math.min(feature,raw.columns.length-1);get('feature').value=String(feature);
@@ -383,30 +451,42 @@
       const keys=[...form.querySelectorAll('input[name="role-feature"]:checked')].map(e=>e.value);
       if(!keys.length){status.textContent='Wybierz przynajmniej jedną cechę. Widoki poniżej zachowują poprzedni wynik.';return;}
       const depth=Number(get('depth').value),aggregation=get('aggregation').value;
-      const scale=get('scale').checked;
+      const scale=get('scale').checked,signed=get('method').value==='svd';
       const raw=featureMatrix(graph,keys,depth,aggregation),scaled=scaleColumns(raw.X,scale);
       const maximumRank=Math.min(5,raw.columns.length);
       for(const option of get('rank').options)option.disabled=Number(option.value)>maximumRank;
       const rank=Math.min(Number(get('rank').value),maximumRank);get('rank').value=String(rank);
-      status.textContent='Wyznaczanie cech i ról…';
-      const result=nmf(scaled.X,rank),reconstructed=multiply(result.W,result.H);
-      current={raw,scaled,result,reconstructed};
+      get('rank-label').textContent=signed?'Liczba składników':'Liczba ról';
+      status.textContent='Obliczanie rozkładu…';
+      const result=signed?truncatedSvd(scaled.X,rank):nmf(scaled.X,rank);
+      const reconstructed=multiply(result.W,result.H);
+      const weights=signed?normalizeSignedWeights(result.W):result.W;
+      const components=Array.from({length:rank},(_,i)=>`${signed?'S':'R'}${i+1}`);
+      current={raw,scaled,weights,reconstructed,signed,components};
       get('feature').replaceChildren();raw.columns.forEach((c,i)=>get('feature').append(el('option',{value:i},c.name)));
-      const vertices=graph.nodes.map(n=>n.label),names=raw.columns.map(c=>c.name),roles=Array.from({length:rank},(_,i)=>`R${i+1}`);
+      const vertices=graph.nodes.map(n=>n.label),names=raw.columns.map(c=>c.name);
+      const profileLabel=signed?'Składniki SVD — macierz H':'Wektory ról — macierz H';
+      get('profile-label').textContent=profileLabel;
       get('matrix-x').replaceChildren(matrixTable(scaled.X,names,vertices,'Macierz cech X używana w rozkładzie'));
-      get('matrix-h').replaceChildren(matrixTable(result.H,names,roles,'Macierz wektorów ról H'));
-      get('matrix-w').replaceChildren(matrixTable(result.W,roles,vertices,'Macierz współczynników W'));
+      get('matrix-h').replaceChildren(matrixTable(result.H,names,components,profileLabel));
+      get('matrix-w').replaceChildren(matrixTable(result.W,components,vertices,'Macierz współczynników W'));
       get('dimensions').textContent=`X: ${vertices.length} × ${names.length} · W: ${vertices.length} × ${rank} · H: ${rank} × ${names.length}`;
       get('error').textContent=`Błąd względny: ${(100*result.relativeError).toLocaleString('pl-PL',{maximumFractionDigits:2})}%`;
       get('scaling-note').hidden=!scale;
-      get('legend').replaceChildren(...roles.map((name,k)=>{
+      get('legend').replaceChildren(...components.map((name,k)=>{
         const label=el('span');label.append(el('i',{style:`background:${palette[k]}`}),document.createTextNode(name));return label;
       }));
       nodeElements.forEach((group,i)=>{
-        const role=dominantRole(result.W[i]);group.querySelector('circle').setAttribute('fill',role===null?'#a5afb6':palette[role]);
-        group.querySelector('title').textContent=`Wierzchołek ${graph.nodes[i].label}; ${role===null?'zerowy opis':`dominująca rola R${role+1}`}`;
+        const component=dominantRole(weights[i],signed);
+        group.querySelector('circle').setAttribute('fill',component===null?'#a5afb6':palette[component]);
+        const description=component===null?'zerowe współczynniki':
+          `${signed?'dominujący składnik':'dominująca rola'} ${components[component]}`;
+        const label=`Wierzchołek ${graph.nodes[i].label}, ${description}`;
+        group.querySelector('title').textContent=label;
+        group.setAttribute('aria-label',label);
       });
-      status.textContent=`Cechy początkowe: ${keys.length}. Rundy agregacji: ${depth}. Kolumny X: ${names.length}. ${rank===1?'Przy jednej roli opis wierzchołka jest wielokrotnością wspólnego wektora.':'Kolor oznacza największy współczynnik W.'} ${maximumRank<5?`Liczba ról ograniczona do ${maximumRank} przez liczbę cech.`:''}`;
+      const colorNote=signed?'Kolor wskazuje składnik o największym |w|.':'Kolor wskazuje rolę o największym współczynniku W.';
+      status.textContent=`Cechy początkowe: ${keys.length}. Rundy agregacji: ${depth}. Kolumny X: ${names.length}. ${colorNote} ${maximumRank<5?`Liczba ${signed?'składników':'ról'} ograniczona do ${maximumRank} przez liczbę cech.`:''}`;
       renderSelection();
     }
     form.addEventListener('change',calculate);

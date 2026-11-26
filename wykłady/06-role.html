@@ -488,7 +488,7 @@ w(p)Y\bigl(p(n)\bigr).
 \underbrace{W}_{n\times r}
 \underbrace{H}_{r\times p},\qquad W,H\geq0.
 \]</span></p>
-<p>Słowo “przybliżać” można definiować na różne sposoby. Najbardziej klasycznym wyborem jest minimalizowanie sumy kwadratów błędów:</p>
+<p>To znaczy, że chcemy rozłożyć <span class="math inline">\(X\)</span> na produkt dwóch macierzy o współczynnikach nieujemnych (taki rozkład nazywa się non-negative matrix factorization, NMF). Słowo “przybliżać” można definiować na różne sposoby. Najbardziej klasycznym wyborem jest minimalizowanie sumy kwadratów błędów:</p>
 <p><span id="eq-nmf"><span class="math display">\[
 \min_{W,H\geq0}\|X-WH\|_F^2,
 \tag{6.1}\]</span></span></p>
@@ -500,7 +500,7 @@ w(p)Y\bigl(p(n)\bigr).
 </section>
 <section id="jak-wyznaczyć-w-i-h" class="level3" data-number="6.4.2">
 <h3 data-number="6.4.2" class="anchored" data-anchor-id="jak-wyznaczyć-w-i-h"><span class="header-section-number">6.4.2</span> Jak wyznaczyć <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span>?</h3>
-<p>Macierze <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span> można wyznaczyć metodą gradientu, zerując ujemne wyrazy jeżeli się pojawią. Inną metodą jest algorytm NMF. Zaczynamy od dodatnich macierzy <span class="math inline">\(W,H\)</span> i poprawiamy je naprzemiennie robiąc poniższe aktualizacje:</p>
+<p>Macierze <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span> można wyznaczyć metodą gradientu, zerując ujemne wyrazy jeżeli się pojawią. Inną metodą jest następujący algorytm. Zaczynamy od dodatnich macierzy <span class="math inline">\(W,H\)</span> i poprawiamy je naprzemiennie robiąc poniższe aktualizacje:</p>
 <p><span class="math display">\[
 \begin{aligned}
 H_{aj}&amp;\leftarrow H_{aj}\frac{(W^\top X)_{aj}}{(W^\top WH)_{aj}},\\
@@ -520,7 +520,7 @@ X_r=U_r\Sigma_rV_r^\top.
 \min_{W\in\mathbb R^{n\times r},\ H\in\mathbb R^{r\times p}}
 \|X-WH\|_F^2.
 \]</span></p>
-<p>Dodatkowy warunek <span class="math inline">\(W,H\geq0\)</span> może zwiększyć najmniejszy osiągalny błąd przy tej samej liczbie ról. SVD wyznacza rozwiązanie globalnie optymalne powyższego problemu, natomiast NMF, wyznacza pewne dodatnie macierze <span class="math inline">\(H\)</span> i <span class="math inline">\(W\)</span>, które niekoniecznie rozwiązują problem <a href="#eq-nmf" class="quarto-xref"><span>6.1</span></a>. Dodatkowo wynik NMF zależy od inicjalizacji, czyli od początkowo wybranych macierzy <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span>.</p>
+<p>Dodatkowy warunek <span class="math inline">\(W,H\geq0\)</span> może zwiększyć najmniejszy osiągalny błąd przy tej samej liczbie ról. SVD wyznacza rozwiązanie globalnie optymalne powyższego problemu, natomiast rozkład NMF z poprzedniego rozdziału, wyznacza pewne dodatnie macierze <span class="math inline">\(H\)</span> i <span class="math inline">\(W\)</span>, które niekoniecznie rozwiązują problem <a href="#eq-nmf" class="quarto-xref"><span>6.1</span></a>. Dodatkowo wynik NMF zależy od inicjalizacji, czyli od początkowo wybranych macierzy <span class="math inline">\(W\)</span> i <span class="math inline">\(H\)</span>.</p>
 </section>
 <section id="rolx" class="level2 page-columns page-full" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="rolx"><span class="header-section-number">6.6</span> RolX</h2>
@@ -531,11 +531,11 @@ X_r=U_r\Sigma_rV_r^\top.
 <li>Dla każdego wierzchołka <span class="math inline">\(v_i\)</span> wybieramy rolę <span class="math inline">\(a\)</span> o największym współczynniku <span class="math inline">\(w_{ia}\)</span>.</li>
 </ol>
 <p>Poniżej znajduje się eksperyment pokazujący działanie algorytmu RolX dla konkretnego grafu. Graf zawiera dwie kliki <span class="math inline">\(K_4\)</span>, dwa rozgałęziające się łączniki, liście, ścieżkę i osobną składową złożoną z jednej krawędzi. Wierzchołki 1, 2 i 3 mają identyczne otoczenia, choć ich sąsiadami są różne osoby. Wierzchołki 11 i 18 mają ten sam stopień <span class="math inline">\(1\)</span>, ale pierwszy jest sąsiadem łącznika, a drugi ma sąsiada również o stopniu <span class="math inline">\(1\)</span>.</p>
-<p>Wybierz cechy początkowe, rodzaj agregacji, liczbę rund i liczbę ról. Przy każdej rundzie dopisujemy kolumny z agregacjami cech z poprzedniego poziomu. Dla samych średnich i trzech cech początkowych otrzymujemy kolejno <span class="math inline">\(3,6,9,12\)</span> kolumn. Przy jednoczesnym użyciu sum i średnich liczba kolumn rośnie szybciej.</p>
-<p>Kolor wierzchołka <span class="math inline">\(v_i\)</span> wskazuje rolę o największym współczynniku w wierszu <span class="math inline">\(W_i\)</span> w wyznaczonym rozkładzie. Wybierz wierzchołek, aby zobaczyć jego współczynniki, obliczenie wybranej cechy oraz to jak odtworzono jego wektor cech za pomocą kombinacji liniowej wektorów ról.</p>
-<p>Dla porównywalności skali możemy dzielić każdą niezerową kolumnę <span class="math inline">\(X\)</span> przez jej maksimum. W przeciwnym razie np. sumy po kilku agregacjach mogłyby zdominować błąd tylko ze względu na większe wartości.</p>
-<p>Błąd względny to <span class="math inline">\(\|X-WH\|_F/\|X\|_F\)</span>. Porównując jego wartości, zachowaj te same cechy, agregacje i skalowanie. Więcej ról daje modelowi więcej możliwości dopasowania, ale wynik numeryczny zależy też od inicjalizacji i liczby iteracji.</p>
-<p>Dla wybranej liczby ról widget oblicza <span class="math inline">\(H\)</span> i <span class="math inline">\(W\)</span> metodą NMF, stosując opisane wyżej aktualizacje. Widget wykonuje cztery próby z różnymi wartościami początkowymi. Każda próba trwa najwyżej 800 iteracji i kończy się wcześniej, gdy błąd jest bliski zeru lub prawie przestaje się zmieniać. Widget wybiera parę <span class="math inline">\(H\)</span> i <span class="math inline">\(W\)</span>, dla której błąd <span class="math inline">\(\|X-WH\|_F^2\)</span> jest najmniejszy spośród czterech wyników.</p>
+<p>Wybierz cechy początkowe, rodzaj agregacji, liczbę rund i metodę rozkładu. Przy każdej rundzie dopisujemy kolumny z agregacjami cech z poprzedniego poziomu. Dla samych średnich i trzech cech początkowych otrzymujemy kolejno <span class="math inline">\(3,6,9,12\)</span> kolumn. Przy jednoczesnym użyciu sum i średnich liczba kolumn rośnie szybciej.</p>
+<p>W NMF kolor wierzchołka <span class="math inline">\(v_i\)</span> wskazuje rolę o największym współczynniku w wierszu <span class="math inline">\(W_i\)</span>. W SVD kolor wskazuje składnik o największym <span class="math inline">\(|w_{ia}|\)</span>. Słupki SVD pokazują znak i mają wspólną skalę od <span class="math inline">\(-1\)</span> do <span class="math inline">\(1\)</span>. Powstają przez podzielenie współczynników przez największe <span class="math inline">\(|w_{ia}|\)</span> w całej macierzy <span class="math inline">\(W\)</span>. Tabela <span class="math inline">\(W\)</span> pokazuje współczynniki użyte do rekonstrukcji. Wybierz wierzchołek, aby zobaczyć jego współczynniki, obliczenie wybranej cechy oraz odtworzenie jego wektora cech.</p>
+<p>Przed rozkładem w obu metodach możemy dzielić każdą niezerową kolumnę <span class="math inline">\(X\)</span> przez jej maksimum. W przeciwnym razie np. sumy po kilku agregacjach mogłyby zdominować błąd tylko ze względu na większe wartości.</p>
+<p>Błąd względny to <span class="math inline">\(\|X-WH\|_F/\|X\|_F\)</span>. Aby porównać NMF z SVD, zachowaj te same cechy, agregacje, skalowanie i liczbę składników. Błąd SVD jest punktem odniesienia dla NMF.</p>
+<p>W trybie NMF widget oblicza <span class="math inline">\(H\)</span> i <span class="math inline">\(W\)</span>, stosując opisane wyżej aktualizacje. Widget wykonuje cztery próby z różnymi wartościami początkowymi. Każda próba trwa najwyżej 800 iteracji i kończy się wcześniej, gdy błąd jest bliski zeru lub prawie przestaje się zmieniać. Widget wybiera parę <span class="math inline">\(H\)</span> i <span class="math inline">\(W\)</span>, dla której błąd <span class="math inline">\(\|X-WH\|_F^2\)</span> jest najmniejszy spośród czterech wyników.</p>
 <div class="column-page">
 <section class="roles-widget" data-roles-widget="" aria-label="Wyznaczanie cech i ról w grafie">
   <div class="roles-widget__heading"><div><p class="roles-widget__eyebrow">Graf → cechy → role</p><h3 class="anchored">Odkrywanie ról</h3></div><button type="button" data-roles-expand="" aria-expanded="false">⛶ Powiększ</button></div>
@@ -552,7 +552,8 @@ X_r=U_r\Sigma_rV_r^\top.
       <label>Agregujemy przez <select data-roles-aggregation=""><option value="mean">średnią</option><option value="sum">sumę</option><option value="both">średnią i sumę</option></select></label>
     </fieldset>
     <fieldset><legend>Rozkład X ≈ WH</legend>
-      <label>Liczba ról <select data-roles-rank=""><option value="1">1</option><option value="2">2</option><option value="3" selected="">3</option><option value="4">4</option><option value="5">5</option></select></label>
+      <label>Metoda <select data-roles-method=""><option value="nmf" selected="">NMF</option><option value="svd">SVD</option></select></label>
+      <label><span data-roles-rank-label="">Liczba ról</span> <select data-roles-rank=""><option value="1">1</option><option value="2">2</option><option value="3" selected="">3</option><option value="4">4</option><option value="5">5</option></select></label>
       <label class="roles-widget__scale-control"><input type="checkbox" data-roles-scale="" checked=""><span>Podziel każdą niezerową kolumnę X przez jej maksimum</span></label>
     </fieldset>
   </form>
@@ -572,7 +573,7 @@ X_r=U_r\Sigma_rV_r^\top.
   </div>
   <p data-roles-scaling-note="" class="roles-widget__scaling-note">Przed rozkładem dzielimy każdą niezerową kolumnę X przez jej maksimum. Tabela odtworzenia przy wierzchołku wraca do oryginalnej skali.</p>
   <details><summary>Macierz cech X używana w rozkładzie</summary><div data-roles-matrix-x=""></div></details>
-  <details><summary>Wektory ról — macierz H</summary><div data-roles-matrix-h=""></div></details>
+  <details><summary data-roles-profile-label="">Wektory ról — macierz H</summary><div data-roles-matrix-h=""></div></details>
   <details><summary>Współczynniki wierzchołków — macierz W</summary><div data-roles-matrix-w=""></div></details>
 </section>
 </div>
